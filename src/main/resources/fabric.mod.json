@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mcdar",
+  "version": "${version}",
+  "name": "Mcdar",
+  "description": "Bringing the artefacts of Minecraft Dungeons to Minecraft",
+  "authors": [
+    "Chronosacaria"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/mcdar/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "mcdar.chronosacaria.client.McdarClient"
+    ],
+    "main": [
+      "mcdar.chronosacaria.Mcdar"
+    ]
+  },
+  "mixins": [
+    "mcdar.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}
