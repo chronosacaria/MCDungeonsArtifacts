@@ -7,8 +7,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
+import java.util.Random;
+
 public class Mcdar implements ModInitializer {
     public static final String MOD_ID = "mcdar";
+
+    public static final Random random = new Random();
 
     public static final ItemGroup ARTEFACTS = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "artefacts"),
