@@ -1,0 +1,61 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"layer0": "mcdar:item/death_cap_mushroom"
+	},
+	"elements": [
+		{
+			"name": "stem",
+			"from": [6, 0, 6],
+			"to": [10, 6, 10],
+			"faces": {
+				"north": {"uv": [6, 9, 10, 15], "texture": "#layer0"},
+				"east": {"uv": [6, 9, 10, 15], "texture": "#layer0"},
+				"south": {"uv": [6, 9, 10, 15], "texture": "#layer0"},
+				"west": {"uv": [6, 9, 10, 15], "texture": "#layer0"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#missing"},
+				"down": {"uv": [6, 11, 10, 15], "texture": "#layer0"}
+			}
+		},
+		{
+			"name": "cap",
+			"from": [2, 6, 2],
+			"to": [14, 14, 14],
+			"faces": {
+				"north": {"uv": [2, 1, 14, 9], "texture": "#layer0"},
+				"east": {"uv": [2, 1, 14, 9], "texture": "#layer0"},
+				"south": {"uv": [2, 1, 14, 9], "texture": "#layer0"},
+				"west": {"uv": [2, 1, 14, 9], "texture": "#layer0"},
+				"up": {"uv": [2, 1, 11, 9], "texture": "#layer0"},
+				"down": {"uv": [4, 7, 5, 8], "texture": "#layer0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 2.25, 1],
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 2.25, 1],
+			"scale": [0.3, 0.3, 0.3]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"translation": [0, 0.75, 0]
+		}
+	}
+}

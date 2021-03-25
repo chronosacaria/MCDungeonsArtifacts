@@ -6,7 +6,7 @@ import net.minecraft.util.Rarity;
 
 public class ArtefactItem extends Item {
     public ArtefactItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1).maxDamage(64));
     }
 
     public Rarity getRarity (ItemStack stack){
