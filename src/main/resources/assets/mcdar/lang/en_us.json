@@ -2,8 +2,10 @@
   "itemGroup.mcdar.artefacts":      "MC Dungeons Artifacts",
 
   "item.mcdar.boots_of_swiftness":  "Boots of Swiftness",
+  "item.mcdar.corrupted_seeds":     "Corrupted Seeds",
   "item.mcdar.death_cap_mushroom":  "Death Cap Mushroom",
   "item.mcdar.ghost_cloak":         "Ghost Cloak",
+  "item.mcdar.harvester":           "Harvester",
   "item.mcdar.iron_hide_amulet":    "Iron Hide Amulet",
   "item.mcdar.light_feather":       "Light Feather",
   "item.mcdar.soul_healer":         "Soul Healer"

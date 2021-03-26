@@ -19,6 +19,11 @@ public class AbilityHelper {
         return false;
     }
 
+    private static boolean isNotTheTargetOrAttacker(LivingEntity attacker, LivingEntity target,
+                                                    LivingEntity nearbyEntity){
+        return nearbyEntity != target && nearbyEntity != attacker;
+    }
+
     public static boolean canHealEntity(LivingEntity healer, LivingEntity nearbyEntity){
         return nearbyEntity != healer && isAlly(healer, nearbyEntity) && isAliveAndCanBeSeen(nearbyEntity, healer);
     }
@@ -31,6 +36,18 @@ public class AbilityHelper {
 
     private static boolean isAliveAndCanBeSeen(LivingEntity nearbyEntity, LivingEntity attacker){
         return nearbyEntity.isAlive() && attacker.canSee(nearbyEntity);
+    }
+
+    public static boolean canApplyToEnemy(LivingEntity attacker, LivingEntity target, LivingEntity nearbyEntity){
+        return isNotTheTargetOrAttacker(attacker, target, nearbyEntity)
+                && isAliveAndCanBeSeen(nearbyEntity, attacker)
+                && !isAlly(attacker, nearbyEntity);
+    }
+
+    public static boolean canApplyToEnemy(LivingEntity attacker, LivingEntity nearbyEntity){
+        return nearbyEntity != attacker
+                && isAliveAndCanBeSeen(nearbyEntity, attacker)
+                && !isAlly(attacker, nearbyEntity);
     }
 
 }
