@@ -13,10 +13,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "mcdar.chronosacaria.client.McdarClient"
+      "chronosacaria.mcdar.client.McdarClient"
     ],
     "main": [
-      "mcdar.chronosacaria.Mcdar"
+      "chronosacaria.mcdar.Mcdar"
     ]
   },
   "mixins": [

@@ -1,8 +1,8 @@
-package mcdar.chronosacaria.artefacts;
+package chronosacaria.mcdar.artefacts;
 
-import mcdar.chronosacaria.Mcdar;
-import mcdar.chronosacaria.api.AOECloudHelper;
-import mcdar.chronosacaria.api.AOEHelper;
+import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.api.AOECloudHelper;
+import chronosacaria.mcdar.api.AOEHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;

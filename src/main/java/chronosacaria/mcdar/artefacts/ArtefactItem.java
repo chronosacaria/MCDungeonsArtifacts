@@ -1,4 +1,4 @@
-package mcdar.chronosacaria.artefacts;
+package chronosacaria.mcdar.artefacts;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

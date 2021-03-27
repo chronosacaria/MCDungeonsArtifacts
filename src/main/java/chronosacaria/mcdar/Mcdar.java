@@ -1,6 +1,6 @@
-package mcdar.chronosacaria;
+package chronosacaria.mcdar;
 
-import mcdar.chronosacaria.init.ArtefactsInit;
+import chronosacaria.mcdar.init.ArtefactsInit;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;

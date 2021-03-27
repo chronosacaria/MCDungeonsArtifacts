@@ -1,4 +1,4 @@
-package mcdar.chronosacaria.api;
+package chronosacaria.mcdar.api;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
@@ -14,8 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-import static mcdar.chronosacaria.Mcdar.random;
-import static mcdar.chronosacaria.api.AbilityHelper.isPetOfAttacker;
+import static chronosacaria.mcdar.Mcdar.random;
 
 public class AOEHelper {
     public static float healMostInjuredAlly(LivingEntity healer, float distance){
@@ -51,12 +49,23 @@ public class AOEHelper {
 
     public static void poisonAndSlowNearbyEnemies(World world, PlayerEntity user){
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
         for (LivingEntity nearbyEntity : nearbyEntities){
             StatusEffectInstance entangled = new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 4);
             StatusEffectInstance poisoned = new StatusEffectInstance(StatusEffects.POISON, 140, 1);
             nearbyEntity.addStatusEffect(entangled);
             nearbyEntity.addStatusEffect(poisoned);
+        }
+    }
+
+    public static void weakenAndMakeNearbyEnemiesVulnerable(World world, PlayerEntity user){
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+        for (LivingEntity nearbyEntity : nearbyEntities){
+            StatusEffectInstance weakness = new StatusEffectInstance(StatusEffects.WEAKNESS, 140, 140);
+            StatusEffectInstance vulnerability = new StatusEffectInstance(StatusEffects.RESISTANCE, 140, -2);
+            nearbyEntity.addStatusEffect(weakness);
+            nearbyEntity.addStatusEffect(vulnerability);
         }
     }
 
@@ -78,7 +87,7 @@ public class AOEHelper {
 
     public static void knockbackNearbyEnemies(World world, PlayerEntity user) {
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
 
         for (LivingEntity nearbyEntity : nearbyEntities) {
             float knockbackMultiplier = 1.0F;

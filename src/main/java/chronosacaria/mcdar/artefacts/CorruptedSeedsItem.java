@@ -1,7 +1,7 @@
-package mcdar.chronosacaria.artefacts;
+package chronosacaria.mcdar.artefacts;
 
-import mcdar.chronosacaria.Mcdar;
-import mcdar.chronosacaria.api.AOEHelper;
+import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.Mcdar;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

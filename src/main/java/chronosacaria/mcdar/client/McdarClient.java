@@ -1,4 +1,4 @@
-package mcdar.chronosacaria.client;
+package chronosacaria.mcdar.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

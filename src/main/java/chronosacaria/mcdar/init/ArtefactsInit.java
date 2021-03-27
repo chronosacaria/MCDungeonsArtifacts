@@ -1,7 +1,7 @@
-package mcdar.chronosacaria.init;
+package chronosacaria.mcdar.init;
 
-import mcdar.chronosacaria.Mcdar;
-import mcdar.chronosacaria.artefacts.*;
+import chronosacaria.mcdar.artefacts.*;
+import chronosacaria.mcdar.Mcdar;
 import net.minecraft.item.Item;
 
 public class ArtefactsInit {
@@ -9,6 +9,7 @@ public class ArtefactsInit {
     public static Item CORRUPTED_SEEDS;
     public static Item DEATH_CAP_MUSHROOM;
     public static Item GHOST_CLOAK;
+    public static Item GONG_OF_WEAKNESS;
     public static Item HARVESTER;
     public static Item IRON_HIDE_AMULET;
     public static Item LIGHT_FEATHER;
@@ -20,6 +21,7 @@ public class ArtefactsInit {
         CORRUPTED_SEEDS = new CorruptedSeedsItem(new Item.Settings().group(Mcdar.ARTEFACTS),"corrupted_seeds");
         DEATH_CAP_MUSHROOM = new DeathCapMushroomItem(new Item.Settings().group(Mcdar.ARTEFACTS), "death_cap_mushroom");
         GHOST_CLOAK = new GhostCloakItem(new Item.Settings().group(Mcdar.ARTEFACTS), "ghost_cloak");
+        GONG_OF_WEAKNESS = new GongOfWeakeningItem(new Item.Settings().group(Mcdar.ARTEFACTS), "gong_of_weakness");
         HARVESTER = new HarvesterItem(new Item.Settings().group(Mcdar.ARTEFACTS), "harvester");
         IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
         LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");

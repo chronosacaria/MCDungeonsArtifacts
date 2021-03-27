@@ -1,6 +1,6 @@
-package mcdar.chronosacaria.artefacts;
+package chronosacaria.mcdar.artefacts;
 
-import mcdar.chronosacaria.Mcdar;
+import chronosacaria.mcdar.Mcdar;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-import static mcdar.chronosacaria.api.AbilityHelper.isPetOfAttacker;
+import static chronosacaria.mcdar.api.AbilityHelper.isPetOfAttacker;
 
 public class LightFeatherItem extends ArtefactItem{
     public LightFeatherItem(Settings settings, String id) {

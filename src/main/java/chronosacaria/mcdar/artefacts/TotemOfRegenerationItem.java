@@ -1,17 +1,14 @@
-package mcdar.chronosacaria.artefacts;
+package chronosacaria.mcdar.artefacts;
 
-import mcdar.chronosacaria.Mcdar;
-import mcdar.chronosacaria.api.AOECloudHelper;
+import chronosacaria.mcdar.api.AOECloudHelper;
+import chronosacaria.mcdar.Mcdar;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;

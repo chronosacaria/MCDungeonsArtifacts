@@ -1,4 +1,4 @@
-package mcdar.chronosacaria.api;
+package chronosacaria.mcdar.api;
 
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
