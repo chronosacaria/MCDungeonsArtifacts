@@ -1,5 +1,9 @@
 package chronosacaria.mcdar.api;
 
+import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -7,6 +11,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -16,6 +22,7 @@ import java.util.List;
 import static chronosacaria.mcdar.Mcdar.random;
 
 public class AOEHelper {
+
     public static float healMostInjuredAlly(LivingEntity healer, float distance){
         World world = healer.getEntityWorld();
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
@@ -45,6 +52,42 @@ public class AOEHelper {
             }
         } else return 0;
 
+    }
+
+    public static void summonLightningBoltOnEntity(Entity target){
+        World world = target.getEntityWorld();
+        LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
+        if (lightningEntity != null){
+            lightningEntity.refreshPositionAfterTeleport(target.getX(), target.getY(), target.getZ());
+            lightningEntity.setCosmetic(true);
+            world.spawnEntity(lightningEntity);
+        }
+    }
+
+    public static void electrocute(LivingEntity attacker, LivingEntity victim, float damageAmount){
+        summonLightningBoltOnEntity(victim);
+        ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(attacker).setUsesMagic();
+        victim.damage(electricShockDamageSource, damageAmount);
+    }
+
+    public static void electrocuteNearbyEnemies(LivingEntity user, float distance, float damageAmount, int limit){
+        World world = user.getEntityWorld();
+
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(distance),
+                (nearbyEntity) -> AbilityHelper.canApplyToEnemy(user, nearbyEntity));
+        if (nearbyEntities.isEmpty()) return;
+        if (limit > nearbyEntities.size()) limit = nearbyEntities.size();
+        user.world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER,
+                SoundCategory.WEATHER, 1.0F, 1.0F);
+        user.world.playSound(null, user.getX(), user.getY(), user.getZ(),SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT,
+                SoundCategory.WEATHER, 1.0F, 1.0F);
+        for (int i = 0; i < limit; i++){
+            if (nearbyEntities.size() >= i + 1){
+                LivingEntity nearbyEntity = nearbyEntities.get(i);
+                electrocute(user, nearbyEntity, damageAmount);
+            }
+        }
     }
 
     public static void poisonAndSlowNearbyEnemies(World world, PlayerEntity user){

@@ -13,6 +13,7 @@ public class ArtefactsInit {
     public static Item HARVESTER;
     public static Item IRON_HIDE_AMULET;
     public static Item LIGHT_FEATHER;
+    public static Item LIGHTNING_ROD;
     public static Item TOTEM_OF_REGENERATION;
     public static Item SOUL_HEALER;
 
@@ -25,6 +26,7 @@ public class ArtefactsInit {
         HARVESTER = new HarvesterItem(new Item.Settings().group(Mcdar.ARTEFACTS), "harvester");
         IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
         LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");
+        LIGHTNING_ROD = new LightningRodItem(new Item.Settings().group(Mcdar.ARTEFACTS), "lightning_rod");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
         SOUL_HEALER = new SoulHealerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "soul_healer");
     }
