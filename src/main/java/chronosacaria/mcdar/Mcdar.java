@@ -1,6 +1,7 @@
 package chronosacaria.mcdar;
 
 import chronosacaria.mcdar.init.ArtefactsInit;
+import chronosacaria.mcdar.init.StatusEffectInit;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -21,5 +22,6 @@ public class Mcdar implements ModInitializer {
     @Override
     public void onInitialize() {
         ArtefactsInit.init();
+        StatusEffectInit.init();
     }
 }
