@@ -43,7 +43,7 @@ public class TotemOfSoulProtection extends ArtefactItem{
             }
             if (itemUsageContextPlayer != null){
 
-                spawnSoulProtectionCloudAtPos(itemUsageContextPlayer,blockPos, 100);
+                spawnSoulProtectionCloudAtPos(itemUsageContextPlayer,blockPos, 500);
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));

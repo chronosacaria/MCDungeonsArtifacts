@@ -12,4 +12,9 @@ public class SoulProtectionStatusEffect extends StatusEffect {
         super(type, color);
         Registry.register(Registry.STATUS_EFFECT, new Identifier(Mcdar.MOD_ID, id), this);
     }
+
+    @Override
+    public boolean canApplyUpdateEffect(int duration, int amplifier){
+        return true;
+    }
 }
