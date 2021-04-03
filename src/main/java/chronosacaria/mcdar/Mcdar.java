@@ -13,6 +13,10 @@ import java.util.Random;
 public class Mcdar implements ModInitializer {
     public static final String MOD_ID = "mcdar";
 
+    public static Identifier ID (String path){
+        return new Identifier(MOD_ID, path);
+    }
+
     public static final Random random = new Random();
 
     public static final ItemGroup ARTEFACTS = FabricItemGroupBuilder.build(

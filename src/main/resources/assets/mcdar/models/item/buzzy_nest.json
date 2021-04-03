@@ -1,0 +1,66 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "block/bee_nest_side",
+		"1": "block/bee_nest_top",
+		"2": "block/bee_nest_bottom",
+		"4": "block/bee_nest_front_honey",
+		"5": "mcdar:item/beenest_stem",
+		"particle": "block/bee_nest_side"
+	},
+	"elements": [
+		{
+			"from": [0, 8, 0],
+			"to": [16, 24, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"from": [6.5, 0, 6.5],
+			"to": [9.5, 8, 9.5],
+			"faces": {
+				"north": {"uv": [6, 4, 9, 12], "texture": "#5"},
+				"east": {"uv": [6, 4, 9, 12], "rotation": 270, "texture": "#5"},
+				"south": {"uv": [6, 4, 9, 12], "rotation": 180, "texture": "#5"},
+				"west": {"uv": [6, 4, 9, 12], "rotation": 90, "texture": "#5"},
+				"up": {"uv": [6, 12, 9, 15], "texture": "#5"},
+				"down": {"uv": [6, 12, 9, 15], "texture": "#5"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [-0.5, 2.75, 1],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [-0.5, 2.75, 1],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [0, -180, 0],
+			"translation": [0.25, -2.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"fixed": {
+			"translation": [0, -3.25, 0],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}
