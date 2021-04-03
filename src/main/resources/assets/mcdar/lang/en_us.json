@@ -1,14 +1,20 @@
 {
-  "itemGroup.mcdar.artefacts":      "MC Dungeons Artifacts",
+  "itemGroup.mcdar.artefacts":            "MC Dungeons Artifacts",
 
-  "item.mcdar.boots_of_swiftness":  "Boots of Swiftness",
-  "item.mcdar.corrupted_seeds":     "Corrupted Seeds",
-  "item.mcdar.death_cap_mushroom":  "Death Cap Mushroom",
-  "item.mcdar.ghost_cloak":         "Ghost Cloak",
-  "item.mcdar.gong_of_weakening":   "Gong of Weakening",
-  "item.mcdar.harvester":           "Harvester",
-  "item.mcdar.iron_hide_amulet":    "Iron Hide Amulet",
-  "item.mcdar.light_feather":       "Light Feather",
-  "item.mcdar.lightning_rod":       "Lightning Rod",
-  "item.mcdar.soul_healer":         "Soul Healer"
+  "item.mcdar.boots_of_swiftness":        "Boots of Swiftness",
+  "item.mcdar.buzzy_nest":                "Buzzy Nest",
+  "item.mcdar.corrupted_seeds":           "Corrupted Seeds",
+  "item.mcdar.death_cap_mushroom":        "Death Cap Mushroom",
+  "item.mcdar.ghost_cloak":               "Ghost Cloak",
+  "item.mcdar.golem_kit":                 "Golem Kit",
+  "item.mcdar.gong_of_weakening":         "Gong of Weakening",
+  "item.mcdar.harvester":                 "Harvester",
+  "item.mcdar.iron_hide_amulet":          "Iron Hide Amulet",
+  "item.mcdar.light_feather":             "Light Feather",
+  "item.mcdar.lightning_rod":             "Lightning Rod",
+  "item.mcdar.tasty_bone":                "Tasty Bone",
+  "item.mcdar.totem_of_restoration":      "Totem of Restoration",
+  "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
+  "item.mcdar.soul_healer":               "Soul Healer",
+  "item.mcdar.wonderful_wheat":           "Wonderful Wheat"
 }

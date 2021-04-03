@@ -1,8 +1,6 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.entities.BuzzyNestBeeEntity;
-import chronosacaria.mcdar.entities.GolemKitGolemEntity;
-import chronosacaria.mcdar.entities.TastyBoneWolfEntity;
+import chronosacaria.mcdar.entities.*;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -45,5 +43,17 @@ public class SummoningHelper {
         tastyBoneWolfEntity.setSummoner(entity);
         tastyBoneWolfEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
         world.spawnEntity(tastyBoneWolfEntity);
+    }
+
+    public static void summonWonderfulWheatLlama (LivingEntity entity, BlockPos blockPos){
+        EntityType<WonderfulWheatLlamaEntity> ww_llama = SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY;
+
+        World world = entity.getEntityWorld();
+
+        WonderfulWheatLlamaEntity wonderfulWheatLlamaEntity = ww_llama.create(world);
+        assert wonderfulWheatLlamaEntity != null;
+        wonderfulWheatLlamaEntity.setSummoner(entity);
+        wonderfulWheatLlamaEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
+        world.spawnEntity(wonderfulWheatLlamaEntity);
     }
 }

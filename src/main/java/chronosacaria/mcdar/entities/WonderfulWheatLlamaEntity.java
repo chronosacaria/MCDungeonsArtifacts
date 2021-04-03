@@ -1,11 +1,12 @@
 package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
-import chronosacaria.mcdar.goals.FollowWolfSummonerGoal;
+import chronosacaria.mcdar.goals.FollowLlamaSummonerGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -13,28 +14,26 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class TastyBoneWolfEntity extends WolfEntity {
+public class WonderfulWheatLlamaEntity extends LlamaEntity {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
 
-    public TastyBoneWolfEntity(EntityType<? extends TastyBoneWolfEntity> type, World world) {
-        super(EntityType.WOLF, world);
+    public WonderfulWheatLlamaEntity(EntityType<? extends WonderfulWheatLlamaEntity> type, World world) {
+        super(EntityType.LLAMA, world);
         //this.setTamed(true);
     }
 
-    public static DefaultAttributeContainer.Builder createTastyBoneWolfAttributes(){
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30000001192092896D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+    public static DefaultAttributeContainer.Builder createLlamaAttributes() {
+        return createAbstractDonkeyAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     protected void initDataTracker(){
@@ -45,14 +44,14 @@ public class TastyBoneWolfEntity extends WolfEntity {
     @Override
     protected void initGoals(){
 
-        this.goalSelector.add(6, new FollowWolfSummonerGoal(this, this.getSummoner(), this.world, 1.0,
+        this.goalSelector.add(6, new FollowLlamaSummonerGoal(this, this.getSummoner(), this.world, 1.0,
                 this.getNavigation(), 90.0F, 3.0F, true));
         this.initCustomGoals();
     }
 
     protected void initCustomGoals(){
-        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])).setGroupRevenge());
+        this.goalSelector.add(3, new ProjectileAttackGoal(this, 1.25D, 40, 20.0F));
+        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -121,6 +120,6 @@ public class TastyBoneWolfEntity extends WolfEntity {
     }
 
     static {
-        SUMMONER_UUID = DataTracker.registerData(TastyBoneWolfEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+        SUMMONER_UUID = DataTracker.registerData(WonderfulWheatLlamaEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
 }

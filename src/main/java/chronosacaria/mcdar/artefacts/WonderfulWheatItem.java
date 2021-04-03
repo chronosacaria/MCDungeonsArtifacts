@@ -13,10 +13,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import static chronosacaria.mcdar.api.SummoningHelper.summonTastyBoneWolf;
+import static chronosacaria.mcdar.api.SummoningHelper.summonWonderfulWheatLlama;
 
-public class TastyBoneItem extends ArtefactItem{
-    public TastyBoneItem(Settings settings, String id) {
+public class WonderfulWheatItem extends ArtefactItem{
+    public WonderfulWheatItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
     }
@@ -42,7 +42,7 @@ public class TastyBoneItem extends ArtefactItem{
             }
             if (itemUsageContextPlayer != null){
 
-                summonTastyBoneWolf(itemUsageContextPlayer, itemUseContextBlockPos);
+                summonWonderfulWheatLlama(itemUsageContextPlayer, itemUseContextBlockPos);
 
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContextItem.damage(16, itemUsageContextPlayer,

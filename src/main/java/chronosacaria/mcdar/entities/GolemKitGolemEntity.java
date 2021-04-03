@@ -56,7 +56,7 @@ public class GolemKitGolemEntity extends IronGolemEntity {
 
     protected void initCustomGoals(){
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])).setGroupRevenge());
+        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -104,7 +104,7 @@ public class GolemKitGolemEntity extends IronGolemEntity {
             if (getSummoner() != null){
                 if (getSummoner().getAttacker() != null){
                     this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null) {
+                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
                     this.setTarget(getSummoner().getAttacking());
                 }
             } else {

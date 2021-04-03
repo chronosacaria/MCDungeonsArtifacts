@@ -1,8 +1,6 @@
 package chronosacaria.mcdar.client;
 
-import chronosacaria.mcdar.entities.renderers.BuzzyNestBeeRenderer;
-import chronosacaria.mcdar.entities.renderers.GolemKitGolemRenderer;
-import chronosacaria.mcdar.entities.renderers.TastyBoneWolfRenderer;
+import chronosacaria.mcdar.entities.renderers.*;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,8 +13,9 @@ import net.minecraft.entity.EntityType;
 public class SummonedEntityRenderRegistry {
     public static void register() {
         registerRenderMob(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BuzzyNestBeeRenderer.class);
-        registerRenderMob(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer.class);
         registerRenderMob(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, GolemKitGolemRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, WonderfulWheatLlamaRenderer.class);
     }
 
     private static void registerRenderMob(EntityType<?> entity, Class<? extends MobEntityRenderer<?, ?>> renderer) {
