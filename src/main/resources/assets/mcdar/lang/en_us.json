@@ -12,9 +12,11 @@
   "item.mcdar.iron_hide_amulet":          "Iron Hide Amulet",
   "item.mcdar.light_feather":             "Light Feather",
   "item.mcdar.lightning_rod":             "Lightning Rod",
-  "item.mcdar.tasty_bone":                "Tasty Bone",
-  "item.mcdar.totem_of_restoration":      "Totem of Restoration",
-  "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
+  "item.mcdar.shock_powder":              "Shock Powder",
   "item.mcdar.soul_healer":               "Soul Healer",
+  "item.mcdar.tasty_bone":                "Tasty Bone",
+  "item.mcdar.totem_of_regeneration":     "Totem of Regeneration",
+  "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
+  "item.mcdar.updraft_tome":              "Updraft Tome",
   "item.mcdar.wonderful_wheat":           "Wonderful Wheat"
 }

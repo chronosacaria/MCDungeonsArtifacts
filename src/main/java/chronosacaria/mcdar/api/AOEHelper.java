@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
+import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -127,7 +128,6 @@ public class AOEHelper {
 
     }
 
-
     public static void knockbackNearbyEnemies(World world, PlayerEntity user) {
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
@@ -144,6 +144,33 @@ public class AOEHelper {
             }
             nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
+        }
+    }
+
+    public static void stunNearbyEnemies(World world, PlayerEntity user) {
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+
+            StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 100);
+            StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 100);
+            StatusEffectInstance slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4);
+
+            nearbyEntity.addStatusEffect(stunned);
+            nearbyEntity.addStatusEffect(nausea);
+            nearbyEntity.addStatusEffect(slowness);
+
+        }
+    }
+
+    public static void updraftNearbyEnemies(World world, PlayerEntity user) {
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+
+            nearbyEntity.setVelocity(0.0D, 1.25D, 0.0D);
         }
     }
 

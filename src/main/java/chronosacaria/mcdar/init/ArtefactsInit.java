@@ -16,9 +16,11 @@ public class ArtefactsInit {
     public static Item IRON_HIDE_AMULET;
     public static Item LIGHT_FEATHER;
     public static Item LIGHTNING_ROD;
+    public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
     public static Item TOTEM_OF_REGENERATION;
     public static Item TOTEM_OF_SOUL_PROTECTION;
+    public static Item UPDRAFT_TOME;
     public static Item SOUL_HEALER;
     public static Item WONDERFUL_WHEAT;
 
@@ -34,9 +36,11 @@ public class ArtefactsInit {
         IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
         LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");
         LIGHTNING_ROD = new LightningRodItem(new Item.Settings().group(Mcdar.ARTEFACTS), "lightning_rod");
+        SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
         TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtection(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");
+        UPDRAFT_TOME = new UpdraftTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "updraft_tome");
         SOUL_HEALER = new SoulHealerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "soul_healer");
         WONDERFUL_WHEAT = new WonderfulWheatItem(new Item.Settings().group(Mcdar.ARTEFACTS), "wonderful_wheat");
     }

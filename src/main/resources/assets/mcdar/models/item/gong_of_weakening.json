@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mcdar:item/gong_of_weakness"
+		"layer0": "mcdar:item/gong_of_weakening"
 	},
 	"gui_light": "front",
 	"display": {
