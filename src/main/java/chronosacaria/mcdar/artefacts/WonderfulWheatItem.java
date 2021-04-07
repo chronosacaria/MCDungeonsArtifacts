@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import static chronosacaria.mcdar.api.SummoningHelper.summonWonderfulWheatLlama;
 
-public class WonderfulWheatItem extends ArtefactItem{
+public class WonderfulWheatItem extends ArtefactSummoningItem{
     public WonderfulWheatItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
@@ -45,7 +45,7 @@ public class WonderfulWheatItem extends ArtefactItem{
                 summonWonderfulWheatLlama(itemUsageContextPlayer, itemUseContextBlockPos);
 
                 if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(16, itemUsageContextPlayer,
+                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
                 itemUsageContextPlayer.getItemCooldownManager().set(this, 600);

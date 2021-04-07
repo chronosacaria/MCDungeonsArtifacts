@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
-public class ShockPowderItem extends ArtefactItem{
+public class ShockPowderItem extends ArtefactStatusInflictingItem{
     public ShockPowderItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

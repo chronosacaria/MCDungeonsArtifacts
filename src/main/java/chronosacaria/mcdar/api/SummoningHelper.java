@@ -1,11 +1,19 @@
 package chronosacaria.mcdar.api;
 
+import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
 import chronosacaria.mcdar.entities.*;
+import chronosacaria.mcdar.init.StatusEffectInit;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class SummoningHelper {
 
@@ -19,6 +27,31 @@ public class SummoningHelper {
         buzzyNestBeeEntity.setSummoner(entity);
         buzzyNestBeeEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
         world.spawnEntity(buzzyNestBeeEntity);
+    }
+
+    public static void summonEnchantedGrassSheep (LivingEntity entity, BlockPos blockPos){
+        Random random = new Random();
+        int upperLimit = 3;
+        int effectInt = random.nextInt(upperLimit);
+
+        if (effectInt == 0){ // GREEN POISON SHEEP
+            EntityType<EnchantedGrassGreenSheepEntity> eg_greenSheep = SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY;
+
+            World world = entity.getEntityWorld();
+
+            EnchantedGrassGreenSheepEntity enchantedGrassGreenSheepEntity = eg_greenSheep.create(world);
+            assert enchantedGrassGreenSheepEntity != null;
+            enchantedGrassGreenSheepEntity.setColor(DyeColor.GREEN);
+            enchantedGrassGreenSheepEntity.setSummoner(entity);
+            enchantedGrassGreenSheepEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
+            world.spawnEntity(enchantedGrassGreenSheepEntity);
+        }
+        if (effectInt == 1) { // BLUE SPEED SHEEP
+
+        }
+        if (effectInt == 2) { // RED BURNING SHEEP
+
+        }
     }
 
     public static void summonGolemKitGolem (LivingEntity entity, BlockPos blockPos){

@@ -25,6 +25,10 @@ public class SummonedEntityRegistry {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BuzzyNestBeeEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
+    public static final EntityType<EnchantedGrassGreenSheepEntity> ENCHANTED_GRASS_GREEN_SHEEP_ENTITY =
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EnchantedGrassGreenSheepEntity::new)
+                    .dimensions(EntityDimensions.fixed(1, 2))
+                    .build();
     public static final EntityType<GolemKitGolemEntity> GOLEM_KIT_GOLEM_ENTITY =
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GolemKitGolemEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
@@ -40,6 +44,7 @@ public class SummonedEntityRegistry {
 
     public static void register(){
         registerEntity("buzzy_nest_bee", BUZZY_NEST_BEE_ENTITY);
+        registerEntity("enchanted_green_sheep", ENCHANTED_GRASS_GREEN_SHEEP_ENTITY);
         registerEntity("golem_kit_golem", GOLEM_KIT_GOLEM_ENTITY);
         registerEntity("tasty_bone_wolf", TASTY_BONE_WOLF_ENTITY);
         registerEntity("wonderful_wheat_llama", WONDERFUL_WHEAT_LLAMA_ENTITY);

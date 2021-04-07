@@ -11,7 +11,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class SoulHealerItem extends ArtefactItem{
+public class SoulHealerItem extends ArtefactDefenciveItem{
     public SoulHealerItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

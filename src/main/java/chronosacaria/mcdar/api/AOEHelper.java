@@ -19,6 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 import static chronosacaria.mcdar.Mcdar.random;
 
@@ -113,8 +114,7 @@ public class AOEHelper {
         }
     }
 
-    public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount,
-                                                 float distance){
+    public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
         World world = victim.getEntityWorld();
         DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
 
@@ -144,6 +144,39 @@ public class AOEHelper {
             }
             nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
+        }
+    }
+
+    public static void satchelOfElementsEffects(World world, PlayerEntity user) {
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+
+        Random random = new Random();
+        int upperLimit = 3;
+        int effectInt = random.nextInt(upperLimit);
+
+        if (effectInt == 0){ // BURNING
+            for (LivingEntity nearbyEntity : nearbyEntities){
+                nearbyEntity.setOnFireFor(3);
+            }
+        }
+        if (effectInt == 1) { // FROZEN
+            for (LivingEntity nearbyEntity : nearbyEntities){
+                StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 100);
+                StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 100);
+                StatusEffectInstance slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4);
+
+                nearbyEntity.addStatusEffect(stunned);
+                nearbyEntity.addStatusEffect(nausea);
+                nearbyEntity.addStatusEffect(slowness);
+            }
+        }
+        if (effectInt == 2){ // LIGHTNING STRIKE
+            for (LivingEntity nearbyEntity : nearbyEntities){
+               summonLightningBoltOnEntity(nearbyEntity);
+                ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(user).setUsesMagic();
+                nearbyEntity.damage(electricShockDamageSource, 5.0f);
+            }
         }
     }
 

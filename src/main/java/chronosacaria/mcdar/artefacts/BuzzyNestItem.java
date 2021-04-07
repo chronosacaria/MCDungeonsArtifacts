@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import static chronosacaria.mcdar.api.AOECloudHelper.spawnRegenCloudAtPos;
 import static chronosacaria.mcdar.api.SummoningHelper.summonBuzzyNestBee;
 
-public class BuzzyNestItem extends ArtefactItem{
+public class BuzzyNestItem extends ArtefactSummoningItem{
     public BuzzyNestItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
@@ -47,7 +47,7 @@ public class BuzzyNestItem extends ArtefactItem{
                 summonBuzzyNestBee(itemUsageContextPlayer, itemUseContextBlockPos);
 
                 if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(16, itemUsageContextPlayer,
+                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
                 itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
