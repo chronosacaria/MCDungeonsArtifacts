@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 
-public class UpdraftTomeItem extends ArtefactItem{
+public class UpdraftTomeItem extends ArtefactDamagingItem{
     public UpdraftTomeItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

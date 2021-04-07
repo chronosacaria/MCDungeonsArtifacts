@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.api.SummoningHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,10 +13,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import static chronosacaria.mcdar.api.SummoningHelper.summonEnchantedGrassSheep;
 import static chronosacaria.mcdar.api.SummoningHelper.summonGolemKitGolem;
 
-public class GolemKitItem extends ArtefactSummoningItem{
-    public GolemKitItem(Settings settings, String id) {
+public class EnchantedGrassItem extends ArtefactSummoningItem{
+    public EnchantedGrassItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
     }
@@ -43,13 +43,13 @@ public class GolemKitItem extends ArtefactSummoningItem{
             }
             if (itemUsageContextPlayer != null){
 
-                summonGolemKitGolem(itemUsageContextPlayer, itemUseContextBlockPos);
+                summonEnchantedGrassSheep(itemUsageContextPlayer, itemUseContextBlockPos);
 
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
-                itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
+                itemUsageContextPlayer.getItemCooldownManager().set(this, 10);
             }
         }
         return ActionResult.CONSUME;

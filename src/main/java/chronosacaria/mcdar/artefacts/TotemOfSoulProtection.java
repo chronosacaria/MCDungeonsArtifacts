@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 import static chronosacaria.mcdar.api.AOECloudHelper.spawnSoulProtectionCloudAtPos;
 
-public class TotemOfSoulProtection extends ArtefactItem{
+public class TotemOfSoulProtection extends ArtefactDefenciveItem{
     public TotemOfSoulProtection(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

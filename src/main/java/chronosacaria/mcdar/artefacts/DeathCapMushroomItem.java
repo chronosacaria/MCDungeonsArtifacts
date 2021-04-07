@@ -12,7 +12,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class DeathCapMushroomItem extends ArtefactItem{
+public class DeathCapMushroomItem extends ArtefactAgilityItem{
     public DeathCapMushroomItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

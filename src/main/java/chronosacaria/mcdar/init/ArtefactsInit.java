@@ -9,6 +9,7 @@ public class ArtefactsInit {
     public static Item BUZZY_NEST;
     public static Item CORRUPTED_SEEDS;
     public static Item DEATH_CAP_MUSHROOM;
+    public static Item ENCHANTED_GRASS;
     public static Item GHOST_CLOAK;
     public static Item GOLEM_KIT;
     public static Item GONG_OF_WEAKENING;
@@ -16,6 +17,7 @@ public class ArtefactsInit {
     public static Item IRON_HIDE_AMULET;
     public static Item LIGHT_FEATHER;
     public static Item LIGHTNING_ROD;
+    public static Item SATCHEL_OF_ELEMENTS;
     public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
     public static Item TOTEM_OF_REGENERATION;
@@ -29,6 +31,7 @@ public class ArtefactsInit {
         BUZZY_NEST = new BuzzyNestItem(new Item.Settings().group(Mcdar.ARTEFACTS), "buzzy_nest");
         CORRUPTED_SEEDS = new CorruptedSeedsItem(new Item.Settings().group(Mcdar.ARTEFACTS),"corrupted_seeds");
         DEATH_CAP_MUSHROOM = new DeathCapMushroomItem(new Item.Settings().group(Mcdar.ARTEFACTS), "death_cap_mushroom");
+        ENCHANTED_GRASS = new EnchantedGrassItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanted_grass");
         GHOST_CLOAK = new GhostCloakItem(new Item.Settings().group(Mcdar.ARTEFACTS), "ghost_cloak");
         GOLEM_KIT = new GolemKitItem(new Item.Settings().group(Mcdar.ARTEFACTS), "golem_kit");
         GONG_OF_WEAKENING = new GongOfWeakeningItem(new Item.Settings().group(Mcdar.ARTEFACTS), "gong_of_weakening");
@@ -36,6 +39,7 @@ public class ArtefactsInit {
         IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
         LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");
         LIGHTNING_ROD = new LightningRodItem(new Item.Settings().group(Mcdar.ARTEFACTS), "lightning_rod");
+        SATCHEL_OF_ELEMENTS = new SatchelOfElementsItem(new Item.Settings().group(Mcdar.ARTEFACTS), "satchel_of_elements");
         SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");

@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityType;
 public class SummonedEntityRenderRegistry {
     public static void register() {
         registerRenderMob(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BuzzyNestBeeRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, BuzzyNestBeeRenderer.class);
         registerRenderMob(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, GolemKitGolemRenderer.class);
         registerRenderMob(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer.class);
         registerRenderMob(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, WonderfulWheatLlamaRenderer.class);

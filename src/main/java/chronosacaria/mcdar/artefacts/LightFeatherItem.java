@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static chronosacaria.mcdar.api.AbilityHelper.isPetOfAttacker;
 
-public class LightFeatherItem extends ArtefactItem{
+public class LightFeatherItem extends ArtefactStatusInflictingItem{
     public LightFeatherItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
@@ -47,8 +48,10 @@ public class LightFeatherItem extends ArtefactItem{
             nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
 
+            StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 60);
             StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 60);
             StatusEffectInstance slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 60, 4);
+            nearbyEntity.addStatusEffect(stunned);
             nearbyEntity.addStatusEffect(nausea);
             nearbyEntity.addStatusEffect(slowness);
         }

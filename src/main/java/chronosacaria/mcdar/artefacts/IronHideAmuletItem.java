@@ -12,7 +12,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class IronHideAmuletItem extends ArtefactItem{
+public class IronHideAmuletItem extends ArtefactDefenciveItem{
     public IronHideAmuletItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);

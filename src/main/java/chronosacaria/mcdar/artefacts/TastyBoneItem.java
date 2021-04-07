@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import static chronosacaria.mcdar.api.SummoningHelper.summonTastyBoneWolf;
 
-public class TastyBoneItem extends ArtefactItem{
+public class TastyBoneItem extends ArtefactSummoningItem{
     public TastyBoneItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
@@ -45,7 +45,7 @@ public class TastyBoneItem extends ArtefactItem{
                 summonTastyBoneWolf(itemUsageContextPlayer, itemUseContextBlockPos);
 
                 if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(16, itemUsageContextPlayer,
+                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
                 itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
