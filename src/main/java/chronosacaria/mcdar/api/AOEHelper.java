@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -88,6 +89,37 @@ public class AOEHelper {
             if (nearbyEntities.size() >= i + 1){
                 LivingEntity nearbyEntity = nearbyEntities.get(i);
                 electrocute(user, nearbyEntity, damageAmount);
+            }
+        }
+    }
+
+    public static void enchantersTomeEffects(World world, PlayerEntity user) {
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5),
+                (nearbyEntity) -> nearbyEntity == user && AbilityHelper.isPetOfAttacker(user, nearbyEntity));
+
+        Random random = new Random();
+        int upperLimit = 3;
+        int effectInt = random.nextInt(upperLimit);
+
+        if (effectInt == 0){ // EXTRA DAMAGE
+            for (LivingEntity nearbyEntity : nearbyEntities){
+                StatusEffectInstance strength = new StatusEffectInstance(StatusEffects.STRENGTH, 100, 2);
+                nearbyEntity.addStatusEffect(strength);
+            }
+        }
+        if (effectInt == 1) { // FAST ATTACK
+            for (LivingEntity nearbyEntity : nearbyEntities){
+                StatusEffectInstance haste = new StatusEffectInstance(StatusEffects.HASTE, 100, 2);
+
+                nearbyEntity.addStatusEffect(haste);
+            }
+        }
+        if (effectInt == 2){ // EXTRA SPEED
+            for (LivingEntity nearbyEntity : nearbyEntities){
+                StatusEffectInstance speed = new StatusEffectInstance(StatusEffects.SPEED, 100, 2);
+
+                nearbyEntity.addStatusEffect(speed);
             }
         }
     }

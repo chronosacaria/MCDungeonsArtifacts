@@ -41,7 +41,6 @@ public class SummoningHelper {
 
             EnchantedGrassGreenSheepEntity enchantedGrassGreenSheepEntity = eg_greenSheep.create(world);
             assert enchantedGrassGreenSheepEntity != null;
-            enchantedGrassGreenSheepEntity.setColor(DyeColor.GREEN);
             enchantedGrassGreenSheepEntity.setSummoner(entity);
             enchantedGrassGreenSheepEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
             world.spawnEntity(enchantedGrassGreenSheepEntity);

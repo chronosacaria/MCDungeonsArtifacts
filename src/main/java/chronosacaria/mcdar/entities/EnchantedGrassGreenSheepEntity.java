@@ -13,6 +13,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.DyeColor;
 import net.minecraft.world.World;
 
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class EnchantedGrassGreenSheepEntity extends SheepEntity {
 
     public EnchantedGrassGreenSheepEntity(EntityType<? extends EnchantedGrassGreenSheepEntity> type, World world) {
         super(EntityType.SHEEP, world);
-        //this.setTamed(true);
+        this.setColor(DyeColor.GREEN);
     }
 
     //public static DefaultAttributeContainer.Builder createTastyBoneWolfAttributes(){
@@ -92,22 +93,19 @@ public class EnchantedGrassGreenSheepEntity extends SheepEntity {
         }
     }
 
-    @Override
-    public void tickMovement(){
-        if (this.isAlive()){
-            if (getSummoner() != null){
-                if (getSummoner().getAttacker() != null){
-                    this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                    this.setTarget(getSummoner().getAttacking());
-                }
-            } else {
-
-            }
-
-        }
-        super.tickMovement();
-    }
+    //@Override
+    //public void tickMovement(){
+    //    if (this.isAlive()){
+    //        if (getSummoner() != null){
+    //            if (getSummoner().getAttacker() != null){
+    //                this.setTarget(getSummoner().getAttacker());
+    //            } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
+    //                this.setTarget(getSummoner().getAttacking());
+    //            }
+    //        }
+    //    }
+    //    super.tickMovement();
+    //}
 
     public LivingEntity getSummoner(){
         try {

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "mcdar",
   "version": "${version}",
-  "name": "Mcdar",
+  "name": "MC Dungeons Artifacts",
   "description": "Bringing the artefacts of Minecraft Dungeons to Minecraft",
   "authors": [
     "Chronosacaria"
