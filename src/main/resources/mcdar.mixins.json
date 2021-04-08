@@ -4,6 +4,7 @@
   "package": "chronosacaria.mcdar.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "EntityHitResultMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
     "PlayerEntityMixin"

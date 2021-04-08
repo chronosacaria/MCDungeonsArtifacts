@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.api.AOECloudHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,10 +13,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import static chronosacaria.mcdar.api.AOECloudHelper.spawnSoulProtectionCloudAtPos;
+import static chronosacaria.mcdar.api.AOECloudHelper.spawnShieldingCloudAtPos;
 
-public class TotemOfSoulProtection extends ArtefactDefenciveItem{
-    public TotemOfSoulProtection(Settings settings, String id) {
+public class TotemOfShieldingItem extends ArtefactDefenciveItem{
+    public TotemOfShieldingItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
     }
@@ -43,7 +42,7 @@ public class TotemOfSoulProtection extends ArtefactDefenciveItem{
             }
             if (itemUsageContextPlayer != null){
 
-                spawnSoulProtectionCloudAtPos(itemUsageContextPlayer,blockPos, 500);
+                spawnShieldingCloudAtPos(itemUsageContextPlayer,blockPos, 500);
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));

@@ -22,6 +22,7 @@ public class ArtefactsInit {
     public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
     public static Item TOTEM_OF_REGENERATION;
+    public static Item TOTEM_OF_SHIELDING;
     public static Item TOTEM_OF_SOUL_PROTECTION;
     public static Item UPDRAFT_TOME;
     public static Item SOUL_HEALER;
@@ -45,7 +46,8 @@ public class ArtefactsInit {
         SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
-        TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtection(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");
+        TOTEM_OF_SHIELDING = new TotemOfShieldingItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_shielding");
+        TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtectionItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");
         UPDRAFT_TOME = new UpdraftTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "updraft_tome");
         SOUL_HEALER = new SoulHealerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "soul_healer");
         WONDERFUL_WHEAT = new WonderfulWheatItem(new Item.Settings().group(Mcdar.ARTEFACTS), "wonderful_wheat");

@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.api.AOECloudHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,10 +14,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import static chronosacaria.mcdar.api.AOECloudHelper.spawnRegenCloudAtPos;
+import static chronosacaria.mcdar.api.AOECloudHelper.spawnSoulProtectionCloudAtPos;
 
-public class TotemOfRegenerationItem extends ArtefactDefenciveItem{
-    public TotemOfRegenerationItem(Settings settings, String id) {
+public class TotemOfSoulProtectionItem extends ArtefactDefenciveItem{
+    public TotemOfSoulProtectionItem(Settings settings, String id) {
         super(settings);
         Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
     }
@@ -43,12 +43,12 @@ public class TotemOfRegenerationItem extends ArtefactDefenciveItem{
             }
             if (itemUsageContextPlayer != null){
 
-                spawnRegenCloudAtPos(itemUsageContextPlayer, blockPos, 100);
+                spawnSoulProtectionCloudAtPos(itemUsageContextPlayer,blockPos, 500);
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
-                itemUsageContextPlayer.getItemCooldownManager().set(this, 500);
+                //itemUsageContextPlayer.getItemCooldownManager().set(this, 500);
             }
         }
         return ActionResult.CONSUME;
