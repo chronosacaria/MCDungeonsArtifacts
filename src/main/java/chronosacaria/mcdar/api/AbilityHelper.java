@@ -1,8 +1,10 @@
 package chronosacaria.mcdar.api;
 
+import chronosacaria.mcdar.entities.GolemKitGolemEntity;
+import chronosacaria.mcdar.entities.TastyBoneWolfEntity;
+import chronosacaria.mcdar.entities.WonderfulWheatLlamaEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 
 public class AbilityHelper {
@@ -12,9 +14,17 @@ public class AbilityHelper {
     }
 
     public static boolean isPetOfAttacker(LivingEntity possibleOwner, LivingEntity possiblePet){
-        if (possiblePet instanceof TameableEntity){
-            TameableEntity pet = (TameableEntity) possiblePet;
-            return pet.getOwner() == possibleOwner;
+        if (possiblePet instanceof GolemKitGolemEntity){
+            GolemKitGolemEntity pet = (GolemKitGolemEntity) possiblePet;
+            return pet.getSummoner() == possibleOwner;
+        }
+        if (possiblePet instanceof TastyBoneWolfEntity){
+            TastyBoneWolfEntity pet = (TastyBoneWolfEntity) possiblePet;
+            return pet.getSummoner() == possibleOwner;
+        }
+        if (possiblePet instanceof WonderfulWheatLlamaEntity){
+            WonderfulWheatLlamaEntity pet = (WonderfulWheatLlamaEntity) possiblePet;
+            return pet.getSummoner() == possibleOwner;
         }
         return false;
     }

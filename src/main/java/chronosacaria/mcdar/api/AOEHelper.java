@@ -96,7 +96,7 @@ public class AOEHelper {
     public static void enchantersTomeEffects(World world, PlayerEntity user) {
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(5),
-                (nearbyEntity) -> nearbyEntity == user && AbilityHelper.isPetOfAttacker(user, nearbyEntity));
+                (nearbyEntity) -> nearbyEntity == nearbyEntity && AbilityHelper.isPetOfAttacker(user, nearbyEntity));
 
         Random random = new Random();
         int upperLimit = 3;
@@ -105,20 +105,21 @@ public class AOEHelper {
         if (effectInt == 0){ // EXTRA DAMAGE
             for (LivingEntity nearbyEntity : nearbyEntities){
                 StatusEffectInstance strength = new StatusEffectInstance(StatusEffects.STRENGTH, 100, 2);
+                nearbyEntity.clearStatusEffects();
                 nearbyEntity.addStatusEffect(strength);
             }
         }
         if (effectInt == 1) { // FAST ATTACK
             for (LivingEntity nearbyEntity : nearbyEntities){
                 StatusEffectInstance haste = new StatusEffectInstance(StatusEffects.HASTE, 100, 2);
-
+                nearbyEntity.clearStatusEffects();
                 nearbyEntity.addStatusEffect(haste);
             }
         }
         if (effectInt == 2){ // EXTRA SPEED
             for (LivingEntity nearbyEntity : nearbyEntities){
                 StatusEffectInstance speed = new StatusEffectInstance(StatusEffects.SPEED, 100, 2);
-
+                nearbyEntity.clearStatusEffects();
                 nearbyEntity.addStatusEffect(speed);
             }
         }

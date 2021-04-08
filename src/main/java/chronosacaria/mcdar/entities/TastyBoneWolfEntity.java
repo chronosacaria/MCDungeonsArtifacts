@@ -13,6 +13,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
@@ -27,7 +28,6 @@ public class TastyBoneWolfEntity extends WolfEntity {
 
     public TastyBoneWolfEntity(EntityType<? extends TastyBoneWolfEntity> type, World world) {
         super(EntityType.WOLF, world);
-        //this.setTamed(true);
     }
 
     public static DefaultAttributeContainer.Builder createTastyBoneWolfAttributes(){
