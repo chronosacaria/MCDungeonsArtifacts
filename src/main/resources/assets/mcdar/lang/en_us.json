@@ -6,6 +6,7 @@
   "item.mcdar.corrupted_seeds":           "Corrupted Seeds",
   "item.mcdar.death_cap_mushroom":        "Death Cap Mushroom",
   "item.mcdar.enchanters_tome":           "Enchanter's Tome",
+  "item.mcdar.flaming_quiver":            "Flaming Quiver",
   "item.mcdar.ghost_cloak":               "Ghost Cloak",
   "item.mcdar.golem_kit":                 "Golem Kit",
   "item.mcdar.gong_of_weakening":         "Gong of Weakening",
@@ -17,9 +18,12 @@
   "item.mcdar.shock_powder":              "Shock Powder",
   "item.mcdar.soul_healer":               "Soul Healer",
   "item.mcdar.tasty_bone":                "Tasty Bone",
+  "item.mcdar.thundering_quiver":         "Thundering Quiver",
   "item.mcdar.totem_of_regeneration":     "Totem of Regeneration",
   "item.mcdar.totem_of_shielding":        "Totem of Shielding",
   "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
   "item.mcdar.updraft_tome":              "Updraft Tome",
-  "item.mcdar.wonderful_wheat":           "Wonderful Wheat"
+  "item.mcdar.wonderful_wheat":           "Wonderful Wheat",
+
+  "death.attack.electricShock": "%s was electrocuted to death."
 }

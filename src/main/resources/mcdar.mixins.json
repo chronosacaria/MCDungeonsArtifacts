@@ -4,9 +4,10 @@
   "package": "chronosacaria.mcdar.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PersistentProjectileEntityMixin",
+    "BowItemMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
+    "PersistentProjectileEntityMixin",
     "PlayerEntityMixin"
   ],
   "client": [

@@ -6,7 +6,7 @@ import net.minecraft.util.Rarity;
 
 public class ArtefactQuiverItem extends Item {
     public ArtefactQuiverItem(Settings settings) {
-        super(settings.maxCount(1).maxDamage(64));
+        super(settings.maxCount(1).maxDamage(7));
     }
 
     public Rarity getRarity(ItemStack stack) {

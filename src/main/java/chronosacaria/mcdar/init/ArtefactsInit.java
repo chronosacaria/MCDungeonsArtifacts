@@ -11,6 +11,7 @@ public class ArtefactsInit {
     public static Item DEATH_CAP_MUSHROOM;
     //public static Item ENCHANTED_GRASS;
     public static Item ENCHANTERS_TOME;
+    public static Item FLAMING_QUIVER;
     public static Item GHOST_CLOAK;
     public static Item GOLEM_KIT;
     public static Item GONG_OF_WEAKENING;
@@ -21,6 +22,7 @@ public class ArtefactsInit {
     public static Item SATCHEL_OF_ELEMENTS;
     public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
+    public static Item THUNDERING_QUIVER;
     public static Item TOTEM_OF_REGENERATION;
     public static Item TOTEM_OF_SHIELDING;
     public static Item TOTEM_OF_SOUL_PROTECTION;
@@ -35,6 +37,7 @@ public class ArtefactsInit {
         DEATH_CAP_MUSHROOM = new DeathCapMushroomItem(new Item.Settings().group(Mcdar.ARTEFACTS), "death_cap_mushroom");
         //ENCHANTED_GRASS = new EnchantedGrassItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanted_grass");
         ENCHANTERS_TOME = new EnchantersTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanters_tome");
+        FLAMING_QUIVER = new FlamingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "flaming_quiver");
         GHOST_CLOAK = new GhostCloakItem(new Item.Settings().group(Mcdar.ARTEFACTS), "ghost_cloak");
         GOLEM_KIT = new GolemKitItem(new Item.Settings().group(Mcdar.ARTEFACTS), "golem_kit");
         GONG_OF_WEAKENING = new GongOfWeakeningItem(new Item.Settings().group(Mcdar.ARTEFACTS), "gong_of_weakening");
@@ -45,6 +48,7 @@ public class ArtefactsInit {
         SATCHEL_OF_ELEMENTS = new SatchelOfElementsItem(new Item.Settings().group(Mcdar.ARTEFACTS), "satchel_of_elements");
         SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
+        THUNDERING_QUIVER = new ThunderingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "thundering_quiver");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
         TOTEM_OF_SHIELDING = new TotemOfShieldingItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_shielding");
         TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtectionItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");
