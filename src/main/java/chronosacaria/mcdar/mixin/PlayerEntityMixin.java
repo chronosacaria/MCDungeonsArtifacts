@@ -18,4 +18,13 @@ public class PlayerEntityMixin {
             ci.cancel();
         }
     }
+
+    @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
+    public void onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
+        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+
+        if (playerEntity.hasStatusEffect(StatusEffectInit.STUNNED)){
+            ci.cancel();
+        }
+    }
 }

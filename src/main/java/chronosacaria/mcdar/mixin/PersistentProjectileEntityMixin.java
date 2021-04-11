@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,8 +18,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PersistentProjectileEntity.class)
-public class PersistentProjectileEntityMixin {
+public abstract class PersistentProjectileEntityMixin {
     @Shadow private double damage;
+
+    @Shadow public abstract boolean isAttackable();
 
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     public void onShieldingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
@@ -53,7 +56,7 @@ public class PersistentProjectileEntityMixin {
             }
         }
     }
-    //TODO Figure out how to get Tormenting Arrows to pass through blocks
+
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     public void onTormentingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
@@ -69,6 +72,26 @@ public class PersistentProjectileEntityMixin {
             float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
             if (effectTimer > 0){
                 persistentProjectileEntity.setPunch(1);
+            }
+        }
+    }
+
+    @Inject(method = "onBlockHit", at = @At("HEAD"), cancellable = true)
+    public void onTormentingArrowBlockImpact(BlockHitResult blockHitResult, CallbackInfo ci){
+        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
+        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
+
+        ItemStack offhand = null;
+        if (shooter != null){
+            offhand = shooter.getOffHandStack();
+        }
+        if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.TORMENT_QUIVER.asItem()){
+            float effectTimer =
+                    ((PlayerEntity)shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+            if (effectTimer > 0){
+                if (ci.isCancellable()){
+                    ci.cancel();
+                }
             }
         }
     }

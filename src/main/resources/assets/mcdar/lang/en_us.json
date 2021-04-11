@@ -19,11 +19,16 @@
   "item.mcdar.soul_healer":               "Soul Healer",
   "item.mcdar.tasty_bone":                "Tasty Bone",
   "item.mcdar.thundering_quiver":         "Thundering Quiver",
+  "item.mcdar.torment_quiver":            "Torment Quiver",
   "item.mcdar.totem_of_regeneration":     "Totem of Regeneration",
   "item.mcdar.totem_of_shielding":        "Totem of Shielding",
   "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
   "item.mcdar.updraft_tome":              "Updraft Tome",
   "item.mcdar.wonderful_wheat":           "Wonderful Wheat",
 
-  "death.attack.electricShock": "%s was electrocuted to death."
+  "death.attack.electricShock":           "%s was electrocuted to death.",
+
+  "effect.mcdar.shielding":               "Shielding",
+  "effect.mcdar.soul_protection":         "Soul Protection",
+  "effect.mcdar.stunned":                 "Stunned"
 }
