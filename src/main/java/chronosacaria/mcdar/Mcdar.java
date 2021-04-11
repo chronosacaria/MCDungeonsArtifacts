@@ -1,9 +1,12 @@
 package chronosacaria.mcdar;
 
+import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -27,5 +30,8 @@ public class Mcdar implements ModInitializer {
     public void onInitialize() {
         ArtefactsInit.init();
         StatusEffectInit.init();
+
+        FabricDefaultAttributeRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY,
+                EnchantedGrassGreenSheepEntity.createEnchantedGreenSheepEntityAttributes());
     }
 }

@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
-import chronosacaria.mcdar.goals.FollowGreenSheepSummonerGoal;
+import chronosacaria.mcdar.goals.FollowBlueSheepSummonerGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -24,14 +24,14 @@ import net.minecraft.world.World;
 import java.util.Optional;
 import java.util.UUID;
 
-public class EnchantedGrassGreenSheepEntity extends SheepEntity implements Summonable {
+public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
     private EatGrassGoal eatGrassGoal;
 
-    public EnchantedGrassGreenSheepEntity(EntityType<? extends EnchantedGrassGreenSheepEntity> type, World world) {
+    public EnchantedGrassBlueSheepEntity(EntityType<? extends EnchantedGrassBlueSheepEntity> type, World world) {
         super(EntityType.SHEEP, world);
-        this.setColor(DyeColor.GREEN);
+        this.setColor(DyeColor.BLUE);
     }
 
     public static DefaultAttributeContainer.Builder createEnchantedGreenSheepEntityAttributes(){
@@ -49,7 +49,7 @@ public class EnchantedGrassGreenSheepEntity extends SheepEntity implements Summo
     @Override
     protected void initGoals(){
         this.eatGrassGoal = new EatGrassGoal(this);
-        this.goalSelector.add(6, new FollowGreenSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
+        this.goalSelector.add(6, new FollowBlueSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
                 this.getNavigation(), 90.0F, 3.0F, true));
         //this.initCustomGoals();
     }
@@ -140,6 +140,6 @@ public class EnchantedGrassGreenSheepEntity extends SheepEntity implements Summo
     }
 
     static {
-        SUMMONER_UUID = DataTracker.registerData(EnchantedGrassGreenSheepEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+        SUMMONER_UUID = DataTracker.registerData(EnchantedGrassBlueSheepEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
 }

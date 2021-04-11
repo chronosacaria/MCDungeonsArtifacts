@@ -21,8 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PersistentProjectileEntityMixin {
     @Shadow private double damage;
 
-    @Shadow public abstract boolean isAttackable();
-
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     public void onShieldingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity arrowEntity = (PersistentProjectileEntity) (Object) this;

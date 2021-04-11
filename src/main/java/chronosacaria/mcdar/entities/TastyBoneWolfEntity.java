@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import chronosacaria.mcdar.goals.FollowWolfSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TastyBoneWolfEntity extends WolfEntity {
+public class TastyBoneWolfEntity extends WolfEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
@@ -63,7 +64,8 @@ public class TastyBoneWolfEntity extends WolfEntity {
         return this.dataTracker.get(SUMMONER_UUID);
     }
 
-    public void setSummoner (Entity player){
+    @Override
+    public void setSummoner(Entity player) {
         this.setSummonerUuid(player.getUuid());
     }
 

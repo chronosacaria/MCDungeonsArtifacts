@@ -13,7 +13,9 @@ import net.minecraft.entity.EntityType;
 public class SummonedEntityRenderRegistry {
     public static void register() {
         registerRenderMob(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BuzzyNestBeeRenderer.class);
-        registerRenderMob(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, BuzzyNestBeeRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY, EnchantedGrassBlueSheepRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, EnchantedGrassGreenSheepRenderer.class);
+        registerRenderMob(SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY, EnchantedGrassRedSheepRenderer.class);
         registerRenderMob(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, GolemKitGolemRenderer.class);
         registerRenderMob(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer.class);
         registerRenderMob(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, WonderfulWheatLlamaRenderer.class);

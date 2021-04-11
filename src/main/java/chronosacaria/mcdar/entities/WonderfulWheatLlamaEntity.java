@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import chronosacaria.mcdar.goals.FollowLlamaSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 import java.util.Optional;
 import java.util.UUID;
 
-public class WonderfulWheatLlamaEntity extends LlamaEntity {
+public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
@@ -62,7 +63,8 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity {
         return this.dataTracker.get(SUMMONER_UUID);
     }
 
-    public void setSummoner (Entity player){
+    @Override
+    public void setSummoner(Entity player) {
         this.setSummonerUuid(player.getUuid());
     }
 

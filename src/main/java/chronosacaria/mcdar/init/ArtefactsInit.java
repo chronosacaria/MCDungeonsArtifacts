@@ -9,7 +9,7 @@ public class ArtefactsInit {
     public static Item BUZZY_NEST;
     public static Item CORRUPTED_SEEDS;
     public static Item DEATH_CAP_MUSHROOM;
-    //public static Item ENCHANTED_GRASS;
+    public static Item ENCHANTED_GRASS;
     public static Item ENCHANTERS_TOME;
     public static Item FLAMING_QUIVER;
     public static Item GHOST_CLOAK;
@@ -36,7 +36,7 @@ public class ArtefactsInit {
         BUZZY_NEST = new BuzzyNestItem(new Item.Settings().group(Mcdar.ARTEFACTS), "buzzy_nest");
         CORRUPTED_SEEDS = new CorruptedSeedsItem(new Item.Settings().group(Mcdar.ARTEFACTS),"corrupted_seeds");
         DEATH_CAP_MUSHROOM = new DeathCapMushroomItem(new Item.Settings().group(Mcdar.ARTEFACTS), "death_cap_mushroom");
-        //ENCHANTED_GRASS = new EnchantedGrassItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanted_grass");
+        ENCHANTED_GRASS = new EnchantedGrassItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanted_grass");
         ENCHANTERS_TOME = new EnchantersTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanters_tome");
         FLAMING_QUIVER = new FlamingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "flaming_quiver");
         GHOST_CLOAK = new GhostCloakItem(new Item.Settings().group(Mcdar.ARTEFACTS), "ghost_cloak");

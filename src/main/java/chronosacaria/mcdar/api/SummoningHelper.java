@@ -1,15 +1,29 @@
 package chronosacaria.mcdar.api;
 
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.entities.*;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 public class SummoningHelper {
+
+    public static final EntityType<SheepEntity>[] SHEEP = new EntityType[]{
+            SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY,
+            SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY,
+            SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY
+    };
 
     public static void summonBuzzyNestBee (LivingEntity entity, BlockPos blockPos){
         EntityType<BuzzyNestBeeEntity> bn_bee = SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY;
@@ -27,24 +41,47 @@ public class SummoningHelper {
         Random random = new Random();
         int upperLimit = 3;
         int effectInt = random.nextInt(upperLimit);
+        World world = entity.getEntityWorld();
+        SheepEntity sheep = SHEEP[effectInt].create(world);
+        if (sheep != null){
+            ((Summonable)sheep).setSummoner(entity);
+            sheep.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0,0);
+        } else {
+            return;
+        }
 
         if (effectInt == 0){ // GREEN POISON SHEEP
-            EntityType<EnchantedGrassGreenSheepEntity> eg_greenSheep = SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY;
-
-            World world = entity.getEntityWorld();
-
-            EnchantedGrassGreenSheepEntity enchantedGrassGreenSheepEntity = eg_greenSheep.create(world);
-            assert enchantedGrassGreenSheepEntity != null;
-            enchantedGrassGreenSheepEntity.setSummoner(entity);
-            enchantedGrassGreenSheepEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
-            world.spawnEntity(enchantedGrassGreenSheepEntity);
+            List<MobEntity> nearbyEntities = world.getEntitiesByClass(MobEntity.class,
+                    new Box(sheep.getBlockPos()).expand(5),
+                    (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive());
+                for (MobEntity nearbyEntity : nearbyEntities){
+                    StatusEffectInstance poison = new StatusEffectInstance(StatusEffects.POISON, 100, 4);
+                    nearbyEntity.addStatusEffect(poison);
+            }
         }
+        world.spawnEntity(sheep);
+
         if (effectInt == 1) { // BLUE SPEED SHEEP
+            List<PlayerEntity> nearbyEntities = world.getEntitiesByClass(PlayerEntity.class,
+                        new Box(sheep.getBlockPos()).expand(10),
+                        PlayerEntity::isAlive);
+                for (PlayerEntity nearbyEntity : nearbyEntities){
+                    StatusEffectInstance speed = new StatusEffectInstance(StatusEffects.SPEED, 600, 2);
+                    nearbyEntity.addStatusEffect(speed);
+                }
+            }
+            world.spawnEntity(sheep);
 
-        }
         if (effectInt == 2) { // RED BURNING SHEEP
+            List<MobEntity> nearbyEntities = world.getEntitiesByClass(MobEntity.class,
+                        new Box(sheep.getBlockPos()).expand(5),
+                        (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive());
+                for (MobEntity nearbyEntity : nearbyEntities){
+                    nearbyEntity.setOnFireFor(100);
+                }
+            }
+            world.spawnEntity(sheep);
 
-        }
     }
 
     public static void summonGolemKitGolem (LivingEntity entity, BlockPos blockPos){
@@ -82,4 +119,6 @@ public class SummoningHelper {
         wonderfulWheatLlamaEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
         world.spawnEntity(wonderfulWheatLlamaEntity);
     }
+
+
 }

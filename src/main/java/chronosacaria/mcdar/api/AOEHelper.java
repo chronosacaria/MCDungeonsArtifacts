@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
+import chronosacaria.mcdar.entities.EnchantedGrassRedSheepEntity;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -25,6 +25,8 @@ import java.util.Random;
 import static chronosacaria.mcdar.Mcdar.random;
 
 public class AOEHelper {
+
+    private static EnchantedGrassRedSheepEntity enchantedGrassRedSheepEntity;
 
     public static float healMostInjuredAlly(LivingEntity healer, float distance){
         World world = healer.getEntityWorld();

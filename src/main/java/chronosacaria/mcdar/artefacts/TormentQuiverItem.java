@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.api.AOEHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -18,11 +19,10 @@ public class TormentQuiverItem extends ArtefactQuiverItem{
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
-
-        if (!user.isCreative()){
-            itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
+        if (user.totalExperience >= 20 || user.isCreative()){
+            user.addExperience((-20));
+            user.getItemCooldownManager().set(this, 600);
         }
-        user.getItemCooldownManager().set(this, 600);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 }

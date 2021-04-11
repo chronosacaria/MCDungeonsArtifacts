@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import chronosacaria.mcdar.goals.FollowWolfSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import java.util.Optional;
 import java.util.UUID;
 
-public class GolemKitGolemEntity extends IronGolemEntity {
+public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
@@ -67,7 +68,8 @@ public class GolemKitGolemEntity extends IronGolemEntity {
         return this.dataTracker.get(SUMMONER_UUID);
     }
 
-    public void setSummoner (Entity player){
+    @Override
+    public void setSummoner(Entity player) {
         this.setSummonerUuid(player.getUuid());
     }
 

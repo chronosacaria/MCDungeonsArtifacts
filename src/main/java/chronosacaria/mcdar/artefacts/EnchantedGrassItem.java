@@ -14,7 +14,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import static chronosacaria.mcdar.api.SummoningHelper.summonEnchantedGrassSheep;
-import static chronosacaria.mcdar.api.SummoningHelper.summonGolemKitGolem;
 
 public class EnchantedGrassItem extends ArtefactSummoningItem{
     public EnchantedGrassItem(Settings settings, String id) {
@@ -49,7 +48,7 @@ public class EnchantedGrassItem extends ArtefactSummoningItem{
                     itemUsageContextItem.damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
                 }
-                itemUsageContextPlayer.getItemCooldownManager().set(this, 10);
+                itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
             }
         }
         return ActionResult.CONSUME;

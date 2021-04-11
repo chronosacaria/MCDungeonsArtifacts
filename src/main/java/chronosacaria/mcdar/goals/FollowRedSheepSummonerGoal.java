@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.goals;
 
-import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
+import chronosacaria.mcdar.entities.EnchantedGrassBlueSheepEntity;
+import chronosacaria.mcdar.entities.EnchantedGrassRedSheepEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
@@ -11,9 +12,9 @@ import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
 
-public class FollowGreenSheepSummonerGoal extends Goal {
+public class FollowRedSheepSummonerGoal extends Goal {
 
-    private final EnchantedGrassGreenSheepEntity enchantedGrassGreenSheepEntity;
+    private final EnchantedGrassRedSheepEntity enchantedGrassRedSheepEntity;
 
     private LivingEntity summoner;
     private final WorldView worldView;
@@ -24,9 +25,9 @@ public class FollowGreenSheepSummonerGoal extends Goal {
     private final float minDistance;
     private final boolean leavesAllowed;
 
-    public FollowGreenSheepSummonerGoal(EnchantedGrassGreenSheepEntity enchantedGrassGreenSheepEntity, LivingEntity summoner, WorldView worldView, double speed,
-                                        EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed){
-            this.enchantedGrassGreenSheepEntity = enchantedGrassGreenSheepEntity;
+    public FollowRedSheepSummonerGoal(EnchantedGrassRedSheepEntity enchantedGrassRedSheepEntity, LivingEntity summoner, WorldView worldView, double speed,
+                                      EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed){
+            this.enchantedGrassRedSheepEntity = enchantedGrassRedSheepEntity;
             this.summoner = summoner;
             this.worldView = worldView;
             this.speed = speed;
@@ -38,13 +39,13 @@ public class FollowGreenSheepSummonerGoal extends Goal {
 
     @Override
     public boolean canStart(){
-        LivingEntity livingEntity = this.enchantedGrassGreenSheepEntity.getSummoner();
+        LivingEntity livingEntity = this.enchantedGrassRedSheepEntity.getSummoner();
 
         if (livingEntity == null){
             return false;
         } else if (livingEntity.isSpectator()){
             return false;
-        } else if (this.enchantedGrassGreenSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
+        } else if (this.enchantedGrassRedSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
             return false;
         } else {
             this.summoner = livingEntity;
@@ -57,16 +58,16 @@ public class FollowGreenSheepSummonerGoal extends Goal {
         if (this.navigation.isIdle()){
             return false;
         } else {
-            return this.enchantedGrassGreenSheepEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
+            return this.enchantedGrassRedSheepEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
         }
     }
 
     public void tick(){
-        this.enchantedGrassGreenSheepEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.enchantedGrassGreenSheepEntity.getLookPitchSpeed());
+        this.enchantedGrassRedSheepEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.enchantedGrassRedSheepEntity.getLookPitchSpeed());
         if (--this.countdownTicks <= 0){
             this.countdownTicks = 10;
-            if (!this.enchantedGrassGreenSheepEntity.hasVehicle()){
-                if (this.enchantedGrassGreenSheepEntity.squaredDistanceTo(this.summoner) >= 144.0D) {
+            if (!this.enchantedGrassRedSheepEntity.hasVehicle()){
+                if (this.enchantedGrassRedSheepEntity.squaredDistanceTo(this.summoner) >= 144.0D) {
                     this.tryTeleport();
                 } else {
                     this.navigation.startMovingTo(this.summoner,this.speed);
@@ -101,7 +102,7 @@ public class FollowGreenSheepSummonerGoal extends Goal {
     }
 
     private boolean canTeleportTo(BlockPos blockPos){
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(enchantedGrassGreenSheepEntity.getEntityWorld(),
+        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(enchantedGrassRedSheepEntity.getEntityWorld(),
                 new BlockPos.Mutable());
         if (pathNodeType != PathNodeType.WALKABLE){
             return false;
@@ -110,14 +111,14 @@ public class FollowGreenSheepSummonerGoal extends Goal {
             if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock){
                 return false;
             } else {
-                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.enchantedGrassGreenSheepEntity.getBlockPos()));
-                return this.worldView.isSpaceEmpty(this.enchantedGrassGreenSheepEntity,
-                        this.enchantedGrassGreenSheepEntity.getBoundingBox().offset(blockPos1));
+                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.enchantedGrassRedSheepEntity.getBlockPos()));
+                return this.worldView.isSpaceEmpty(this.enchantedGrassRedSheepEntity,
+                        this.enchantedGrassRedSheepEntity.getBoundingBox().offset(blockPos1));
             }
         }
     }
 
     private int getRandomInt(int i, int j){
-        return this.enchantedGrassGreenSheepEntity.getRandom().nextInt(j - i + 1) + i;
+        return this.enchantedGrassRedSheepEntity.getRandom().nextInt(j - i + 1) + i;
     }
 }
