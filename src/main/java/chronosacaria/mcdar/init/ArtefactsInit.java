@@ -23,6 +23,7 @@ public class ArtefactsInit {
     public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
     public static Item THUNDERING_QUIVER;
+    public static Item TORMENT_QUIVER;
     public static Item TOTEM_OF_REGENERATION;
     public static Item TOTEM_OF_SHIELDING;
     public static Item TOTEM_OF_SOUL_PROTECTION;
@@ -49,6 +50,7 @@ public class ArtefactsInit {
         SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
         THUNDERING_QUIVER = new ThunderingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "thundering_quiver");
+        TORMENT_QUIVER = new TormentQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "torment_quiver");
         TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
         TOTEM_OF_SHIELDING = new TotemOfShieldingItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_shielding");
         TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtectionItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");

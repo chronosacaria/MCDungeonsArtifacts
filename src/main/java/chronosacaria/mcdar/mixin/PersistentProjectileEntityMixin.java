@@ -40,13 +40,35 @@ public class PersistentProjectileEntityMixin {
         Entity entity = entityHitResult.getEntity();
         LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
         damage = persistentProjectileEntity.getDamage();
-        assert shooter != null;
-        ItemStack offhand = shooter.getOffHandStack();
 
-        if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.THUNDERING_QUIVER.asItem()){
+        ItemStack offhand = null;
+        if (shooter != null) {
+            offhand = shooter.getOffHandStack();
+        }
+
+        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.THUNDERING_QUIVER.asItem()){
             float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
             if (effectTimer > 0){
                 AOEHelper.electrocute(shooter, (LivingEntity) entity, (float) damage);
+            }
+        }
+    }
+    //TODO Figure out how to get Tormenting Arrows to pass through blocks
+    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    public void onTormentingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
+        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
+        Entity entity = entityHitResult.getEntity();
+        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
+        damage = persistentProjectileEntity.getDamage();
+
+        ItemStack offhand = null;
+        if (shooter != null) {
+            offhand = shooter.getOffHandStack();
+        }
+        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.TORMENT_QUIVER.asItem()){
+            float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+            if (effectTimer > 0){
+                persistentProjectileEntity.setPunch(1);
             }
         }
     }

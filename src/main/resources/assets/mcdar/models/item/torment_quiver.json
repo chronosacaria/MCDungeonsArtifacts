@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mcdar:item/flaming_quiver"
+		"layer0": "mcdar:item/torment_quiver"
 	},
 	"gui_light": "front",
 	"display": {

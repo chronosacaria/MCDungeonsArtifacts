@@ -22,7 +22,7 @@ public class ThunderingQuiverItem extends ArtefactQuiverItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        user.getItemCooldownManager().set(this, 100);
+        user.getItemCooldownManager().set(this, 600);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 }

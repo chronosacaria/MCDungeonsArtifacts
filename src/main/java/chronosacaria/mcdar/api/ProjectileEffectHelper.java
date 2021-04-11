@@ -4,8 +4,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.BlockPos;
 
 public class ProjectileEffectHelper {
     public static void ricochetArrowLikeShield(PersistentProjectileEntity persistentProjectileEntity, LivingEntity livingEntity){
@@ -21,12 +19,6 @@ public class ProjectileEffectHelper {
     }
     public static void flamingQuiverArrow(PersistentProjectileEntity persistentProjectileEntity){
         persistentProjectileEntity.setOnFireFor(100);
-    }
-
-    public static void thunderingQuiverArrow(PersistentProjectileEntity persistentProjectileEntity,
-                                             LivingEntity attacker, LivingEntity victim, float damageAmount){
-        AOEHelper.electrocute(attacker, victim, damageAmount);
-
     }
 
 }
