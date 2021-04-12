@@ -59,6 +59,22 @@ public class AOEHelper {
 
     }
 
+    public static void causeExplosion(LivingEntity user, LivingEntity target, float damageAmount, float distance){
+        World world = target.getEntityWorld();
+        DamageSource explosion = DamageSource.explosion(user);
+
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(target.getBlockPos()).expand(distance),
+                (nearbyEntity) -> AbilityHelper
+                        .canApplyToEnemy(user, target, nearbyEntity));
+        if (nearbyEntities.isEmpty()) return;
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (nearbyEntity == null) return;
+            if (nearbyEntity instanceof PlayerEntity && ((PlayerEntity) nearbyEntity).abilities.creativeMode) return;
+            nearbyEntity.damage(explosion, damageAmount);
+        }
+    }
+
     public static void summonLightningBoltOnEntity(Entity target){
         World world = target.getEntityWorld();
         LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
