@@ -19,6 +19,7 @@ public class ArtefactsInit {
     public static Item IRON_HIDE_AMULET;
     public static Item LIGHT_FEATHER;
     public static Item LIGHTNING_ROD;
+    public static Item POWERSHAKER;
     public static Item SATCHEL_OF_ELEMENTS;
     public static Item SHOCK_POWDER;
     public static Item TASTY_BONE;
@@ -46,6 +47,7 @@ public class ArtefactsInit {
         IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
         LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");
         LIGHTNING_ROD = new LightningRodItem(new Item.Settings().group(Mcdar.ARTEFACTS), "lightning_rod");
+        POWERSHAKER = new PowershakerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "powershaker");
         SATCHEL_OF_ELEMENTS = new SatchelOfElementsItem(new Item.Settings().group(Mcdar.ARTEFACTS), "satchel_of_elements");
         SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
         TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
