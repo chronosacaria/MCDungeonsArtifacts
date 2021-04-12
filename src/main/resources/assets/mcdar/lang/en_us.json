@@ -32,5 +32,19 @@
 
   "effect.mcdar.shielding":               "Shielding",
   "effect.mcdar.soul_protection":         "Soul Protection",
-  "effect.mcdar.stunned":                 "Stunned"
+  "effect.mcdar.stunned":                 "Stunned",
+
+  "tooltip_info_item.mcdar.boots_of_swiftness_1": "Boots blessed with enchantments",
+  "tooltip_info_item.mcdar.boots_of_swiftness_2": "to allow for swift movements. Useful",
+  "tooltip_info_item.mcdar.boots_of_swiftness_3": "in uncertain times such as these.",
+
+  "tooltip_info_item.mcdar.buzzy_nest_1": "Bee lovers and the bee-loved alike",
+  "tooltip_info_item.mcdar.buzzy_nest_2": "are fans of the Buzzy Nest, but don't",
+  "tooltip_info_item.mcdar.buzzy_nest_3": "be fooled by the cute bees within -",
+  "tooltip_info_item.mcdar.buzzy_nest_4": "they, pack a powerful sting!",
+
+  "tooltip_info_item.mcdar.corrupted_seeds_1": "A pouch of poisonous, corrupted seeds",
+  "tooltip_info_item.mcdar.corrupted_seeds_2": "which grow into spiky grapple vines,",
+  "tooltip_info_item.mcdar.corrupted_seeds_3": "entangling and slowly draining the",
+  "tooltip_info_item.mcdar.corrupted_seeds_4": "life from its victims."
 }
