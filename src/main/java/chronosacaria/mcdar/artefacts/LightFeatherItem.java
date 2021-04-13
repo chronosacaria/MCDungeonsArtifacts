@@ -2,15 +2,15 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.init.StatusEffectInit;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
@@ -61,5 +61,12 @@ public class LightFeatherItem extends ArtefactStatusInflictingItem{
         }
         user.getItemCooldownManager().set(this, 120);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
+        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.light_feather_1").formatted(Formatting.ITALIC));
+        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.light_feather_2").formatted(Formatting.ITALIC));
+        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.light_feather_3").formatted(Formatting.ITALIC));
     }
 }
