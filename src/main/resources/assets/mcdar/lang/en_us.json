@@ -89,5 +89,35 @@
 
   "tooltip_info_item.mcdar.light_feather_1":          "No one knows what mysterious creature",
   "tooltip_info_item.mcdar.light_feather_2":          "this feather came from, but it is as",
-  "tooltip_info_item.mcdar.light_feather_3":          "beautiful and powerful."
+  "tooltip_info_item.mcdar.light_feather_3":          "beautiful and powerful.",
+
+  "tooltip_info_item.mcdar.lightning_rod_1":          "Crafted by Illager Geomancers, this",
+  "tooltip_info_item.mcdar.lightning_rod_2":          "item is enchanted with the power of",
+  "tooltip_info_item.mcdar.lightning_rod_3":          "a storming sky.",
+
+  "tooltip_info_item.mcdar.powershaker_1":            "The Powershaker is a smashing good",
+  "tooltip_info_item.mcdar.powershaker_2":            "time, though it may not be as fun",
+  "tooltip_info_item.mcdar.powershaker_3":            "for your enemies.",
+
+  "tooltip_info_item.mcdar.satchel_of_elements_1":    "Mysteries surround this primordial",
+  "tooltip_info_item.mcdar.satchel_of_elements_2":    "satchel. Will it unleash fire, ice,",
+  "tooltip_info_item.mcdar.satchel_of_elements_3":    "or something a lot less nice?",
+
+  "tooltip_info_item.mcdar.shock_powder_1":           "Shock Powder is a reliable tool for",
+  "tooltip_info_item.mcdar.shock_powder_2":           "those who wish to make a swift exit.",
+
+  "tooltip_info_item.mcdar.soul_healer_1":            "The Soul Healer amulet is cold to",
+  "tooltip_info_item.mcdar.soul_healer_2":            "the touch and trembles with the power",
+  "tooltip_info_item.mcdar.soul_healer_3":            "of souls. It is a common among the",
+  "tooltip_info_item.mcdar.soul_healer_4":            "Illagers of the Woodland Mansions.",
+
+  "tooltip_info_item.mcdar.tasty_bone_1":             "You hear distant howling as you hold",
+  "tooltip_info_item.mcdar.tasty_bone_2":             "the Tasty Bone in your hand.",
+
+  "tooltip_info_item.mcdar.thundering_quiver_1":      "This copper quiver channels",
+  "tooltip_info_item.mcdar.thundering_quiver_2":      "the power of lightning.",
+
+  "tooltip_info_item.mcdar.torment_quiver_1":          "The Torment Quiver radiates powerful",
+  "tooltip_info_item.mcdar.torment_quiver_2":          "energy drawn from the eternal source",
+  "tooltip_info_item.mcdar.torment_quiver_3":          "of the Undead."
 }
