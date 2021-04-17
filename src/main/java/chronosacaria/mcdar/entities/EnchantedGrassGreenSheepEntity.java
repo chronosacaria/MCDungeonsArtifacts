@@ -36,9 +36,10 @@ public class EnchantedGrassGreenSheepEntity extends SheepEntity implements Summo
 
     public static DefaultAttributeContainer.Builder createEnchantedGreenSheepEntityAttributes(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30000001192092896D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 24.0D);
     }
 
     protected void initDataTracker(){
