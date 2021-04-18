@@ -184,14 +184,14 @@ public class AOEHelper {
                 new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
 
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            float knockbackMultiplier = 1.0F;
+            float knockbackMultiplier = 2.0F;
             double xRatio = user.getX() - nearbyEntity.getX();
             double zRatio;
             for (
                     zRatio = user.getZ() - nearbyEntity.getZ();
                     xRatio * xRatio + zRatio < 1.0E-4D;
                     zRatio = (Math.random() - Math.random()) * 0.01D) {
-                xRatio = (Math.random() - Math.random()) * 0.01D;
+                    xRatio = (Math.random() - Math.random()) * 0.01D;
             }
             nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);

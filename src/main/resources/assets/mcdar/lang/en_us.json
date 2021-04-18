@@ -26,6 +26,7 @@
   "item.mcdar.totem_of_shielding":        "Totem of Shielding",
   "item.mcdar.totem_of_soul_protection":  "Totem of Soul Protection",
   "item.mcdar.updraft_tome":              "Updraft Tome",
+  "item.mcdar.wind_horn":                 "Wind Horn",
   "item.mcdar.wonderful_wheat":           "Wonderful Wheat",
 
   "death.attack.electricShock":           "%s was electrocuted to death.",
@@ -135,6 +136,10 @@
   "tooltip_info_item.mcdar.updraft_tome_1":               "An ancient book filled with illegible",
   "tooltip_info_item.mcdar.updraft_tome_2":               "glyphs, you feel a strange breeze as",
   "tooltip_info_item.mcdar.updraft_tome_3":               "you flip the pages.",
+
+  "tooltip_info_item.mcdar.wind_horn_1":                  "When the Wind Horn echoes throughout",
+  "tooltip_info_item.mcdar.wind_horn_2":                  "the forests of the Overworld the creatures",
+  "tooltip_info_item.mcdar.wind_horn_3":                  "of the night tremble with fear.",
 
   "tooltip_info_item.mcdar.wonderful_wheat_1":            "This item has the faint smell of an",
   "tooltip_info_item.mcdar.wonderful_wheat_2":            "open field, baked bread, and freshly",
