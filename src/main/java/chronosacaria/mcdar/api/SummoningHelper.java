@@ -10,6 +10,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -40,7 +42,9 @@ public class SummoningHelper {
     public static void summonEnchantedGrassSheep (LivingEntity entity, BlockPos blockPos){
         Random random = new Random();
         int upperLimit = 3;
+        int nameLimit = 99;
         int effectInt = random.nextInt(upperLimit);
+        int nameRandom = random.nextInt(nameLimit);
         World world = entity.getEntityWorld();
         SheepEntity sheep = SHEEP[effectInt].create(world);
         if (sheep != null){
@@ -60,7 +64,9 @@ public class SummoningHelper {
             }
         }
         world.spawnEntity(sheep);
-
+        if (nameRandom <= 0){
+            sheep.setCustomName(new LiteralText("Lilly"));
+        }
         if (effectInt == 1) { // BLUE SPEED SHEEP
             List<PlayerEntity> nearbyEntities = world.getEntitiesByClass(PlayerEntity.class,
                         new Box(sheep.getBlockPos()).expand(10),

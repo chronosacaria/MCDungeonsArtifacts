@@ -2,6 +2,7 @@ package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowRedSheepSummonerGoal;
+import chronosacaria.mcdar.goals.SheepAttackGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -56,12 +57,12 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
         this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.add(4, this.eatGrassGoal);
-        //this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(5, new SheepAttackGoal(this));
         this.goalSelector.add(6, new FollowRedSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
                 this.getNavigation(), 90.0F, 3.0F, true));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        //this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
+        this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -93,6 +94,20 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
         if (id != null){
             this.setSummonerUuid(tag.getUuid("SummonerUUID"));
         }
+    }
+
+    @Override
+    public boolean tryAttack(Entity target) {
+        boolean bl = target.damage(DamageSource.mob(this),
+                8.0F);
+        if (bl) {
+            this.dealDamage(this, target);
+            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+            this.isFireImmune();
+            target.setOnFireFor(3);
+        }
+
+        return bl;
     }
 
     @Override

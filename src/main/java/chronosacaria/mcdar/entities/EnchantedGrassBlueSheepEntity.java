@@ -2,21 +2,26 @@ package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowBlueSheepSummonerGoal;
+import chronosacaria.mcdar.goals.FollowRedSheepSummonerGoal;
+import chronosacaria.mcdar.goals.SheepAttackGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.EatGrassGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DyeColor;
 import net.minecraft.world.World;
@@ -50,15 +55,18 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
     @Override
     protected void initGoals(){
         this.eatGrassGoal = new EatGrassGoal(this);
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
+        this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
+        this.goalSelector.add(4, this.eatGrassGoal);
+        this.goalSelector.add(5, new SheepAttackGoal(this));
         this.goalSelector.add(6, new FollowBlueSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
                 this.getNavigation(), 90.0F, 3.0F, true));
-        //this.initCustomGoals();
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
     }
-
-   protected void initCustomGoals(){
-       this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
-       this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])));
-   }
 
     private void setSummonerUuid (UUID uuid){
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
@@ -94,10 +102,10 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
     @Override
     public boolean tryAttack(Entity target) {
         boolean bl = target.damage(DamageSource.mob(this),
-                (float) this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
+                8.0F);
         if (bl) {
             this.dealDamage(this, target);
-            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f, 1f);
+            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
         }
 
         return bl;
