@@ -1,8 +1,6 @@
 package chronosacaria.mcdar;
 
-import chronosacaria.mcdar.init.ArtefactsInit;
-import chronosacaria.mcdar.init.LootRegistry;
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -29,5 +27,8 @@ public class Mcdar implements ModInitializer {
         ArtefactsInit.init();
         StatusEffectInit.init();
         LootRegistry.init();
+        EntityTypeRegistry.register();
+        BlockRegistry.register();
+        ItemRegistry.register();
     }
 }
