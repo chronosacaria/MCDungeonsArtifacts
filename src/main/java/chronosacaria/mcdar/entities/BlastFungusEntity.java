@@ -28,8 +28,8 @@ public class BlastFungusEntity extends Entity {
     public BlastFungusEntity (World world, double x, double y, double z, @Nullable LivingEntity igniter){
         this(EntityTypeRegistry.BLAST_FUNGUS_ENTITY_TYPE, world);
         this.updatePosition(x, y, z);
-        double d = world.random.nextDouble() * (double) ((float) Math.PI * 2F);
-        this.setVelocity(-Math.sin(d) * 0.02D, 0.2D, -Math.cos(d) * 0.02D);
+        double d = world.random.nextDouble() * 6.2831854820251465D;
+        this.setVelocity(-Math.sin(d) * 0.02D, 0.20000000298023224D, -Math.cos(d) * 0.02D);
         this.setFuse(80);
         this.prevX = x;
         this.prevY = y;
@@ -76,7 +76,7 @@ public class BlastFungusEntity extends Entity {
     }
 
     private void explode() {
-        this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 20.0F,
+        this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), 4.0F,
                 Explosion.DestructionType.NONE);
     }
 
