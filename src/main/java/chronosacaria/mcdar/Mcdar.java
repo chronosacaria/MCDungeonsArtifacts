@@ -27,8 +27,8 @@ public class Mcdar implements ModInitializer {
         ArtefactsInit.init();
         StatusEffectInit.init();
         LootRegistry.init();
-        EntityTypeRegistry.register();
-        BlockRegistry.register();
-        ItemRegistry.register();
+        //EntityTypeRegistry.register();
+        //BlockRegistry.register();
+        //ItemRegistry.register();
     }
 }

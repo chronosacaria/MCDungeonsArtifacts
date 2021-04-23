@@ -5,6 +5,7 @@ import chronosacaria.mcdar.Mcdar;
 import net.minecraft.item.Item;
 
 public class ArtefactsInit {
+    public static Item BLAST_FUNGUS;
     public static Item BOOTS_OF_SWIFTNESS;
     public static Item BUZZY_NEST;
     public static Item CORRUPTED_SEEDS;
@@ -34,6 +35,7 @@ public class ArtefactsInit {
     public static Item WONDERFUL_WHEAT;
 
     public static void init(){
+        BLAST_FUNGUS = new BlastFungusItem(new Item.Settings().group(Mcdar.ARTEFACTS),"blast_fungus");
         BOOTS_OF_SWIFTNESS = new BootsOfSwiftnessItem(new Item.Settings().group(Mcdar.ARTEFACTS),"boots_of_swiftness");
         BUZZY_NEST = new BuzzyNestItem(new Item.Settings().group(Mcdar.ARTEFACTS), "buzzy_nest");
         CORRUPTED_SEEDS = new CorruptedSeedsItem(new Item.Settings().group(Mcdar.ARTEFACTS),"corrupted_seeds");

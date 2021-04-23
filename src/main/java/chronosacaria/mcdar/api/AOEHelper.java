@@ -75,6 +75,23 @@ public class AOEHelper {
         }
     }
 
+    public static void causeBlastFungusExplosions(LivingEntity user, float distance, float damageAmount){
+        World world = user.getEntityWorld();
+        DamageSource explosion = DamageSource.explosion(user);
+
+        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(distance),
+                (nearbyEntity) -> AbilityHelper.canApplyToEnemy(user, nearbyEntity));
+        if (nearbyEntities.isEmpty()) return;
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (nearbyEntity == null) return;
+            if (nearbyEntity instanceof PlayerEntity && ((PlayerEntity) nearbyEntity).abilities.creativeMode) return;
+
+            AOECloudHelper.spawnExplosionCloud(user, nearbyEntity, 3);
+            nearbyEntity.damage(explosion, damageAmount);
+        }
+    }
+
     public static void summonLightningBoltOnEntity(Entity target){
         World world = target.getEntityWorld();
         LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
