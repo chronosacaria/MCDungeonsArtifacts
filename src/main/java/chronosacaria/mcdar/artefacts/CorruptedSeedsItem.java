@@ -22,7 +22,7 @@ public class CorruptedSeedsItem extends ArtefactStatusInflictingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.poisonAndSlowNearbyEnemies(world, user);
+        AOEHelper.poisonAndSlowNearbyEnemies(user);
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

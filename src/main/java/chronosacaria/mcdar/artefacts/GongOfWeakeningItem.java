@@ -29,7 +29,7 @@ public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_USE,SoundCategory.BLOCKS, 2.0F, 1.0F);
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_RESONATE,SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        weakenAndMakeNearbyEnemiesVulnerable(world, user);
+        weakenAndMakeNearbyEnemiesVulnerable(user);
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

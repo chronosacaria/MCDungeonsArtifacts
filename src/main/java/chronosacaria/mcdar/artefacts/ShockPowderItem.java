@@ -23,7 +23,7 @@ public class ShockPowderItem extends ArtefactStatusInflictingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.stunNearbyEnemies(world, user);
+        AOEHelper.stunNearbyEnemies(user);
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }

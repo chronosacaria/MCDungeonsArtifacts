@@ -27,7 +27,7 @@ public class SatchelOfElementsItem extends ArtefactStatusInflictingItem{
                 user.addExperience(-15);
             }
 
-            AOEHelper.satchelOfElementsEffects(world, user);
+            AOEHelper.satchelOfElementsEffects(user);
 
             if (!user.isCreative()){
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

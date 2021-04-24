@@ -26,7 +26,7 @@ public class WindHornItem extends ArtefactDefenciveItem{
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.EVENT_RAID_HORN,
                 SoundCategory.BLOCKS, 5.0F, 1.0F);
-        AOEHelper.knockbackNearbyEnemies(world, user);
+        AOEHelper.knockbackNearbyEnemies(user);
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

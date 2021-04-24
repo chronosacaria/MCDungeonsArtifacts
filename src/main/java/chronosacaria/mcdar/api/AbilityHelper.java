@@ -1,63 +1,75 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.entities.GolemKitGolemEntity;
-import chronosacaria.mcdar.entities.TastyBoneWolfEntity;
-import chronosacaria.mcdar.entities.WonderfulWheatLlamaEntity;
+import chronosacaria.mcdar.entities.*;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.HorseBaseEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.VillagerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class AbilityHelper {
 
-    private static boolean isAVillagerOrIronGolem(LivingEntity nearbyEntity){
-        return (nearbyEntity instanceof VillagerEntity) || (nearbyEntity instanceof IronGolemEntity);
-    }
-
-    public static boolean isPetOfAttacker(LivingEntity possibleOwner, LivingEntity possiblePet){
-        if (possiblePet instanceof GolemKitGolemEntity){
-            GolemKitGolemEntity pet = (GolemKitGolemEntity) possiblePet;
-            return pet.getSummoner() == possibleOwner;
+    public static boolean isPetOf(LivingEntity self, LivingEntity owner){
+        if (self instanceof GolemKitGolemEntity){
+            GolemKitGolemEntity pet = (GolemKitGolemEntity) self;
+            return pet.getSummoner() == owner;
         }
-        if (possiblePet instanceof TastyBoneWolfEntity){
-            TastyBoneWolfEntity pet = (TastyBoneWolfEntity) possiblePet;
-            return pet.getSummoner() == possibleOwner;
+        if (self instanceof TastyBoneWolfEntity){
+            TastyBoneWolfEntity pet = (TastyBoneWolfEntity) self;
+            return pet.getSummoner() == owner;
         }
-        if (possiblePet instanceof WonderfulWheatLlamaEntity){
-            WonderfulWheatLlamaEntity pet = (WonderfulWheatLlamaEntity) possiblePet;
-            return pet.getSummoner() == possibleOwner;
+        if (self instanceof WonderfulWheatLlamaEntity) {
+            WonderfulWheatLlamaEntity pet = (WonderfulWheatLlamaEntity) self;
+            return pet.getSummoner() == owner;
+        }
+        if (self instanceof EnchantedGrassRedSheepEntity) {
+            EnchantedGrassRedSheepEntity pet = (EnchantedGrassRedSheepEntity) self;
+            return pet.getSummoner() == owner;
+        }
+        if (self instanceof EnchantedGrassGreenSheepEntity) {
+            EnchantedGrassGreenSheepEntity pet = (EnchantedGrassGreenSheepEntity) self;
+            return pet.getSummoner() == owner;
+        }
+        if (self instanceof EnchantedGrassBlueSheepEntity) {
+            EnchantedGrassBlueSheepEntity pet = (EnchantedGrassBlueSheepEntity) self;
+            return pet.getSummoner() == owner;
         }
         return false;
     }
 
-    private static boolean isNotTheTargetOrAttacker(LivingEntity attacker, LivingEntity target,
-                                                    LivingEntity nearbyEntity){
-        return nearbyEntity != target && nearbyEntity != attacker;
+    private static boolean isVillagerOrIronGolem(LivingEntity nearbyEntity) {
+        return (nearbyEntity instanceof VillagerEntity) || (nearbyEntity instanceof IronGolemEntity);
     }
 
     public static boolean canHealEntity(LivingEntity healer, LivingEntity nearbyEntity){
-        return nearbyEntity != healer && isAlly(healer, nearbyEntity) && isAliveAndCanBeSeen(nearbyEntity, healer);
+        return nearbyEntity != healer
+                && isAllyOf(healer, nearbyEntity)
+                && nearbyEntity.isAlive()
+                && healer.canSee(nearbyEntity);
     }
 
-    private static boolean isAlly (LivingEntity healer, LivingEntity nearbyEntity){
-        return isPetOfAttacker(healer, nearbyEntity)
-                || isAVillagerOrIronGolem(nearbyEntity)
-                || healer.isTeammate(nearbyEntity);
+    private static boolean isAllyOf(LivingEntity self, LivingEntity other) {
+        return self.isTeammate(other)
+                || isPetOf(self, other)
+                || isVillagerOrIronGolem(other);
     }
 
-    private static boolean isAliveAndCanBeSeen(LivingEntity nearbyEntity, LivingEntity attacker){
-        return nearbyEntity.isAlive() && attacker.canSee(nearbyEntity);
+    public static boolean isAoeTarget(LivingEntity self, LivingEntity attacker, LivingEntity center) {
+        return self != attacker
+                && self.isAlive()
+                && !isAllyOf(attacker, self)
+                && !isUnaffectedByAoe(self)
+                && center.canSee(self);
     }
 
-    public static boolean canApplyToEnemy(LivingEntity attacker, LivingEntity target, LivingEntity nearbyEntity){
-        return isNotTheTargetOrAttacker(attacker, target, nearbyEntity)
-                && isAliveAndCanBeSeen(nearbyEntity, attacker)
-                && !isAlly(attacker, nearbyEntity);
-    }
+    private static boolean isUnaffectedByAoe(LivingEntity entity) {
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entity;
+            if (player.isCreative()) return true;
+            //return McdwEnchantsConfig.getValue("aoe_dont_affect_players");
+        }
 
-    public static boolean canApplyToEnemy(LivingEntity attacker, LivingEntity nearbyEntity){
-        return nearbyEntity != attacker
-                && isAliveAndCanBeSeen(nearbyEntity, attacker)
-                && !isAlly(attacker, nearbyEntity);
+        return false;
     }
-
 }

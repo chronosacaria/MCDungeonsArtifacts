@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-import static chronosacaria.mcdar.api.AbilityHelper.isPetOfAttacker;
+import static chronosacaria.mcdar.api.AbilityHelper.isPetOf;
 
 public class LightFeatherItem extends ArtefactStatusInflictingItem{
     public LightFeatherItem(Settings settings, String id) {
@@ -33,7 +33,8 @@ public class LightFeatherItem extends ArtefactStatusInflictingItem{
 
 
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
+                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOf(nearbyEntity,
+                        user) && nearbyEntity.isAlive());
 
         for (LivingEntity nearbyEntity : nearbyEntities){
             float knockbackMultiplier = 1.0F;

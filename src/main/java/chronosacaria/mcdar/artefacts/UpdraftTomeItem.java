@@ -23,7 +23,7 @@ public class UpdraftTomeItem extends ArtefactDamagingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.updraftNearbyEnemies(world, user);
+        AOEHelper.updraftNearbyEnemies(user);
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }

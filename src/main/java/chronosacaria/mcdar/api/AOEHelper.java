@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
-import chronosacaria.mcdar.entities.EnchantedGrassRedSheepEntity;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -26,7 +25,21 @@ import static chronosacaria.mcdar.Mcdar.random;
 
 public class AOEHelper {
 
-    private static EnchantedGrassRedSheepEntity enchantedGrassRedSheepEntity;
+    /** Returns targets of an AOE effect from 'attacker' around 'center'. This includes 'center'. */
+    public static List<LivingEntity> getAoeTargets(LivingEntity center, LivingEntity attacker, float distance) {
+        return center.getEntityWorld().getEntitiesByClass(LivingEntity.class,
+                new Box(center.getBlockPos()).expand(distance),
+                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, attacker, center)
+        );
+    }
+
+    /* Returns targets of an AOE effect excluding the 'user' and any 'pets' of the 'user' */
+    public static List<LivingEntity> excludeUserAndPetsOfUser(LivingEntity user) {
+        return user.getEntityWorld().getEntitiesByClass(LivingEntity.class,
+                new Box(user.getBlockPos()).expand(5),
+                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive());
+    }
+
 
     public static float healMostInjuredAlly(LivingEntity healer, float distance){
         World world = healer.getEntityWorld();
@@ -48,30 +61,19 @@ public class AOEHelper {
                 mostInjuredAlly.setHealth(currentHealth + lostHealth);
                 //addParticles((ServerWorld) world, mostInjuredAlly, ParticleTypes.HEART);
                 healedAmount = lostHealth;
-                return healedAmount;
             } else {
                 mostInjuredAlly.setHealth(currentHealth + (maxHealth * 0.20F));
                 //addParticles((ServerWorld) world, mostInjuredAlly, ParticleTypes.HEART);
                 healedAmount = (maxHealth * 0.20F);
-                return healedAmount;
             }
+            return healedAmount;
         } else return 0;
 
     }
 
-    public static void causeExplosion(LivingEntity user, LivingEntity target, float damageAmount, float distance){
-        World world = target.getEntityWorld();
-        DamageSource explosion = DamageSource.explosion(user);
-
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(target.getBlockPos()).expand(distance),
-                (nearbyEntity) -> AbilityHelper
-                        .canApplyToEnemy(user, target, nearbyEntity));
-        if (nearbyEntities.isEmpty()) return;
-        for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (nearbyEntity == null) return;
-            if (nearbyEntity instanceof PlayerEntity && ((PlayerEntity) nearbyEntity).abilities.creativeMode) return;
-            nearbyEntity.damage(explosion, damageAmount);
+    public static void causeExplosion(LivingEntity user, LivingEntity target, float damageAmount, float distance) {
+        for (LivingEntity nearbyEntity : getAoeTargets(target, user, distance)) {
+            nearbyEntity.damage(DamageSource.explosion(user), damageAmount);
         }
     }
 
@@ -81,7 +83,7 @@ public class AOEHelper {
 
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(distance),
-                (nearbyEntity) -> AbilityHelper.canApplyToEnemy(user, nearbyEntity));
+                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity));
         if (nearbyEntities.isEmpty()) return;
         for (LivingEntity nearbyEntity : nearbyEntities) {
             if (nearbyEntity == null) return;
@@ -109,29 +111,23 @@ public class AOEHelper {
     }
 
     public static void electrocuteNearbyEnemies(LivingEntity user, float distance, float damageAmount, int limit){
-        World world = user.getEntityWorld();
-
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(distance),
-                (nearbyEntity) -> AbilityHelper.canApplyToEnemy(user, nearbyEntity));
-        if (nearbyEntities.isEmpty()) return;
-        if (limit > nearbyEntities.size()) limit = nearbyEntities.size();
         user.world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER,
                 SoundCategory.WEATHER, 1.0F, 1.0F);
         user.world.playSound(null, user.getX(), user.getY(), user.getZ(),SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT,
                 SoundCategory.WEATHER, 1.0F, 1.0F);
-        for (int i = 0; i < limit; i++){
-            if (nearbyEntities.size() >= i + 1){
-                LivingEntity nearbyEntity = nearbyEntities.get(i);
-                electrocute(user, nearbyEntity, damageAmount);
-            }
+
+        for (LivingEntity nearbyEntity : getAoeTargets(user, user, distance)) {
+            electrocute(user, nearbyEntity, damageAmount);
+
+            limit--;
+            if (limit <= 0) break;
         }
     }
 
     public static void enchantersTomeEffects(World world, PlayerEntity user) {
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(5),
-                (nearbyEntity) -> nearbyEntity == nearbyEntity && AbilityHelper.isPetOfAttacker(user, nearbyEntity));
+                (nearbyEntity) -> nearbyEntity == nearbyEntity && AbilityHelper.isPetOf(nearbyEntity, user));
 
         Random random = new Random();
         int upperLimit = 3;
@@ -160,10 +156,8 @@ public class AOEHelper {
         }
     }
 
-    public static void poisonAndSlowNearbyEnemies(World world, PlayerEntity user){
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-        for (LivingEntity nearbyEntity : nearbyEntities){
+    public static void poisonAndSlowNearbyEnemies(PlayerEntity user){
+        for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
             StatusEffectInstance entangled = new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 4);
             StatusEffectInstance poisoned = new StatusEffectInstance(StatusEffects.POISON, 140, 1);
             nearbyEntity.addStatusEffect(entangled);
@@ -171,10 +165,8 @@ public class AOEHelper {
         }
     }
 
-    public static void weakenAndMakeNearbyEnemiesVulnerable(World world, PlayerEntity user){
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-        for (LivingEntity nearbyEntity : nearbyEntities){
+    public static void weakenAndMakeNearbyEnemiesVulnerable(PlayerEntity user){
+        for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
             StatusEffectInstance weakness = new StatusEffectInstance(StatusEffects.WEAKNESS, 140, 140);
             StatusEffectInstance vulnerability = new StatusEffectInstance(StatusEffects.RESISTANCE, 140, -2);
             nearbyEntity.addStatusEffect(weakness);
@@ -183,24 +175,16 @@ public class AOEHelper {
     }
 
     public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
-        World world = victim.getEntityWorld();
         DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
 
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(distance),
-                (nearbyEntity) -> AbilityHelper.canApplyToEnemy(user, nearbyEntity));
-        if (nearbyEntities.isEmpty()) return;
-        for (LivingEntity nearbyEntity : nearbyEntities){
+        for (LivingEntity nearbyEntity : getAoeTargets(victim, user, distance)) {
             nearbyEntity.damage(magicExplosion, damageAmount);
         }
 
     }
 
-    public static void knockbackNearbyEnemies(World world, PlayerEntity user) {
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
+    public static void knockbackNearbyEnemies(PlayerEntity user) {
+        for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
             float knockbackMultiplier = 2.0F;
             double xRatio = user.getX() - nearbyEntity.getX();
             double zRatio;
@@ -215,21 +199,18 @@ public class AOEHelper {
         }
     }
 
-    public static void satchelOfElementsEffects(World world, PlayerEntity user) {
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-
+    public static void satchelOfElementsEffects(PlayerEntity user) {
         Random random = new Random();
         int upperLimit = 3;
         int effectInt = random.nextInt(upperLimit);
 
         if (effectInt == 0){ // BURNING
-            for (LivingEntity nearbyEntity : nearbyEntities){
+            for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
                 nearbyEntity.setOnFireFor(3);
             }
         }
         if (effectInt == 1) { // FROZEN
-            for (LivingEntity nearbyEntity : nearbyEntities){
+            for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
                 StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 100);
                 StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 100);
                 StatusEffectInstance slowness = new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4);
@@ -240,7 +221,7 @@ public class AOEHelper {
             }
         }
         if (effectInt == 2){ // LIGHTNING STRIKE
-            for (LivingEntity nearbyEntity : nearbyEntities){
+            for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
                summonLightningBoltOnEntity(nearbyEntity);
                 ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(user).setUsesMagic();
                 nearbyEntity.damage(electricShockDamageSource, 5.0f);
@@ -248,11 +229,8 @@ public class AOEHelper {
         }
     }
 
-    public static void stunNearbyEnemies(World world, PlayerEntity user) {
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
+    public static void stunNearbyEnemies(PlayerEntity user) {
+        for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
 
             StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 100);
             StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 100);
@@ -265,11 +243,8 @@ public class AOEHelper {
         }
     }
 
-    public static void updraftNearbyEnemies(World world, PlayerEntity user) {
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOfAttacker(user, nearbyEntity) && nearbyEntity.isAlive());
-
-        for (LivingEntity nearbyEntity : nearbyEntities) {
+    public static void updraftNearbyEnemies(PlayerEntity user) {
+        for (LivingEntity nearbyEntity : excludeUserAndPetsOfUser(user)){
 
             nearbyEntity.setVelocity(0.0D, 1.25D, 0.0D);
         }
