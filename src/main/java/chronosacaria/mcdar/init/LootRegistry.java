@@ -45,6 +45,7 @@ public class LootRegistry {
 
             if (ILLAGER_ARTEFACT_LOOT_TABLES.contains(id)){
                 poolBuilder = FabricLootPoolBuilder.builder();
+                addArtefact(poolBuilder, ArtefactsInit.BLAST_FUNGUS,                0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.CORRUPTED_SEEDS,             0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.DEATH_CAP_MUSHROOM,          0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.ENCHANTERS_TOME,             0.25F);
@@ -74,10 +75,12 @@ public class LootRegistry {
                 addArtefact(poolBuilder, ArtefactsInit.POWERSHAKER,       0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.TASTY_BONE,        0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.UPDRAFT_TOME,      0.25F);
+                addArtefact(poolBuilder, ArtefactsInit.WIND_HORN,         0.25F);
                 addArtefact(poolBuilder, ArtefactsInit.WONDERFUL_WHEAT,   0.25F);
                 supplier.pool(poolBuilder);
             } else if (DUNGEON_AND_MINESHAFTS.contains(id)){
                 poolBuilder = FabricLootPoolBuilder.builder();
+                addArtefact(poolBuilder, ArtefactsInit.BLAST_FUNGUS,                0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.CORRUPTED_SEEDS,             0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.DEATH_CAP_MUSHROOM,          0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.ENCHANTERS_TOME,             0.10F);
@@ -104,6 +107,7 @@ public class LootRegistry {
                 addArtefact(poolBuilder, ArtefactsInit.POWERSHAKER,                 0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.TASTY_BONE,                  0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.UPDRAFT_TOME,                0.10F);
+                addArtefact(poolBuilder, ArtefactsInit.WIND_HORN,                   0.10F);
                 addArtefact(poolBuilder, ArtefactsInit.WONDERFUL_WHEAT,             0.10F);
                 supplier.pool(poolBuilder);
             }
