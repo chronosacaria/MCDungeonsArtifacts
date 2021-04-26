@@ -32,7 +32,7 @@ public class BlastFungusItem extends ArtefactDamagingItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        //user.getItemCooldownManager().set(this, 120); // Six Seconds of cooldown, this might need to change
+        user.getItemCooldownManager().set(this, 120); // Six Seconds of cooldown, this might need to change
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
