@@ -20,7 +20,7 @@ public class Mcdar implements ModInitializer {
 
     public static final ItemGroup ARTEFACTS = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "artefacts"),
-            () -> new ItemStack(ArtefactsInit.BOOTS_OF_SWIFTNESS));
+            () -> new ItemStack(ArtefactsInit.LIGHTNING_ROD));
 
     @Override
     public void onInitialize() {
