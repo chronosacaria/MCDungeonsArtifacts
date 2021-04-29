@@ -2,6 +2,7 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
+import chronosacaria.mcdar.config.McdarConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,8 +26,9 @@ import static chronosacaria.mcdar.api.AOECloudHelper.spawnSoulProtectionCloudAtP
 public class TotemOfSoulProtectionItem extends ArtefactDefenciveItem{
     public TotemOfSoulProtectionItem(Settings settings, String id) {
         super(settings);
-        Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-    }
+        if (McdarConfig.config.enableTotemSoulProtection) {
+            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        }    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();

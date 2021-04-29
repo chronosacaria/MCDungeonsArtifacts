@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.config.McdarConfig;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,8 +18,9 @@ import java.util.List;
 public class GhostCloakItem extends ArtefactAgilityItem{
     public GhostCloakItem(Settings settings, String id) {
         super(settings);
-        Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-    }
+        if (McdarConfig.config.enableGhostCloak) {
+            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        }    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

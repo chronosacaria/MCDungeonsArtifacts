@@ -3,6 +3,7 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.config.McdarConfig;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,9 @@ import java.util.List;
 public class BlastFungusItem extends ArtefactDamagingItem{
     public BlastFungusItem(Settings settings, String id) {
         super(settings);
-        Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        if (McdarConfig.config.enableBlastFungus) {
+            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        }
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){

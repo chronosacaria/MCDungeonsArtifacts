@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.config.McdarConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,8 +25,9 @@ import static chronosacaria.mcdar.api.SummoningHelper.summonTastyBoneWolf;
 public class TastyBoneItem extends ArtefactSummoningItem{
     public TastyBoneItem(Settings settings, String id) {
         super(settings);
-        Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-    }
+        if (McdarConfig.config.enableTastyBone) {
+            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        }    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();

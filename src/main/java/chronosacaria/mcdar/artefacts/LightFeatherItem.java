@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -23,8 +24,9 @@ import static chronosacaria.mcdar.api.AbilityHelper.isPetOf;
 public class LightFeatherItem extends ArtefactStatusInflictingItem{
     public LightFeatherItem(Settings settings, String id) {
         super(settings);
-        Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-    }
+        if (McdarConfig.config.enableLightFeather) {
+            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
+        }    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
