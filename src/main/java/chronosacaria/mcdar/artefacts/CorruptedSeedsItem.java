@@ -3,6 +3,8 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DamagingArtefactID;
+import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -15,11 +17,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class CorruptedSeedsItem extends ArtefactStatusInflictingItem{
-    public CorruptedSeedsItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableCorruptedSeeds) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public CorruptedSeedsItem(StatusInflictingArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

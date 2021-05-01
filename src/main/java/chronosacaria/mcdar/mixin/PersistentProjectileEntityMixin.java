@@ -2,6 +2,7 @@ package chronosacaria.mcdar.mixin;
 
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
+import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.Entity;
@@ -47,7 +48,7 @@ public abstract class PersistentProjectileEntityMixin {
             offhand = shooter.getOffHandStack();
         }
 
-        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.THUNDERING_QUIVER.asItem()){
+        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER).asItem()){
             float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
             if (effectTimer > 0){
                 AOEHelper.electrocute(shooter, (LivingEntity) entity, (float) damage);
@@ -66,7 +67,7 @@ public abstract class PersistentProjectileEntityMixin {
         if (shooter != null) {
             offhand = shooter.getOffHandStack();
         }
-        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.TORMENT_QUIVER.asItem()){
+        if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()){
             float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
             if (effectTimer > 0){
                 persistentProjectileEntity.setPunch(1);
@@ -83,7 +84,7 @@ public abstract class PersistentProjectileEntityMixin {
         if (shooter != null){
             offhand = shooter.getOffHandStack();
         }
-        if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.TORMENT_QUIVER.asItem()){
+        if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()){
             float effectTimer =
                     ((PlayerEntity)shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
             if (effectTimer > 0){

@@ -3,6 +3,7 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DamagingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,11 +17,9 @@ import java.util.List;
 
 
 public class UpdraftTomeItem extends ArtefactDamagingItem{
-    public UpdraftTomeItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableUpdraftTome) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public UpdraftTomeItem(DamagingArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

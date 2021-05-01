@@ -1,25 +1,21 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DamagingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class LightningRodItem extends ArtefactDamagingItem{
-    public LightningRodItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableLightningRod) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public LightningRodItem(DamagingArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.AgilityArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -10,17 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class BootsOfSwiftnessItem extends ArtefactAgilityItem{
-    public BootsOfSwiftnessItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableBootsOfSwiftness) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public BootsOfSwiftnessItem(AgilityArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

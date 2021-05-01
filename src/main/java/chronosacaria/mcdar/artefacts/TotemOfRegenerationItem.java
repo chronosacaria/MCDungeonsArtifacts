@@ -3,6 +3,7 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,11 +25,9 @@ import java.util.List;
 import static chronosacaria.mcdar.api.AOECloudHelper.spawnRegenCloudAtPos;
 
 public class TotemOfRegenerationItem extends ArtefactDefenciveItem{
-    public TotemOfRegenerationItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableTotemOfRegeneration) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public TotemOfRegenerationItem(DefenciveArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();

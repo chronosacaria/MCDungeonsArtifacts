@@ -3,6 +3,7 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.SummoningArtefactID;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,11 +25,9 @@ import java.util.List;
 import static chronosacaria.mcdar.api.SummoningHelper.summonGolemKitGolem;
 
 public class GolemKitItem extends ArtefactSummoningItem{
-    public GolemKitItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableGolemKit) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public GolemKitItem(SummoningArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();

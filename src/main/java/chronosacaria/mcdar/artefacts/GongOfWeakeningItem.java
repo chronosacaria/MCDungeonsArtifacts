@@ -2,6 +2,7 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,11 +19,9 @@ import java.util.List;
 import static chronosacaria.mcdar.api.AOEHelper.weakenAndMakeNearbyEnemiesVulnerable;
 
 public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
-    public GongOfWeakeningItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableGongOfWeakening) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public GongOfWeakeningItem(StatusInflictingArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

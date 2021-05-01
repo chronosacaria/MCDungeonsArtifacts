@@ -1,11 +1,14 @@
 package chronosacaria.mcdar.config;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.enums.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+
+import java.util.EnumMap;
 
 @Config(name = Mcdar.MOD_ID)
 public class McdarConfig implements ConfigData {
@@ -17,35 +20,14 @@ public class McdarConfig implements ConfigData {
         config = AutoConfig.getConfigHolder(McdarConfig.class).getConfig();
     }
 
-    @Comment("Register the following Artefacts?")
-    public boolean enableBlastFungus = true;
-    public boolean enableBootsOfSwiftness = true;
-    public boolean enableBuzzyNest = true;
-    public boolean enableCorruptedSeeds = true;
-    public boolean enableDeathCapMushroom = true;
-    public boolean enableEnchantedGrass = true;
-    public boolean enableEnchantersTome = true;
-    public boolean enableFlamingQuiver = true;
-    public boolean enableGhostCloak = true;
-    public boolean enableGolemKit = true;
-    public boolean enableGongOfWeakening = true;
-    public boolean enableHarvester = true;
-    public boolean enableIronHideAmulet = true;
-    public boolean enableLightFeather = true;
-    public boolean enableLightningRod = true;
-    public boolean enablePowershaker = true;
-    public boolean enableSatchelOfElements = true;
-    public boolean enableShockPowder = true;
-    public boolean enableSoulHealer = true;
-    public boolean enableTastyBone = true;
-    public boolean enableThunderingQuiver = true;
-    public boolean enableTormentQuiver = true;
-    public boolean enableTotemOfRegeneration = true;
-    public boolean enableTotemOfShielding = true;
-    public boolean enableTotemSoulProtection = true;
-    public boolean enableUpdraftTome = true;
-    public boolean enableWindHorn = true;
-    public boolean enableWonderfulWheat = true;
+    // config contents:
+    public EnumMap<DamagingArtefactID, Boolean> enableDamagingArtefact = new EnumMap<>(DamagingArtefactID.class);
+    public EnumMap<StatusInflictingArtefactID, Boolean> enableStatusInflictingArtefact = new EnumMap<>(StatusInflictingArtefactID.class);
+    public EnumMap<QuiverArtefactID, Boolean> enableQuiverArtefact = new EnumMap<>(QuiverArtefactID.class);
+    public EnumMap<SummoningArtefactID, Boolean> enableSummoningArtefact = new EnumMap<>(SummoningArtefactID.class);
+    public EnumMap<AgilityArtefactID, Boolean> enableAgilityArtefact = new EnumMap<>(AgilityArtefactID.class);
+    public EnumMap<DefenciveArtefactID, Boolean> enableDefenciveArtefact = new EnumMap<>(DefenciveArtefactID.class);
+
 
     @Comment("Artefact Durability")
     public int agilityArtefactDurability = 64;
@@ -95,5 +77,26 @@ public class McdarConfig implements ConfigData {
         return dungeonArtefactSpawnRate;
     }
 
+    // set config defaults
+    public McdarConfig(){
+        for (AgilityArtefactID artefactID : AgilityArtefactID.values()){
+            enableAgilityArtefact.put(artefactID, true);
+        }
+        for (DamagingArtefactID artefactID : DamagingArtefactID.values()){
+            enableDamagingArtefact.put(artefactID, true);
+        }
+        for (DefenciveArtefactID artefactID : DefenciveArtefactID.values()){
+            enableDefenciveArtefact.put(artefactID, true);
+        }
+        for (QuiverArtefactID artefactID : QuiverArtefactID.values()){
+            enableQuiverArtefact.put(artefactID, true);
+        }
+        for (StatusInflictingArtefactID artefactID : StatusInflictingArtefactID.values()){
+            enableStatusInflictingArtefact.put(artefactID, true);
+        }
+        for (SummoningArtefactID artefactID : SummoningArtefactID.values()){
+            enableSummoningArtefact.put(artefactID, true);
+        }
+    }
 
 }

@@ -2,66 +2,197 @@ package chronosacaria.mcdar.init;
 
 import chronosacaria.mcdar.artefacts.*;
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;
+import net.minecraft.util.registry.Registry;
+
+import java.util.EnumMap;
+
+import static chronosacaria.mcdar.config.McdarConfig.config;
 
 public class ArtefactsInit {
-    public static Item BLAST_FUNGUS;
-    public static Item BOOTS_OF_SWIFTNESS;
-    public static Item BUZZY_NEST;
-    public static Item CORRUPTED_SEEDS;
-    public static Item DEATH_CAP_MUSHROOM;
-    public static Item ENCHANTED_GRASS;
-    public static Item ENCHANTERS_TOME;
-    public static Item FLAMING_QUIVER;
-    public static Item GHOST_CLOAK;
-    public static Item GOLEM_KIT;
-    public static Item GONG_OF_WEAKENING;
-    public static Item HARVESTER;
-    public static Item IRON_HIDE_AMULET;
-    public static Item LIGHT_FEATHER;
-    public static Item LIGHTNING_ROD;
-    public static Item POWERSHAKER;
-    public static Item SATCHEL_OF_ELEMENTS;
-    public static Item SHOCK_POWDER;
-    public static Item TASTY_BONE;
-    public static Item THUNDERING_QUIVER;
-    public static Item TORMENT_QUIVER;
-    public static Item TOTEM_OF_REGENERATION;
-    public static Item TOTEM_OF_SHIELDING;
-    public static Item TOTEM_OF_SOUL_PROTECTION;
-    public static Item UPDRAFT_TOME;
-    public static Item SOUL_HEALER;
-    public static Item WIND_HORN;
-    public static Item WONDERFUL_WHEAT;
 
-    public static void init(){
-        BLAST_FUNGUS = new BlastFungusItem(new Item.Settings().group(Mcdar.ARTEFACTS),"blast_fungus");
-        BOOTS_OF_SWIFTNESS = new BootsOfSwiftnessItem(new Item.Settings().group(Mcdar.ARTEFACTS),"boots_of_swiftness");
-        BUZZY_NEST = new BuzzyNestItem(new Item.Settings().group(Mcdar.ARTEFACTS), "buzzy_nest");
-        CORRUPTED_SEEDS = new CorruptedSeedsItem(new Item.Settings().group(Mcdar.ARTEFACTS),"corrupted_seeds");
-        DEATH_CAP_MUSHROOM = new DeathCapMushroomItem(new Item.Settings().group(Mcdar.ARTEFACTS), "death_cap_mushroom");
-        ENCHANTED_GRASS = new EnchantedGrassItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanted_grass");
-        ENCHANTERS_TOME = new EnchantersTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "enchanters_tome");
-        FLAMING_QUIVER = new FlamingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "flaming_quiver");
-        GHOST_CLOAK = new GhostCloakItem(new Item.Settings().group(Mcdar.ARTEFACTS), "ghost_cloak");
-        GOLEM_KIT = new GolemKitItem(new Item.Settings().group(Mcdar.ARTEFACTS), "golem_kit");
-        GONG_OF_WEAKENING = new GongOfWeakeningItem(new Item.Settings().group(Mcdar.ARTEFACTS), "gong_of_weakening");
-        HARVESTER = new HarvesterItem(new Item.Settings().group(Mcdar.ARTEFACTS), "harvester");
-        IRON_HIDE_AMULET = new IronHideAmuletItem(new Item.Settings().group(Mcdar.ARTEFACTS), "iron_hide_amulet");
-        LIGHT_FEATHER = new LightFeatherItem(new Item.Settings().group(Mcdar.ARTEFACTS),"light_feather");
-        LIGHTNING_ROD = new LightningRodItem(new Item.Settings().group(Mcdar.ARTEFACTS), "lightning_rod");
-        POWERSHAKER = new PowershakerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "powershaker");
-        SATCHEL_OF_ELEMENTS = new SatchelOfElementsItem(new Item.Settings().group(Mcdar.ARTEFACTS), "satchel_of_elements");
-        SHOCK_POWDER = new ShockPowderItem(new Item.Settings().group(Mcdar.ARTEFACTS), "shock_powder");
-        TASTY_BONE = new TastyBoneItem(new Item.Settings().group(Mcdar.ARTEFACTS), "tasty_bone");
-        THUNDERING_QUIVER = new ThunderingQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "thundering_quiver");
-        TORMENT_QUIVER = new TormentQuiverItem(new Item.Settings().group(Mcdar.ARTEFACTS), "torment_quiver");
-        TOTEM_OF_REGENERATION = new TotemOfRegenerationItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_regeneration");
-        TOTEM_OF_SHIELDING = new TotemOfShieldingItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_shielding");
-        TOTEM_OF_SOUL_PROTECTION = new TotemOfSoulProtectionItem(new Item.Settings().group(Mcdar.ARTEFACTS), "totem_of_soul_protection");
-        UPDRAFT_TOME = new UpdraftTomeItem(new Item.Settings().group(Mcdar.ARTEFACTS), "updraft_tome");
-        SOUL_HEALER = new SoulHealerItem(new Item.Settings().group(Mcdar.ARTEFACTS), "soul_healer");
-        WIND_HORN = new WindHornItem(new Item.Settings().group(Mcdar.ARTEFACTS), "wind_horn");
-        WONDERFUL_WHEAT = new WonderfulWheatItem(new Item.Settings().group(Mcdar.ARTEFACTS), "wonderful_wheat");
+    public static final EnumMap<DamagingArtefactID, Item> damagingArtefact = new EnumMap<>(DamagingArtefactID.class);
+    public static final EnumMap<StatusInflictingArtefactID, Item> statusInflictingArtefact = new EnumMap<>(StatusInflictingArtefactID.class);
+    public static final EnumMap<QuiverArtefactID, Item> quiverArtefact = new EnumMap<>(QuiverArtefactID.class);
+    public static final EnumMap<SummoningArtefactID, Item> summoningArtefact = new EnumMap<>(SummoningArtefactID.class);
+    public static final EnumMap<AgilityArtefactID, Item> agilityArtefact = new EnumMap<>(AgilityArtefactID.class);
+    public static final EnumMap<DefenciveArtefactID, Item> defenciveArtefact = new EnumMap<>(DefenciveArtefactID.class);
+
+    public static void init() {
+
+        for (DamagingArtefactID artefactID : DamagingArtefactID.values()) {
+            if (!config.enableDamagingArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case BLAST_FUNGUS:
+                    item = new BlastFungusItem(artefactID);
+                    break;
+                case HARVESTER:
+                    item = new HarvesterItem(artefactID);
+                    break;
+                case LIGHTNING_ROD:
+                    item = new LightningRodItem(artefactID);
+                    break;
+                case UPDRAFT_TOME:
+                    item = new UpdraftTomeItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactDamagingItem(artefactID);
+                    break;
+            }
+            damagingArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
+        for (StatusInflictingArtefactID artefactID : StatusInflictingArtefactID.values()) {
+            if (!config.enableStatusInflictingArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case CORRUPTED_SEEDS:
+                    item = new CorruptedSeedsItem(artefactID);
+                    break;
+                case GONG_OF_WEAKENING:
+                    item = new GongOfWeakeningItem(artefactID);
+                    break;
+                case SATCHEL_OF_ELEMENTS:
+                    item = new SatchelOfElementsItem(artefactID);
+                    break;
+                case SHOCK_POWDER:
+                    item = new ShockPowderItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactStatusInflictingItem(artefactID);
+                    break;
+            }
+            statusInflictingArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
+        for (QuiverArtefactID artefactID : QuiverArtefactID.values()) {
+            if (!config.enableQuiverArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case FLAMING_QUIVER:
+                    item = new FlamingQuiverItem(artefactID);
+                    break;
+                case THUNDERING_QUIVER:
+                    item = new ThunderingQuiverItem(artefactID);
+                    break;
+                case TORMENT_QUIVER:
+                    item = new TormentQuiverItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactQuiverItem(artefactID);
+                    break;
+            }
+            quiverArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
+        for (SummoningArtefactID artefactID : SummoningArtefactID.values()) {
+            if (!config.enableSummoningArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case BUZZY_NEST:
+                    item = new BuzzyNestItem(artefactID);
+                    break;
+                case ENCHANTED_GRASS:
+                    item = new EnchantedGrassItem(artefactID);
+                    break;
+                case GOLEM_KIT:
+                    item = new GolemKitItem(artefactID);
+                    break;
+                case TASTY_BONE:
+                    item = new TastyBoneItem(artefactID);
+                    break;
+                case WONDERFUL_WHEAT:
+                    item = new WonderfulWheatItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactSummoningItem(artefactID);
+                    break;
+            }
+            summoningArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
+        for (AgilityArtefactID artefactID : AgilityArtefactID.values()) {
+            if (!config.enableAgilityArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case BOOTS_OF_SWIFTNESS:
+                    item = new BootsOfSwiftnessItem(artefactID);
+                    break;
+                case DEATH_CAP_MUSHROOM:
+                    item = new DeathCapMushroomItem(artefactID);
+                    break;
+                case GHOST_CLOAK:
+                    item = new GhostCloakItem(artefactID);
+                    break;
+                case LIGHT_FEATHER:
+                    item = new LightFeatherItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactAgilityItem(artefactID);
+                    break;
+            }
+            agilityArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
+        for (DefenciveArtefactID artefactID : DefenciveArtefactID.values()) {
+            if (!config.enableDefenciveArtefact.get(artefactID))
+                continue;
+
+            Item item;
+
+            switch (artefactID) {
+                case ENCHANTERS_TOME:
+                    item = new EnchantersTomeItem(artefactID);
+                    break;
+                case IRON_HIDE_AMULET:
+                    item = new IronHideAmuletItem(artefactID);
+                    break;
+                case POWERSHAKER:
+                    item = new PowershakerItem(artefactID);
+                    break;
+                case SOUL_HEALER:
+                    item = new SoulHealerItem(artefactID);
+                    break;
+                case TOTEM_OF_REGENERATION:
+                    item = new TotemOfRegenerationItem(artefactID);
+                    break;
+                case TOTEM_OF_SHIELDING:
+                    item = new TotemOfShieldingItem(artefactID);
+                    break;
+                case TOTEM_OF_SOUL_PROTECTION:
+                    item = new TotemOfSoulProtectionItem(artefactID);
+                    break;
+                case WIND_HORN:
+                    item = new WindHornItem(artefactID);
+                    break;
+                default:
+                    item = new ArtefactDefenciveItem(artefactID);
+                    break;
+            }
+            defenciveArtefact.put(artefactID, item);
+            registerArtefacts(artefactID.toString().toLowerCase(), item);
+        }
     }
+
+    protected static void registerArtefacts(String id, Item item) {
+        Registry.register(Registry.ITEM, Mcdar.ID(id), item);
+    }
+
 }

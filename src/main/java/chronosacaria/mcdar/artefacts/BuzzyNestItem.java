@@ -3,6 +3,8 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DamagingArtefactID;
+import chronosacaria.mcdar.enums.SummoningArtefactID;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,11 +27,9 @@ import static chronosacaria.mcdar.api.AOECloudHelper.spawnRegenCloudAtPos;
 import static chronosacaria.mcdar.api.SummoningHelper.summonBuzzyNestBee;
 
 public class BuzzyNestItem extends ArtefactSummoningItem{
-    public BuzzyNestItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableBuzzyNest) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public BuzzyNestItem(SummoningArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();

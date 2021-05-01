@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.AgilityArtefactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -14,25 +13,21 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 import static chronosacaria.mcdar.api.AbilityHelper.isPetOf;
 
-public class LightFeatherItem extends ArtefactStatusInflictingItem{
-    public LightFeatherItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableLightFeather) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+public class LightFeatherItem extends ArtefactAgilityItem{
+    public LightFeatherItem(AgilityArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
         user.jump();
-
 
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOf(nearbyEntity,

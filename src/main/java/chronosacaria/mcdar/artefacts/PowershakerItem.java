@@ -2,6 +2,7 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,11 +15,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class PowershakerItem extends ArtefactDefenciveItem{
-    public PowershakerItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enablePowershaker) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public PowershakerItem(DefenciveArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

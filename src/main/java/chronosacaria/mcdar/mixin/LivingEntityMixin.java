@@ -2,6 +2,8 @@ package chronosacaria.mcdar.mixin;
 
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.enums.DefenciveArtefactID;
+import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
@@ -61,7 +63,7 @@ public abstract class LivingEntityMixin {
 
         ItemStack offhand = user.getOffHandStack();
 
-        if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.POWERSHAKER.asItem()){
+        if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()){
             float explodingDamage = target.getMaxHealth() * 0.2F;
             float chance = user.getRandom().nextFloat();
             float effectTimer = ((PlayerEntity)user).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);

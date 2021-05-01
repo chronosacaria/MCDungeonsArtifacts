@@ -3,6 +3,8 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.DefenciveArtefactID;
+import chronosacaria.mcdar.enums.SummoningArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -15,11 +17,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class EnchantersTomeItem extends ArtefactDefenciveItem{
-    public EnchantersTomeItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableEnchantersTome) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public EnchantersTomeItem(DefenciveArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

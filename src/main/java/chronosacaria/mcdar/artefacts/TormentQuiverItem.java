@@ -3,6 +3,7 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.QuiverArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -15,11 +16,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class TormentQuiverItem extends ArtefactQuiverItem{
-    public TormentQuiverItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableTormentQuiver) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public TormentQuiverItem(QuiverArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);

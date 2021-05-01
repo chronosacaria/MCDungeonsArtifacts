@@ -2,6 +2,7 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enums.SummoningArtefactID;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,11 +24,9 @@ import java.util.List;
 import static chronosacaria.mcdar.api.SummoningHelper.summonEnchantedGrassSheep;
 
 public class EnchantedGrassItem extends ArtefactSummoningItem{
-    public EnchantedGrassItem(Settings settings, String id) {
-        super(settings);
-        if (McdarConfig.config.enableEnchantedGrass) {
-            Registry.register(Registry.ITEM, new Identifier(Mcdar.MOD_ID, id), this);
-        }    }
+    public EnchantedGrassItem(SummoningArtefactID artefactID) {
+        super(artefactID);
+    }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         World world = itemUsageContext.getWorld();
