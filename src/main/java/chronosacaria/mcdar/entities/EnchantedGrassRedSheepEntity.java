@@ -62,7 +62,7 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
                 this.getNavigation(), 90.0F, 3.0F, true));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
+        this.targetSelector.add(1, new RevengeGoal(this));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -85,15 +85,8 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
 
     public void readCustomDataFromTag(CompoundTag tag){
         super.readCustomDataFromTag(tag);
-        UUID id;
-        if (tag.contains("SummonerUUID")){
-            id = tag.getUuid("SummonerUUID");
-        } else {
-            id = tag.getUuid("SummonerUUID");
-        }
-        if (id != null){
+        if (tag.getUuid("SummonerUUID") != null)
             this.setSummonerUuid(tag.getUuid("SummonerUUID"));
-        }
     }
 
     @Override
@@ -112,36 +105,28 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
 
     @Override
     public void setAttacker(LivingEntity attacker){
-        if (attacker == getSummoner()) {
-
-        } else {
+        if (attacker != getSummoner())
             super.setAttacker(attacker);
-        }
     }
 
     @Override
-    public void tickMovement(){
-        if (this.isAlive()){
-            if (getSummoner() != null){
-                if (getSummoner().getAttacker() != null){
-                    this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                    this.setTarget(getSummoner().getAttacking());
-                }
-            }
+    public void tickMovement() {
+        if (this.isAlive() && getSummoner() != null) {
+            if (getSummoner().getAttacker() != null)
+                this.setTarget(getSummoner().getAttacker());
+            else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this)
+                this.setTarget(getSummoner().getAttacking());
         }
+
         super.tickMovement();
     }
 
     @Override
-    protected void mobTick(){
-
-    }
+    protected void mobTick() { }
 
     public LivingEntity getSummoner(){
         try {
-            Optional<UUID> uUID = this.getSummonerUuid();
-            return uUID.map(value -> this.world.getPlayerByUuid(value)).orElse(null);
+            return this.getSummonerUuid().map(value -> this.world.getPlayerByUuid(value)).orElse(null);
         } catch (IllegalArgumentException var2){
             return null;
         }

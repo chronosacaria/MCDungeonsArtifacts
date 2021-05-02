@@ -24,17 +24,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Shadow public abstract void setHealth(float health);
+    @Shadow
+    public abstract void setHealth(float health);
 
-    @Shadow public abstract boolean clearStatusEffects();
+    @Shadow
+    public abstract boolean clearStatusEffects();
 
-    @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
+    @Shadow
+    public abstract boolean addStatusEffect(StatusEffectInstance effect);
 
     @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
-    public void onSoulProtectionDeath(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir){
+    public void onSoulProtectionDeath(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
-        if (livingEntity.hasStatusEffect(StatusEffectInit.SOUL_PROTECTION)){
+        if (livingEntity.hasStatusEffect(StatusEffectInit.SOUL_PROTECTION)) {
             this.setHealth(1.0F);
             this.clearStatusEffects();
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 900, 1));
@@ -46,16 +49,16 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"), cancellable = true)
-    public void onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci){
+    public void onAttackWhilstStunnedNoTarget(Hand hand, CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
 
-        if (livingEntity.hasStatusEffect(StatusEffectInit.STUNNED)){
+        if (livingEntity.hasStatusEffect(StatusEffectInit.STUNNED)) {
             ci.cancel();
         }
     }
 
     @Inject(method = "onDeath", at = @At("HEAD"), cancellable = true)
-    public void onPowershakerExplodingKill(DamageSource source, CallbackInfo ci){
+    public void onPowershakerExplodingKill(DamageSource source, CallbackInfo ci) {
         if (!(source.getAttacker() instanceof PlayerEntity)) return;
 
         LivingEntity user = (LivingEntity) source.getAttacker();
@@ -63,24 +66,19 @@ public abstract class LivingEntityMixin {
 
         ItemStack offhand = user.getOffHandStack();
 
-        if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()){
-            float explodingDamage = target.getMaxHealth() * 0.2F;
-            float chance = user.getRandom().nextFloat();
-            float effectTimer = ((PlayerEntity)user).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
-            if (effectTimer > 0) {
-                if (chance <= 0.2F) {
-                    target.world.playSound(
-                            null,
-                            target.getX(),
-                            target.getY(),
-                            target.getZ(),
-                            SoundEvents.ENTITY_GENERIC_EXPLODE,
-                            SoundCategory.PLAYERS,
-                            0.5F,
-                            1.0F);
-                    AOECloudHelper.spawnExplosionCloud(user, target, 3.0F);
-                    AOEHelper.causeExplosion(user, target, explodingDamage, 3.0F);
-                }
+        if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()) {
+            if (((PlayerEntity) user).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && user.getRandom().nextFloat() <= 0.2F) {
+                target.world.playSound(
+                        null,
+                        target.getX(),
+                        target.getY(),
+                        target.getZ(),
+                        SoundEvents.ENTITY_GENERIC_EXPLODE,
+                        SoundCategory.PLAYERS,
+                        0.5F,
+                        1.0F);
+                AOECloudHelper.spawnExplosionCloud(user, target, 3.0F);
+                AOEHelper.causeExplosion(user, target, target.getMaxHealth() * 0.2F, 3.0F);
             }
         }
     }

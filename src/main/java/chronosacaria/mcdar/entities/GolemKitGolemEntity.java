@@ -57,7 +57,7 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
 
     protected void initCustomGoals(){
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])));
+        this.targetSelector.add(2, new RevengeGoal(this));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -101,26 +101,20 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
     }
 
     @Override
-    public void tickMovement(){
-        if (this.isAlive()){
-            if (getSummoner() != null){
-                if (getSummoner().getAttacker() != null){
-                    this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                    this.setTarget(getSummoner().getAttacking());
-                }
-            } else {
-
+    public void tickMovement() {
+        if (this.isAlive() && getSummoner() != null) {
+            if (getSummoner().getAttacker() != null) {
+                this.setTarget(getSummoner().getAttacker());
+            } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
+                this.setTarget(getSummoner().getAttacking());
             }
-
         }
         super.tickMovement();
     }
 
     public LivingEntity getSummoner(){
         try {
-            Optional<UUID> uUID = this.getSummonerUuid();
-            return uUID.map(value -> this.world.getPlayerByUuid(value)).orElse(null);
+            return this.getSummonerUuid().map(value -> this.world.getPlayerByUuid(value)).orElse(null);
         } catch (IllegalArgumentException var2){
             return null;
         }

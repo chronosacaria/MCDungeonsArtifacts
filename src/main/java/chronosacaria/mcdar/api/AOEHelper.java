@@ -127,7 +127,7 @@ public class AOEHelper {
     public static void enchantersTomeEffects(World world, PlayerEntity user) {
         List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
                 new Box(user.getBlockPos()).expand(5),
-                (nearbyEntity) -> nearbyEntity == nearbyEntity && AbilityHelper.isPetOf(nearbyEntity, user));
+                (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, user));
 
         Random random = new Random();
         int upperLimit = 3;

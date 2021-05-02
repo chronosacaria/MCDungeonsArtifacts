@@ -1,9 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,11 +9,6 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -34,26 +26,15 @@ public class TastyBoneItem extends ArtefactSummoningItem{
         if (world.isClient){
             return ActionResult.SUCCESS;
         } else {
-            ItemStack itemUsageContextItem = itemUsageContext.getStack();
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
-            Hand itemUseContextHand = itemUsageContext.getHand();
-            BlockPos itemUseContextBlockPos = itemUsageContext.getBlockPos();
-            Direction itemUseContextFacing = itemUsageContext.getPlayerFacing();
-            BlockState blockState = world.getBlockState(itemUseContextBlockPos);
 
-            BlockPos blockPos;
-            if (blockState.getCollisionShape(world, itemUseContextBlockPos).isEmpty()){
-                blockPos = itemUseContextBlockPos;
-            } else {
-                blockPos = itemUseContextBlockPos.offset(itemUseContextFacing);
-            }
             if (itemUsageContextPlayer != null){
 
-                summonTastyBoneWolf(itemUsageContextPlayer, itemUseContextBlockPos);
+                summonTastyBoneWolf(itemUsageContextPlayer, itemUsageContext.getBlockPos());
 
                 if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
+                    itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
+                            (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
                 }
                 itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
             }

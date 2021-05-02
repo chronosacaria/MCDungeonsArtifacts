@@ -45,20 +45,15 @@ public class BuzzyNestBeeEntity extends BeeEntity {
     }
 
     private boolean setBeeAttacker(LivingEntity attacker){
-        if (attacker.equals(summoner)) {
+        if (attacker.equals(summoner))
             return false;
-        }
         setAttacker(attacker);
         return true;
     }
 
     public boolean tryAttack(Entity target){
-        if (target.equals(summoner)){
+        if (target.equals(summoner) || this.hasStung())
             return false;
-        } else if (this.hasStung()){
-            return false;
-        } else {
-            return super.tryAttack(target);
-        }
+        return super.tryAttack(target);
     }
 }

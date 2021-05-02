@@ -2,7 +2,6 @@ package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowGreenSheepSummonerGoal;
-import chronosacaria.mcdar.goals.FollowRedSheepSummonerGoal;
 import chronosacaria.mcdar.goals.SheepAttackGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

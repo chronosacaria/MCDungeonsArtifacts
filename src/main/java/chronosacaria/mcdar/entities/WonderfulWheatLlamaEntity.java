@@ -52,7 +52,7 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
 
     protected void initCustomGoals(){
         this.goalSelector.add(3, new ProjectileAttackGoal(this, 1.25D, 40, 20.0F));
-        this.targetSelector.add(2, (new RevengeGoal(this, new Class[0])));
+        this.targetSelector.add(2, new RevengeGoal(this));
     }
 
     private void setSummonerUuid (UUID uuid){
@@ -75,47 +75,31 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
 
     public void readCustomDataFromTag(CompoundTag tag){
         super.readCustomDataFromTag(tag);
-        UUID id;
-        if (tag.contains("SummonerUUID")){
-            id = tag.getUuid("SummonerUUID");
-        } else {
-            id = tag.getUuid("SummonerUUID");
-        }
-        if (id != null){
+        if (tag.getUuid("SummonerUUID") != null)
             this.setSummonerUuid(tag.getUuid("SummonerUUID"));
-        }
     }
 
     @Override
     public void setAttacker(LivingEntity attacker){
-        if (attacker == getSummoner()) {
-
-        } else {
+        if (attacker != getSummoner())
             super.setAttacker(attacker);
-        }
     }
 
     @Override
-    public void tickMovement(){
-        if (this.isAlive()){
-            if (getSummoner() != null){
-                if (getSummoner().getAttacker() != null){
-                    this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                    this.setTarget(getSummoner().getAttacking());
-                }
-            } else {
-
+    public void tickMovement() {
+        if (this.isAlive() && getSummoner() != null) {
+            if (getSummoner().getAttacker() != null) {
+                this.setTarget(getSummoner().getAttacker());
+            } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
+                this.setTarget(getSummoner().getAttacking());
             }
-
         }
         super.tickMovement();
     }
 
     public LivingEntity getSummoner(){
         try {
-            Optional<UUID> uUID = this.getSummonerUuid();
-            return uUID.map(value -> this.world.getPlayerByUuid(value)).orElse(null);
+            return this.getSummonerUuid().map(value -> this.world.getPlayerByUuid(value)).orElse(null);
         } catch (IllegalArgumentException var2){
             return null;
         }

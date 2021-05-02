@@ -12,18 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerEntityMixin {
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     public void onPlayerAttackWhilstStunnedTarget(Entity target, CallbackInfo ci) {
-        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
-
-        if (playerEntity.hasStatusEffect(StatusEffectInit.STUNNED)){
+        if (((PlayerEntity) (Object) this).hasStatusEffect(StatusEffectInit.STUNNED)){
             ci.cancel();
         }
     }
 
     @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
     public void onPlayerMovementWhilstStunnedTarget(CallbackInfo ci) {
-        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
-
-        if (playerEntity.hasStatusEffect(StatusEffectInit.STUNNED)){
+        if (((PlayerEntity) (Object) this).hasStatusEffect(StatusEffectInit.STUNNED)){
             ci.cancel();
         }
     }

@@ -1,6 +1,5 @@
 package chronosacaria.mcdar.entities.renderers;
 
-import chronosacaria.mcdar.entities.EnchantedGrassBlueSheepEntity;
 import chronosacaria.mcdar.entities.EnchantedGrassRedSheepEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;

@@ -1,10 +1,8 @@
 package chronosacaria.mcdar.entities.renderers;
 
-import chronosacaria.mcdar.entities.GolemKitGolemEntity;
 import chronosacaria.mcdar.entities.WonderfulWheatLlamaEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.IronGolemEntityModel;
 import net.minecraft.client.render.entity.model.LlamaEntityModel;
 import net.minecraft.util.Identifier;
 
