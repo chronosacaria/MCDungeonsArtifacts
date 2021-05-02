@@ -90,11 +90,9 @@ public class SummoningHelper {
     }
 
     public static void summonGolemKitGolem (LivingEntity entity, BlockPos blockPos){
-        EntityType<GolemKitGolemEntity> gk_golem = SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY;
-
         World world = entity.getEntityWorld();
 
-        GolemKitGolemEntity golemKitGolemEntity = gk_golem.create(world);
+        GolemKitGolemEntity golemKitGolemEntity = SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY.create(world);
         assert golemKitGolemEntity != null;
         golemKitGolemEntity.setSummoner(entity);
         golemKitGolemEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
@@ -102,11 +100,9 @@ public class SummoningHelper {
     }
 
     public static void summonTastyBoneWolf (LivingEntity entity, BlockPos blockPos){
-        EntityType<TastyBoneWolfEntity> tb_wolf = SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY;
-
         World world = entity.getEntityWorld();
 
-        TastyBoneWolfEntity tastyBoneWolfEntity = tb_wolf.create(world);
+        TastyBoneWolfEntity tastyBoneWolfEntity = SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY.create(world);
         assert tastyBoneWolfEntity != null;
         tastyBoneWolfEntity.setSummoner(entity);
         tastyBoneWolfEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
@@ -114,16 +110,12 @@ public class SummoningHelper {
     }
 
     public static void summonWonderfulWheatLlama (LivingEntity entity, BlockPos blockPos){
-        EntityType<WonderfulWheatLlamaEntity> ww_llama = SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY;
-
         World world = entity.getEntityWorld();
 
-        WonderfulWheatLlamaEntity wonderfulWheatLlamaEntity = ww_llama.create(world);
+        WonderfulWheatLlamaEntity wonderfulWheatLlamaEntity = SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY.create(world);
         assert wonderfulWheatLlamaEntity != null;
         wonderfulWheatLlamaEntity.setSummoner(entity);
         wonderfulWheatLlamaEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
         world.spawnEntity(wonderfulWheatLlamaEntity);
     }
-
-
 }

@@ -23,13 +23,9 @@ public abstract class BowItemMixin {
             "/PersistentProjectileEntity;setProperties(Lnet/minecraft/entity/Entity;FFFFF)V"), locals = LocalCapture.CAPTURE_FAILHARD)
     public void onFlamingQuiverArrowLoosing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks,
                                             CallbackInfo ci, PlayerEntity playerEntity, boolean bl,
-                                            ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity){
+                                            ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity) {
         ItemStack offhand = user.getOffHandStack();
-        if (user instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER).asItem()){
-            float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
-            if (effectTimer > 0){
-                ProjectileEffectHelper.flamingQuiverArrow(persistentProjectileEntity);
-            }
-        }
+        if (user instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER).asItem() && playerEntity.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0)
+            ProjectileEffectHelper.flamingQuiverArrow(persistentProjectileEntity);
     }
 }

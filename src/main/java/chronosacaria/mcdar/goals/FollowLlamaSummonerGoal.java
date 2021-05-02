@@ -27,60 +27,54 @@ public class FollowLlamaSummonerGoal extends Goal {
 
     public FollowLlamaSummonerGoal(WonderfulWheatLlamaEntity wonderfulWheatLlamaEntity, LivingEntity summoner, WorldView worldView,
                                    double speed,
-                                   EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed){
-            this.wonderfulWheatLlamaEntity = wonderfulWheatLlamaEntity;
-            this.summoner = summoner;
-            this.worldView = worldView;
-            this.speed = speed;
-            this.navigation = navigation;
-            this.maxDistance = maxDistance;
-            this.minDistance = minDistance;
-            this.leavesAllowed = leavesAllowed;
+                                   EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed) {
+        this.wonderfulWheatLlamaEntity = wonderfulWheatLlamaEntity;
+        this.summoner = summoner;
+        this.worldView = worldView;
+        this.speed = speed;
+        this.navigation = navigation;
+        this.maxDistance = maxDistance;
+        this.minDistance = minDistance;
+        this.leavesAllowed = leavesAllowed;
     }
 
     @Override
-    public boolean canStart(){
+    public boolean canStart() {
         LivingEntity livingEntity = this.wonderfulWheatLlamaEntity.getSummoner();
 
-        if (livingEntity == null){
+        if (livingEntity == null || livingEntity.isSpectator() || this.wonderfulWheatLlamaEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance))
             return false;
-        } else if (livingEntity.isSpectator()){
-            return false;
-        } else if (this.wonderfulWheatLlamaEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
-            return false;
-        } else {
-            this.summoner = livingEntity;
-            return true;
-        }
+        this.summoner = livingEntity;
+        return true;
     }
 
     @Override
-    public boolean shouldContinue(){
-        if (this.navigation.isIdle()){
+    public boolean shouldContinue() {
+        if (this.navigation.isIdle()) {
             return false;
         } else {
             return this.wonderfulWheatLlamaEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
         }
     }
 
-    public void tick(){
-        this.wonderfulWheatLlamaEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.wonderfulWheatLlamaEntity.getLookPitchSpeed());
-        if (--this.countdownTicks <= 0){
+    public void tick() {
+        this.wonderfulWheatLlamaEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.wonderfulWheatLlamaEntity.getLookPitchSpeed());
+        if (--this.countdownTicks <= 0) {
             this.countdownTicks = 10;
-            if (!this.wonderfulWheatLlamaEntity.hasVehicle()){
+            if (!this.wonderfulWheatLlamaEntity.hasVehicle()) {
                 if (this.wonderfulWheatLlamaEntity.squaredDistanceTo(this.summoner) >= 144.0D) {
                     this.tryTeleport();
                 } else {
-                    this.navigation.startMovingTo(this.summoner,this.speed);
+                    this.navigation.startMovingTo(this.summoner, this.speed);
                 }
             }
         }
     }
 
-    private void tryTeleport(){
+    private void tryTeleport() {
         BlockPos blockPos = new BlockPos(this.summoner.getBlockPos());
 
-        for (int i = 0; i < 10; ++i){
+        for (int i = 0; i < 10; ++i) {
             int j = this.getRandomInt(-3, 3);
             int k = this.getRandomInt(-1, 1);
             int l = this.getRandomInt(-3, 3);
@@ -91,10 +85,10 @@ public class FollowLlamaSummonerGoal extends Goal {
         }
     }
 
-    private boolean tryTeleportTo(int i, int j, int k){
+    private boolean tryTeleportTo(int i, int j, int k) {
         if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D) {
             return false;
-        } else if (!this.canTeleportTo(new BlockPos(i, j, k))){ //23344
+        } else if (!this.canTeleportTo(new BlockPos(i, j, k))) { //23344
             return false;
         } else {
             this.navigation.stop();
@@ -102,21 +96,13 @@ public class FollowLlamaSummonerGoal extends Goal {
         }
     }
 
-    private boolean canTeleportTo(BlockPos blockPos){
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(wonderfulWheatLlamaEntity.getEntityWorld(),
-                new BlockPos.Mutable());
-        if (pathNodeType != PathNodeType.WALKABLE){
+    private boolean canTeleportTo(BlockPos blockPos) {
+        if (LandPathNodeMaker.getLandNodeType(wonderfulWheatLlamaEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE)
             return false;
-        } else {
-            BlockState blockState = this.worldView.getBlockState(blockPos.down());
-            if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock){
-                return false;
-            } else {
-                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.wonderfulWheatLlamaEntity.getBlockPos()));
-                return this.worldView.isSpaceEmpty(this.wonderfulWheatLlamaEntity,
-                        this.wonderfulWheatLlamaEntity.getBoundingBox().offset(blockPos1));
-            }
-        }
+        BlockState blockState = this.worldView.getBlockState(blockPos.down());
+        if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock)
+            return false;
+        return this.worldView.isSpaceEmpty(this.wonderfulWheatLlamaEntity, this.wonderfulWheatLlamaEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(this.wonderfulWheatLlamaEntity.getBlockPos()))));
     }
 
     private int getRandomInt(int i, int j){

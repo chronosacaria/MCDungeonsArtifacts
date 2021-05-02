@@ -13,11 +13,9 @@ public class BuzzyNestBeeRenderer extends MobEntityRenderer<BuzzyNestBeeEntity, 
 
     @Override
     public Identifier getTexture(BuzzyNestBeeEntity entity){
-        if (!entity.hasStung()){
-            return new Identifier("textures/entity/bee/bee_angry.png");
-        } else if (entity.hasStung()){
+        if (entity.hasStung())
             return new Identifier("textures/entity/bee/bee.png");
-        }
-        return new Identifier("textures/entity/bee/bee.png");
+        else
+            return new Identifier("textures/entity/bee/bee_angry.png");
     }
 }

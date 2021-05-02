@@ -34,26 +34,14 @@ public class EnchantedGrassItem extends ArtefactSummoningItem{
         if (world.isClient){
             return ActionResult.SUCCESS;
         } else {
-            ItemStack itemUsageContextItem = itemUsageContext.getStack();
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
-            Hand itemUseContextHand = itemUsageContext.getHand();
-            BlockPos itemUseContextBlockPos = itemUsageContext.getBlockPos();
-            Direction itemUseContextFacing = itemUsageContext.getPlayerFacing();
-            BlockState blockState = world.getBlockState(itemUseContextBlockPos);
 
-            BlockPos blockPos;
-            if (blockState.getCollisionShape(world, itemUseContextBlockPos).isEmpty()){
-                blockPos = itemUseContextBlockPos;
-            } else {
-                blockPos = itemUseContextBlockPos.offset(itemUseContextFacing);
-            }
             if (itemUsageContextPlayer != null){
-
-                summonEnchantedGrassSheep(itemUsageContextPlayer, itemUseContextBlockPos);
+                summonEnchantedGrassSheep(itemUsageContextPlayer, itemUsageContext.getBlockPos());
 
                 if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
+                    itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
+                            (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
                 }
                 itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
             }

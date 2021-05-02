@@ -29,11 +29,8 @@ public class LightFeatherItem extends ArtefactAgilityItem{
 
         user.jump();
 
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOf(nearbyEntity,
-                        user) && nearbyEntity.isAlive());
 
-        for (LivingEntity nearbyEntity : nearbyEntities){
+        for (LivingEntity nearbyEntity : world.getEntitiesByClass(LivingEntity.class, new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
             float knockbackMultiplier = 1.0F;
             double xRatio = user.getX() - nearbyEntity.getX();
             double zRatio;

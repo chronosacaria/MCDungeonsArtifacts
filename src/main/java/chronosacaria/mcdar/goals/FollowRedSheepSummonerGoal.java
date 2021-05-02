@@ -38,19 +38,13 @@ public class FollowRedSheepSummonerGoal extends Goal {
     }
 
     @Override
-    public boolean canStart(){
+    public boolean canStart() {
         LivingEntity livingEntity = this.enchantedGrassRedSheepEntity.getSummoner();
 
-        if (livingEntity == null){
+        if (livingEntity == null || livingEntity.isSpectator() || this.enchantedGrassRedSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance))
             return false;
-        } else if (livingEntity.isSpectator()){
-            return false;
-        } else if (this.enchantedGrassRedSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
-            return false;
-        } else {
-            this.summoner = livingEntity;
-            return true;
-        }
+        this.summoner = livingEntity;
+        return true;
     }
 
     @Override
@@ -101,21 +95,11 @@ public class FollowRedSheepSummonerGoal extends Goal {
         }
     }
 
-    private boolean canTeleportTo(BlockPos blockPos){
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(enchantedGrassRedSheepEntity.getEntityWorld(),
-                new BlockPos.Mutable());
-        if (pathNodeType != PathNodeType.WALKABLE){
+    private boolean canTeleportTo(BlockPos blockPos) {
+
+        if (LandPathNodeMaker.getLandNodeType(enchantedGrassRedSheepEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE || !this.leavesAllowed && this.worldView.getBlockState(blockPos.down()).getBlock() instanceof LeavesBlock)
             return false;
-        } else {
-            BlockState blockState = this.worldView.getBlockState(blockPos.down());
-            if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock){
-                return false;
-            } else {
-                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.enchantedGrassRedSheepEntity.getBlockPos()));
-                return this.worldView.isSpaceEmpty(this.enchantedGrassRedSheepEntity,
-                        this.enchantedGrassRedSheepEntity.getBoundingBox().offset(blockPos1));
-            }
-        }
+        return this.worldView.isSpaceEmpty(this.enchantedGrassRedSheepEntity, this.enchantedGrassRedSheepEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(this.enchantedGrassRedSheepEntity.getBlockPos()))));
     }
 
     private int getRandomInt(int i, int j){

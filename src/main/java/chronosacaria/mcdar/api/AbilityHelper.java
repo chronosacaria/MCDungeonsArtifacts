@@ -11,30 +11,24 @@ import net.minecraft.entity.player.PlayerEntity;
 public class AbilityHelper {
 
     public static boolean isPetOf(LivingEntity self, LivingEntity owner){
-        if (self instanceof GolemKitGolemEntity){
-            GolemKitGolemEntity pet = (GolemKitGolemEntity) self;
-            return pet.getSummoner() == owner;
-        }
-        if (self instanceof TastyBoneWolfEntity){
-            TastyBoneWolfEntity pet = (TastyBoneWolfEntity) self;
-            return pet.getSummoner() == owner;
-        }
-        if (self instanceof WonderfulWheatLlamaEntity) {
-            WonderfulWheatLlamaEntity pet = (WonderfulWheatLlamaEntity) self;
-            return pet.getSummoner() == owner;
-        }
-        if (self instanceof EnchantedGrassRedSheepEntity) {
-            EnchantedGrassRedSheepEntity pet = (EnchantedGrassRedSheepEntity) self;
-            return pet.getSummoner() == owner;
-        }
-        if (self instanceof EnchantedGrassGreenSheepEntity) {
-            EnchantedGrassGreenSheepEntity pet = (EnchantedGrassGreenSheepEntity) self;
-            return pet.getSummoner() == owner;
-        }
-        if (self instanceof EnchantedGrassBlueSheepEntity) {
-            EnchantedGrassBlueSheepEntity pet = (EnchantedGrassBlueSheepEntity) self;
-            return pet.getSummoner() == owner;
-        }
+        if (self instanceof GolemKitGolemEntity)
+            return ((GolemKitGolemEntity) self)
+                    .getSummoner() == owner;
+        if (self instanceof TastyBoneWolfEntity)
+            return ((TastyBoneWolfEntity) self)
+                    .getSummoner() == owner;
+        if (self instanceof WonderfulWheatLlamaEntity)
+            return ((WonderfulWheatLlamaEntity) self)
+                    .getSummoner() == owner;
+        if (self instanceof EnchantedGrassRedSheepEntity)
+            return ((EnchantedGrassRedSheepEntity) self)
+                    .getSummoner() == owner;
+        if (self instanceof EnchantedGrassGreenSheepEntity)
+            return ((EnchantedGrassGreenSheepEntity) self)
+                    .getSummoner() == owner;
+        if (self instanceof EnchantedGrassBlueSheepEntity)
+            return ((EnchantedGrassBlueSheepEntity) self)
+                    .getSummoner() == owner;
         return false;
     }
 
@@ -64,12 +58,8 @@ public class AbilityHelper {
     }
 
     private static boolean isUnaffectedByAoe(LivingEntity entity) {
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) entity;
-            if (player.isCreative()) return true;
-            //return McdwEnchantsConfig.getValue("aoe_dont_affect_players");
-        }
-
+        if (entity instanceof PlayerEntity)
+            return ((PlayerEntity) entity).isCreative();
         return false;
     }
 }

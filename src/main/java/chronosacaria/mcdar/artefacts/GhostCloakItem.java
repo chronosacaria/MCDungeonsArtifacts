@@ -24,15 +24,10 @@ public class GhostCloakItem extends ArtefactAgilityItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        StatusEffectInstance invisibility = new StatusEffectInstance(StatusEffects.INVISIBILITY, 60);
-        StatusEffectInstance glowing = new StatusEffectInstance(StatusEffects.GLOWING, 60);
-        StatusEffectInstance resistance = new StatusEffectInstance(StatusEffects.RESISTANCE, 60, 3);
-        StatusEffectInstance swiftness = new StatusEffectInstance(StatusEffects.SPEED, 60);
-
-        user.addStatusEffect(invisibility);
-        user.addStatusEffect(glowing);
-        user.addStatusEffect(resistance);
-        user.addStatusEffect(swiftness);
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 60));
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 60));
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 60, 3));
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 60));
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

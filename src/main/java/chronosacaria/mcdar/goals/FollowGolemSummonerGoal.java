@@ -37,28 +37,20 @@ public class FollowGolemSummonerGoal extends Goal {
     }
 
     @Override
-    public boolean canStart(){
+    public boolean canStart() {
         LivingEntity livingEntity = this.golemKitGolemEntity.getSummoner();
 
-        if (livingEntity == null){
+        if (livingEntity == null || livingEntity.isSpectator() || this.golemKitGolemEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance))
             return false;
-        } else if (livingEntity.isSpectator()){
-            return false;
-        } else if (this.golemKitGolemEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
-            return false;
-        } else {
-            this.summoner = livingEntity;
-            return true;
-        }
+        this.summoner = livingEntity;
+        return true;
     }
 
     @Override
     public boolean shouldContinue(){
-        if (this.navigation.isIdle()){
+        if (this.navigation.isIdle())
             return false;
-        } else {
-            return this.golemKitGolemEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
-        }
+        return this.golemKitGolemEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
     }
 
     public void tick(){
@@ -89,32 +81,20 @@ public class FollowGolemSummonerGoal extends Goal {
         }
     }
 
-    private boolean tryTeleportTo(int i, int j, int k){
-        if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D) {
+    private boolean tryTeleportTo(int i, int j, int k) {
+        if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D || !this.canTeleportTo(new BlockPos(i, j, k)))
             return false;
-        } else if (!this.canTeleportTo(new BlockPos(i, j, k))){ //23344
-            return false;
-        } else {
-            this.navigation.stop();
-            return true;
-        }
+        this.navigation.stop();
+        return true;
     }
 
-    private boolean canTeleportTo(BlockPos blockPos){
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(golemKitGolemEntity.getEntityWorld(),
-                new BlockPos.Mutable());
-        if (pathNodeType != PathNodeType.WALKABLE){
+    private boolean canTeleportTo(BlockPos blockPos) {
+        if (LandPathNodeMaker.getLandNodeType(golemKitGolemEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE)
             return false;
-        } else {
-            BlockState blockState = this.worldView.getBlockState(blockPos.down());
-            if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock){
-                return false;
-            } else {
-                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.golemKitGolemEntity.getBlockPos()));
-                return this.worldView.isSpaceEmpty(this.golemKitGolemEntity,
-                        this.golemKitGolemEntity.getBoundingBox().offset(blockPos1));
-            }
-        }
+        BlockState blockState = this.worldView.getBlockState(blockPos.down());
+        if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock)
+            return false;
+        return this.worldView.isSpaceEmpty(this.golemKitGolemEntity, this.golemKitGolemEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(this.golemKitGolemEntity.getBlockPos()))));
     }
 
     private int getRandomInt(int i, int j){

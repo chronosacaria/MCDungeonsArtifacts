@@ -1,7 +1,5 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,8 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.*;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -24,9 +24,7 @@ public class IronHideAmuletItem extends ArtefactDefenciveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        StatusEffectInstance resistance = new StatusEffectInstance(StatusEffects.RESISTANCE, 220, 1);
-
-        user.addStatusEffect(resistance);
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 220, 1));
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

@@ -26,60 +26,54 @@ public class FollowBlueSheepSummonerGoal extends Goal {
     private final boolean leavesAllowed;
 
     public FollowBlueSheepSummonerGoal(EnchantedGrassBlueSheepEntity enchantedGrassBlueSheepEntity, LivingEntity summoner, WorldView worldView, double speed,
-                                       EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed){
-            this.enchantedGrassBlueSheepEntity = enchantedGrassBlueSheepEntity;
-            this.summoner = summoner;
-            this.worldView = worldView;
-            this.speed = speed;
-            this.navigation = navigation;
-            this.maxDistance = maxDistance;
-            this.minDistance = minDistance;
-            this.leavesAllowed = leavesAllowed;
+                                       EntityNavigation navigation, float maxDistance, float minDistance, boolean leavesAllowed) {
+        this.enchantedGrassBlueSheepEntity = enchantedGrassBlueSheepEntity;
+        this.summoner = summoner;
+        this.worldView = worldView;
+        this.speed = speed;
+        this.navigation = navigation;
+        this.maxDistance = maxDistance;
+        this.minDistance = minDistance;
+        this.leavesAllowed = leavesAllowed;
     }
 
     @Override
-    public boolean canStart(){
+    public boolean canStart() {
         LivingEntity livingEntity = this.enchantedGrassBlueSheepEntity.getSummoner();
 
-        if (livingEntity == null){
+        if (livingEntity == null || livingEntity.isSpectator() || this.enchantedGrassBlueSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance))
             return false;
-        } else if (livingEntity.isSpectator()){
-            return false;
-        } else if (this.enchantedGrassBlueSheepEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance)){
-            return false;
-        } else {
-            this.summoner = livingEntity;
-            return true;
-        }
+        this.summoner = livingEntity;
+        return true;
     }
 
     @Override
-    public boolean shouldContinue(){
-        if (this.navigation.isIdle()){
+    public boolean shouldContinue() {
+        if (this.navigation.isIdle()) {
             return false;
         } else {
             return this.enchantedGrassBlueSheepEntity.squaredDistanceTo(this.summoner) > (double) (this.maxDistance * this.maxDistance);
         }
     }
 
-    public void tick(){
-        this.enchantedGrassBlueSheepEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.enchantedGrassBlueSheepEntity.getLookPitchSpeed());
-        if (--this.countdownTicks <= 0){
+    public void tick() {
+        this.enchantedGrassBlueSheepEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.enchantedGrassBlueSheepEntity.getLookPitchSpeed());
+        if (--this.countdownTicks <= 0) {
             this.countdownTicks = 10;
-            if (!this.enchantedGrassBlueSheepEntity.hasVehicle()){
+            if (!this.enchantedGrassBlueSheepEntity.hasVehicle()) {
                 if (this.enchantedGrassBlueSheepEntity.squaredDistanceTo(this.summoner) >= 144.0D) {
                     this.tryTeleport();
                 } else {
-                    this.navigation.startMovingTo(this.summoner,this.speed);
+                    this.navigation.startMovingTo(this.summoner, this.speed);
                 }
             }
         }
     }
 
-    private void tryTeleport(){
+    private void tryTeleport() {
         BlockPos blockPos = new BlockPos(this.summoner.getBlockPos());
 
-        for (int i = 0; i < 10; ++i){
+        for (int i = 0; i < 10; ++i) {
             int j = this.getRandomInt(-3, 3);
             int k = this.getRandomInt(-1, 1);
             int l = this.getRandomInt(-3, 3);
@@ -90,32 +84,19 @@ public class FollowBlueSheepSummonerGoal extends Goal {
         }
     }
 
-    private boolean tryTeleportTo(int i, int j, int k){
-        if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D) {
+    private boolean tryTeleportTo(int i, int j, int k) {
+        if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D || !this.canTeleportTo(new BlockPos(i, j, k)))
             return false;
-        } else if (!this.canTeleportTo(new BlockPos(i, j, k))){ //23344
-            return false;
-        } else {
-            this.navigation.stop();
-            return true;
-        }
+        this.navigation.stop();
+        return true;
     }
 
-    private boolean canTeleportTo(BlockPos blockPos){
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(enchantedGrassBlueSheepEntity.getEntityWorld(),
-                new BlockPos.Mutable());
-        if (pathNodeType != PathNodeType.WALKABLE){
+    private boolean canTeleportTo(BlockPos blockPos) {
+        if (LandPathNodeMaker.getLandNodeType(enchantedGrassBlueSheepEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE)
             return false;
-        } else {
-            BlockState blockState = this.worldView.getBlockState(blockPos.down());
-            if (!this.leavesAllowed && blockState.getBlock() instanceof LeavesBlock){
-                return false;
-            } else {
-                BlockPos blockPos1 = blockPos.subtract(new BlockPos(this.enchantedGrassBlueSheepEntity.getBlockPos()));
-                return this.worldView.isSpaceEmpty(this.enchantedGrassBlueSheepEntity,
-                        this.enchantedGrassBlueSheepEntity.getBoundingBox().offset(blockPos1));
-            }
-        }
+        if (!this.leavesAllowed && this.worldView.getBlockState(blockPos.down()).getBlock() instanceof LeavesBlock)
+            return false;
+        return this.worldView.isSpaceEmpty(this.enchantedGrassBlueSheepEntity, this.enchantedGrassBlueSheepEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(this.enchantedGrassBlueSheepEntity.getBlockPos()))));
     }
 
     private int getRandomInt(int i, int j){
