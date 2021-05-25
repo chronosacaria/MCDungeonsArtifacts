@@ -33,9 +33,10 @@ public class LootRegistry {
                     LootTables.VILLAGE_TANNERY_CHEST, LootTables.VILLAGE_TEMPLE_CHEST,
                     LootTables.VILLAGE_TOOLSMITH_CHEST
             )));
-    public static final Collection<Identifier> DUNGEON_AND_MINESHAFTS =
+    public static final Collection<Identifier> WORLD_CHESTS =
             Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-                    LootTables.ABANDONED_MINESHAFT_CHEST, LootTables.SIMPLE_DUNGEON_CHEST
+                    LootTables.ABANDONED_MINESHAFT_CHEST, LootTables.SIMPLE_DUNGEON_CHEST,
+                    LootTables.SHIPWRECK_TREASURE_CHEST
             )));
 
     public static void init(){
@@ -79,7 +80,7 @@ public class LootRegistry {
                 addArtefact(poolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.WIND_HORN),                        McdarConfig.config.getVillagerArtefactSpawnRate());
                 addArtefact(poolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT),                  McdarConfig.config.getVillagerArtefactSpawnRate());
                 supplier.pool(poolBuilder);
-            } else if (DUNGEON_AND_MINESHAFTS.contains(id)){
+            } else if (WORLD_CHESTS.contains(id)){
                 poolBuilder = FabricLootPoolBuilder.builder();
                 addArtefact(poolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.config.getDungeonArtefactSpawnRate());
                 addArtefact(poolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS),    McdarConfig.config.getDungeonArtefactSpawnRate());
