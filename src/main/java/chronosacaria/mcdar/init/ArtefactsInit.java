@@ -83,6 +83,9 @@ public class ArtefactsInit {
                 case FLAMING_QUIVER:
                     item = new FlamingQuiverItem(artefactID);
                     break;
+                case HARPOON_QUIVER:
+                    item = new HarpoonQuiverItem(artefactID);
+                    break;
                 case THUNDERING_QUIVER:
                     item = new ThunderingQuiverItem(artefactID);
                     break;

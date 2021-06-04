@@ -12,6 +12,7 @@
   "item.mcdar.ghost_cloak":               "幽灵战袍",
   "item.mcdar.golem_kit":                 "傀儡用具",
   "item.mcdar.gong_of_weakening":         "弱化之锣",
+  "item.mcdar.harpoon_quiver":            "鱼叉箭袋",
   "item.mcdar.harvester":                 "收割者",
   "item.mcdar.iron_hide_amulet":          "铁皮护身符",
   "item.mcdar.light_feather":             "浮流之羽",
@@ -84,6 +85,10 @@
   "tooltip_info_item.mcdar.gong_of_weakening_2":          "王国的象征，拿在手上感觉",
   "tooltip_info_item.mcdar.gong_of_weakening_3":          "很安全，但会向附近的人",
   "tooltip_info_item.mcdar.gong_of_weakening_4":          "发出可怕的嗡嗡声。",
+
+  "tooltip_info_item.mcdar.harpoon_quiver_1":             "这个箭袋装有许多鱼叉，",
+  "tooltip_info_item.mcdar.harpoon_quiver_2":             "可以迅速刺穿",
+  "tooltip_info_item.mcdar.harpoon_quiver_3":             "陆地或水下的敌人。",
 
   "tooltip_info_item.mcdar.harvester_1":                  "收割者会吸收",
   "tooltip_info_item.mcdar.harvester_2":                  "死者的灵魂，释放成",

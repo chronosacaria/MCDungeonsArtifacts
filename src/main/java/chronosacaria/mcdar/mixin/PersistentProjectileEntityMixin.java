@@ -17,10 +17,15 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PersistentProjectileEntity.class)
 public abstract class PersistentProjectileEntityMixin {
     @Shadow private double damage;
+
+    @Shadow protected abstract float getDragInWater();
+
+    @Shadow public abstract void setVelocity(double x, double y, double z, float speed, float divergence);
 
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     public void onShieldingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
@@ -90,6 +95,27 @@ public abstract class PersistentProjectileEntityMixin {
             if (effectTimer > 0){
                 if (ci.isCancellable()){
                     ci.cancel();
+                }
+            }
+        }
+    }
+
+    @Inject(method = "getDragInWater", at = @At("HEAD"), cancellable = true)
+    public void onHarpoonArrowFire(CallbackInfoReturnable<Float> cir) {
+        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
+        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
+
+        ItemStack offhand = null;
+        if (shooter != null) {
+            offhand = shooter.getOffHandStack();
+        }
+        if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER).asItem()) {
+            float effectTimer =
+                    ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+            if (effectTimer > 0) {
+                if (persistentProjectileEntity.isTouchingWater()){
+                    float m = 0.85f;
+                    cir.setReturnValue(m);
                 }
             }
         }

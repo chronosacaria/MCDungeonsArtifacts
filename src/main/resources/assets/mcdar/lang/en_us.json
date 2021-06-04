@@ -12,6 +12,7 @@
   "item.mcdar.ghost_cloak":               "Ghost Cloak",
   "item.mcdar.golem_kit":                 "Golem Kit",
   "item.mcdar.gong_of_weakening":         "Gong of Weakening",
+  "item.mcdar.harpoon_quiver":            "Harpoon Quiver",
   "item.mcdar.harvester":                 "Harvester",
   "item.mcdar.iron_hide_amulet":          "Iron Hide Amulet",
   "item.mcdar.light_feather":             "Light Feather",
@@ -84,6 +85,10 @@
   "tooltip_info_item.mcdar.gong_of_weakening_2":          "symbols of a nameless kingdom,",
   "tooltip_info_item.mcdar.gong_of_weakening_3":          "feels safe in your hands but emits",
   "tooltip_info_item.mcdar.gong_of_weakening_4":          "a menacing hum to those nearby.",
+
+  "tooltip_info_item.mcdar.harpoon_quiver_1":             "This quiver holds a number of harpoons",
+  "tooltip_info_item.mcdar.harpoon_quiver_2":             "that swiftly pierce through enemies on",
+  "tooltip_info_item.mcdar.harpoon_quiver_3":             "land or underwater.",
 
   "tooltip_info_item.mcdar.harvester_1":                  "The Harvester siphons the souls",
   "tooltip_info_item.mcdar.harvester_2":                  "of the dead, before releasing",
