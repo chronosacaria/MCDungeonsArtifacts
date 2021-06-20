@@ -55,7 +55,7 @@ public class SummonedEntityRegistry {
         registerEntity("buzzy_nest_bee", BuzzyNestBeeEntity.createBuzzyNestBeeAttributes(), BUZZY_NEST_BEE_ENTITY);
         registerEntity("enchanted_blue_sheep", EnchantedGrassBlueSheepEntity.createEnchantedBlueSheepEntityAttributes(), ENCHANTED_GRASS_BLUE_SHEEP_ENTITY);
         registerEntity("enchanted_green_sheep", EnchantedGrassGreenSheepEntity.createEnchantedGreenSheepEntityAttributes(), ENCHANTED_GRASS_GREEN_SHEEP_ENTITY);
-        registerEntity("enchanted_red_sheep", EnchantedGrassRedSheepEntity.createMobAttributes(), ENCHANTED_GRASS_RED_SHEEP_ENTITY);
+        registerEntity("enchanted_red_sheep", EnchantedGrassRedSheepEntity.createEnchantedRedSheepAttributes(), ENCHANTED_GRASS_RED_SHEEP_ENTITY);
         registerEntity("golem_kit_golem", GolemKitGolemEntity.createMobAttributes(), GOLEM_KIT_GOLEM_ENTITY);
         registerEntity("tasty_bone_wolf", TastyBoneWolfEntity.createTastyBoneWolfAttributes(), TASTY_BONE_WOLF_ENTITY);
         registerEntity("wonderful_wheat_llama", WonderfulWheatLlamaEntity.createLlamaAttributes(), WONDERFUL_WHEAT_LLAMA_ENTITY);

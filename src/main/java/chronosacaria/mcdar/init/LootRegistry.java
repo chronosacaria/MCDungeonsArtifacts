@@ -5,9 +5,9 @@ import chronosacaria.mcdar.enums.*;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.item.Item;
-import net.minecraft.loot.BinomialLootTableRange;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
 import net.minecraft.util.Identifier;
 
 import java.util.Arrays;
@@ -116,7 +116,7 @@ public class LootRegistry {
     }
 
     public static void addArtefact(FabricLootPoolBuilder poolBuilder, Item artefact, float p){
-        poolBuilder.rolls(new BinomialLootTableRange(1, p));
+        poolBuilder.rolls(BinomialLootNumberProvider.create(1, p));
         poolBuilder.withEntry(ItemEntry.builder(artefact).build());
     }
 }

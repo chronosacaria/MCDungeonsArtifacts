@@ -1,12 +1,10 @@
 package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
-import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import chronosacaria.mcdar.goals.FollowLlamaSummonerGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -14,10 +12,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.LlamaEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import java.util.Optional;
@@ -68,13 +64,13 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(CompoundTag tag){
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDateToTag(NbtCompound tag){
+        super.writeCustomDataToNbt(tag);
         tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(CompoundTag tag){
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromTag(NbtCompound tag){
+        super.readCustomDataFromNbt(tag);
         if (tag.getUuid("SummonerUUID") != null)
             this.setSummonerUuid(tag.getUuid("SummonerUUID"));
     }

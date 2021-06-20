@@ -2,13 +2,15 @@ package chronosacaria.mcdar.entities.renderers;
 
 import chronosacaria.mcdar.entities.TastyBoneWolfEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.WolfEntityModel;
 import net.minecraft.util.Identifier;
 
 public class TastyBoneWolfRenderer extends MobEntityRenderer<TastyBoneWolfEntity, WolfEntityModel<TastyBoneWolfEntity>> {
-    public TastyBoneWolfRenderer(EntityRenderDispatcher renderDispatcher){
-        super(renderDispatcher, new WolfEntityModel<>(), 1);
+    public TastyBoneWolfRenderer(EntityRendererFactory.Context context) {
+        super(context, new WolfEntityModel(context.getPart(EntityModelLayers.WOLF)), 0.5F);
     }
 
     @Override

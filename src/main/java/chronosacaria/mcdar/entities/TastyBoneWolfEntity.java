@@ -1,7 +1,6 @@
 package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
-import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import chronosacaria.mcdar.goals.FollowWolfSummonerGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,9 +13,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import java.util.Optional;
@@ -69,13 +67,13 @@ public class TastyBoneWolfEntity extends WolfEntity implements Summonable {
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(CompoundTag tag){
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDateToTag(NbtCompound tag){
+        super.writeCustomDataToNbt(tag);
         tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(CompoundTag tag){
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromTag(NbtCompound tag){
+        super.readCustomDataFromNbt(tag);
         UUID id;
         if (tag.contains("SummonerUUID")){
             id = tag.getUuid("SummonerUUID");

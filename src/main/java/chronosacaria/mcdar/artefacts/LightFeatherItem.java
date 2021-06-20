@@ -34,7 +34,7 @@ public class LightFeatherItem extends ArtefactAgilityItem{
                         user) && nearbyEntity.isAlive());
 
         for (LivingEntity nearbyEntity : nearbyEntities){
-            float knockbackMultiplier = 1.0F;
+            float knockbackMultiplier = 5.0F;
             double xRatio = user.getX() - nearbyEntity.getX();
             double zRatio;
             for (
@@ -43,7 +43,8 @@ public class LightFeatherItem extends ArtefactAgilityItem{
                     zRatio = (Math.random() - Math.random()) * 0.01D) {
                     xRatio = (Math.random() - Math.random()) * 0.01D;
             }
-            nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
+            nearbyEntity.knockbackVelocity =
+                    (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.getYaw());
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
 
             StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 60);

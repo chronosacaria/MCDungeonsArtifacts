@@ -87,7 +87,7 @@ public class AOEHelper {
         if (nearbyEntities.isEmpty()) return;
         for (LivingEntity nearbyEntity : nearbyEntities) {
             if (nearbyEntity == null) return;
-            if (nearbyEntity instanceof PlayerEntity && ((PlayerEntity) nearbyEntity).abilities.creativeMode) return;
+            if (nearbyEntity instanceof PlayerEntity && ((PlayerEntity) nearbyEntity).getAbilities().creativeMode) return;
 
             AOECloudHelper.spawnExplosionCloud(user, nearbyEntity, 3);
             nearbyEntity.damage(explosion, damageAmount);
@@ -194,7 +194,8 @@ public class AOEHelper {
                     zRatio = (Math.random() - Math.random()) * 0.01D) {
                     xRatio = (Math.random() - Math.random()) * 0.01D;
             }
-            nearbyEntity.knockbackVelocity = (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.yaw);
+            nearbyEntity.knockbackVelocity =
+                    (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.getYaw());
             nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
         }
     }

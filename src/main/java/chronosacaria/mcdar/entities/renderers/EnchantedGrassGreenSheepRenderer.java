@@ -3,15 +3,17 @@ package chronosacaria.mcdar.entities.renderers;
 import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
 import chronosacaria.mcdar.entities.GolemKitGolemEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.IronGolemEntityModel;
 import net.minecraft.client.render.entity.model.SheepEntityModel;
 import net.minecraft.util.Identifier;
 
 public class EnchantedGrassGreenSheepRenderer extends MobEntityRenderer<EnchantedGrassGreenSheepEntity,
         SheepEntityModel<EnchantedGrassGreenSheepEntity>> {
-    public EnchantedGrassGreenSheepRenderer(EntityRenderDispatcher renderDispatcher){
-        super(renderDispatcher, new SheepEntityModel<>(), 1);
+    public EnchantedGrassGreenSheepRenderer(EntityRendererFactory.Context context){
+        super(context, new SheepEntityModel(context.getPart(EntityModelLayers.SHEEP)), 0.7F);
     }
 
     @Override

@@ -16,11 +16,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DyeColor;
@@ -40,7 +41,7 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
     }
 
     public static DefaultAttributeContainer.Builder createEnchantedBlueSheepEntityAttributes(){
-        return MobEntity.createMobAttributes()
+        return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D)
@@ -60,7 +61,8 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
         this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.add(4, this.eatGrassGoal);
-        this.goalSelector.add(5, new SheepAttackGoal(this));
+        this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0D, true));
+        //this.goalSelector.add(5, new SheepAttackGoal(this));
         this.goalSelector.add(6, new FollowBlueSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
                 this.getNavigation(), 90.0F, 3.0F, true));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -81,13 +83,13 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(CompoundTag tag){
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDateToTag(NbtCompound tag){
+        super.writeCustomDataToNbt(tag);
         tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(CompoundTag tag){
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromTag(NbtCompound tag){
+        super.readCustomDataFromNbt(tag);
         UUID id;
         if (tag.contains("SummonerUUID")){
             id = tag.getUuid("SummonerUUID");
@@ -104,8 +106,8 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
         boolean bl = target.damage(DamageSource.mob(this),
                 8.0F);
         if (bl) {
-            this.dealDamage(this, target);
-            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+            this.tryAttack(target);
+            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f,(this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
         }
 
         return bl;

@@ -9,7 +9,8 @@ import net.fabricmc.api.Environment;
 public class McdarClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        SummonedEntityRegistry.register();
-        SummonedEntityRenderRegistry.register();
+
+        //SummonedEntityRenderRegistry.register();
+        SummonedEntityRenderRegistry.init();
     }
 }

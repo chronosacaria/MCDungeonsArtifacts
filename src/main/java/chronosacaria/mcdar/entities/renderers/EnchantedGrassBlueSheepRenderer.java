@@ -3,14 +3,17 @@ package chronosacaria.mcdar.entities.renderers;
 import chronosacaria.mcdar.entities.EnchantedGrassBlueSheepEntity;
 import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.SheepWoolFeatureRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.SheepEntityModel;
 import net.minecraft.util.Identifier;
 
 public class EnchantedGrassBlueSheepRenderer extends MobEntityRenderer<EnchantedGrassBlueSheepEntity,
         SheepEntityModel<EnchantedGrassBlueSheepEntity>> {
-    public EnchantedGrassBlueSheepRenderer(EntityRenderDispatcher renderDispatcher){
-        super(renderDispatcher, new SheepEntityModel<>(), 1);
+    public EnchantedGrassBlueSheepRenderer(EntityRendererFactory.Context context){
+        super(context, new SheepEntityModel(context.getPart(EntityModelLayers.SHEEP)), 0.7F);
     }
 
     @Override
