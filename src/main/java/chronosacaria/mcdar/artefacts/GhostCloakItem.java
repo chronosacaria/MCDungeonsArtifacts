@@ -38,7 +38,9 @@ public class GhostCloakItem extends ArtefactAgilityItem{
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
         if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (120 / cooldownLevel));
+            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 120));
+        } else {
+            user.getItemCooldownManager().set(this, 120);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

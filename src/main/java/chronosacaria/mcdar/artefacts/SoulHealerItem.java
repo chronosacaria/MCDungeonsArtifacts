@@ -54,7 +54,9 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
                     int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                             user);
                     if (cooldownLevel > 0) {
-                        user.getItemCooldownManager().set(this, (60 / cooldownLevel));
+                        user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 60));
+                    } else {
+                        user.getItemCooldownManager().set(this, 60);
                     }
                 }
             }

@@ -57,7 +57,9 @@ public class TotemOfRegenerationItem extends ArtefactDefenciveItem{
                 int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                         itemUsageContextPlayer);
                 if (cooldownLevel > 0) {
-                    itemUsageContextPlayer.getItemCooldownManager().set(this, (500 / cooldownLevel));
+                    itemUsageContextPlayer.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 500));
+                } else {
+                    itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
                 }
             }
         }

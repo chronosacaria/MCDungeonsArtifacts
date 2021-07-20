@@ -64,7 +64,9 @@ public class BuzzyNestItem extends ArtefactSummoningItem{
                 int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                         itemUsageContextPlayer);
                 if (cooldownLevel > 0) {
-                    itemUsageContextPlayer.getItemCooldownManager().set(this, (600 / cooldownLevel));
+                    itemUsageContextPlayer.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 600));
+                } else {
+                    itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
                 }
             }
         }

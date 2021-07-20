@@ -38,8 +38,9 @@ public class BlastFungusItem extends ArtefactDamagingItem{
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
         if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (120 / cooldownLevel)); // Six Seconds of cooldown, this might
-            // need to change
+            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 120));
+        } else {
+            user.getItemCooldownManager().set(this, 120);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

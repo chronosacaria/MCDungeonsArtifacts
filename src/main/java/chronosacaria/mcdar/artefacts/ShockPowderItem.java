@@ -34,7 +34,9 @@ public class ShockPowderItem extends ArtefactStatusInflictingItem{
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
         if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (300 / cooldownLevel));
+            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 300));
+        } else {
+            user.getItemCooldownManager().set(this, 300);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

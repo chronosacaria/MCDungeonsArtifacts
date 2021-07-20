@@ -13,6 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import org.lwjgl.system.CallbackI;
 
 import java.util.List;
 
@@ -32,7 +33,9 @@ public class BootsOfSwiftnessItem extends ArtefactAgilityItem{
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
         if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (100 / cooldownLevel));
+            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 100));
+        } else {
+            user.getItemCooldownManager().set(this, 100);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

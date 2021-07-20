@@ -36,7 +36,9 @@ public class LightningRodItem extends ArtefactDamagingItem{
             int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                     user);
             if (cooldownLevel > 0) {
-                user.getItemCooldownManager().set(this, (60 / cooldownLevel));
+                user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 40));
+            } else {
+                user.getItemCooldownManager().set(this, 40);
             }
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

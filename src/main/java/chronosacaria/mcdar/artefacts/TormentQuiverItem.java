@@ -31,6 +31,8 @@ public class TormentQuiverItem extends ArtefactQuiverItem{
                     user);
             if (cooldownLevel > 0) {
                 user.getItemCooldownManager().set(this, (600 * cooldownLevel));
+            } else {
+                user.getItemCooldownManager().set(this, 600);
             }
         }
 
