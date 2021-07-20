@@ -2,8 +2,11 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -35,7 +38,11 @@ public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        user.getItemCooldownManager().set(this, 100);
+        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
+                user);
+        if (cooldownLevel > 0) {
+            user.getItemCooldownManager().set(this, (100 / cooldownLevel));
+        }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

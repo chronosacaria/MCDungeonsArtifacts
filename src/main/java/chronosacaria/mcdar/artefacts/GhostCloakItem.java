@@ -2,8 +2,11 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.AgilityArtefactID;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +35,11 @@ public class GhostCloakItem extends ArtefactAgilityItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        user.getItemCooldownManager().set(this, 120);
+        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
+                user);
+        if (cooldownLevel > 0) {
+            user.getItemCooldownManager().set(this, (120 / cooldownLevel));
+        }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

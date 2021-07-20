@@ -38,6 +38,7 @@
   "effect.mcdar.stunned":                 "愕然",
 
   "enchantment.mcdar.beast_boss":         "万兽之王",
+  "enchantment.mcdar.cooldown":           "冷却",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "只有最勇敢的武士才敢",
   "tooltip_info_item.mcdar.blast_fungus_2":               "携带此物。不仅因为其",

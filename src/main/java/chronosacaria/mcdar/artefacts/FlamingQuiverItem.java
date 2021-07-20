@@ -1,7 +1,10 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.QuiverArtefactID;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -22,7 +25,11 @@ public class FlamingQuiverItem extends ArtefactQuiverItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        user.getItemCooldownManager().set(this, 600);
+        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
+                user);
+        if (cooldownLevel > 0) {
+            user.getItemCooldownManager().set(this, (int) (600 * cooldownLevel));
+        }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

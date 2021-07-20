@@ -3,8 +3,11 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.QuiverArtefactID;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -24,7 +27,11 @@ public class TormentQuiverItem extends ArtefactQuiverItem{
         ItemStack itemStack = user.getStackInHand(hand);
         if (user.totalExperience >= 20 || user.isCreative()){
             user.addExperience((-20));
-            user.getItemCooldownManager().set(this, 600);
+            int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
+                    user);
+            if (cooldownLevel > 0) {
+                user.getItemCooldownManager().set(this, (600 * cooldownLevel));
+            }
         }
 
         if (!user.isCreative()){

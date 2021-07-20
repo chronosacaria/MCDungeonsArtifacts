@@ -3,8 +3,11 @@ package chronosacaria.mcdar.artefacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -32,7 +35,12 @@ public class BlastFungusItem extends ArtefactDamagingItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        user.getItemCooldownManager().set(this, 120); // Six Seconds of cooldown, this might need to change
+        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
+                user);
+        if (cooldownLevel > 0) {
+            user.getItemCooldownManager().set(this, (120 / cooldownLevel)); // Six Seconds of cooldown, this might
+            // need to change
+        }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

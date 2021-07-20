@@ -38,6 +38,7 @@
   "effect.mcdar.stunned":                 "Оглушён",
 
   "enchantment.mcdar.beast_boss":         "Король Зверей",
+  "enchantment.mcdar.cooldown":           "Перезарядка",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "Только храбрейшие из воинов носят",
   "tooltip_info_item.mcdar.blast_fungus_2":               "Взрывной грибок. Не только из-за",
