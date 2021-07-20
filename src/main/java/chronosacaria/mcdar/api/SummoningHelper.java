@@ -2,7 +2,9 @@ package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.entities.*;
+import chronosacaria.mcdar.entities.renderers.EnchantedGrassGreenSheepRenderer;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class SummoningHelper {
 
@@ -117,5 +120,15 @@ public class SummoningHelper {
         wonderfulWheatLlamaEntity.setSummoner(entity);
         wonderfulWheatLlamaEntity.refreshPositionAndAngles(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ(), 0, 0);
         world.spawnEntity(wonderfulWheatLlamaEntity);
+    }
+
+    public static boolean isEntitySummonable(Entity target){
+        return target instanceof BuzzyNestBeeEntity
+                || target instanceof EnchantedGrassBlueSheepEntity
+                || target instanceof EnchantedGrassGreenSheepEntity
+                || target instanceof EnchantedGrassRedSheepEntity
+                || target instanceof GolemKitGolemEntity
+                || target instanceof TastyBoneWolfEntity
+                || target instanceof WonderfulWheatLlamaEntity;
     }
 }

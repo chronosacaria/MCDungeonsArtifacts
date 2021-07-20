@@ -1,18 +1,28 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class BuzzyNestBeeEntity extends BeeEntity {
+import java.util.Optional;
+import java.util.UUID;
 
-    private Entity summoner;
+public class BuzzyNestBeeEntity extends BeeEntity implements Summonable {
+
+
+    protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
     public BuzzyNestBeeEntity(EntityType<? extends BuzzyNestBeeEntity> type, World world){
         super(EntityType.BEE, world);
@@ -27,33 +37,63 @@ public class BuzzyNestBeeEntity extends BeeEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0D);
     }
 
-    public void setSummoner(Entity player){
-        summoner = player;
+    protected void initDataTracker(){
+        super.initDataTracker();
+        this.dataTracker.startTracking(SUMMONER_UUID, Optional.empty());
     }
 
+    public Optional<UUID> getSummonerUuid(){
+        return this.dataTracker.get(SUMMONER_UUID);
+    }
+
+    @Override
+    public void setSummonerUuid(@Nullable UUID uuid) {
+        this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
+    }
+
+    @Override
+    public void setSummoner(Entity player) {
+        this.setSummonerUuid(player.getUuid());
+    }
+
+    public LivingEntity getSummoner(){
+        try {
+            Optional<UUID> uUID = this.getSummonerUuid();
+            return uUID.map(value -> this.world.getPlayerByUuid(value)).orElse(null);
+        } catch (IllegalArgumentException var2){
+            return null;
+        }
+    }
+
+
+
     protected void mobTick(){
-        if (summoner instanceof PlayerEntity){
-            if (((PlayerEntity)summoner).getAttacker() != null){
-                this.setBeeAttacker(((PlayerEntity)summoner).getAttacker());
+        if (getSummoner() instanceof PlayerEntity){
+            if (getSummoner().getAttacker() != null){
+                this.setBeeAttacker(getSummoner().getAttacker());
             }
 
-            if (((PlayerEntity)summoner).getAttacking() != null){
-                this.setBeeAttacker(((PlayerEntity)summoner).getAttacking());
+            if (getSummoner().getAttacking() != null){
+                this.setBeeAttacker(getSummoner().getAttacking());
             }
         }
         super.mobTick();
     }
 
     private boolean setBeeAttacker(LivingEntity attacker){
-        if (attacker.equals(summoner))
+        if (attacker.equals(getSummoner()))
             return false;
         setAttacker(attacker);
         return true;
     }
 
     public boolean tryAttack(Entity target){
-        if (target.equals(summoner) || this.hasStung())
+        if (target.equals(getSummoner()) || this.hasStung())
             return false;
         return super.tryAttack(target);
+    }
+
+    static {
+        SUMMONER_UUID = DataTracker.registerData(BuzzyNestBeeEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
 }

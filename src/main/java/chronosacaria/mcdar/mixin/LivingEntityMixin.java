@@ -2,16 +2,24 @@ package chronosacaria.mcdar.mixin;
 
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.api.SummoningHelper;
+import chronosacaria.mcdar.api.interfaces.Summonable;
+import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.entities.*;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
-import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
+import chronosacaria.mcdar.init.EnchantsRegistry;
 import chronosacaria.mcdar.init.StatusEffectInit;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -21,6 +29,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
+import java.util.UUID;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -79,6 +90,35 @@ public abstract class LivingEntityMixin {
                         1.0F);
                 AOECloudHelper.spawnExplosionCloud(user, target, 3.0F);
                 AOEHelper.causeExplosion(user, target, target.getMaxHealth() * 0.2F, 3.0F);
+            }
+        }
+    }
+
+    @Inject(method = "applyDamage", at = @At("HEAD"), cancellable = true)
+    public void onBeastBossDamage(DamageSource source, float amount, CallbackInfo ci){
+        LivingEntity target = (LivingEntity) (Object) this;
+        Entity trueSource = source.getSource();
+
+        if (trueSource == null) return;
+
+        if (trueSource.world instanceof ServerWorld && SummoningHelper.isEntitySummonable(trueSource)){
+            ServerWorld serverWorld = (ServerWorld) trueSource.world;
+            LivingEntity summoner = (((Summonable) trueSource).getSummoner());
+            UUID summonerUUID = summoner.getUuid();
+            if (summonerUUID != null){
+                Entity beastOwner = serverWorld.getEntity(summonerUUID);
+                if (beastOwner instanceof LivingEntity) {
+                    LivingEntity beastOwnerAsLiving = ((LivingEntity) beastOwner);
+                    int beastBossLevel =
+                            EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BOSS),
+                                    beastOwnerAsLiving);
+                    if (beastBossLevel > 0) {
+                        float beastBossFactor = 0.1F + (0.1F * beastBossLevel);
+                        float newDamage = amount * beastBossFactor;
+                        float h = target.getHealth();
+                        target.setHealth(h - newDamage);
+                    }
+                }
             }
         }
     }

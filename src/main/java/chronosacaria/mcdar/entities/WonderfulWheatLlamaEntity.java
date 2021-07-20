@@ -15,6 +15,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -51,7 +52,8 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
         this.targetSelector.add(2, new RevengeGoal(this));
     }
 
-    private void setSummonerUuid (UUID uuid){
+    @Override
+    public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
 

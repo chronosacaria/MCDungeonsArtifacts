@@ -16,6 +16,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -54,7 +55,8 @@ public class TastyBoneWolfEntity extends WolfEntity implements Summonable {
         this.targetSelector.add(2, new RevengeGoal(this).setGroupRevenge());
     }
 
-    private void setSummonerUuid (UUID uuid){
+    @Override
+    public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
 

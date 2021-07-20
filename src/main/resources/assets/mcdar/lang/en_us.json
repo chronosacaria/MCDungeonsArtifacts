@@ -37,6 +37,8 @@
   "effect.mcdar.soul_protection":         "Soul Protection",
   "effect.mcdar.stunned":                 "Stunned",
 
+  "enchantment.mcdar.beast_boss":         "Beast Boss",
+
   "tooltip_info_item.mcdar.blast_fungus_1":               "Only the bravest of warriors carry",
   "tooltip_info_item.mcdar.blast_fungus_2":               "the Blast Fungus. Not just because",
   "tooltip_info_item.mcdar.blast_fungus_3":               "of its toxic spores, but because",

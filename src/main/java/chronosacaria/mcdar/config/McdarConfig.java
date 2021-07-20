@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.config;
 
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
@@ -21,6 +22,7 @@ public class McdarConfig implements ConfigData {
     }
 
     // config contents:
+    public EnumMap<EnchantID, Boolean> enableEnchantment = new EnumMap<>(EnchantID.class);
     public EnumMap<DamagingArtefactID, Boolean> enableDamagingArtefact = new EnumMap<>(DamagingArtefactID.class);
     public EnumMap<StatusInflictingArtefactID, Boolean> enableStatusInflictingArtefact = new EnumMap<>(StatusInflictingArtefactID.class);
     public EnumMap<QuiverArtefactID, Boolean> enableQuiverArtefact = new EnumMap<>(QuiverArtefactID.class);
@@ -79,6 +81,9 @@ public class McdarConfig implements ConfigData {
 
     // set config defaults
     public McdarConfig(){
+        for (EnchantID enchantID : EnchantID.values()) {
+            enableEnchantment.put(enchantID, true);
+        }
         for (AgilityArtefactID artefactID : AgilityArtefactID.values()){
             enableAgilityArtefact.put(artefactID, true);
         }

@@ -24,6 +24,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DyeColor;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -68,7 +69,8 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
         this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
     }
 
-    private void setSummonerUuid (UUID uuid){
+    @Override
+    public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
 

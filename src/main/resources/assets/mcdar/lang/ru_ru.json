@@ -1,0 +1,160 @@
+{
+  "itemGroup.mcdar.artefacts":            "Майнкрафт Подземелья: Артефакты",
+
+  "item.mcdar.blast_fungus":              "Взрывной Грибок",
+  "item.mcdar.boots_of_swiftness":        "Ботинки ловкости",
+  "item.mcdar.buzzy_nest":                "Жужжащее гнездо",
+  "item.mcdar.corrupted_seeds":           "Искажённые-семена",
+  "item.mcdar.death_cap_mushroom":        "Бледная поганка",
+  "item.mcdar.enchanted_grass":           "Зачарованная трава",
+  "item.mcdar.enchanters_tome":           "Том Чародея",
+  "item.mcdar.flaming_quiver":            "Пылающий Колчан",
+  "item.mcdar.ghost_cloak":               "Призрачный Плащ",
+  "item.mcdar.golem_kit":                 "Комплект голема",
+  "item.mcdar.gong_of_weakening":         "Гонг Ослабления",
+  "item.mcdar.harpoon_quiver":            "Колчан гарпунов",
+  "item.mcdar.harvester":                 "Жнец",
+  "item.mcdar.iron_hide_amulet":          "Амулет железной крепости",
+  "item.mcdar.light_feather":             "Лёгкое перо",
+  "item.mcdar.lightning_rod":             "Жезл молний",
+  "item.mcdar.powershaker":               "Громыхалка",
+  "item.mcdar.satchel_of_elements":       "Сумка стихий",
+  "item.mcdar.shock_powder":              "Шокирующий порошок",
+  "item.mcdar.soul_healer":               "Целитель душ",
+  "item.mcdar.tasty_bone":                "Вкусная кость",
+  "item.mcdar.thundering_quiver":         "Громовой колчан",
+  "item.mcdar.torment_quiver":            "Колчан мучения",
+  "item.mcdar.totem_of_regeneration":     "Тотем Регенерации",
+  "item.mcdar.totem_of_shielding":        "Тотем защиты",
+  "item.mcdar.totem_of_soul_protection":  "Тотем защиты души",
+  "item.mcdar.updraft_tome":              "Восходящий Фолиант",
+  "item.mcdar.wind_horn":                 "Рог ветра",
+  "item.mcdar.wonderful_wheat":           "Превосходная пшеница",
+
+  "death.attack.electricShock":           "%s был убит электричеством.",
+
+  "effect.mcdar.shielding":               "Защита",
+  "effect.mcdar.soul_protection":         "Защита души",
+  "effect.mcdar.stunned":                 "Оглушён",
+
+  "enchantment.mcdar.beast_boss":         "Король Зверей",
+
+  "tooltip_info_item.mcdar.blast_fungus_1":               "Только храбрейшие из воинов носят",
+  "tooltip_info_item.mcdar.blast_fungus_2":               "Взрывной грибок. Не только из-за",
+  "tooltip_info_item.mcdar.blast_fungus_3":               "его токсичных спор, но и потому-что",
+  "tooltip_info_item.mcdar.blast_fungus_4":               "оно отвратительно пахнет.",
+
+  "tooltip_info_item.mcdar.boots_of_swiftness_1":         "Ботинки обоготворённые зачарованиями",
+  "tooltip_info_item.mcdar.boots_of_swiftness_2":         "чтобы разрешить быстрейшие движения. Полезно",
+  "tooltip_info_item.mcdar.boots_of_swiftness_3":         "в неуверенные времена как эти.",
+
+  "tooltip_info_item.mcdar.buzzy_nest_1":                 "Любители пчёл и воЗЗЗлюбленные вместе",
+  "tooltip_info_item.mcdar.buzzy_nest_2":                 "фанаты жужжащего гнезда, но не",
+  "tooltip_info_item.mcdar.buzzy_nest_3":                 "будьте обмануты милыми пчелами внутри -",
+  "tooltip_info_item.mcdar.buzzy_nest_4":                 "они могут очень сильно укусить!",
+
+  "tooltip_info_item.mcdar.corrupted_seeds_1":            "Мешок ядовитых, искаженных семян",
+  "tooltip_info_item.mcdar.corrupted_seeds_2":            "которые вырастает в шипастые хваткие лианы,",
+  "tooltip_info_item.mcdar.corrupted_seeds_3":            "хватая и медленно высасывая",
+  "tooltip_info_item.mcdar.corrupted_seeds_4":            "жизнь из своих жертв.",
+
+  "tooltip_info_item.mcdar.death_cap_mushroom_1":         "Съедается перед битвой дерзкими воинами,",
+  "tooltip_info_item.mcdar.death_cap_mushroom_2":         "Бледная Поганка вводит бойцов",
+  "tooltip_info_item.mcdar.death_cap_mushroom_3":         "в безумие.",
+
+  "tooltip_info_item.mcdar.enchanted_grass_1":            "Прям как сильные герои кто",
+  "tooltip_info_item.mcdar.enchanted_grass_2":            "принимают зов в бой, также есть и",
+  "tooltip_info_item.mcdar.enchanted_grass_3":            "могучие зачарованные овцы которые",
+  "tooltip_info_item.mcdar.enchanted_grass_4":            "присоединяться к битве когда призваны.",
+
+  "tooltip_info_item.mcdar.enchanters_tome_1":            "Предназначен к использованию только чародеями,",
+  "tooltip_info_item.mcdar.enchanters_tome_2":            "магия этого артефакта может призвать",
+  "tooltip_info_item.mcdar.enchanters_tome_3":            "могущественные зачарования.",
+
+  "tooltip_info_item.mcdar.flaming_quiver_1":             "Этот колчан наполнен самыми смертельными",
+  "tooltip_info_item.mcdar.flaming_quiver_2":             "из стрел.",
+
+  "tooltip_info_item.mcdar.ghost_cloak_1":                "Души заточенные в призрачном плаще",
+  "tooltip_info_item.mcdar.ghost_cloak_2":                "заботливы, но они излучают чувство",
+  "tooltip_info_item.mcdar.ghost_cloak_3":                "меланхолии.",
+
+  "tooltip_info_item.mcdar.golem_kit_1":                  "Железные големы всегда защищали",
+  "tooltip_info_item.mcdar.golem_kit_2":                  "Жителей этого мира. Их ",
+  "tooltip_info_item.mcdar.golem_kit_3":                  "количество истощается в результате",
+  "tooltip_info_item.mcdar.golem_kit_4":                  "войны с разбойниками.",
+
+  "tooltip_info_item.mcdar.gong_of_weakening_1":          "Этот древний гонг, помеченный",
+  "tooltip_info_item.mcdar.gong_of_weakening_2":          "символами безимянного королевства,",
+  "tooltip_info_item.mcdar.gong_of_weakening_3":          "чувствуют себя безопасно в ваших руках, но издаёт",
+  "tooltip_info_item.mcdar.gong_of_weakening_4":          "устрашающий гул тем кто рядом.",
+
+  "tooltip_info_item.mcdar.harpoon_quiver_1":             "Этот колчан содержит небольшое количество гарпунов",
+  "tooltip_info_item.mcdar.harpoon_quiver_2":             "которые быстро пробивают врагов на",
+  "tooltip_info_item.mcdar.harpoon_quiver_3":             "суше или под водой.",
+
+  "tooltip_info_item.mcdar.harvester_1":                  "Жнец собирает души",
+  "tooltip_info_item.mcdar.harvester_2":                  "мертвых, перед тем как выпустить",
+  "tooltip_info_item.mcdar.harvester_3":                  "их в кластер силы.",
+
+  "tooltip_info_item.mcdar.iron_hide_amulet_1":           "Амулет Железной Крепости одновременно и древний",
+  "tooltip_info_item.mcdar.iron_hide_amulet_2":           "и вневременной. Песок загадочно и",
+  "tooltip_info_item.mcdar.iron_hide_amulet_3":           "бесконечно проскальзывает через ущелья",
+  "tooltip_info_item.mcdar.iron_hide_amulet_4":           "в железе.",
+
+  "tooltip_info_item.mcdar.light_feather_1":              "Никто не знает от какого загадочного существа",
+  "tooltip_info_item.mcdar.light_feather_2":              "пришло это перо, но оно все также",
+  "tooltip_info_item.mcdar.light_feather_3":              "красиво и сильно.",
+
+  "tooltip_info_item.mcdar.lightning_rod_1":              "Создано Разбойниками Некромантами, этот",
+  "tooltip_info_item.mcdar.lightning_rod_2":              "предмет зачарован силой",
+  "tooltip_info_item.mcdar.lightning_rod_3":              "громового неба.",
+
+  "tooltip_info_item.mcdar.powershaker_1":                "Громыхалка это чертовски хорошее",
+  "tooltip_info_item.mcdar.powershaker_2":                "время, не для ваших врагов,",
+  "tooltip_info_item.mcdar.powershaker_3":                "конечно же.",
+
+  "tooltip_info_item.mcdar.satchel_of_elements_1":        "Мистика окружает этот древний",
+  "tooltip_info_item.mcdar.satchel_of_elements_2":        "мешок. Выпустит ли оно огонь, лёд,",
+  "tooltip_info_item.mcdar.satchel_of_elements_3":        "или что-то намного менее приятное?",
+
+  "tooltip_info_item.mcdar.shock_powder_1":               "Шокирующий порошок для тех",
+  "tooltip_info_item.mcdar.shock_powder_2":               "кто хочет сделать ловкий выход.",
+
+  "tooltip_info_item.mcdar.soul_healer_1":                "Амулет целителя душ холоден к тем",
+  "tooltip_info_item.mcdar.soul_healer_2":                "кто его прикасается и дрожит от силы",
+  "tooltip_info_item.mcdar.soul_healer_3":                "душ. Оно очень распростаненно между",
+  "tooltip_info_item.mcdar.soul_healer_4":                "Разбойниками в Деревянных Особняках.",
+
+  "tooltip_info_item.mcdar.tasty_bone_1":                 "Вы слышите далёкое завывание когда вы",
+  "tooltip_info_item.mcdar.tasty_bone_2":                 "держите Вкусную Кость в руке.",
+
+  "tooltip_info_item.mcdar.thundering_quiver_1":          "Этот медный колчан содержит",
+  "tooltip_info_item.mcdar.thundering_quiver_2":          "силу молний.",
+
+  "tooltip_info_item.mcdar.torment_quiver_1":             "Колчан мучений излучает очень сильную",
+  "tooltip_info_item.mcdar.torment_quiver_2":             "энергию исчерпаную из бесконечного источника",
+  "tooltip_info_item.mcdar.torment_quiver_3":             "неживых.",
+
+  "tooltip_info_item.mcdar.totem_of_regeneration_1":      "Эта самодельная деревянная фигура излучает",
+  "tooltip_info_item.mcdar.totem_of_regeneration_2":      "тепло как от костра,",
+  "tooltip_info_item.mcdar.totem_of_regeneration_3":      "леча тех кто собираются вокруг неё.",
+
+  "tooltip_info_item.mcdar.totem_of_shielding_1":         "Этот тотем имеет мистические силы как щита",
+  "tooltip_info_item.mcdar.totem_of_shielding_2":         "тех кто вокруг него от снарядов.",
+
+  "tooltip_info_item.mcdar.totem_of_soul_protection_1":   "Это улучшение Тотема",
+  "tooltip_info_item.mcdar.totem_of_soul_protection_2":   "Бессмертия, созданный Мастерами Вызывателями,",
+  "tooltip_info_item.mcdar.totem_of_soul_protection_3":   "может защитить не только владельца.",
+
+  "tooltip_info_item.mcdar.updraft_tome_1":               "Древняя книга наполненная неразборчивыми",
+  "tooltip_info_item.mcdar.updraft_tome_2":               "символами, ты чувствуешь странный бриз когда",
+  "tooltip_info_item.mcdar.updraft_tome_3":               "перелистываешь странницы.",
+
+  "tooltip_info_item.mcdar.wind_horn_1":                  "Когда Рог Ветра раздаётся эхом через",
+  "tooltip_info_item.mcdar.wind_horn_2":                  "леса мира существа",
+  "tooltip_info_item.mcdar.wind_horn_3":                  "ночи дрожжат от страха.",
+
+  "tooltip_info_item.mcdar.wonderful_wheat_1":            "Этот предмет имеет тусклый запах",
+  "tooltip_info_item.mcdar.wonderful_wheat_2":            "открытого поля, испечённого хлеба, и свеже",
+  "tooltip_info_item.mcdar.wonderful_wheat_3":            "срезанных растений."
+}

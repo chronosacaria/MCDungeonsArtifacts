@@ -26,6 +26,7 @@ public class Mcdar implements ModInitializer {
     @Override
     public void onInitialize() {
         ArtefactsInit.init();
+        EnchantsRegistry.init();
         StatusEffectInit.init();
         LootRegistry.init();
         SummonedEntityRegistry.register();
