@@ -2,7 +2,6 @@ package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.entities.*;
-import chronosacaria.mcdar.entities.renderers.EnchantedGrassGreenSheepRenderer;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class SummoningHelper {
 

@@ -5,7 +5,6 @@ import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.enchants.EnchantID;
-import chronosacaria.mcdar.entities.*;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import chronosacaria.mcdar.init.EnchantsRegistry;
@@ -43,6 +42,8 @@ public abstract class LivingEntityMixin {
 
     @Shadow
     public abstract boolean addStatusEffect(StatusEffectInstance effect);
+
+    @Shadow public abstract ItemStack getMainHandStack();
 
     @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
     public void onSoulProtectionDeath(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
@@ -117,6 +118,70 @@ public abstract class LivingEntityMixin {
                         float newDamage = amount * beastBossFactor;
                         float h = target.getHealth();
                         target.setHealth(h - newDamage);
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "consumeItem", at = @At("HEAD"), cancellable = true)
+    public void onBeastBurstPotionConsumption(CallbackInfo ci){
+        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+
+        if ( playerEntity.isAlive() && playerEntity.world instanceof ServerWorld){
+            List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(getMainHandStack());
+            if (potionEffects.isEmpty()) return;
+            if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
+                int beastBurstLevel =
+                        EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BURST),
+                                playerEntity);
+                if (beastBurstLevel > 0){
+                    for (Entity summonedMob : AOEHelper.getSummonedMobs(playerEntity, 10)){
+                        if (summonedMob == null) return;
+                        if (summonedMob instanceof LivingEntity){
+                            LivingEntity summonedMobAsLiving = (LivingEntity) summonedMob;
+                            summonedMobAsLiving.world.playSound(
+                                    null,
+                                    summonedMobAsLiving.getX(),
+                                    summonedMobAsLiving.getY(),
+                                    summonedMobAsLiving.getZ(),
+                                    SoundEvents.ENTITY_GENERIC_EXPLODE,
+                                    SoundCategory.PLAYERS,
+                                    0.5F,
+                                    1.0F);
+                            AOECloudHelper.spawnExplosionCloud(summonedMobAsLiving, summonedMobAsLiving, 3.0F);
+                            AOEHelper.causeExplosion(summonedMobAsLiving, summonedMobAsLiving, 15 * beastBurstLevel,
+                                    3.0F);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "consumeItem", at = @At("HEAD"), cancellable = true)
+    public void onBeastSurgePotionConsumption(CallbackInfo ci){
+        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+
+        if ( playerEntity.isAlive() && playerEntity.world instanceof ServerWorld){
+            List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(getMainHandStack());
+            if (potionEffects.isEmpty()) return;
+            if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
+                int beastSurgeLevel =
+                        EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_SURGE),
+                                playerEntity);
+                if (beastSurgeLevel > 0){
+                    for (Entity summonedMob : AOEHelper.getSummonedMobs(playerEntity, 10)){
+                        if (summonedMob == null) return;
+                        if (summonedMob instanceof LivingEntity){
+                            LivingEntity summonedMobAsLiving = (LivingEntity) summonedMob;
+                            StatusEffectInstance beastSurgeSpeed = new StatusEffectInstance(StatusEffects.SPEED,
+                                    10 * 20, (beastSurgeLevel * 3) - 1);
+                            StatusEffectInstance beastSurgeAttack = new StatusEffectInstance(StatusEffects.STRENGTH,
+                                    10 * 20, (beastSurgeLevel * 3) - 1);
+                            summonedMobAsLiving.addStatusEffect(beastSurgeSpeed);
+                            summonedMobAsLiving.addStatusEffect(beastSurgeAttack);
+                        }
                     }
                 }
             }

@@ -37,7 +37,9 @@
   "effect.mcdar.soul_protection":         "Защита души",
   "effect.mcdar.stunned":                 "Оглушён",
 
-  "enchantment.mcdar.beast_boss":         "Король Зверей",
+  "enchantment.mcdar.beast_boss":         "Царь Зверей",
+  "enchantment.mcdar.beast_burst":        "Зверский Взрыв",
+  "enchantment.mcdar.beast_surge":        "Сила Зверя",
   "enchantment.mcdar.cooldown":           "Перезарядка",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "Только храбрейшие из воинов носят",

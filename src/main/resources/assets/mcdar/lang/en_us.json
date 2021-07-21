@@ -38,6 +38,8 @@
   "effect.mcdar.stunned":                 "Stunned",
 
   "enchantment.mcdar.beast_boss":         "Beast Boss",
+  "enchantment.mcdar.beast_burst":        "Beast Burst",
+  "enchantment.mcdar.beast_surge":        "Beast Surge",
   "enchantment.mcdar.cooldown":           "Cooldown",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "Only the bravest of warriors carry",

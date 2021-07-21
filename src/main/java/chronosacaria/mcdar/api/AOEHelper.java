@@ -33,6 +33,14 @@ public class AOEHelper {
         );
     }
 
+    /** Returns targets of an AOE effect from 'attacker' around 'center'. This includes 'center'. */
+    public static List<LivingEntity> getSummonedMobs(LivingEntity center, float distance) {
+        return center.getEntityWorld().getEntitiesByClass(LivingEntity.class,
+                new Box(center.getBlockPos()).expand(distance),
+                (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, center)
+        );
+    }
+
     /* Returns targets of an AOE effect excluding the 'user' and any 'pets' of the 'user' */
     public static List<LivingEntity> excludeUserAndPetsOfUser(LivingEntity user) {
         return user.getEntityWorld().getEntitiesByClass(LivingEntity.class,
@@ -178,6 +186,16 @@ public class AOEHelper {
         DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
 
         for (LivingEntity nearbyEntity : getAoeTargets(victim, user, distance)) {
+            nearbyEntity.damage(magicExplosion, damageAmount);
+        }
+
+    }
+
+    public static void causeBeastBurstExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount,
+                                             float distance){
+        DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
+
+        for (LivingEntity nearbyEntity : getSummonedMobs(victim, distance)) {
             nearbyEntity.damage(magicExplosion, damageAmount);
         }
 
