@@ -17,12 +17,7 @@ public class EnchantsRegistry {
             if (!McdarConfig.config.enableEnchantment.get(enchantID))
                 continue;
 
-            Enchantment enchantment;
-            switch (enchantID) {
-                default:
-                    enchantment = new ArmourEnchantment(enchantID);
-                    break;
-            }
+            Enchantment enchantment = new ArmourEnchantment(enchantID);
 
             enchants.put(enchantID, enchantment);
             registerEnchant(enchantID.toString().toLowerCase(), enchantment);
