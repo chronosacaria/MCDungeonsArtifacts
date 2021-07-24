@@ -126,17 +126,19 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "consumeItem", at = @At("HEAD"), cancellable = true)
     public void onBeastBurstPotionConsumption(CallbackInfo ci){
-        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
 
-        if ( playerEntity.isAlive() && playerEntity.world instanceof ServerWorld){
+        if (!(livingEntity instanceof PlayerEntity)) return;
+
+        if ( livingEntity.isAlive() && livingEntity.world instanceof ServerWorld){
             List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(getMainHandStack());
             if (potionEffects.isEmpty()) return;
             if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
                 int beastBurstLevel =
                         EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BURST),
-                                playerEntity);
+                                livingEntity);
                 if (beastBurstLevel > 0){
-                    for (Entity summonedMob : AOEHelper.getSummonedMobs(playerEntity, 10)){
+                    for (Entity summonedMob : AOEHelper.getSummonedMobs(livingEntity, 10)){
                         if (summonedMob == null) return;
                         if (summonedMob instanceof LivingEntity){
                             LivingEntity summonedMobAsLiving = (LivingEntity) summonedMob;
@@ -161,17 +163,19 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "consumeItem", at = @At("HEAD"), cancellable = true)
     public void onBeastSurgePotionConsumption(CallbackInfo ci){
-        PlayerEntity playerEntity = (PlayerEntity) (Object) this;
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
 
-        if ( playerEntity.isAlive() && playerEntity.world instanceof ServerWorld){
+        if (!(livingEntity instanceof PlayerEntity)) return;
+
+        if ( livingEntity.isAlive() && livingEntity.world instanceof ServerWorld){
             List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(getMainHandStack());
             if (potionEffects.isEmpty()) return;
             if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
                 int beastSurgeLevel =
                         EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_SURGE),
-                                playerEntity);
+                                livingEntity);
                 if (beastSurgeLevel > 0){
-                    for (Entity summonedMob : AOEHelper.getSummonedMobs(playerEntity, 10)){
+                    for (Entity summonedMob : AOEHelper.getSummonedMobs(livingEntity, 10)){
                         if (summonedMob == null) return;
                         if (summonedMob instanceof LivingEntity){
                             LivingEntity summonedMobAsLiving = (LivingEntity) summonedMob;
