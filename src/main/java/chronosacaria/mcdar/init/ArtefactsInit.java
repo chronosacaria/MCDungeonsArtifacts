@@ -31,6 +31,9 @@ public class ArtefactsInit {
                 case BLAST_FUNGUS:
                     item = new BlastFungusItem(artefactID);
                     break;
+                case CORRUPTED_BEACON:
+                    item = new CorruptedBeaconItem(artefactID);
+                    break;
                 case HARVESTER:
                     item = new HarvesterItem(artefactID);
                     break;
