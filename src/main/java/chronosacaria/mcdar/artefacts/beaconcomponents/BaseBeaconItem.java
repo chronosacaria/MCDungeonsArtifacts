@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -38,8 +37,6 @@ public abstract class BaseBeaconItem extends ArtefactDamagingItem {
         return item instanceof BaseBeaconItem ? ((BaseBeaconItem)item).getBeamColour() : null;
     }
 
-    public abstract boolean canFireBeacon(PlayerEntity playerEntity, ItemStack itemStack);
-
     public static ItemStack getBeaconIfHeld(PlayerEntity playerEntity){
         ItemStack heldItem = playerEntity.getMainHandStack();
         if (!(heldItem.getItem() instanceof BaseBeaconItem)){
@@ -58,26 +55,27 @@ public abstract class BaseBeaconItem extends ArtefactDamagingItem {
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (world.isClient) {
-            if (canFireBeacon(user, itemStack)) {
+            if (user.totalExperience >= 7) {
                 user.world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BEACON_ACTIVATE,
                         SoundCategory.PLAYERS, 1.0F, 1.0F);
             }
             return new TypedActionResult<>(ActionResult.PASS, itemStack);
         }
-        if (!canFireBeacon(user, itemStack)){
+        if (user.totalExperience < 7){
             return new TypedActionResult<>(ActionResult.FAIL, itemStack);
         }
         user.setCurrentHand(hand);
         return new TypedActionResult<>(ActionResult.PASS, itemStack);
     }
 
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        user.world.playSound((PlayerEntity) user, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BEACON_DEACTIVATE,
+                SoundCategory.PLAYERS, 1.0F, 1.0F);
+    }
+
     @Override
     public UseAction getUseAction(ItemStack itemStack){
         return UseAction.NONE;
-    }
-
-    public TypedActionResult<ItemStack> activateArtefact(ItemUsageContext itemUsageContext){
-        return new TypedActionResult<>(ActionResult.PASS, itemUsageContext.getStack());
     }
 
     @Override

@@ -4,6 +4,7 @@
   "item.mcdar.blast_fungus":              "Blast Fungus",
   "item.mcdar.boots_of_swiftness":        "Boots of Swiftness",
   "item.mcdar.buzzy_nest":                "Buzzy Nest",
+  "item.mcdar.corrupted_beacon":          "Corrupted Beacon",
   "item.mcdar.corrupted_seeds":           "Corrupted Seeds",
   "item.mcdar.death_cap_mushroom":        "Death Cap Mushroom",
   "item.mcdar.enchanted_grass":           "Enchanted Grass",
@@ -55,6 +56,11 @@
   "tooltip_info_item.mcdar.buzzy_nest_2":                 "are fans of the Buzzy Nest, but don't",
   "tooltip_info_item.mcdar.buzzy_nest_3":                 "be fooled by the cute bees within -",
   "tooltip_info_item.mcdar.buzzy_nest_4":                 "they, pack a powerful sting!",
+
+  "tooltip_info_item.mcdar.corrupted_beacon_1":           "The Corrupted Beacon holds immense",
+  "tooltip_info_item.mcdar.corrupted_beacon_2":           "power within. It waits for the",
+  "tooltip_info_item.mcdar.corrupted_beacon_3":           "moment to unleash its wrath.",
+
 
   "tooltip_info_item.mcdar.corrupted_seeds_1":            "A pouch of poisonous, corrupted seeds",
   "tooltip_info_item.mcdar.corrupted_seeds_2":            "which grow into spiky grapple vines,",

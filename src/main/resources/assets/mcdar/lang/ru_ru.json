@@ -4,6 +4,7 @@
   "item.mcdar.blast_fungus":              "Взрывной Грибок",
   "item.mcdar.boots_of_swiftness":        "Ботинки ловкости",
   "item.mcdar.buzzy_nest":                "Жужжащее гнездо",
+  "item.mcdar.corrupted_beacon":          "Нечистый Маяк",
   "item.mcdar.corrupted_seeds":           "Искажённые-семена",
   "item.mcdar.death_cap_mushroom":        "Бледная поганка",
   "item.mcdar.enchanted_grass":           "Зачарованная трава",
@@ -55,6 +56,10 @@
   "tooltip_info_item.mcdar.buzzy_nest_2":                 "фанаты жужжащего гнезда, но не",
   "tooltip_info_item.mcdar.buzzy_nest_3":                 "будьте обмануты милыми пчелами внутри -",
   "tooltip_info_item.mcdar.buzzy_nest_4":                 "они могут очень сильно укусить!",
+
+  "tooltip_info_item.mcdar.corrupted_beacon_1":           "Нечистый Маяк обладает огромной",
+  "tooltip_info_item.mcdar.corrupted_beacon_2":           "силой внутри. Он ждет момента,",
+  "tooltip_info_item.mcdar.corrupted_beacon_3":           "чтобы высвободить свой гнев.",
 
   "tooltip_info_item.mcdar.corrupted_seeds_1":            "Мешок ядовитых, искаженных семян",
   "tooltip_info_item.mcdar.corrupted_seeds_2":            "которые вырастает в шипастые хваткие лианы,",

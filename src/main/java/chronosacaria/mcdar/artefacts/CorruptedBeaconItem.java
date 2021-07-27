@@ -4,7 +4,6 @@ import chronosacaria.mcdar.artefacts.beaconcomponents.BaseBeaconItem;
 import chronosacaria.mcdar.artefacts.beaconcomponents.BeaconBeamColour;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 
 public class CorruptedBeaconItem extends BaseBeaconItem {
     public CorruptedBeaconItem(DamagingArtefactID artefactID) {
@@ -18,11 +17,6 @@ public class CorruptedBeaconItem extends BaseBeaconItem {
             (short) 255,
             (short) 255,
             (short) 255);
-
-    @Override
-    public boolean canFireBeacon(PlayerEntity playerEntity, ItemStack itemStack) {
-        return playerEntity.totalExperience >= 40F;
-    }
 
     @Override
     protected BeaconBeamColour getBeamColour() {

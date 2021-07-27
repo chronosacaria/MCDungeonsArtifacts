@@ -4,6 +4,7 @@
   "item.mcdar.blast_fungus":              "爆破菌",
   "item.mcdar.boots_of_swiftness":        "迅捷之靴",
   "item.mcdar.buzzy_nest":                "嗡嗡蜂巢",
+  "item.mcdar.corrupted_beacon":          "腐化信标",
   "item.mcdar.corrupted_seeds":           "腐化种子",
   "item.mcdar.death_cap_mushroom":        "毒帽菇",
   "item.mcdar.enchanted_grass":           "附魔草",
@@ -55,6 +56,10 @@
   "tooltip_info_item.mcdar.buzzy_nest_2":                 "人都是嗡嗡蜂巢的粉丝，",
   "tooltip_info_item.mcdar.buzzy_nest_3":                 "但不要被里面可爱的蜜蜂所迷惑——",
   "tooltip_info_item.mcdar.buzzy_nest_4":                 "它们蜇人真的疼！",
+
+  "tooltip_info_item.mcdar.corrupted_beacon_1":           "腐化信标暗含",
+  "tooltip_info_item.mcdar.corrupted_beacon_2":           "巨大的能量。释放",
+  "tooltip_info_item.mcdar.corrupted_beacon_3":           "只需一个时机。",
 
   "tooltip_info_item.mcdar.corrupted_seeds_1":            "一袋有毒的腐化种子，",
   "tooltip_info_item.mcdar.corrupted_seeds_2":            "会长出带有尖刺的扭曲藤蔓，",
