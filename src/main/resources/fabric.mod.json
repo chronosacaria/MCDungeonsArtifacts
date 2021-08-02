@@ -25,6 +25,9 @@
   "mixins": [
     "mcdar.mixins.json"
   ],
+
+  "accessWidener": "mcdar.accesswidener",
+
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",

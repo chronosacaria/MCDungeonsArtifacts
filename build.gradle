@@ -31,6 +31,10 @@ dependencies {
 
 }
 
+minecraft {
+    accessWidener = file("src/main/resources/mcdar.accesswidener");
+}
+
 processResources {
     inputs.property "version", project.version
 

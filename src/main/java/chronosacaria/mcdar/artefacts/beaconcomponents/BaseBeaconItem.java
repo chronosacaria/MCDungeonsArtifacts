@@ -2,6 +2,11 @@ package chronosacaria.mcdar.artefacts.beaconcomponents;
 
 import chronosacaria.mcdar.artefacts.ArtefactDamagingItem;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -22,6 +27,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public abstract class BaseBeaconItem extends ArtefactDamagingItem {
 
     public static final double RAYTRACE_DISTANCE = 256;
@@ -32,7 +39,7 @@ public abstract class BaseBeaconItem extends ArtefactDamagingItem {
     }
 
     @Nullable
-    public static BeaconBeamColour beaconBeamColour(ItemStack itemStack){
+    public static BeaconBeamColour getBeaconBeamColour(ItemStack itemStack){
         Item item = itemStack.getItem();
         return item instanceof BaseBeaconItem ? ((BaseBeaconItem)item).getBeamColour() : null;
     }
@@ -55,13 +62,13 @@ public abstract class BaseBeaconItem extends ArtefactDamagingItem {
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (world.isClient) {
-            if (user.totalExperience >= 7) {
+            if (user.totalExperience > 0) {
                 user.world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BEACON_ACTIVATE,
                         SoundCategory.PLAYERS, 1.0F, 1.0F);
             }
             return new TypedActionResult<>(ActionResult.PASS, itemStack);
         }
-        if (user.totalExperience < 7){
+        if (user.totalExperience < 0){
             return new TypedActionResult<>(ActionResult.FAIL, itemStack);
         }
         user.setCurrentHand(hand);
@@ -76,6 +83,26 @@ public abstract class BaseBeaconItem extends ArtefactDamagingItem {
     @Override
     public UseAction getUseAction(ItemStack itemStack){
         return UseAction.NONE;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void onRenderWorldLast(float particleTick, MatrixStack matrixStack){
+        List<AbstractClientPlayerEntity> abstractClientPlayerEntities = null;
+        if (MinecraftClient.getInstance().world != null){
+            abstractClientPlayerEntities = MinecraftClient.getInstance().world.getPlayers();
+            PlayerEntity playerEntity = MinecraftClient.getInstance().player;
+            if (playerEntity != null){
+                for (PlayerEntity playerEntity1 : abstractClientPlayerEntities) {
+                    if (playerEntity1.squaredDistanceTo(playerEntity) > 500)
+                        continue;
+
+                    ItemStack heldItem = BaseBeaconItem.getBeaconIfHeld(playerEntity);
+                    if (heldItem.getItem() instanceof BaseBeaconItem/* && playerEntity1.totalExperience > 7*/){
+                        BeaconBeamRenderer.renderBeam(matrixStack, playerEntity1, particleTick);
+                    }
+                }
+            }
+        }
     }
 
     @Override
