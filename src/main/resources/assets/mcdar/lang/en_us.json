@@ -20,6 +20,8 @@
   "item.mcdar.lightning_rod":             "Lightning Rod",
   "item.mcdar.powershaker":               "Powershaker",
   "item.mcdar.satchel_of_elements":       "Satchel of Elements",
+  "item.mcdar.satchel_of_elixirs":        "Satchel of Elixirs",
+  "item.mcdar.satchel_of_snacks":         "Satchel of Snacks",
   "item.mcdar.shock_powder":              "Shock Powder",
   "item.mcdar.soul_healer":               "Soul Healer",
   "item.mcdar.tasty_bone":                "Tasty Bone",
@@ -60,7 +62,6 @@
   "tooltip_info_item.mcdar.corrupted_beacon_1":           "The Corrupted Beacon holds immense",
   "tooltip_info_item.mcdar.corrupted_beacon_2":           "power within. It waits for the",
   "tooltip_info_item.mcdar.corrupted_beacon_3":           "moment to unleash its wrath.",
-
 
   "tooltip_info_item.mcdar.corrupted_seeds_1":            "A pouch of poisonous, corrupted seeds",
   "tooltip_info_item.mcdar.corrupted_seeds_2":            "which grow into spiky grapple vines,",
@@ -125,6 +126,14 @@
   "tooltip_info_item.mcdar.satchel_of_elements_1":        "Mysteries surround this primordial",
   "tooltip_info_item.mcdar.satchel_of_elements_2":        "satchel. Will it unleash fire, ice,",
   "tooltip_info_item.mcdar.satchel_of_elements_3":        "or something a lot less nice?",
+
+  "tooltip_info_item.mcdar.satchel_of_elixirs_1":         "The Satchel of Elixirs always contains",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_2":         "the exact potions you need! (Well, at",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_3":         "least the potions it thinks you need,",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_4":         "which is still pretty helpful.)",
+
+  "tooltip_info_item.mcdar.satchel_of_snacks_1":          "The Satchel of Snacks provides a treat",
+  "tooltip_info_item.mcdar.satchel_of_snacks_2":          "when you need it the most!",
 
   "tooltip_info_item.mcdar.shock_powder_1":               "Shock Powder is a reliable tool for",
   "tooltip_info_item.mcdar.shock_powder_2":               "those who wish to make a swift exit.",

@@ -20,6 +20,8 @@
   "item.mcdar.lightning_rod":             "雷霆法杖",
   "item.mcdar.powershaker":               "巨力沙锤",
   "item.mcdar.satchel_of_elements":       "元素背袋",
+  "item.mcdar.satchel_of_elixirs":        "药水背袋",
+  "item.mcdar.satchel_of_snacks":         "食物背袋",
   "item.mcdar.shock_powder":              "休克粉末",
   "item.mcdar.soul_healer":               "灵魂治疗器",
   "item.mcdar.tasty_bone":                "美味骨肉",
@@ -124,6 +126,14 @@
   "tooltip_info_item.mcdar.satchel_of_elements_1":        "谜团重重的原始背袋。",
   "tooltip_info_item.mcdar.satchel_of_elements_2":        "它会爆发出火焰、寒冰",
   "tooltip_info_item.mcdar.satchel_of_elements_3":        "还是其它什么不好的东西？",
+
+  "tooltip_info_item.mcdar.satchel_of_elixirs_1":         "药水背袋总是包含,",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_2":         "您需要的确切药水！ （嗯，",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_3":         "至少它认为你需要的药水，",
+  "tooltip_info_item.mcdar.satchel_of_elixirs_4":         "这仍然很有帮助。）",
+
+  "tooltip_info_item.mcdar.satchel_of_snacks_1":          "食物背袋会在您最",
+  "tooltip_info_item.mcdar.satchel_of_snacks_2":          "需要的时候提供零食！",
 
   "tooltip_info_item.mcdar.shock_powder_1":               "对于那些希望迅速抽身的人",
   "tooltip_info_item.mcdar.shock_powder_2":               "来说，休克粉末是可靠的工具。",

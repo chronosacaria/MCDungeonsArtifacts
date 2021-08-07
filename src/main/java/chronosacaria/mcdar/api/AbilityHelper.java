@@ -7,6 +7,15 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class AbilityHelper {
 
@@ -62,4 +71,14 @@ public class AbilityHelper {
             return ((PlayerEntity) entity).isCreative();
         return false;
     }
+
+    public static final List<ItemStack> SATCHEL_OF_ELIXIRS_LIST = Collections.unmodifiableList(Arrays.asList(
+            PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.STRENGTH),
+            PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.SWIFTNESS),
+            PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.INVISIBILITY)));
+
+    public static final List<Item> SATCHEL_OF_SNACKS_LIST = Collections.unmodifiableList(Arrays.asList(
+            Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,
+            Items.COOKED_COD, Items.COOKED_COD, Items.COOKED_RABBIT, Items.COOKED_CHICKEN, Items.COOKED_BEEF,
+            Items.MELON_SLICE, Items.CARROT, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.BAKED_POTATO));
 }

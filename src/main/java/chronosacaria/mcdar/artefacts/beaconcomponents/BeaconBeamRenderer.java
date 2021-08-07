@@ -1,7 +1,9 @@
 package chronosacaria.mcdar.artefacts.beaconcomponents;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -79,6 +81,8 @@ public class BeaconBeamRenderer {
 
         matrixStack.translate(-view.getX(), -view.getY(), -view.getZ());
         matrixStack.translate(from.x, from.y, from.z);
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(ticks, -playerEntity.getYaw(), -playerEntity.prevYaw)));
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(ticks, playerEntity.getPitch(), playerEntity.prevPitch)));
 
         MatrixStack.Entry entry = matrixStack.peek();
         Matrix3f matrixNormal = entry.getNormal();
@@ -93,8 +97,6 @@ public class BeaconBeamRenderer {
         builder = buffer.getBuffer(BeaconRenderLayer.BEACON_BEAM_CORE);
         drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness/2, activeHand, distance, v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
         matrixStack.pop();
-        buffer.draw();
-
     }
 
     private static float calculateFlickerModifier(long gameTime){
@@ -108,51 +110,50 @@ public class BeaconBeamRenderer {
         Vec3f vec3f = new Vec3f(0.0f, 1.0f, 0.0f);
         vec3f.transform(matrixNormal);
         ClientPlayerEntity playerEntity = MinecraftClient.getInstance().player;
-        if (MinecraftClient.getInstance().options.mainArm != Arm.RIGHT){
+        if (MinecraftClient.getInstance().options.mainArm != Arm.RIGHT)
             hand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
-            float startXOffset = -0.25f;
-            float startYOffset = -0.115f;
-            float startZOffset = 0f;
-            if (playerEntity != null) {
-                startZOffset = 0.56f + (1 - 0.75f); //Needs to be Field of View??
-            }
-            if (hand == Hand.OFF_HAND){
-                startYOffset = -0.120f;
-                startXOffset = 0.25f;
-            }
-            float f = 0;
-            if (playerEntity != null){
-                f = (MathHelper.lerp(ticks, playerEntity.prevPitch, playerEntity.getPitch() - MathHelper.lerp(ticks,
-                        playerEntity.lastRenderPitch, playerEntity.renderPitch)));
-            }
-            float f1 = 0;
-            if (playerEntity != null){
-                f1 = (MathHelper.lerp(ticks, playerEntity.prevYaw, playerEntity.getYaw() - MathHelper.lerp(ticks,
-                        playerEntity.lastRenderYaw, playerEntity.renderYaw)));
-            }
-            startXOffset = startXOffset + (f1 / 750);
-            startYOffset = startYOffset + (f / 750);
+        float startXOffset = -0.25f;
+        float startYOffset = -0.115f;
+        float startZOffset = 0f;
+        if (playerEntity != null) {
+            startZOffset = 0.56f + (1 - 0.75f); //Needs to be Field of View??
+        }
+        if (hand == Hand.OFF_HAND){
+            startYOffset = -0.120f;
+            startXOffset = 0.25f;
+        }
+        float f = 0;
+        if (playerEntity != null){
+            f = (MathHelper.lerp(ticks, playerEntity.prevPitch, playerEntity.getPitch() - MathHelper.lerp(ticks,
+                    playerEntity.lastRenderPitch, playerEntity.renderPitch)));
+        }
+        float f1 = 0;
+        if (playerEntity != null){
+        f1 = (MathHelper.lerp(ticks, playerEntity.prevYaw, playerEntity.getYaw() - MathHelper.lerp(ticks,
+                playerEntity.lastRenderYaw, playerEntity.renderYaw)));
+        }
+        startXOffset = startXOffset + (f1 / 750);
+        startYOffset = startYOffset + (f / 750);
 
-            Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0f);
-            vec1.transform(positionMatrix);
-            Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
-            vec2.transform(positionMatrix);
-            Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
-            vec3.transform(positionMatrix);
-            Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0f);
-            vec4.transform(positionMatrix);
+        Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0f);
+        vec1.transform(positionMatrix);
+        Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
+        vec2.transform(positionMatrix);
+        Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
+        vec3.transform(positionMatrix);
+        Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0f);
+        vec4.transform(positionMatrix);
 
-            if (hand == Hand.MAIN_HAND){
-                builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            } else {
-                builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-                builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            }
+        if (hand == Hand.MAIN_HAND){
+            builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+        } else {
+            builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
+            builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
         }
     }
 }

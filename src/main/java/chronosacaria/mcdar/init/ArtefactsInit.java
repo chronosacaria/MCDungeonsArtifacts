@@ -31,9 +31,9 @@ public class ArtefactsInit {
                 case BLAST_FUNGUS:
                     item = new BlastFungusItem(artefactID);
                     break;
-                case CORRUPTED_BEACON:
-                    item = new CorruptedBeaconItem(artefactID);
-                    break;
+                //case CORRUPTED_BEACON:
+                //    item = new CorruptedBeaconItem(artefactID);
+                //    break;
                 case HARVESTER:
                     item = new HarvesterItem(artefactID);
                     break;
@@ -172,6 +172,12 @@ public class ArtefactsInit {
                     break;
                 case POWERSHAKER:
                     item = new PowershakerItem(artefactID);
+                    break;
+                case SATCHEL_OF_ELIXIRS:
+                    item = new SatchelOfElixirsItem(artefactID);
+                    break;
+                case SATCHEL_OF_SNACKS:
+                    item = new SatchelOfSnacksItem(artefactID);
                     break;
                 case SOUL_HEALER:
                     item = new SoulHealerItem(artefactID);
