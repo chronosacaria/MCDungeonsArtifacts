@@ -1,22 +1,48 @@
+/*
 package chronosacaria.mcdar.artefacts.beaconcomponents;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.GameRenderer;
+import chronosacaria.mcdar.Mcdar;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Arm;
-import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.Matrix3f;
+import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 
+@Environment(EnvType.CLIENT)
 public class BeaconBeamRenderer {
-    public static void renderBeam(MatrixStack matrixStack, PlayerEntity playerEntity, float ticks){
+    AnimatedGeoModel geoModelProvider;
+    private static final Identifier CORRUPTED_BEAM_TEXTURE = new Identifier(Mcdar.MOD_ID, "textures/misc" +
+            "/beacon_beam_core.png");
+    private static final Identifier CORRUPTED_PUMPKIN_TEXTURE = new Identifier(Mcdar.MOD_ID, "textures/entity/corrupted_pumpkin_texture.png");
+    private static final Identifier EYE_OF_THE_GUARDIAN_TEXTURE = new Identifier(Mcdar.MOD_ID, "textures/entity/eye_of_the_guardian_texture.png");
+
+    public long allDelta = 0;
+    public long deltaGathered = 0;
+    public long deltaTime = 0;
+    public long lastTime = 0;
+    public long currentTime = 0;
+
+    public int scaleSteps = 0;
+    public int scaleMaxSteps = 15;
+    public int animationSteps = 0;
+    public int animationMaxSteps = 20;
+    public boolean scaleComplete = false;
+
+    public int beamType = 0;
+
+    public void render(MatrixStack matrixStack, VertexConsumerProvider bufferIn, int packedLightIn,
+                       PlayerEntity playerEntity, float ticks){
         ItemStack itemStack = BaseBeaconItem.getBeaconIfHeld(playerEntity);
 
         double range = BaseBeaconItem.RAYTRACE_DISTANCE;
@@ -28,132 +54,131 @@ public class BeaconBeamRenderer {
 
         BeaconBeamColour beaconBeamColour = BaseBeaconItem.getBeaconBeamColour(itemStack);
         if (beaconBeamColour != null){
-            drawBeams(
-                    matrixStack,
-                    playerPosition,
-                    trace,
-                    0,
-                    0,
-                    0,
-                    beaconBeamColour.getRedValue() / 255f,
-                    beaconBeamColour.getGreenValue() / 255f,
-                    beaconBeamColour.getBlueValue() / 255f,
-                    0.02f,
+            renderBeam(
                     playerEntity,
                     ticks,
-                    speedModifier);
+                    matrixStack,
+                    bufferIn,
+                    packedLightIn);
         }
     }
 
-    private static void drawBeams(MatrixStack matrixStack, Vec3d from, HitResult trace, double xOffset,
-                                  double yOffset, double zOffset, float r, float g, float b, float thickness,
-                                  PlayerEntity playerEntity, float ticks, float speedmodifier){
-        Hand activeHand;
-        if (playerEntity.getMainHandStack().getItem() instanceof BaseBeaconItem){
-            activeHand = Hand.MAIN_HAND;
-        } else if (playerEntity.getOffHandStack().getItem() instanceof BaseBeaconItem){
-            activeHand = Hand.OFF_HAND;
-        } else {
-            return;
-        }
-
-        VertexConsumer builder;
-        ItemStack itemStack = playerEntity.getStackInHand(activeHand);
-        double distance = Math.max(1, from.subtract(trace.getPos()).length());
-        long gameTime = playerEntity.world.getTime();
-        double v = gameTime * speedmodifier;
-        float additiveThickness = (thickness * 3.5f) * calculateFlickerModifier(gameTime);
-
-        float beam2r = 0;
-        float beam2g = 0;
-        float beam2b = 0;
-        BeaconBeamColour beaconBeamColour = BaseBeaconItem.getBeaconBeamColour(itemStack);
-        if (beaconBeamColour != null){
-            beam2r = beaconBeamColour.getInnerRedValue() / 255f;
-            beam2g = beaconBeamColour.getGreenValue() / 255f;
-            beam2b = beaconBeamColour.getInnerBlueValue() / 255f;
-        }
-
-        Vec3d view = MinecraftClient.getInstance().gameRenderer.getCamera().getPos();
-        VertexConsumerProvider.Immediate buffer = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-
+    private void renderBeam(PlayerEntity entity, float partialTicks, MatrixStack matrixStack,
+                            VertexConsumerProvider bufferIn, int packedLightIn){
+        float h = 20;
+        float j = 1;
+        float k = j * 0.5F % 1.0F;
+        float l = 1.625F;
         matrixStack.push();
 
-        matrixStack.translate(-view.getX(), -view.getY(), -view.getZ());
-        matrixStack.translate(from.x, from.y, from.z);
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(MathHelper.lerp(ticks, -playerEntity.getYaw(), -playerEntity.prevYaw)));
-        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(ticks, playerEntity.getPitch(), playerEntity.prevPitch)));
+        matrixStack.translate(-0.250D, (double)l, -0.750D);
 
+        this.currentTime = entity.world.getTime();
+        this.deltaTime = this.currentTime - this.lastTime;
+        this.lastTime = this.currentTime;
+        if (this.deltaTime > 0) {
+            this.deltaGathered += this.deltaTime;
+        }
+
+        if (this.deltaGathered > 0) {
+            if (!this.scaleComplete) {
+                this.scaleSteps += 1;
+            }
+
+            this.animationSteps += 1;
+            if (this.scaleSteps >= this.scaleMaxSteps) {
+                this.scaleComplete = true;
+
+            }
+            this.deltaGathered = 0;
+        }
+
+        float scalefactor = this.scaleSteps * 0.0625F;
+        float pOffset = -11F;
+        float pMulti = 2.3F;
+        float adjustedPitch = (entity.getPitch(0) * pMulti)+pOffset;
+        double pitchClamped = -(Math.max(Math.min(adjustedPitch, 20.0F), -20.0F));
+        // Apply pitch to beam.
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion((int) pitchClamped));
+
+        // Widen beam over time.
+        matrixStack.translate(0.250F, -0.250F, 0);
+        matrixStack.scale(0.0625F+scalefactor, 0.0625F+scalefactor, 1.F);
+        matrixStack.translate(-0.250F, 0.250F, 0);
+
+        // Rotate beam.
+        matrixStack.translate(0.250F, -0.250F, 0);
+        matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(this.animationSteps * 24));
+        matrixStack.translate(-0.250F, 0.250F, 0);
+
+        Vec3d vec3d2 = Vec3d.ZERO;
+        Vec3d vec3d = new Vec3d(vec3d2.x, vec3d2.y, vec3d2.z);
+        Vec3d vec3d3 = vec3d.subtract(vec3d2);
+        float m = (float)(vec3d3.length() + 1.0D);
+        vec3d3 = vec3d3.normalize();
+        float n = (float)Math.acos(vec3d3.y);
+        float o = (float)Math.atan2(vec3d3.z, vec3d3.x);
+        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((1.5707964F - o) * 57.295776F));
+        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(n * 57.295776F));
+
+        float r = h * h;
+        int R = 64 + (int)(r * 191.0F);
+        int G = 32 + (int)(r * 191.0F);
+        int B = 128 - (int)(r * 64.0F);
+        float aq = -1.0F + k;
+        float ar = m * 2.5F + aq;
+
+        Identifier beamTexture;
+        if (this.beamType == 0) {
+            beamTexture = CORRUPTED_BEAM_TEXTURE;
+        } else if (this.beamType == 1){
+            beamTexture = CORRUPTED_PUMPKIN_TEXTURE;
+        } else {
+            beamTexture = EYE_OF_THE_GUARDIAN_TEXTURE;
+        }
+
+        RenderLayer customRenderLayer = RenderLayer.getEyes(beamTexture);
+        VertexConsumer vertexConsumer = bufferIn.getBuffer(customRenderLayer);
         MatrixStack.Entry entry = matrixStack.peek();
-        Matrix3f matrixNormal = entry.getNormal();
-        Matrix4f positionMatrix = entry.getModel();
+        Matrix4f matrix4f = entry.getModel();
+        Matrix3f matrix3f = entry.getNormal();
 
-        builder = buffer.getBuffer(BeaconRenderLayer.BEACON_BEAM_GLOW);
-        drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, additiveThickness, activeHand, distance, 0.5, 1, ticks, r, g, b, 0.7f);
+        // "left" face                                     X     Y     Z
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.0F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.0F, R, G, B, 0.5F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.0F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.0F, R, G, B, 0.0F, ar);
+        // "top" face
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.0F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.0F, R, G, B, 0.0F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.5F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.5F, R, G, B, 0.5F, aq);
+        // "front" face
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.5F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.5F, R, G, B, 0.0F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.0F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.0F, R, G, B, 0.5F, aq);
+        // "back" face
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.5F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.5F, R, G, B, 0.0F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.0F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.0F, R, G, B, 0.5F, aq);
+        // "bottom" face
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.5F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.5F, R, G, B, 0.0F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.0F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.0F, R, G, B, 0.5F, aq);
+        // "right" face
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.5F, 0.5F, R, G, B, 0.5F, ar);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.5F, 0.5F, R, G, B, 0.5F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 0.0F, 0.0F, 0.5F, R, G, B, 0.0F, aq);
+        renderConsumer(vertexConsumer, matrix4f, matrix3f, 6.0F, 0.0F, 0.5F, R, G, B, 0.0F, ar);
 
-        builder = buffer.getBuffer(BeaconRenderLayer.BEACON_BEAM_MAIN);
-        drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness, activeHand, distance, v, v + distance * 1.5, ticks, r,g,b,1f);
-
-        builder = buffer.getBuffer(BeaconRenderLayer.BEACON_BEAM_CORE);
-        drawBeam(xOffset, yOffset, zOffset, builder, positionMatrix, matrixNormal, thickness/2, activeHand, distance, v, v + distance * 1.5, ticks, beam2r, beam2g, beam2b, 1f);
         matrixStack.pop();
     }
 
-    private static float calculateFlickerModifier(long gameTime){
-        return 0.9f + 0.1f * MathHelper.sin(gameTime * 0.99f) * MathHelper.sin(gameTime * 0.3f) * MathHelper.sin(gameTime * 0.1f);
-    }
-
-    private static void drawBeam(double xOffset, double yOffset, double zOffset, VertexConsumer builder,
-                                 Matrix4f positionMatrix, Matrix3f matrixNormal, float thickness, Hand hand,
-                                 double distance, double v1, double v2, float ticks, float r, float g, float b,
-                                 float alpha){
-        Vec3f vec3f = new Vec3f(0.0f, 1.0f, 0.0f);
-        vec3f.transform(matrixNormal);
-        ClientPlayerEntity playerEntity = MinecraftClient.getInstance().player;
-        if (MinecraftClient.getInstance().options.mainArm != Arm.RIGHT)
-            hand = hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
-        float startXOffset = -0.25f;
-        float startYOffset = -0.115f;
-        float startZOffset = 0f;
-        if (playerEntity != null) {
-            startZOffset = 0.56f + (1 - 0.75f); //Needs to be Field of View??
-        }
-        if (hand == Hand.OFF_HAND){
-            startYOffset = -0.120f;
-            startXOffset = 0.25f;
-        }
-        float f = 0;
-        if (playerEntity != null){
-            f = (MathHelper.lerp(ticks, playerEntity.prevPitch, playerEntity.getPitch() - MathHelper.lerp(ticks,
-                    playerEntity.lastRenderPitch, playerEntity.renderPitch)));
-        }
-        float f1 = 0;
-        if (playerEntity != null){
-        f1 = (MathHelper.lerp(ticks, playerEntity.prevYaw, playerEntity.getYaw() - MathHelper.lerp(ticks,
-                playerEntity.lastRenderYaw, playerEntity.renderYaw)));
-        }
-        startXOffset = startXOffset + (f1 / 750);
-        startYOffset = startYOffset + (f / 750);
-
-        Vector4f vec1 = new Vector4f(startXOffset, -thickness + startYOffset, startZOffset, 1.0f);
-        vec1.transform(positionMatrix);
-        Vector4f vec2 = new Vector4f((float) xOffset, -thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
-        vec2.transform(positionMatrix);
-        Vector4f vec3 = new Vector4f((float) xOffset, thickness + (float) yOffset, (float) distance + (float) zOffset, 1.0f);
-        vec3.transform(positionMatrix);
-        Vector4f vec4 = new Vector4f(startXOffset, thickness + startYOffset, startZOffset, 1.0f);
-        vec4.transform(positionMatrix);
-
-        if (hand == Hand.MAIN_HAND){
-            builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-        } else {
-            builder.vertex(vec1.getX(), vec1.getY(), vec1.getZ(), r, g, b, alpha, 1, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec2.getX(), vec2.getY(), vec2.getZ(), r, g, b, alpha, 1, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec3.getX(), vec3.getY(), vec3.getZ(), r, g, b, alpha, 0, (float) v2, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-            builder.vertex(vec4.getX(), vec4.getY(), vec4.getZ(), r, g, b, alpha, 0, (float) v1, OverlayTexture.DEFAULT_UV, 15728880, vec3f.getX(), vec3f.getY(), vec3f.getZ());
-        }
+    public void renderConsumer(VertexConsumer vertexConsumer, Matrix4f matrix4f, Matrix3f matrix3f, float f, float g, float h, int i, int j, int k, float l, float m) {
+        vertexConsumer.vertex(matrix4f, f, g, h).color(i, j, k, 128).texture(l, m).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(matrix3f, 0.0F, 1.0F, 0.0F).next();
     }
 }
+*/

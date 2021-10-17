@@ -173,12 +173,12 @@ public class ArtefactsInit {
                 case POWERSHAKER:
                     item = new PowershakerItem(artefactID);
                     break;
-                case SATCHEL_OF_ELIXIRS:
-                    item = new SatchelOfElixirsItem(artefactID);
-                    break;
-                case SATCHEL_OF_SNACKS:
-                    item = new SatchelOfSnacksItem(artefactID);
-                    break;
+                //case SATCHEL_OF_ELIXIRS:
+                //    item = new SatchelOfElixirsItem(artefactID);
+                //    break;
+                //case SATCHEL_OF_SNACKS:
+                //    item = new SatchelOfSnacksItem(artefactID);
+                //    break;
                 case SOUL_HEALER:
                     item = new SoulHealerItem(artefactID);
                     break;
