@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.mixin;
 
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
+import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.EnumMap;
+
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
 
@@ -25,10 +28,12 @@ public abstract class BowItemMixin {
                                             CallbackInfo ci, PlayerEntity playerEntity, boolean bl,
                                             ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity){
         ItemStack offhand = user.getOffHandStack();
-        if (user instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER).asItem()){
-            float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
-            if (effectTimer > 0){
-                ProjectileEffectHelper.flamingQuiverArrow(persistentProjectileEntity);
+        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)){
+            if (user instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER).asItem()) {
+                float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+                if (effectTimer > 0) {
+                    ProjectileEffectHelper.flamingQuiverArrow(persistentProjectileEntity);
+                }
             }
         }
     }

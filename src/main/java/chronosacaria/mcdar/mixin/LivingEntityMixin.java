@@ -4,8 +4,10 @@ import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.api.interfaces.Summonable;
+import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
+import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.ArtefactsInit;
 import chronosacaria.mcdar.init.EnchantsRegistry;
 import chronosacaria.mcdar.init.StatusEffectInit;
@@ -78,19 +80,27 @@ public abstract class LivingEntityMixin {
 
         ItemStack offhand = user.getOffHandStack();
 
-        if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()) {
-            if (((PlayerEntity) user).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && user.getRandom().nextFloat() <= 0.2F) {
-                target.world.playSound(
-                        null,
-                        target.getX(),
-                        target.getY(),
-                        target.getZ(),
-                        SoundEvents.ENTITY_GENERIC_EXPLODE,
-                        SoundCategory.PLAYERS,
-                        0.5F,
-                        1.0F);
-                AOECloudHelper.spawnExplosionCloud(user, target, 3.0F);
-                AOEHelper.causeExplosion(user, target, target.getMaxHealth() * 0.2F, 3.0F);
+        if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER)){
+
+            // Temporary way to stop crash with Industrial Revolution Slaughter Block
+            if (user.getEntityName().equals("slaughter")) {
+                return;
+            }
+
+            if (user instanceof PlayerEntity && target instanceof LivingEntity && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()) {
+                if (((PlayerEntity) user).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && user.getRandom().nextFloat() <= 0.2F) {
+                    target.world.playSound(
+                            null,
+                            target.getX(),
+                            target.getY(),
+                            target.getZ(),
+                            SoundEvents.ENTITY_GENERIC_EXPLODE,
+                            SoundCategory.PLAYERS,
+                            0.5F,
+                            1.0F);
+                    AOECloudHelper.spawnExplosionCloud(user, target, 3.0F);
+                    AOEHelper.causeExplosion(user, target, target.getMaxHealth() * 0.2F, 3.0F);
+                }
             }
         }
     }
