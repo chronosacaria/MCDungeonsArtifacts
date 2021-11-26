@@ -54,7 +54,7 @@ public class FollowGolemSummonerGoal extends Goal {
     }
 
     public void tick(){
-        this.golemKitGolemEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.golemKitGolemEntity.getLookPitchSpeed());
+        this.golemKitGolemEntity.getLookControl().lookAt(this.summoner,10.0F, (float) this.golemKitGolemEntity.getMaxLookPitchChange());
         if (--this.countdownTicks <= 0){
             this.countdownTicks = 10;
             if (!this.golemKitGolemEntity.hasVehicle()){

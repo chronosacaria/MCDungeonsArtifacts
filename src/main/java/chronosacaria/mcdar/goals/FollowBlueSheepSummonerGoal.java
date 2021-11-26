@@ -57,7 +57,8 @@ public class FollowBlueSheepSummonerGoal extends Goal {
     }
 
     public void tick() {
-        this.enchantedGrassBlueSheepEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.enchantedGrassBlueSheepEntity.getLookPitchSpeed());
+        this.enchantedGrassBlueSheepEntity.getLookControl().lookAt(this.summoner, 10.0F,
+                (float) this.enchantedGrassBlueSheepEntity.getMaxLookPitchChange());
         if (--this.countdownTicks <= 0) {
             this.countdownTicks = 10;
             if (!this.enchantedGrassBlueSheepEntity.hasVehicle()) {

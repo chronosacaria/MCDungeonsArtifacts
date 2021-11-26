@@ -58,7 +58,7 @@ public class FollowLlamaSummonerGoal extends Goal {
     }
 
     public void tick() {
-        this.wonderfulWheatLlamaEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.wonderfulWheatLlamaEntity.getLookPitchSpeed());
+        this.wonderfulWheatLlamaEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.wonderfulWheatLlamaEntity.getMaxLookPitchChange());
         if (--this.countdownTicks <= 0) {
             this.countdownTicks = 10;
             if (!this.wonderfulWheatLlamaEntity.hasVehicle()) {

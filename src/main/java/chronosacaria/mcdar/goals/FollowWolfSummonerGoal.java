@@ -61,7 +61,7 @@ public class FollowWolfSummonerGoal extends Goal {
     }
 
     public void tick() {
-        this.tastyBoneWolfEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.tastyBoneWolfEntity.getLookPitchSpeed());
+        this.tastyBoneWolfEntity.getLookControl().lookAt(this.summoner, 10.0F, (float) this.tastyBoneWolfEntity.getMaxLookPitchChange());
         if (--this.countdownTicks <= 0) {
             this.countdownTicks = 10;
             if (!this.tastyBoneWolfEntity.hasVehicle()) {
