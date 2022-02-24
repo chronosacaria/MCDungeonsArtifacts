@@ -58,6 +58,10 @@ java {
     withSourcesJar()
 }
 
+loom {
+    accessWidenerPath.set(file("src/main/resources/mcdar.accesswidener"))
+}
+
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}

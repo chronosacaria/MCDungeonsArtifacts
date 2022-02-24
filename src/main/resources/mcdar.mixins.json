@@ -9,7 +9,8 @@
     "LivingEntityMixin",
     "MobEntityMixin",
     "PersistentProjectileEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "invokers.RenderLayerInvoker"
   ],
   "client": [
   ],

@@ -2,6 +2,7 @@ package chronosacaria.mcdar.init;
 
 import chronosacaria.mcdar.artefacts.*;
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.artefacts.beacon.CorruptedBeaconItem;
 import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
@@ -31,9 +32,9 @@ public class ArtefactsInit {
                 case BLAST_FUNGUS:
                     item = new BlastFungusItem(artefactID);
                     break;
-                //case CORRUPTED_BEACON:
-                //    item = new CorruptedBeaconItem(artefactID);
-                //    break;
+                case CORRUPTED_BEACON:
+                    item = new CorruptedBeaconItem(artefactID);
+                    break;
                 case HARVESTER:
                     item = new HarvesterItem(artefactID);
                     break;
