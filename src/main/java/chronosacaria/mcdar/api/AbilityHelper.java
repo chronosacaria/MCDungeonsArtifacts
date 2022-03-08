@@ -2,9 +2,7 @@ package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.entities.*;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.HorseBaseEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

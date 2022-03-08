@@ -1,13 +1,10 @@
 package chronosacaria.mcdar.entities.renderers;
 
 import chronosacaria.mcdar.entities.GolemKitGolemEntity;
-import chronosacaria.mcdar.entities.TastyBoneWolfEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.IronGolemEntityModel;
-import net.minecraft.client.render.entity.model.WolfEntityModel;
 import net.minecraft.util.Identifier;
 
 public class GolemKitGolemRenderer extends MobEntityRenderer<GolemKitGolemEntity, IronGolemEntityModel<GolemKitGolemEntity>> {

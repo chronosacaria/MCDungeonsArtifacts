@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.init;
 
-import chronosacaria.mcdar.artefacts.*;
 import chronosacaria.mcdar.Mcdar;
+import chronosacaria.mcdar.artefacts.*;
 import chronosacaria.mcdar.artefacts.beacon.CorruptedBeaconItem;
 import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;

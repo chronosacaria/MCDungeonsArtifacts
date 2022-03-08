@@ -1,6 +1,5 @@
 package chronosacaria.mcdar.goals;
 
-import chronosacaria.mcdar.entities.GolemKitGolemEntity;
 import chronosacaria.mcdar.entities.WonderfulWheatLlamaEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;

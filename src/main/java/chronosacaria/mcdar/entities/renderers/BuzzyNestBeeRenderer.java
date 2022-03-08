@@ -3,12 +3,10 @@ package chronosacaria.mcdar.entities.renderers;
 import chronosacaria.mcdar.entities.BuzzyNestBeeEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.BeeEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)

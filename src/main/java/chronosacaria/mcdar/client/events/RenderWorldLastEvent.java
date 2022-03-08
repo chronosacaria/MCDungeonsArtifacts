@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.client.events;
+/*package chronosacaria.mcdar.client.events;
 
 import chronosacaria.mcdar.artefacts.beacon.AbstractBeaconItem;
 import chronosacaria.mcdar.artefacts.beacon.BeaconBeamRenderer;
@@ -20,3 +20,4 @@ public class RenderWorldLastEvent {
         BeaconBeamRenderer.renderBeam((RenderWorldLastEvent) event, playerEntity, MinecraftClient.getInstance().getLastFrameDuration());
     }
 }
+*/

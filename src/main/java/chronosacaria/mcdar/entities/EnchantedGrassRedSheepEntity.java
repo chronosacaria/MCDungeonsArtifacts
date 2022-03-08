@@ -1,9 +1,7 @@
 package chronosacaria.mcdar.entities;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
-import chronosacaria.mcdar.goals.FollowBlueSheepSummonerGoal;
 import chronosacaria.mcdar.goals.FollowRedSheepSummonerGoal;
-import chronosacaria.mcdar.goals.SheepAttackGoal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +13,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;

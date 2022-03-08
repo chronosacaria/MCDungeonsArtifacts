@@ -1,11 +1,8 @@
 package chronosacaria.mcdar.entities.renderers;
 
 import chronosacaria.mcdar.entities.EnchantedGrassBlueSheepEntity;
-import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.SheepWoolFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.SheepEntityModel;
 import net.minecraft.util.Identifier;

@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.artefacts.beacon;
+/*package chronosacaria.mcdar.artefacts.beacon;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.mixin.invokers.RenderLayerInvoker;
@@ -62,3 +62,4 @@ public class MyRenderType extends RenderLayer {
                     .build(false));
 
 }
+*/

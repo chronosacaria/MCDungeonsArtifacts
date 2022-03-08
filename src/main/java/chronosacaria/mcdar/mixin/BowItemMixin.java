@@ -17,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.EnumMap;
-
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
 

@@ -1,7 +1,5 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import chronosacaria.mcdar.init.EnchantsRegistry;
@@ -13,8 +11,10 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.*;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;

@@ -13,7 +13,6 @@
   "contact": {},
   "license": "MIT",
   "icon": "assets/mcdar/icon.png",
-  "accessWidener": "mcdar.accesswidener",
   "environment": "*",
   "entrypoints": {
     "client": [

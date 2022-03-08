@@ -1,8 +1,6 @@
 package chronosacaria.mcdar.goals;
 
 import chronosacaria.mcdar.entities.EnchantedGrassBlueSheepEntity;
-import chronosacaria.mcdar.entities.EnchantedGrassGreenSheepEntity;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;

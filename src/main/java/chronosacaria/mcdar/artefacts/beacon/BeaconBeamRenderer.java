@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.artefacts.beacon;
+/*package chronosacaria.mcdar.artefacts.beacon;
 
 import chronosacaria.mcdar.client.events.RenderWorldLastEvent;
 import net.minecraft.client.MinecraftClient;
@@ -68,3 +68,4 @@ public class BeaconBeamRenderer {
 
     }
 }
+*/

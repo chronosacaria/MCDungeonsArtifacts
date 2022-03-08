@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.mixin.invokers;
+/*package chronosacaria.mcdar.mixin.invokers;
 
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexFormat;
@@ -13,3 +13,4 @@ public interface RenderLayerInvoker {
         throw new AssertionError();
     }
 }
+*/
