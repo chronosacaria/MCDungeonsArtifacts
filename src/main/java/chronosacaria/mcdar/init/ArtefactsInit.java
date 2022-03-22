@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
 import java.util.EnumMap;
+import java.util.Locale;
 
 import static chronosacaria.mcdar.config.McdarConfig.config;
 
@@ -32,9 +33,9 @@ public class ArtefactsInit {
                 case BLAST_FUNGUS:
                     item = new BlastFungusItem(artefactID);
                     break;
-                case CORRUPTED_BEACON:
-                    item = new CorruptedBeaconItem(artefactID);
-                    break;
+                //case CORRUPTED_BEACON:
+                //    item = new CorruptedBeaconItem(artefactID);
+                //    break;
                 case HARVESTER:
                     item = new HarvesterItem(artefactID);
                     break;
@@ -49,7 +50,7 @@ public class ArtefactsInit {
                     break;
             }
             damagingArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (StatusInflictingArtefactID artefactID : StatusInflictingArtefactID.values()) {
             if (!config.enableStatusInflictingArtefact.get(artefactID))
@@ -75,7 +76,7 @@ public class ArtefactsInit {
                     break;
             }
             statusInflictingArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (QuiverArtefactID artefactID : QuiverArtefactID.values()) {
             if (!config.enableQuiverArtefact.get(artefactID))
@@ -101,7 +102,7 @@ public class ArtefactsInit {
                     break;
             }
             quiverArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (SummoningArtefactID artefactID : SummoningArtefactID.values()) {
             if (!config.enableSummoningArtefact.get(artefactID))
@@ -130,7 +131,7 @@ public class ArtefactsInit {
                     break;
             }
             summoningArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (AgilityArtefactID artefactID : AgilityArtefactID.values()) {
             if (!config.enableAgilityArtefact.get(artefactID))
@@ -156,7 +157,7 @@ public class ArtefactsInit {
                     break;
             }
             agilityArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (DefenciveArtefactID artefactID : DefenciveArtefactID.values()) {
             if (!config.enableDefenciveArtefact.get(artefactID))
@@ -200,7 +201,7 @@ public class ArtefactsInit {
                     break;
             }
             defenciveArtefact.put(artefactID, item);
-            registerArtefacts(artefactID.toString().toLowerCase(), item);
+            registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
     }
 

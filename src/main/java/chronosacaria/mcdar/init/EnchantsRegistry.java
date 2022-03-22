@@ -8,6 +8,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.registry.Registry;
 
 import java.util.EnumMap;
+import java.util.Locale;
 
 public class EnchantsRegistry {
     public static final EnumMap<EnchantID, Enchantment> enchants = new EnumMap<>(EnchantID.class);
@@ -20,7 +21,7 @@ public class EnchantsRegistry {
             Enchantment enchantment = new ArmourEnchantment(enchantID);
 
             enchants.put(enchantID, enchantment);
-            registerEnchant(enchantID.toString().toLowerCase(), enchantment);
+            registerEnchant(enchantID.toString().toLowerCase(Locale.ROOT), enchantment);
         }
     }
 
