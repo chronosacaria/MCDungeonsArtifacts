@@ -1,10 +1,8 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enums.AgilityArtefactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,13 +32,8 @@ public class DeathCapMushroomItem extends ArtefactAgilityItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                user);
-        if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 600));
-        } else {
-            user.getItemCooldownManager().set(this, 600);
-        }
+        CleanlinessHelper.cooldownHelper(user, this, 600);
+
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

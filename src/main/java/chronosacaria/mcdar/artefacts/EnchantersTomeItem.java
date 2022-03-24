@@ -1,11 +1,9 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -30,13 +28,8 @@ public class EnchantersTomeItem extends ArtefactDefenciveItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                user);
-        if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 100));
-        } else {
-            user.getItemCooldownManager().set(this, 100);
-        }
+        CleanlinessHelper.cooldownHelper(user, this, 100);
+
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

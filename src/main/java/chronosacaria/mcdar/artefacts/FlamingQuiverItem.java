@@ -30,11 +30,8 @@ public class FlamingQuiverItem extends ArtefactQuiverItem{
         }
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
-        if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, cooldownLevel * 500);
-        } else {
-            user.getItemCooldownManager().set(this, 500);
-        }
+        user.getItemCooldownManager().set(this, (cooldownLevel + 1) * 500);
+
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

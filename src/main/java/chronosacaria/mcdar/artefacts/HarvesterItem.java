@@ -2,11 +2,9 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -41,13 +39,7 @@ public class HarvesterItem extends ArtefactDamagingItem{
             if (!user.isCreative()){
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                    user);
-            if (cooldownLevel > 0) {
-                user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 60));
-            } else {
-                user.getItemCooldownManager().set(this, 60);
-            }
+            CleanlinessHelper.cooldownHelper(user, this, 60);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
