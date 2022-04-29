@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,7 +34,7 @@ public class SatchelOfElementsItem extends ArtefactStatusInflictingItem{
             if (!user.isCreative()){
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            CleanlinessHelper.cooldownHelper(user, this, 60);
+            EnchantmentHelper.cooldownHelper(user, this, 60);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

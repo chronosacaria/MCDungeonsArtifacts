@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,7 +26,7 @@ public class PowershakerItem extends ArtefactDefenciveItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        CleanlinessHelper.cooldownHelper(user, this, 600);
+        EnchantmentHelper.cooldownHelper(user, this, 600);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

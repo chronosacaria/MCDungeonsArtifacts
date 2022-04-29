@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.AgilityArtefactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
@@ -62,7 +62,7 @@ public class LightFeatherItem extends ArtefactAgilityItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        CleanlinessHelper.cooldownHelper(user, this, 120);
+        EnchantmentHelper.cooldownHelper(user, this, 120);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +33,7 @@ public class BlastFungusItem extends ArtefactDamagingItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        CleanlinessHelper.cooldownHelper(user, this, 120);
+        EnchantmentHelper.cooldownHelper(user, this, 120);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

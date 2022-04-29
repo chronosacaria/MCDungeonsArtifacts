@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +49,7 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
                         user.addExperience((int)(-healedAmount));
                         itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
                     }
-                    CleanlinessHelper.cooldownHelper(user, this, 60);
+                    EnchantmentHelper.cooldownHelper(user, this, 60);
                 }
             }
         }

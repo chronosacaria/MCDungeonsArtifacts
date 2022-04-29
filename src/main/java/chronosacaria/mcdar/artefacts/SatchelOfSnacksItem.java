@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AbilityHelper;
-import chronosacaria.mcdar.api.CleanlinessHelper;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
@@ -35,7 +35,7 @@ public class SatchelOfSnacksItem extends ArtefactDefenciveItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        CleanlinessHelper.cooldownHelper(user, this, 400);
+        EnchantmentHelper.cooldownHelper(user, this, 400);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
