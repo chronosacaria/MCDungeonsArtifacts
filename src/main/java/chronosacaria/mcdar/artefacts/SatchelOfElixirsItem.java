@@ -1,11 +1,9 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AbilityHelper;
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -36,13 +34,7 @@ public class SatchelOfElixirsItem extends ArtefactDefenciveItem{
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
-        int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                user);
-        if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 400));
-        } else {
-            user.getItemCooldownManager().set(this, 400);
-        }
+        EnchantmentHelper.cooldownHelper(user, this, 400);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

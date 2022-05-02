@@ -49,18 +49,20 @@ public class ArtifactEffects {
     }
 
     public static float beastBossDamage(Summonable summonedEntity, ServerWorld serverWorld) {
-        UUID summonerUUID = summonedEntity.getSummoner().getUuid();
-        if (summonerUUID != null) {
-            Entity beastOwner = serverWorld.getEntity(summonerUUID);
-            if (beastOwner instanceof LivingEntity beastOwnerAsLiving) {
-                int beastBossLevel =
-                        EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BOSS),
-                                beastOwnerAsLiving);
-                if (beastBossLevel > 0) {
-                    return 1.1F + (0.1F * beastBossLevel);
+       if (summonedEntity.getSummoner() != null) {
+            UUID summonerUUID = summonedEntity.getSummoner().getUuid();
+            if (summonerUUID != null) {
+                Entity beastOwner = serverWorld.getEntity(summonerUUID);
+                if (beastOwner instanceof LivingEntity beastOwnerAsLiving) {
+                    int beastBossLevel =
+                            EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BOSS),
+                                    beastOwnerAsLiving);
+                    if (beastBossLevel > 0) {
+                        return 1.1F + (0.1F * beastBossLevel);
+                    }
                 }
             }
-        }
+       }
         return 1f;
     }
 

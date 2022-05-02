@@ -30,11 +30,8 @@ public class HarpoonQuiverItem extends ArtefactQuiverItem{
         }
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
-        if (cooldownLevel > 0) {
-            user.getItemCooldownManager().set(this, (600 * cooldownLevel));
-        } else {
-            user.getItemCooldownManager().set(this, 600);
-        }
+        user.getItemCooldownManager().set(this, 600 * (cooldownLevel + 1));
+
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

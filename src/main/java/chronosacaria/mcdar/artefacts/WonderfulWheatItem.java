@@ -1,10 +1,8 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -39,13 +37,7 @@ public class WonderfulWheatItem extends ArtefactSummoningItem{
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
                 }
-                int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                        itemUsageContextPlayer);
-                if (cooldownLevel > 0) {
-                    itemUsageContextPlayer.getItemCooldownManager().set(this, (int) ((cooldownLevel * 0.1) * 600));
-                } else {
-                    itemUsageContextPlayer.getItemCooldownManager().set(this, 600);
-                }
+                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
             }
         }
         return ActionResult.CONSUME;

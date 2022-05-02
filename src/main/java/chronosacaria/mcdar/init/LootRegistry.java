@@ -63,6 +63,9 @@ public class LootRegistry {
                 if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
                     addArtefact(poolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.config.getIllagerArtefactSpawnRate());
                 }
+                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
+                    addArtefact(poolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.config.getIllagerArtefactSpawnRate());
+                }
                 if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
                     addArtefact(poolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.config.getIllagerArtefactSpawnRate());
                 }
@@ -152,6 +155,9 @@ public class LootRegistry {
                 }
                 if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
                     addArtefact(poolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.config.getDungeonArtefactSpawnRate());
+                }
+                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
+                    addArtefact(poolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.config.getIllagerArtefactSpawnRate());
                 }
                 if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
                     addArtefact(poolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.config.getDungeonArtefactSpawnRate());

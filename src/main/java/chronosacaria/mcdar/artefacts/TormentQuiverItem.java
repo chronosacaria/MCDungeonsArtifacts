@@ -25,18 +25,13 @@ public class TormentQuiverItem extends ArtefactQuiverItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         if (user.totalExperience >= 20 || user.isCreative()){
-            user.addExperience((-20));
+            user.addExperience(-20);
             int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                     user);
-            if (cooldownLevel > 0) {
-                user.getItemCooldownManager().set(this, (600 * cooldownLevel));
-            } else {
-                user.getItemCooldownManager().set(this, 600);
+            user.getItemCooldownManager().set(this, 600 * (cooldownLevel + 1));
+            if (!user.isCreative()){
+                itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-        }
-
-        if (!user.isCreative()){
-            itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
