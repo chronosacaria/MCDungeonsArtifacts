@@ -7,7 +7,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -36,7 +35,7 @@ public class ShockPowderItem extends ArtefactStatusInflictingItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.shock_powder_1").formatted(Formatting.ITALIC));
-        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.shock_powder_2").formatted(Formatting.ITALIC));
+        tooltip.add(Text.translatable("tooltip_info_item.mcdar.shock_powder_1").formatted(Formatting.ITALIC));
+        tooltip.add(Text.translatable("tooltip_info_item.mcdar.shock_powder_2").formatted(Formatting.ITALIC));
     }
 }

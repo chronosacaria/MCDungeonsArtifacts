@@ -38,7 +38,7 @@ public abstract class PersistentProjectileEntityMixin {
         }
     }
 
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onThunderingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
         Entity entity = entityHitResult.getEntity();
@@ -59,7 +59,7 @@ public abstract class PersistentProjectileEntityMixin {
         }
     }
 
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onTormentingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
         Entity entity = entityHitResult.getEntity();

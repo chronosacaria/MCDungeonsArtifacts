@@ -6,6 +6,7 @@
   "description": "Bringing the artefacts of Minecraft Dungeons to Minecraft",
   "authors": [
     "Chronosacaria",
+    "Kluzzio",
     "SeaOfPixels (Art)",
     "SattesKrokodil (Art)",
     "Patreons (Support)"
@@ -29,6 +30,6 @@
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.18.x"
+    "minecraft": "1.19.x"
   }
 }

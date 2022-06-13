@@ -8,7 +8,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -40,8 +39,8 @@ public class GhostCloakItem extends ArtefactAgilityItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.ghost_cloak_1").formatted(Formatting.ITALIC));
-        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.ghost_cloak_2").formatted(Formatting.ITALIC));
-        tooltip.add(new TranslatableText("tooltip_info_item.mcdar.ghost_cloak_3").formatted(Formatting.ITALIC));
+        tooltip.add(Text.translatable("tooltip_info_item.mcdar.ghost_cloak_1").formatted(Formatting.ITALIC));
+        tooltip.add(Text.translatable("tooltip_info_item.mcdar.ghost_cloak_2").formatted(Formatting.ITALIC));
+        tooltip.add(Text.translatable("tooltip_info_item.mcdar.ghost_cloak_3").formatted(Formatting.ITALIC));
     }
 }
