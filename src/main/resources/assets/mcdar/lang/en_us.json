@@ -18,6 +18,7 @@
   "item.mcdar.iron_hide_amulet":          "Iron Hide Amulet",
   "item.mcdar.light_feather":             "Light Feather",
   "item.mcdar.lightning_rod":             "Lightning Rod",
+  "item.mcdar.love_medallion":            "Love Medallion",
   "item.mcdar.powershaker":               "Powershaker",
   "item.mcdar.satchel_of_elements":       "Satchel of Elements",
   "item.mcdar.satchel_of_elixirs":        "Satchel of Elixirs",
@@ -118,6 +119,11 @@
   "tooltip_info_item.mcdar.lightning_rod_1":              "Crafted by Illager Geomancers, this",
   "tooltip_info_item.mcdar.lightning_rod_2":              "item is enchanted with the power of",
   "tooltip_info_item.mcdar.lightning_rod_3":              "a storming sky.",
+
+  "tooltip_info_item.mcdar.love_medallion_1":             "A spell radiates from this trinket,",
+  "tooltip_info_item.mcdar.love_medallion_2":             "enchanting those nearby into a trance",
+  "tooltip_info_item.mcdar.love_medallion_3":             "where they must protect the holder of",
+  "tooltip_info_item.mcdar.love_medallion_4":             "the, medallion at all costs.",
 
   "tooltip_info_item.mcdar.powershaker_1":                "The Powershaker is a smashing good",
   "tooltip_info_item.mcdar.powershaker_2":                "time, though it may not be as fun",

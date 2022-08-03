@@ -16,8 +16,7 @@ public class ArtefactStatusInflictingItem extends Item {
         this.id = id;
     }
 
-
-        public Rarity getRarity(ItemStack stack) {
+    public Rarity getRarity(ItemStack stack) {
         return Rarity.RARE;
     }
 }

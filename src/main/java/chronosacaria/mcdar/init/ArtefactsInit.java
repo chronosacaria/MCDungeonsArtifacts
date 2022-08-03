@@ -27,28 +27,18 @@ public class ArtefactsInit {
             if (!config.enableDamagingArtefact.get(artefactID))
                 continue;
 
-            Item item;
-
-            switch (artefactID) {
-                case BLAST_FUNGUS:
-                    item = new BlastFungusItem(artefactID);
-                    break;
+            Item item = switch (artefactID) {
+                case BLAST_FUNGUS -> new BlastFungusItem(artefactID);
                 //case CORRUPTED_BEACON:
                 //    item = new CorruptedBeaconItem(artefactID);
                 //    break;
-                case HARVESTER:
-                    item = new HarvesterItem(artefactID);
-                    break;
-                case LIGHTNING_ROD:
-                    item = new LightningRodItem(artefactID);
-                    break;
-                case UPDRAFT_TOME:
-                    item = new UpdraftTomeItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactDamagingItem(artefactID);
-                    break;
-            }
+                case HARVESTER -> new HarvesterItem(artefactID);
+                case LIGHTNING_ROD -> new LightningRodItem(artefactID);
+                case UPDRAFT_TOME -> new UpdraftTomeItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactDamagingItem(artefactID);
+            };
+
             damagingArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
@@ -56,25 +46,16 @@ public class ArtefactsInit {
             if (!config.enableStatusInflictingArtefact.get(artefactID))
                 continue;
 
-            Item item;
+            Item item = switch (artefactID) {
+                case CORRUPTED_SEEDS -> new CorruptedSeedsItem(artefactID);
+                case GONG_OF_WEAKENING -> new GongOfWeakeningItem(artefactID);
+                case LOVE_MEDALLION -> new LoveMedallionItem(artefactID);
+                case SATCHEL_OF_ELEMENTS -> new SatchelOfElementsItem(artefactID);
+                case SHOCK_POWDER -> new ShockPowderItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactStatusInflictingItem(artefactID);
+            };
 
-            switch (artefactID) {
-                case CORRUPTED_SEEDS:
-                    item = new CorruptedSeedsItem(artefactID);
-                    break;
-                case GONG_OF_WEAKENING:
-                    item = new GongOfWeakeningItem(artefactID);
-                    break;
-                case SATCHEL_OF_ELEMENTS:
-                    item = new SatchelOfElementsItem(artefactID);
-                    break;
-                case SHOCK_POWDER:
-                    item = new ShockPowderItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactStatusInflictingItem(artefactID);
-                    break;
-            }
             statusInflictingArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
@@ -82,25 +63,15 @@ public class ArtefactsInit {
             if (!config.enableQuiverArtefact.get(artefactID))
                 continue;
 
-            Item item;
+            Item item = switch (artefactID) {
+                case FLAMING_QUIVER -> new FlamingQuiverItem(artefactID);
+                case HARPOON_QUIVER -> new HarpoonQuiverItem(artefactID);
+                case THUNDERING_QUIVER -> new ThunderingQuiverItem(artefactID);
+                case TORMENT_QUIVER -> new TormentQuiverItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactQuiverItem(artefactID);
+            };
 
-            switch (artefactID) {
-                case FLAMING_QUIVER:
-                    item = new FlamingQuiverItem(artefactID);
-                    break;
-                case HARPOON_QUIVER:
-                    item = new HarpoonQuiverItem(artefactID);
-                    break;
-                case THUNDERING_QUIVER:
-                    item = new ThunderingQuiverItem(artefactID);
-                    break;
-                case TORMENT_QUIVER:
-                    item = new TormentQuiverItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactQuiverItem(artefactID);
-                    break;
-            }
             quiverArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
@@ -108,28 +79,16 @@ public class ArtefactsInit {
             if (!config.enableSummoningArtefact.get(artefactID))
                 continue;
 
-            Item item;
+            Item item = switch (artefactID) {
+                case BUZZY_NEST -> new BuzzyNestItem(artefactID);
+                case ENCHANTED_GRASS -> new EnchantedGrassItem(artefactID);
+                case GOLEM_KIT -> new GolemKitItem(artefactID);
+                case TASTY_BONE -> new TastyBoneItem(artefactID);
+                case WONDERFUL_WHEAT -> new WonderfulWheatItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactSummoningItem(artefactID);
+            };
 
-            switch (artefactID) {
-                case BUZZY_NEST:
-                    item = new BuzzyNestItem(artefactID);
-                    break;
-                case ENCHANTED_GRASS:
-                    item = new EnchantedGrassItem(artefactID);
-                    break;
-                case GOLEM_KIT:
-                    item = new GolemKitItem(artefactID);
-                    break;
-                case TASTY_BONE:
-                    item = new TastyBoneItem(artefactID);
-                    break;
-                case WONDERFUL_WHEAT:
-                    item = new WonderfulWheatItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactSummoningItem(artefactID);
-                    break;
-            }
             summoningArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
@@ -137,25 +96,15 @@ public class ArtefactsInit {
             if (!config.enableAgilityArtefact.get(artefactID))
                 continue;
 
-            Item item;
+            Item item = switch (artefactID) {
+                case BOOTS_OF_SWIFTNESS -> new BootsOfSwiftnessItem(artefactID);
+                case DEATH_CAP_MUSHROOM -> new DeathCapMushroomItem(artefactID);
+                case GHOST_CLOAK -> new GhostCloakItem(artefactID);
+                case LIGHT_FEATHER -> new LightFeatherItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactAgilityItem(artefactID);
+            };
 
-            switch (artefactID) {
-                case BOOTS_OF_SWIFTNESS:
-                    item = new BootsOfSwiftnessItem(artefactID);
-                    break;
-                case DEATH_CAP_MUSHROOM:
-                    item = new DeathCapMushroomItem(artefactID);
-                    break;
-                case GHOST_CLOAK:
-                    item = new GhostCloakItem(artefactID);
-                    break;
-                case LIGHT_FEATHER:
-                    item = new LightFeatherItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactAgilityItem(artefactID);
-                    break;
-            }
             agilityArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
@@ -163,43 +112,25 @@ public class ArtefactsInit {
             if (!config.enableDefenciveArtefact.get(artefactID))
                 continue;
 
-            Item item;
-
-            switch (artefactID) {
-                case ENCHANTERS_TOME:
-                    item = new EnchantersTomeItem(artefactID);
-                    break;
-                case IRON_HIDE_AMULET:
-                    item = new IronHideAmuletItem(artefactID);
-                    break;
-                case POWERSHAKER:
-                    item = new PowershakerItem(artefactID);
-                    break;
+            Item item = switch (artefactID) {
+                case ENCHANTERS_TOME -> new EnchantersTomeItem(artefactID);
+                case IRON_HIDE_AMULET -> new IronHideAmuletItem(artefactID);
+                case POWERSHAKER -> new PowershakerItem(artefactID);
                 //case SATCHEL_OF_ELIXIRS:
                 //    item = new SatchelOfElixirsItem(artefactID);
                 //    break;
                 //case SATCHEL_OF_SNACKS:
                 //    item = new SatchelOfSnacksItem(artefactID);
                 //    break;
-                case SOUL_HEALER:
-                    item = new SoulHealerItem(artefactID);
-                    break;
-                case TOTEM_OF_REGENERATION:
-                    item = new TotemOfRegenerationItem(artefactID);
-                    break;
-                case TOTEM_OF_SHIELDING:
-                    item = new TotemOfShieldingItem(artefactID);
-                    break;
-                case TOTEM_OF_SOUL_PROTECTION:
-                    item = new TotemOfSoulProtectionItem(artefactID);
-                    break;
-                case WIND_HORN:
-                    item = new WindHornItem(artefactID);
-                    break;
-                default:
-                    item = new ArtefactDefenciveItem(artefactID);
-                    break;
-            }
+                case SOUL_HEALER -> new SoulHealerItem(artefactID);
+                case TOTEM_OF_REGENERATION -> new TotemOfRegenerationItem(artefactID);
+                case TOTEM_OF_SHIELDING -> new TotemOfShieldingItem(artefactID);
+                case TOTEM_OF_SOUL_PROTECTION -> new TotemOfSoulProtectionItem(artefactID);
+                case WIND_HORN -> new WindHornItem(artefactID);
+                //noinspection UnnecessaryDefault
+                default -> new ArtefactDefenciveItem(artefactID);
+            };
+
             defenciveArtefact.put(artefactID, item);
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }

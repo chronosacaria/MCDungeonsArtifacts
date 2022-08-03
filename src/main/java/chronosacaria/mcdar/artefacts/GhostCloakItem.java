@@ -25,7 +25,6 @@ public class GhostCloakItem extends ArtefactAgilityItem{
         ItemStack itemStack = user.getStackInHand(hand);
 
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 60));
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 60));
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 60, 3));
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 60));
 
