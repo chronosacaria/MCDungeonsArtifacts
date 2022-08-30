@@ -18,6 +18,7 @@
   "item.mcdar.iron_hide_amulet":          "Амулет железной крепости",
   "item.mcdar.light_feather":             "Лёгкое перо",
   "item.mcdar.lightning_rod":             "Жезл молний",
+  "item.mcdar.love_medallion":            "Медальон Любви",
   "item.mcdar.powershaker":               "Громыхалка",
   "item.mcdar.satchel_of_elements":       "Сумка стихий",
   "item.mcdar.shock_powder":              "Шокирующий порошок",
@@ -116,6 +117,11 @@
   "tooltip_info_item.mcdar.lightning_rod_1":              "Создано Разбойниками Некромантами, этот",
   "tooltip_info_item.mcdar.lightning_rod_2":              "предмет зачарован силой",
   "tooltip_info_item.mcdar.lightning_rod_3":              "громового неба.",
+
+  "tooltip_info_item.mcdar.love_medallion_1":             "Заклинание исходит от этой безделушки,",
+  "tooltip_info_item.mcdar.love_medallion_2":             "зачаровывая окружающих в транс,",
+  "tooltip_info_item.mcdar.love_medallion_3":             "где они должны защищать владельца",
+  "tooltip_info_item.mcdar.love_medallion_4":             "медальона любой ценой.",
 
   "tooltip_info_item.mcdar.powershaker_1":                "Громыхалка это чертовски хорошее",
   "tooltip_info_item.mcdar.powershaker_2":                "время, не для ваших врагов,",

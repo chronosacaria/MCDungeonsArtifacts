@@ -18,6 +18,7 @@
   "item.mcdar.iron_hide_amulet":          "铁皮护身符",
   "item.mcdar.light_feather":             "浮流之羽",
   "item.mcdar.lightning_rod":             "雷霆法杖",
+  "item.mcdar.love_medallion":            "迷情挂坠",
   "item.mcdar.powershaker":               "巨力沙锤",
   "item.mcdar.satchel_of_elements":       "元素背袋",
   "item.mcdar.satchel_of_elixirs":        "药水背袋",
@@ -44,6 +45,11 @@
   "enchantment.mcdar.beast_burst":        "万兽之烈",
   "enchantment.mcdar.beast_surge":        "万兽之力",
   "enchantment.mcdar.cooldown":           "冷却",
+
+  "enchantment.mcdar.beast_boss.desc":    "你的宠物会造成更多伤害。",
+  "enchantment.mcdar.beast_burst.desc":   "使用治疗药水会在宠物所在处造成爆炸，造成范围伤害。",
+  "enchantment.mcdar.beast_surge.desc":   "使用治疗药水会提升宠物攻击速度和移动速度10秒。",
+  "enchantment.mcdar.cooldown.desc":      "减少法器冷却时间。",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "只有最勇敢的武士才敢",
   "tooltip_info_item.mcdar.blast_fungus_2":               "携带此物。不仅因为其",
@@ -118,6 +124,11 @@
   "tooltip_info_item.mcdar.lightning_rod_1":              "由灾厄村民中的地卜师",
   "tooltip_info_item.mcdar.lightning_rod_2":              "制作而成，附魔了天空",
   "tooltip_info_item.mcdar.lightning_rod_3":              "中雷暴的力量。",
+
+  "tooltip_info_item.mcdar.love_medallion_1":             "一个咒语从这个小饰物中放射",
+  "tooltip_info_item.mcdar.love_medallion_2":             "出来，并迷惑住附近的人，让",
+  "tooltip_info_item.mcdar.love_medallion_3":             "他们必须不惜一切代价保护这个",
+  "tooltip_info_item.mcdar.love_medallion_4":             "挂坠的持有者。",
 
   "tooltip_info_item.mcdar.powershaker_1":                "摇晃巨力沙锤能给你带来",
   "tooltip_info_item.mcdar.powershaker_2":                "一段美好时光，不过对于敌人",

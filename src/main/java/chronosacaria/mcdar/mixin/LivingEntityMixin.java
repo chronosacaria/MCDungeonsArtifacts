@@ -84,4 +84,8 @@ public class LivingEntityMixin {
                 ArtifactEffects.activateBeastSurge(player);
         }
     }
+
+    public boolean isMobNotPlayer(LivingEntity livingEntity) {
+        return !(livingEntity instanceof PlayerEntity);
+    }
 }
