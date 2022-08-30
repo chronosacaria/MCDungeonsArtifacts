@@ -45,11 +45,11 @@
   "enchantment.mcdar.beast_burst":        "Beast Burst",
   "enchantment.mcdar.beast_surge":        "Beast Surge",
   "enchantment.mcdar.cooldown":           "Cooldown",
-  
-  "enchantment.mcdar.beast_boss.desc":    "Increases the damage dealt by summoned creatures.",
-  "enchantment.mcdar.beast_burst.desc":   "Drinking a health potion will cause summoned creatures to emit an explosion.",
-  "enchantment.mcdar.beast_surge.desc":   "Drinking a health potion will cause give summoned creatures a speed and strength boost.",
-  "enchantment.mcdar.cooldown.desc":      "Reduces the artefact cooldown timer.",
+
+  "enchantment.mcdar.beast_boss.desc":    "Increases the amount of damage your pets deal.",
+  "enchantment.mcdar.beast_burst.desc":   "Using a healing potion causes an explosion at your pets' locations, dealing damage to mobs around them.",
+  "enchantment.mcdar.beast_surge.desc":   "Using your health potion boosts your pets' attack and movement speed for 10 seconds.",
+  "enchantment.mcdar.cooldown.desc":      "Artifact cooldowns are decreased.",
 
   "tooltip_info_item.mcdar.blast_fungus_1":               "Only the bravest of warriors carry",
   "tooltip_info_item.mcdar.blast_fungus_2":               "the Blast Fungus. Not just because",

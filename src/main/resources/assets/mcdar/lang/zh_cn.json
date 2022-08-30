@@ -46,6 +46,11 @@
   "enchantment.mcdar.beast_surge":        "万兽之力",
   "enchantment.mcdar.cooldown":           "冷却",
 
+  "enchantment.mcdar.beast_boss.desc":    "你的宠物会造成更多伤害。",
+  "enchantment.mcdar.beast_burst.desc":   "使用治疗药水会在宠物所在处造成爆炸，造成范围伤害。",
+  "enchantment.mcdar.beast_surge.desc":   "使用治疗药水会提升宠物攻击速度和移动速度10秒。",
+  "enchantment.mcdar.cooldown.desc":      "减少法器冷却时间。",
+
   "tooltip_info_item.mcdar.blast_fungus_1":               "只有最勇敢的武士才敢",
   "tooltip_info_item.mcdar.blast_fungus_2":               "携带此物。不仅因为其",
   "tooltip_info_item.mcdar.blast_fungus_3":               "孢子有毒，而且气味也",
