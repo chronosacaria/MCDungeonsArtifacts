@@ -2,7 +2,6 @@ package chronosacaria.mcdar.init;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.artefacts.*;
-import chronosacaria.mcdar.artefacts.beacon.CorruptedBeaconItem;
 import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
@@ -49,7 +48,7 @@ public class ArtefactsInit {
             Item item = switch (artefactID) {
                 case CORRUPTED_SEEDS -> new CorruptedSeedsItem(artefactID);
                 case GONG_OF_WEAKENING -> new GongOfWeakeningItem(artefactID);
-                case LOVE_MEDALLION -> new LoveMedallionItem(artefactID);
+                //case LOVE_MEDALLION -> new LoveMedallionItem(artefactID);
                 case SATCHEL_OF_ELEMENTS -> new SatchelOfElementsItem(artefactID);
                 case SHOCK_POWDER -> new ShockPowderItem(artefactID);
                 //noinspection UnnecessaryDefault
