@@ -38,15 +38,14 @@ public abstract class PersistentProjectileEntityMixin {
         }
     }
 
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onThunderingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
         Entity entity = entityHitResult.getEntity();
-        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
         damage = persistentProjectileEntity.getDamage();
 
         if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
-            if (shooter != null) {
+            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
                 if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER).asItem()) {
@@ -59,15 +58,14 @@ public abstract class PersistentProjectileEntityMixin {
         }
     }
 
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onTormentingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
         Entity entity = entityHitResult.getEntity();
-        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
         damage = persistentProjectileEntity.getDamage();
 
         if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)){
-            if (shooter != null) {
+            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
                 if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()) {
@@ -83,10 +81,9 @@ public abstract class PersistentProjectileEntityMixin {
     @Inject(method = "onBlockHit", at = @At("HEAD"), cancellable = true)
     public void onTormentingArrowBlockImpact(BlockHitResult blockHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
-        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
 
         if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
-            if (shooter != null) {
+            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
                 if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()) {
@@ -102,13 +99,12 @@ public abstract class PersistentProjectileEntityMixin {
         }
     }
 
-    @Inject(method = "getDragInWater", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getDragInWater", at = @At("RETURN"), cancellable = true)
     public void onHarpoonArrowFire(CallbackInfoReturnable<Float> cir) {
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
-        LivingEntity shooter = (LivingEntity) persistentProjectileEntity.getOwner();
 
         if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
-            if (shooter != null) {
+            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
                 if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER).asItem()) {
@@ -116,8 +112,9 @@ public abstract class PersistentProjectileEntityMixin {
                             ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
                     if (effectTimer > 0) {
                         if (persistentProjectileEntity.isTouchingWater()) {
-                            float m = 0.85f;
-                            cir.setReturnValue(m);
+                            float normDrag = cir.getReturnValueF();
+                            float v = (cir.getReturnValue() == null ? 0.6F : normDrag) * 1.542f;
+                            cir.setReturnValue(v);
                         }
                     }
                 }
