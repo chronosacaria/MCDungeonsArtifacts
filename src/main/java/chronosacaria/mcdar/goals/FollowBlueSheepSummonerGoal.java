@@ -87,6 +87,7 @@ public class FollowBlueSheepSummonerGoal extends Goal {
         if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D || !this.canTeleportTo(new BlockPos(i, j, k)))
             return false;
         this.navigation.stop();
+        this.enchantedGrassBlueSheepEntity.refreshPositionAndAngles((double)i + 0.5, j, (double)k + 0.5, this.enchantedGrassBlueSheepEntity.getYaw(), this.enchantedGrassBlueSheepEntity.getPitch());
         return true;
     }
 

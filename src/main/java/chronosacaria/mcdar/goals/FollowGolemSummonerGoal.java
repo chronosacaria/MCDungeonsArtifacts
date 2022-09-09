@@ -85,6 +85,7 @@ public class FollowGolemSummonerGoal extends Goal {
         if (Math.abs((double) i - this.summoner.getX()) < 2.0D && Math.abs((double) k - this.summoner.getZ()) < 2.0D || !this.canTeleportTo(new BlockPos(i, j, k)))
             return false;
         this.navigation.stop();
+        this.golemKitGolemEntity.refreshPositionAndAngles((double)i + 0.5, j, (double)k + 0.5, this.golemKitGolemEntity.getYaw(), this.golemKitGolemEntity.getPitch());
         return true;
     }
 

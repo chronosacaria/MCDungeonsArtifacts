@@ -90,6 +90,7 @@ public class FollowGreenSheepSummonerGoal extends Goal {
             return false;
         } else {
             this.navigation.stop();
+            this.enchantedGrassGreenSheepEntity.refreshPositionAndAngles((double)i + 0.5, j, (double)k + 0.5, this.enchantedGrassGreenSheepEntity.getYaw(), this.enchantedGrassGreenSheepEntity.getPitch());
             return true;
         }
     }

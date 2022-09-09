@@ -91,6 +91,7 @@ public class FollowLlamaSummonerGoal extends Goal {
             return false;
         } else {
             this.navigation.stop();
+            this.wonderfulWheatLlamaEntity.refreshPositionAndAngles((double)i + 0.5, j, (double)k + 0.5, this.wonderfulWheatLlamaEntity.getYaw(), this.wonderfulWheatLlamaEntity.getPitch());
             return true;
         }
     }

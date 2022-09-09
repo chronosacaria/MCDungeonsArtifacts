@@ -89,6 +89,7 @@ public class FollowRedSheepSummonerGoal extends Goal {
             return false;
         } else {
             this.navigation.stop();
+            this.enchantedGrassRedSheepEntity.refreshPositionAndAngles((double)i + 0.5, j, (double)k + 0.5, this.enchantedGrassRedSheepEntity.getYaw(), this.enchantedGrassRedSheepEntity.getPitch());
             return true;
         }
     }
