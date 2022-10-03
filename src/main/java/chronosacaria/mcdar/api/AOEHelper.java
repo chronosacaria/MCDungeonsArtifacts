@@ -2,13 +2,16 @@ package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
 import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.mixin.CreeperEntityAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -103,11 +106,15 @@ public class AOEHelper {
     }
 
     public static void summonLightningBoltOnEntity(Entity target){
+        TrackedData<Boolean> charged = CreeperEntityAccessor.getCHARGED();
         World world = target.getEntityWorld();
         LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
-        if (lightningEntity != null){
+        if (lightningEntity != null) {
             lightningEntity.refreshPositionAfterTeleport(target.getX(), target.getY(), target.getZ());
             lightningEntity.setCosmetic(true);
+            if (target instanceof CreeperEntity creeperEntity) {
+                creeperEntity.getDataTracker().set(charged, true);
+            }
             world.spawnEntity(lightningEntity);
         }
     }
