@@ -3,6 +3,7 @@ package chronosacaria.mcdar.mixin;
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.effects.ArtifactEffects;
+import chronosacaria.mcdar.effects.EnchantmentEffects;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
@@ -64,7 +65,7 @@ public class LivingEntityMixin {
             if (source.getSource().world instanceof ServerWorld serverWorld) {
 
                 if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_BOSS))
-                    amount *= ArtifactEffects.beastBossDamage(summonedEntity, serverWorld);
+                    amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
 
             }
         }
@@ -79,9 +80,9 @@ public class LivingEntityMixin {
         if (player.isAlive() && player.world instanceof ServerWorld) {
 
             if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_BURST))
-                ArtifactEffects.activateBeastBurst(player);
+                EnchantmentEffects.activateBeastBurst(player);
             if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_SURGE))
-                ArtifactEffects.activateBeastSurge(player);
+                EnchantmentEffects.activateBeastSurge(player);
         }
     }
 

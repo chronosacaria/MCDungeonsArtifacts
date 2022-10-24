@@ -93,8 +93,7 @@ public abstract class AbstractBeaconItem extends ArtefactDamagingItem {
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks){
-        if (user instanceof PlayerEntity){
-            PlayerEntity playerEntity = (PlayerEntity) user;
+        if (user instanceof PlayerEntity playerEntity){
 
             if (playerEntity.isCreative() || this.consumeTick(playerEntity)) {
                 HitResult result = playerEntity.raycast(RAYTRACE_DISTANCE, 1.0f, false);
@@ -106,7 +105,7 @@ public abstract class AbstractBeaconItem extends ArtefactDamagingItem {
                         1.0D, 1.0D);
                 EntityHitResult entityHitResult = ProjectileUtil.getEntityCollision(world, playerEntity, eyeVector,
                         targetVector, box,
-                        entity -> entity instanceof LivingEntity && !entity.isSpectator() && entity.collides());
+                        entity -> entity instanceof LivingEntity && !entity.isSpectator() /*&& entity.collides()*/);
                 if (entityHitResult != null && result.getPos().squaredDistanceTo(eyeVector) > entityHitResult.getPos().squaredDistanceTo(eyeVector)){
                     if (!world.isClient()){
                         Entity entity = entityHitResult.getEntity();

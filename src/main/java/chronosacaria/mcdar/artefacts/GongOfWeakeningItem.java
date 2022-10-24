@@ -1,8 +1,11 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -16,7 +19,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-import static chronosacaria.mcdar.api.AOEHelper.weakenAndMakeNearbyEnemiesVulnerable;
 
 public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
     public GongOfWeakeningItem(StatusInflictingArtefactID artefactID) {
@@ -30,7 +32,8 @@ public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_USE,SoundCategory.BLOCKS, 2.0F, 1.0F);
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_RESONATE,SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        weakenAndMakeNearbyEnemiesVulnerable(user);
+        AOEHelper.afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffects.WEAKNESS, 140, 140),
+                new StatusEffectInstance(StatusEffects.RESISTANCE, 140, -2));
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

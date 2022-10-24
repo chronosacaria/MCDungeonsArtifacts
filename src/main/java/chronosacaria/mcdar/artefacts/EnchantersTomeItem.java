@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +23,7 @@ public class EnchantersTomeItem extends ArtefactDefenciveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.enchantersTomeEffects(world, user);
+        ArtifactEffects.enchantersTomeEffects(user);
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }

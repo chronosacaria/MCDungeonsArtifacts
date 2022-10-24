@@ -1,5 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.AgilityArtefactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
@@ -14,13 +16,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.AbilityHelper.isPetOf;
 
 public class LightFeatherItem extends ArtefactAgilityItem{
     public LightFeatherItem(AgilityArtefactID artefactID) {
@@ -32,23 +30,9 @@ public class LightFeatherItem extends ArtefactAgilityItem{
 
         user.jump();
 
-        List<LivingEntity> nearbyEntities = world.getEntitiesByClass(LivingEntity.class,
-                new Box(user.getBlockPos()).expand(5), (nearbyEntity) -> nearbyEntity != user && !isPetOf(nearbyEntity,
-                        user) && nearbyEntity.isAlive());
-
-        for (LivingEntity nearbyEntity : nearbyEntities){
-            float knockbackMultiplier = 5.0F;
-            double xRatio = user.getX() - nearbyEntity.getX();
-            double zRatio;
-            for (
-                    zRatio = user.getZ() - nearbyEntity.getZ();
-                    xRatio * xRatio + zRatio < 1.0E-4D;
-                    zRatio = (Math.random() - Math.random()) * 0.01D) {
-                    xRatio = (Math.random() - Math.random()) * 0.01D;
-            }
-            nearbyEntity.knockbackVelocity =
-                    (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.getYaw());
-            nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
+        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
+            AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 5.0F);
 
             StatusEffectInstance stunned = new StatusEffectInstance(StatusEffectInit.STUNNED, 60);
             StatusEffectInstance nausea = new StatusEffectInstance(StatusEffects.NAUSEA, 60);

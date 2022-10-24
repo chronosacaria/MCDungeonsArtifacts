@@ -4,6 +4,8 @@ import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.StatusInflictingArtefactID;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -23,7 +25,8 @@ public class CorruptedSeedsItem extends ArtefactStatusInflictingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.poisonAndSlowNearbyEnemies(user);
+        AOEHelper.afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 4),
+                new StatusEffectInstance(StatusEffects.POISON, 140, 1));
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

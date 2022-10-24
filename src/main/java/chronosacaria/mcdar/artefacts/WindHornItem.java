@@ -1,9 +1,11 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -27,7 +29,10 @@ public class WindHornItem extends ArtefactDefenciveItem{
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.EVENT_RAID_HORN,
                 SoundCategory.BLOCKS, 5.0F, 1.0F);
-        AOEHelper.knockbackNearbyEnemies(user);
+        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
+            AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 2.0F);
+        }
 
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));

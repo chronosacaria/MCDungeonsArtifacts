@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.artefacts;
 
-import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +28,7 @@ public class BlastFungusItem extends ArtefactDamagingItem{
 
         user.world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE,
                 SoundCategory.PLAYERS, 1.0F, 1.0F);
-        AOEHelper.causeBlastFungusExplosions(user, 5, 4);
+        ArtifactEffects.causeBlastFungusExplosions(user, 5, 4);
         if (!user.isCreative()){
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
         }
