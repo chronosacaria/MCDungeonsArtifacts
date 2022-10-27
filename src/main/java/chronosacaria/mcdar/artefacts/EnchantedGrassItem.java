@@ -30,14 +30,14 @@ public class EnchantedGrassItem extends ArtefactSummoningItem{
         } else {
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
 
-            if (itemUsageContextPlayer != null){
+            if (itemUsageContextPlayer != null) {
 
                 int effectInt = (new Random()).nextInt(3);
                 SheepEntity sheep = SummoningHelper.SHEEP[effectInt].create(world);
 
                 if (SummoningHelper.summonSummonableEntity(sheep, itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
                     assert sheep != null;
-                    if (CleanlinessHelper.percentToOccur(100))
+                    if (CleanlinessHelper.percentToOccur(1))
                         sheep.setCustomName(Text.literal("Lilly"));
                     SummoningHelper.summonedSheepEffect(sheep, effectInt);
 
