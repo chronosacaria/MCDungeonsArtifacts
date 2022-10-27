@@ -1,7 +1,9 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
+import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,8 +14,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.SummoningHelper.summonGolemKitGolem;
 
 public class GolemKitItem extends ArtefactSummoningItem{
     public GolemKitItem(SummoningArtefactID artefactID) {
@@ -30,13 +30,14 @@ public class GolemKitItem extends ArtefactSummoningItem{
 
             if (itemUsageContextPlayer != null){
 
-                summonGolemKitGolem(itemUsageContextPlayer, itemUsageContext.getBlockPos());
+                if (SummoningHelper.summonSummonableEntity(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY.create(world), itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
 
-                if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                    if (!itemUsageContextPlayer.isCreative()) {
+                        itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
+                                (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                    }
+                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
                 }
-                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
             }
         }
         return ActionResult.CONSUME;
@@ -48,5 +49,6 @@ public class GolemKitItem extends ArtefactSummoningItem{
         tooltip.add(Text.translatable("tooltip_info_item.mcdar.golem_kit_2").formatted(Formatting.ITALIC));
         tooltip.add(Text.translatable("tooltip_info_item.mcdar.golem_kit_3").formatted(Formatting.ITALIC));
         tooltip.add(Text.translatable("tooltip_info_item.mcdar.golem_kit_4").formatted(Formatting.ITALIC));
+        tooltip.add(Text.literal("Right Click a block to spawn a friend!").formatted(Formatting.GRAY));
     }
 }

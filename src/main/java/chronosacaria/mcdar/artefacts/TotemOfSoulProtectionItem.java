@@ -1,8 +1,11 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
+import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -13,8 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.AOECloudHelper.spawnSoulProtectionCloudAtPos;
 
 public class TotemOfSoulProtectionItem extends ArtefactDefenciveItem{
     public TotemOfSoulProtectionItem(DefenciveArtefactID artefactID) {
@@ -38,7 +39,8 @@ public class TotemOfSoulProtectionItem extends ArtefactDefenciveItem{
             }
             if (itemUsageContextPlayer != null){
 
-                spawnSoulProtectionCloudAtPos(itemUsageContextPlayer,blockPos, 500);
+                AOECloudHelper.spawnStatusEffectCloud(itemUsageContextPlayer, blockPos, 500,
+                        new StatusEffectInstance(StatusEffectInit.SOUL_PROTECTION, 40));
                 if (!itemUsageContextPlayer.isCreative()){
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));

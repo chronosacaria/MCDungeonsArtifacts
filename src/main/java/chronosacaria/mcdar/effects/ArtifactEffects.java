@@ -29,7 +29,7 @@ public class ArtifactEffects {
             if (player.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && player.getRandom().nextFloat() <= 0.2F) {
                 CleanlinessHelper.playCenteredSound(target, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
                 AOECloudHelper.spawnExplosionCloud(player, target, 3.0F);
-                for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(target, 3.0F,
+                for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(target, 3.0F,
                         (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, player, target))) {
                     nearbyEntity.damage(DamageSource.explosion(player), target.getMaxHealth() * 0.2F);
                 }
@@ -39,7 +39,7 @@ public class ArtifactEffects {
 
     public static void causeBlastFungusExplosions(LivingEntity user, float distance, float damageAmount) {
 
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, distance,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity))) {
             if (nearbyEntity == null) return;
             if (nearbyEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode) return;
@@ -50,7 +50,7 @@ public class ArtifactEffects {
     }
 
     public static void enchantersTomeEffects(PlayerEntity user) {
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, user))){
             //noinspection RedundantSuppression
             StatusEffectInstance statusEffectInstance = new StatusEffectInstance(
@@ -67,7 +67,7 @@ public class ArtifactEffects {
     }
 
     public static void updraftNearbyEnemies(PlayerEntity user) {
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
             nearbyEntity.setVelocity(0.0D, 1.25D, 0.0D);
         }

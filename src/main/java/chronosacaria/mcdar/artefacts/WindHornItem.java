@@ -29,7 +29,7 @@ public class WindHornItem extends ArtefactDefenciveItem{
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.EVENT_RAID_HORN,
                 SoundCategory.BLOCKS, 5.0F, 1.0F);
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
             AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 2.0F);
         }

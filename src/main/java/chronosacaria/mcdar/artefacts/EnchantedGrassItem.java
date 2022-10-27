@@ -1,8 +1,11 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -12,8 +15,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.SummoningHelper.summonEnchantedGrassSheep;
+import java.util.Random;
 
 public class EnchantedGrassItem extends ArtefactSummoningItem{
     public EnchantedGrassItem(SummoningArtefactID artefactID) {
@@ -29,13 +31,22 @@ public class EnchantedGrassItem extends ArtefactSummoningItem{
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
 
             if (itemUsageContextPlayer != null){
-                summonEnchantedGrassSheep(itemUsageContextPlayer, itemUsageContext.getBlockPos());
 
-                if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                int effectInt = (new Random()).nextInt(3);
+                SheepEntity sheep = SummoningHelper.SHEEP[effectInt].create(world);
+
+                if (SummoningHelper.summonSummonableEntity(sheep, itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
+                    assert sheep != null;
+                    if (CleanlinessHelper.percentToOccur(100))
+                        sheep.setCustomName(Text.literal("Lilly"));
+                    SummoningHelper.summonedSheepEffect(sheep, effectInt);
+
+                    if (!itemUsageContextPlayer.isCreative()) {
+                        itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
+                                (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                    }
+                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
                 }
-                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
             }
         }
         return ActionResult.CONSUME;

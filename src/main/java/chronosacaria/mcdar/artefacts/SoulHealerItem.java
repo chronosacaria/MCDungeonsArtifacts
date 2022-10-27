@@ -57,7 +57,7 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
     }
 
     public static float healMostInjuredAlly(LivingEntity healer, float distance) {
-        List<LivingEntity> nearbyEntities = AOEHelper.getLivingEntitiesByPredicate(healer, distance,
+        List<LivingEntity> nearbyEntities = AOEHelper.getEntitiesByPredicate(healer, distance,
                 (nearbyEntity) -> AbilityHelper.canHealEntity(healer, nearbyEntity));
         if (!nearbyEntities.isEmpty()) {
             nearbyEntities.sort((o1, o2) -> {

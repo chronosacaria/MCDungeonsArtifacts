@@ -25,7 +25,7 @@ public class CorruptedSeedsItem extends ArtefactStatusInflictingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 4),
+        AOEHelper.afflictNearbyEntities(user, new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 4),
                 new StatusEffectInstance(StatusEffects.POISON, 140, 1));
 
         if (!user.isCreative()){

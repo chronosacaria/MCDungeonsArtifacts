@@ -32,7 +32,7 @@ public class GongOfWeakeningItem extends ArtefactStatusInflictingItem{
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_USE,SoundCategory.BLOCKS, 2.0F, 1.0F);
         entityWorld.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_BELL_RESONATE,SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        AOEHelper.afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffects.WEAKNESS, 140, 140),
+        AOEHelper.afflictNearbyEntities(user, new StatusEffectInstance(StatusEffects.WEAKNESS, 140, 140),
                 new StatusEffectInstance(StatusEffects.RESISTANCE, 140, -2));
 
         if (!user.isCreative()){

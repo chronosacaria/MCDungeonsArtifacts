@@ -1,7 +1,9 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
+import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,8 +14,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.SummoningHelper.summonWonderfulWheatLlama;
 
 public class WonderfulWheatItem extends ArtefactSummoningItem{
     public WonderfulWheatItem(SummoningArtefactID artefactID) {
@@ -30,13 +30,14 @@ public class WonderfulWheatItem extends ArtefactSummoningItem{
 
             if (itemUsageContextPlayer != null){
 
-                summonWonderfulWheatLlama(itemUsageContextPlayer, itemUsageContext.getBlockPos());
+                if (SummoningHelper.summonSummonableEntity(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY.create(world), itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
 
-                if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                    if (!itemUsageContextPlayer.isCreative()) {
+                        itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
+                                (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
+                    }
+                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
                 }
-                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
             }
         }
         return ActionResult.CONSUME;

@@ -1,7 +1,9 @@
 package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtefactID;
+import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,8 +18,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-import static chronosacaria.mcdar.api.SummoningHelper.summonBuzzyNestBee;
 
 public class BuzzyNestItem extends ArtefactSummoningItem{
     public BuzzyNestItem(SummoningArtefactID artefactID) {
@@ -45,13 +45,14 @@ public class BuzzyNestItem extends ArtefactSummoningItem{
             }
             if (itemUsageContextPlayer != null){
 
-                summonBuzzyNestBee(itemUsageContextPlayer, itemUseContextBlockPos);
+                if (SummoningHelper.summonSummonableEntity(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY.create(world), itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
 
-                if (!itemUsageContextPlayer.isCreative()){
-                    itemUsageContextItem.damage(1, itemUsageContextPlayer,
-                            (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
+                    if (!itemUsageContextPlayer.isCreative()) {
+                        itemUsageContextItem.damage(1, itemUsageContextPlayer,
+                                (entity) -> entity.sendToolBreakStatus(itemUseContextHand));
+                    }
+                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
                 }
-                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
             }
         }
         return ActionResult.CONSUME;

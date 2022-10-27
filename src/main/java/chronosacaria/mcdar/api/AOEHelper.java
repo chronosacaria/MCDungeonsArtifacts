@@ -30,10 +30,33 @@ import static chronosacaria.mcdar.Mcdar.random;
 public class AOEHelper {
 
     /** Returns targets of an AOE effect from 'attacker' around 'center'. This includes 'center'. */
-    public static List<LivingEntity> getLivingEntitiesByPredicate(LivingEntity center, float distance, Predicate<? super LivingEntity> predicate) {
+    public static List<LivingEntity> getEntitiesByPredicate(LivingEntity center, float distance, Predicate<? super LivingEntity> predicate) {
         return center.getEntityWorld().getEntitiesByClass(LivingEntity.class,
                 new Box(center.getBlockPos()).expand(distance), predicate
         );
+    }
+
+    public static List<? extends LivingEntity> getEntitiesByPredicate(Class<? extends LivingEntity> entityType,
+                                                                      LivingEntity center, float distance, Predicate<? super LivingEntity> predicate) {
+        return center.getEntityWorld().getEntitiesByClass(entityType,
+                new Box(center.getBlockPos()).expand(distance), predicate
+        );
+    }
+
+    public static void afflictNearbyEntities(LivingEntity user, StatusEffectInstance... statusEffectInstances) {
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,
+                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
+            for (StatusEffectInstance instance : statusEffectInstances)
+                nearbyEntity.addStatusEffect(instance);
+        }
+    }
+
+    public static void afflictNearbyEntities(Class<? extends LivingEntity> entityType, LivingEntity user, float distance,
+                                             Predicate<? super LivingEntity> predicate, StatusEffectInstance... statusEffectInstances) {
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(entityType, user, distance, predicate)) {
+            for (StatusEffectInstance instance : statusEffectInstances)
+                nearbyEntity.addStatusEffect(instance);
+        }
     }
 
     public static void summonLightningBoltOnEntity(Entity target){
@@ -60,7 +83,7 @@ public class AOEHelper {
         CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 1.0F, 1.0F);
         CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.WEATHER, 1.0F, 1.0F);
 
-        for (LivingEntity nearbyEntity : getLivingEntitiesByPredicate(user, distance,
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, user))) {
             electrocute(user, nearbyEntity, damageAmount);
 
@@ -69,18 +92,10 @@ public class AOEHelper {
         }
     }
 
-    public static void afflictNearbyEnemies(PlayerEntity user, StatusEffectInstance... statusEffectInstances) {
-        for (LivingEntity nearbyEntity : getLivingEntitiesByPredicate(user, 5,
-                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
-            for (StatusEffectInstance instance : statusEffectInstances)
-                nearbyEntity.addStatusEffect(instance);
-        }
-    }
-
     public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
         DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
 
-        for (LivingEntity nearbyEntity : getLivingEntitiesByPredicate(victim, distance,
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(victim, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, victim))) {
             nearbyEntity.damage(magicExplosion, damageAmount);
         }
@@ -105,18 +120,18 @@ public class AOEHelper {
         int effectInt = (new Random()).nextInt(3);
 
         if (effectInt == 0){ // BURNING
-            for (LivingEntity nearbyEntity : getLivingEntitiesByPredicate(user, 5,
+            for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,
                     (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
                 nearbyEntity.setOnFireFor(3);
             }
         }
         if (effectInt == 1) { // FROZEN
-            afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffectInit.STUNNED, 100),
+            afflictNearbyEntities(user, new StatusEffectInstance(StatusEffectInit.STUNNED, 100),
                     new StatusEffectInstance(StatusEffects.NAUSEA, 100),
                     new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4));
         }
         if (effectInt == 2){ // LIGHTNING STRIKE
-            for (LivingEntity nearbyEntity : getLivingEntitiesByPredicate(user, 5,
+            for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,
                     (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
                 summonLightningBoltOnEntity(nearbyEntity);
                 ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(user).setUsesMagic();

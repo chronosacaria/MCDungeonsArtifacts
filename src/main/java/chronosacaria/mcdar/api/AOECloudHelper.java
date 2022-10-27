@@ -1,10 +1,8 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 
@@ -19,39 +17,16 @@ public class AOECloudHelper {
         attacker.world.spawnEntity(areaEffectCloudEntity);
     }
 
-    public static void spawnRegenCloudAtPos(LivingEntity attacker, BlockPos blockPos, int amplifier){
-        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(attacker.world, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
-        areaEffectCloudEntity.setOwner(attacker);
-        areaEffectCloudEntity.setRadius(5.0f);
-        areaEffectCloudEntity.setRadiusOnUse(-0.5f);
-        areaEffectCloudEntity.setWaitTime(10);
-        areaEffectCloudEntity.setDuration(100);
-        StatusEffectInstance regeneration = new StatusEffectInstance(StatusEffects.REGENERATION, 100, amplifier);
-        areaEffectCloudEntity.addEffect(regeneration);
-        attacker.world.spawnEntity(areaEffectCloudEntity);
+    public static void spawnStatusEffectCloud(LivingEntity owner, BlockPos blockPos, int duration, StatusEffectInstance... statusEffectInstances) {
+        AreaEffectCloudEntity aoeCloudEntity = new AreaEffectCloudEntity(owner.world, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
+        aoeCloudEntity.setOwner(owner);
+        aoeCloudEntity.setRadius(5.0f);
+        aoeCloudEntity.setRadiusOnUse(-0.5f);
+        aoeCloudEntity.setWaitTime(10);
+        aoeCloudEntity.setDuration(duration);
+        for (StatusEffectInstance instance : statusEffectInstances)
+            aoeCloudEntity.addEffect(instance);
+        owner.world.spawnEntity(aoeCloudEntity);
     }
 
-    public static void spawnSoulProtectionCloudAtPos(LivingEntity attacker, BlockPos blockPos, int duration){
-        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(attacker.world, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
-        areaEffectCloudEntity.setOwner(attacker);
-        areaEffectCloudEntity.setRadius(5.0F);
-        areaEffectCloudEntity.setRadiusOnUse(-0.5F);
-        areaEffectCloudEntity.setWaitTime(10);
-        areaEffectCloudEntity.setDuration(duration);
-        StatusEffectInstance soulProtection = new StatusEffectInstance(StatusEffectInit.SOUL_PROTECTION, 40);
-        areaEffectCloudEntity.addEffect(soulProtection);
-        attacker.world.spawnEntity(areaEffectCloudEntity);
-    }
-
-    public static void spawnShieldingCloudAtPos(LivingEntity attacker, BlockPos blockPos, int duration){
-        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(attacker.world, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
-        areaEffectCloudEntity.setOwner(attacker);
-        areaEffectCloudEntity.setRadius(5.0F);
-        areaEffectCloudEntity.setRadiusOnUse(-0.5F);
-        areaEffectCloudEntity.setWaitTime(10);
-        areaEffectCloudEntity.setDuration(duration);
-        StatusEffectInstance soulProtection = new StatusEffectInstance(StatusEffectInit.SHIELDING, 40);
-        areaEffectCloudEntity.addEffect(soulProtection);
-        attacker.world.spawnEntity(areaEffectCloudEntity);
-    }
 }

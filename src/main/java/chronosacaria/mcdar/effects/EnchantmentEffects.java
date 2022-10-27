@@ -51,13 +51,13 @@ public class EnchantmentEffects {
                     EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BURST),
                             player);
             if (beastBurstLevel > 0){
-                for (Entity summonedMob : AOEHelper.getLivingEntitiesByPredicate(player, 10,
+                for (Entity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
                         (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
                     if (summonedMob == null) return;
                     if (summonedMob instanceof LivingEntity summonedMobAsLiving){
                         CleanlinessHelper.playCenteredSound(summonedMobAsLiving, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
                         AOECloudHelper.spawnExplosionCloud(summonedMobAsLiving, summonedMobAsLiving, 3.0F);
-                        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(summonedMobAsLiving, 3.0F,
+                        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(summonedMobAsLiving, 3.0F,
                                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, summonedMobAsLiving, summonedMobAsLiving))) {
                             nearbyEntity.damage(DamageSource.explosion(summonedMobAsLiving), 15 * beastBurstLevel);
                         }
@@ -69,7 +69,7 @@ public class EnchantmentEffects {
 
     public static void causeBeastBurstExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
         DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(victim, distance,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(victim, distance,
                 (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, victim)))
             nearbyEntity.damage(magicExplosion, damageAmount);
     }
@@ -82,7 +82,7 @@ public class EnchantmentEffects {
                     EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_SURGE),
                             player);
             if (beastSurgeLevel > 0) {
-                for (Entity summonedMob : AOEHelper.getLivingEntitiesByPredicate(player, 10,
+                for (Entity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
                         (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
                     if (summonedMob == null) return;
                     if (summonedMob instanceof LivingEntity summonedMobAsLiving) {

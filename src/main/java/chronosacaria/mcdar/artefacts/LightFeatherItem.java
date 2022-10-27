@@ -30,7 +30,7 @@ public class LightFeatherItem extends ArtefactAgilityItem{
 
         user.jump();
 
-        for (LivingEntity nearbyEntity : AOEHelper.getLivingEntitiesByPredicate(user, 5,
+        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
             AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 5.0F);
 

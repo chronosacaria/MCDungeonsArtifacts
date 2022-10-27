@@ -27,7 +27,7 @@ public class ShockPowderItem extends ArtefactStatusInflictingItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        AOEHelper.afflictNearbyEnemies(user, new StatusEffectInstance(StatusEffectInit.STUNNED, 100),
+        AOEHelper.afflictNearbyEntities(user, new StatusEffectInstance(StatusEffectInit.STUNNED, 100),
                 new StatusEffectInstance(StatusEffects.NAUSEA, 100),
                 new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 4));
         if (!user.isCreative()){
