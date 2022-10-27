@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.enums.DamagingArtefactID;
@@ -8,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -25,9 +25,9 @@ public class UpdraftTomeItem extends ArtefactDamagingItem{
         ItemStack itemStack = user.getStackInHand(hand);
 
         ArtifactEffects.updraftNearbyEnemies(user);
-        if (!user.isCreative()){
+        if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
-        }
+
         EnchantmentHelper.cooldownHelper(user, this, 300);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
@@ -35,8 +35,6 @@ public class UpdraftTomeItem extends ArtefactDamagingItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.updraft_tome_1").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.updraft_tome_2").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.updraft_tome_3").formatted(Formatting.ITALIC));
+        CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
 }

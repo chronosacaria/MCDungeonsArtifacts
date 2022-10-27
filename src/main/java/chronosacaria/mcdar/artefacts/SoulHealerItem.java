@@ -2,6 +2,7 @@ package chronosacaria.mcdar.artefacts;
 
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefenciveArtefactID;
 import net.minecraft.client.item.TooltipContext;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -26,21 +26,15 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
         ItemStack itemStack = user.getStackInHand(hand);
 
         if (user.totalExperience >= 20 || user.isCreative()){
-            if ((user.getHealth() < user.getMaxHealth())){
-                float healedAmount = healAlly(user);
-                if (!user.isCreative()){
-                    user.addExperience((int)(-healedAmount));
+
+            boolean bl = user.getHealth() < user.getMaxHealth();
+            float healedAmount = bl ?
+                    healAlly(user) : healMostInjuredAlly(user, 12);
+            if (!user.isCreative()){
+                if (healedAmount > 0) {
+                    user.addExperience((int) (-healedAmount));
                     itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
-                }
-                user.getItemCooldownManager().set(this, 20);
-            } else {
-                float healedAmount = healMostInjuredAlly(user, 12);
-                if (healedAmount > 0){
-                    if (!user.isCreative()){
-                        user.addExperience((int)(-healedAmount));
-                        itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
-                    }
-                    EnchantmentHelper.cooldownHelper(user, this, 60);
+                    EnchantmentHelper.cooldownHelper(user, this, bl ? 20 : 60);
                 }
             }
         }
@@ -50,10 +44,7 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.soul_healer_1").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.soul_healer_2").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.soul_healer_3").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.soul_healer_4").formatted(Formatting.ITALIC));
+        CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
 
     public static float healMostInjuredAlly(LivingEntity healer, float distance) {
@@ -71,19 +62,11 @@ public class SoulHealerItem extends ArtefactDefenciveItem{
             return 0;
     }
     public static float healAlly(LivingEntity allyToBeHealed) {
-        float currentHealth = allyToBeHealed.getHealth();
         float maxHealth = allyToBeHealed.getMaxHealth();
-        float lostHealth = maxHealth - currentHealth;
-        float healedAmount;
-        if (lostHealth < (maxHealth * 0.20F)){
-            allyToBeHealed.setHealth(maxHealth);
-            //addParticles((ServerWorld) world, mostInjuredAlly, ParticleTypes.HEART);
-            healedAmount = lostHealth;
-        } else {
-            allyToBeHealed.setHealth(currentHealth + (maxHealth * 0.20F));
-            //addParticles((ServerWorld) world, mostInjuredAlly, ParticleTypes.HEART);
-            healedAmount = (maxHealth * 0.20F);
-        }
+        float lostHealth = maxHealth - allyToBeHealed.getHealth();
+        float healedAmount = Math.min(lostHealth, 0.2F * maxHealth);
+        allyToBeHealed.heal(healedAmount);
+        //addParticles((ServerWorld) world, mostInjuredAlly, ParticleTypes.HEART);
         return healedAmount;
     }
 }

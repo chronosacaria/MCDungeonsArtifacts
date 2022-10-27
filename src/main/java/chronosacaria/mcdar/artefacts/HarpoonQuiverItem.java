@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.QuiverArtefactID;
 import chronosacaria.mcdar.init.EnchantsRegistry;
@@ -9,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -24,9 +24,9 @@ public class HarpoonQuiverItem extends ArtefactQuiverItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        if (!user.isCreative()){
+        if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
-        }
+
         int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
                 user);
         user.getItemCooldownManager().set(this, 600 * (cooldownLevel + 1));
@@ -36,8 +36,6 @@ public class HarpoonQuiverItem extends ArtefactQuiverItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.harpoon_quiver_1").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.harpoon_quiver_2").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.harpoon_quiver_3").formatted(Formatting.ITALIC));
+        CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
 }

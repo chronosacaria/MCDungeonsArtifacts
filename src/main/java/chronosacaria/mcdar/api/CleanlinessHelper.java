@@ -1,9 +1,17 @@
 package chronosacaria.mcdar.api;
 
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class CleanlinessHelper {
@@ -23,5 +31,30 @@ public class CleanlinessHelper {
 
     public static boolean percentToOccur (int chance) {
         return random.nextInt(100) + 1 <= chance;
+    }
+
+    public static void createLoreTTips(ItemStack stack, List<Text> tooltip) {
+        String str = stack.getItem().getTranslationKey().toLowerCase(Locale.ROOT).substring(11);
+        String translationKey = String.format("tooltip_info_item.mcdar.%s_", str);
+        int i = 1;
+        while (I18n.hasTranslation(translationKey + i)) {
+            tooltip.add(Text.translatable(translationKey + i).formatted(Formatting.ITALIC));
+            i++;
+        }
+    }
+
+    public static void mcdar$dropItem(LivingEntity le, Item item) {
+        mcdar$dropItem(le, item, 1);
+    }
+
+    public static void mcdar$dropItem(LivingEntity le, ItemStack itemStack) {
+        ItemEntity it = new ItemEntity(
+                le.world, le.getX(), le.getY(), le.getZ(),
+                itemStack);
+        le.world.spawnEntity(it);
+    }
+
+    public static void mcdar$dropItem(LivingEntity le, Item item, int amount) {
+        mcdar$dropItem(le, new ItemStack(item, amount));
     }
 }

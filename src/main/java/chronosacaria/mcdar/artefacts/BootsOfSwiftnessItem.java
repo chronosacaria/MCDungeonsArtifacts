@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artefacts;
 
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.AgilityArtefactID;
 import net.minecraft.client.item.TooltipContext;
@@ -9,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -36,8 +36,6 @@ public class BootsOfSwiftnessItem extends ArtefactAgilityItem{
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext){
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.boots_of_swiftness_1").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.boots_of_swiftness_2").formatted(Formatting.ITALIC));
-        tooltip.add(Text.translatable("tooltip_info_item.mcdar.boots_of_swiftness_3").formatted(Formatting.ITALIC));
+        CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
 }
