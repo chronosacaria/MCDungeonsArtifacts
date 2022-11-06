@@ -37,190 +37,190 @@ public class LootRegistry {
             
             if (ILLAGER_ARTEFACT_LOOT_TABLES.contains(id)){
                 lootPoolBuilder = LootPool.builder();
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS),    McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS),    McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM),                   McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM),                   McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME),                  McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME),                  McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD),                      McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD),                      McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER),                      McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER),                      McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS),McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS),McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER),       McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER),       McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER),                      McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER),                      McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER),                      McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER),                      McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER),                         McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER),                         McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION),            McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION),            McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING),               McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING),               McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION),         McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION),         McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
                 tableBuilder.pool(lootPoolBuilder.build());
             }
             else if (VILLAGER_ARTEFACT_LOOT_TABLES.contains(id)){
                 lootPoolBuilder = LootPool.builder();
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS),                   McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS),                   McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.BUZZY_NEST)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.BUZZY_NEST),                       McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.BUZZY_NEST)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.BUZZY_NEST),                       McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS),                  McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS),                  McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER),                         McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER),                         McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.GHOST_CLOAK)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.GHOST_CLOAK),                          McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.GHOST_CLOAK)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.GHOST_CLOAK),                          McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.GOLEM_KIT)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.GOLEM_KIT),                        McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.GOLEM_KIT)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.GOLEM_KIT),                        McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET),                 McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET),                 McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER),                        McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER),                        McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.TASTY_BONE)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.TASTY_BONE),                       McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.TASTY_BONE)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.TASTY_BONE),                       McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME),                       McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME),                       McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.WIND_HORN)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.WIND_HORN),                        McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.WIND_HORN)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.WIND_HORN),                        McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT),                  McdarConfig.config.getVillagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT),                  McdarConfig.CONFIG.getVillagerArtefactSpawnRate());
                 }
                 tableBuilder.pool(lootPoolBuilder.build());}
             else if (WORLD_CHESTS.contains(id)){
                 lootPoolBuilder = LootPool.builder();
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.BLAST_FUNGUS),                       McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS),    McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.CORRUPTED_SEEDS),    McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM),                   McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.DEATH_CAP_MUSHROOM),                   McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME),                  McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.ENCHANTERS_TOME),                  McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.GONG_OF_WEAKENING),  McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.config.getIllagerArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER),                         McdarConfig.CONFIG.getIllagerArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.HARVESTER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.HARVESTER),                          McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD),                      McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD),                      McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER),                      McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER),                      McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS),McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SATCHEL_OF_ELEMENTS),McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER),       McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableStatusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.statusInflictingArtefact.get(StatusInflictingArtefactID.SHOCK_POWDER),       McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER),                      McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.SOUL_HEALER),                      McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER),                      McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER),                      McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER),                         McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER),                         McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION),            McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_REGENERATION),            McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING),               McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SHIELDING),               McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION),         McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.TOTEM_OF_SOUL_PROTECTION),         McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
 
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS),                   McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.BOOTS_OF_SWIFTNESS),                   McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.BUZZY_NEST)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.BUZZY_NEST),                       McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.BUZZY_NEST)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.BUZZY_NEST),                       McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS),                  McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.ENCHANTED_GRASS),                  McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER),                         McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER),                         McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.GHOST_CLOAK)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.GHOST_CLOAK),                          McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.GHOST_CLOAK)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.GHOST_CLOAK),                          McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.GOLEM_KIT)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.GOLEM_KIT),                        McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.GOLEM_KIT)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.GOLEM_KIT),                        McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET),                 McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.IRON_HIDE_AMULET),                 McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableAgilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER),                        McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableAgilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.agilityArtefact.get(AgilityArtefactID.LIGHT_FEATHER),                        McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.TASTY_BONE)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.TASTY_BONE),                       McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.TASTY_BONE)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.TASTY_BONE),                       McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDamagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME),                       McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDamagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.damagingArtefact.get(DamagingArtefactID.UPDRAFT_TOME),                       McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.WIND_HORN)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.WIND_HORN),                        McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.WIND_HORN)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.WIND_HORN),                        McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
-                if (McdarConfig.config.enableSummoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT)) {
-                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT),                  McdarConfig.config.getDungeonArtefactSpawnRate());
+                if (McdarConfig.CONFIG.enableSummoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT)) {
+                    addArtefact(lootPoolBuilder, ArtefactsInit.summoningArtefact.get(SummoningArtefactID.WONDERFUL_WHEAT),                  McdarConfig.CONFIG.getDungeonArtefactSpawnRate());
                 }
                 tableBuilder.pool(lootPoolBuilder.build());
             }

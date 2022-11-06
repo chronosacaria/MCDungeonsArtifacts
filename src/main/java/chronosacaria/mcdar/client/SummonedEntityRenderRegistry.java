@@ -16,6 +16,5 @@ public class SummonedEntityRenderRegistry {
         EntityRendererRegistry.register(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, GolemKitGolemRenderer::new);
         EntityRendererRegistry.register(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer::new);
         EntityRendererRegistry.register(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, WonderfulWheatLlamaRenderer::new);
-
     }
 }

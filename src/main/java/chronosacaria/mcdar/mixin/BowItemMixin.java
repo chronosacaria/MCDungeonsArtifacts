@@ -26,7 +26,7 @@ public abstract class BowItemMixin {
                                             CallbackInfo ci, PlayerEntity playerEntity, boolean bl,
                                             ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity){
         ItemStack offhand = user.getOffHandStack();
-        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)){
+        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER)){
             if (user instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.FLAMING_QUIVER).asItem()) {
                 float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
                 if (effectTimer > 0) {

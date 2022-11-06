@@ -15,7 +15,7 @@ public class EnchantsRegistry {
 
     public static void init(){
         for (EnchantID enchantID : EnchantID.values()) {
-            if (!McdarConfig.config.enableEnchantment.get(enchantID))
+            if (!McdarConfig.CONFIG.enableEnchantment.get(enchantID))
                 continue;
 
             Enchantment enchantment = new ArmourEnchantment(enchantID);

@@ -44,7 +44,7 @@ public abstract class PersistentProjectileEntityMixin {
         Entity entity = entityHitResult.getEntity();
         damage = persistentProjectileEntity.getDamage();
 
-        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
+        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
             if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
@@ -64,7 +64,7 @@ public abstract class PersistentProjectileEntityMixin {
         Entity entity = entityHitResult.getEntity();
         damage = persistentProjectileEntity.getDamage();
 
-        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)){
+        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)){
             if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
@@ -82,7 +82,7 @@ public abstract class PersistentProjectileEntityMixin {
     public void onTormentingArrowBlockImpact(BlockHitResult blockHitResult, CallbackInfo ci){
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
+        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
             if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
@@ -103,7 +103,7 @@ public abstract class PersistentProjectileEntityMixin {
     public void onHarpoonArrowFire(CallbackInfoReturnable<Float> cir) {
         PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.config.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
+        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
             if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 

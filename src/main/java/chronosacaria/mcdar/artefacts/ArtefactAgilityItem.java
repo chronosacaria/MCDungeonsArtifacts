@@ -12,7 +12,7 @@ public class ArtefactAgilityItem extends Item {
     public final AgilityArtefactID id;
 
     public ArtefactAgilityItem(AgilityArtefactID id) {
-        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.config.getAgilityArtefactDurability()));
+        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.CONFIG.getAgilityArtefactDurability()));
         this.id = id;
     }
 

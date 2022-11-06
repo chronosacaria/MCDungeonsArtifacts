@@ -12,7 +12,7 @@ public class ArtefactQuiverItem extends Item {
     public final QuiverArtefactID id;
 
     public ArtefactQuiverItem(QuiverArtefactID id) {
-        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.config.getQuiverArtefactDurability()));
+        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.CONFIG.getQuiverArtefactDurability()));
         this.id = id;
     }
 

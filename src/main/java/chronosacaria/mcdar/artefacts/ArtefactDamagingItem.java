@@ -12,7 +12,7 @@ public class ArtefactDamagingItem extends Item {
     public final DamagingArtefactID id;
 
     public ArtefactDamagingItem(DamagingArtefactID id) {
-        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.config.getDamagingArtefactDurability()));
+        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.CONFIG.getDamagingArtefactDurability()));
         this.id = id;
     }
 

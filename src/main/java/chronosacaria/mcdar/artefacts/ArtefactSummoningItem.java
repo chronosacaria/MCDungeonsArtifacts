@@ -12,7 +12,7 @@ public class ArtefactSummoningItem extends Item {
     public final SummoningArtefactID id;
 
     public ArtefactSummoningItem(SummoningArtefactID id) {
-        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.config.getSummoningArtefactDurability()));
+        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.CONFIG.getSummoningArtefactDurability()));
         this.id = id;
     }
 

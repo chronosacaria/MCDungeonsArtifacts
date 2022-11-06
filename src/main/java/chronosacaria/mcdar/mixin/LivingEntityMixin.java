@@ -55,7 +55,7 @@ public class LivingEntityMixin {
 
         LivingEntity target = (LivingEntity) (Object) this;
 
-        if (McdarConfig.config.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER))
+        if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER))
             ArtifactEffects.activatePowerShaker(player, target);
     }
 
@@ -64,7 +64,7 @@ public class LivingEntityMixin {
         if (source.getSource() instanceof Summonable summonedEntity) {
             if (source.getSource().world instanceof ServerWorld serverWorld) {
 
-                if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_BOSS))
+                if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_BOSS))
                     amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
 
             }
@@ -79,9 +79,9 @@ public class LivingEntityMixin {
 
         if (player.isAlive() && player.world instanceof ServerWorld) {
 
-            if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_BURST))
+            if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_BURST))
                 EnchantmentEffects.activateBeastBurst(player);
-            if (McdarConfig.config.enableEnchantment.get(EnchantID.BEAST_SURGE))
+            if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_SURGE))
                 EnchantmentEffects.activateBeastSurge(player);
         }
     }

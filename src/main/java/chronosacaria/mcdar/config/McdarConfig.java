@@ -14,14 +14,14 @@ import java.util.EnumMap;
 @Config(name = Mcdar.MOD_ID)
 public class McdarConfig implements ConfigData {
 
-    public static final McdarConfig config;
+    public static final McdarConfig CONFIG;
 
     static {
         AutoConfig.register(McdarConfig.class, JanksonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(McdarConfig.class).getConfig();
+        CONFIG = AutoConfig.getConfigHolder(McdarConfig.class).getConfig();
     }
 
-    // config contents:
+    // CONFIG contents:
     public EnumMap<EnchantID, Boolean> enableEnchantment = new EnumMap<>(EnchantID.class);
     public EnumMap<DamagingArtefactID, Boolean> enableDamagingArtefact = new EnumMap<>(DamagingArtefactID.class);
     public EnumMap<StatusInflictingArtefactID, Boolean> enableStatusInflictingArtefact = new EnumMap<>(StatusInflictingArtefactID.class);
@@ -79,7 +79,7 @@ public class McdarConfig implements ConfigData {
         return dungeonArtefactSpawnRate;
     }
 
-    // set config defaults
+    // set CONFIG defaults
     public McdarConfig(){
         for (EnchantID enchantID : EnchantID.values()) {
             enableEnchantment.put(enchantID, true);

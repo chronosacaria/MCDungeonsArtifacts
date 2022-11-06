@@ -12,7 +12,7 @@ public class ArtefactStatusInflictingItem extends Item {
     public final StatusInflictingArtefactID id;
 
     public ArtefactStatusInflictingItem(StatusInflictingArtefactID id) {
-        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.config.getStatusArtefactDurability()));
+        super(new Settings().maxCount(1).group(Mcdar.ARTEFACTS).maxDamage(McdarConfig.CONFIG.getStatusArtefactDurability()));
         this.id = id;
     }
 

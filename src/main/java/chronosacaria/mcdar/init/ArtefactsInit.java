@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.EnumMap;
 import java.util.Locale;
 
-import static chronosacaria.mcdar.config.McdarConfig.config;
+import static chronosacaria.mcdar.config.McdarConfig.CONFIG;
 
 public class ArtefactsInit {
 
@@ -23,7 +23,7 @@ public class ArtefactsInit {
     public static void init() {
 
         for (DamagingArtefactID artefactID : DamagingArtefactID.values()) {
-            if (!config.enableDamagingArtefact.get(artefactID))
+            if (!CONFIG.enableDamagingArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
@@ -42,7 +42,7 @@ public class ArtefactsInit {
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (StatusInflictingArtefactID artefactID : StatusInflictingArtefactID.values()) {
-            if (!config.enableStatusInflictingArtefact.get(artefactID))
+            if (!CONFIG.enableStatusInflictingArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
@@ -59,7 +59,7 @@ public class ArtefactsInit {
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (QuiverArtefactID artefactID : QuiverArtefactID.values()) {
-            if (!config.enableQuiverArtefact.get(artefactID))
+            if (!CONFIG.enableQuiverArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
@@ -75,7 +75,7 @@ public class ArtefactsInit {
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (SummoningArtefactID artefactID : SummoningArtefactID.values()) {
-            if (!config.enableSummoningArtefact.get(artefactID))
+            if (!CONFIG.enableSummoningArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
@@ -92,7 +92,7 @@ public class ArtefactsInit {
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (AgilityArtefactID artefactID : AgilityArtefactID.values()) {
-            if (!config.enableAgilityArtefact.get(artefactID))
+            if (!CONFIG.enableAgilityArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
@@ -108,7 +108,7 @@ public class ArtefactsInit {
             registerArtefacts(artefactID.toString().toLowerCase(Locale.ROOT), item);
         }
         for (DefenciveArtefactID artefactID : DefenciveArtefactID.values()) {
-            if (!config.enableDefenciveArtefact.get(artefactID))
+            if (!CONFIG.enableDefenciveArtefact.get(artefactID))
                 continue;
 
             Item item = switch (artefactID) {
