@@ -22,86 +22,79 @@ public class McdarConfig implements ConfigData {
     }
 
     // CONFIG contents:
-    public EnumMap<EnchantID, Boolean> enableEnchantment = new EnumMap<>(EnchantID.class);
-    public EnumMap<DamagingArtefactID, Boolean> enableDamagingArtefact = new EnumMap<>(DamagingArtefactID.class);
-    public EnumMap<StatusInflictingArtefactID, Boolean> enableStatusInflictingArtefact = new EnumMap<>(StatusInflictingArtefactID.class);
-    public EnumMap<QuiverArtefactID, Boolean> enableQuiverArtefact = new EnumMap<>(QuiverArtefactID.class);
-    public EnumMap<SummoningArtefactID, Boolean> enableSummoningArtefact = new EnumMap<>(SummoningArtefactID.class);
-    public EnumMap<AgilityArtefactID, Boolean> enableAgilityArtefact = new EnumMap<>(AgilityArtefactID.class);
-    public EnumMap<DefenciveArtefactID, Boolean> enableDefenciveArtefact = new EnumMap<>(DefenciveArtefactID.class);
+    public final EnumMap<EnchantID, Boolean> ENABLE_ENCHANTMENT = new EnumMap<>(EnchantID.class);
+    public final EnumMap<DamagingArtifactID, Boolean> ENABLE_DAMAGING_ARTIFACT = new EnumMap<>(DamagingArtifactID.class);
+    public final EnumMap<StatusInflictingArtifactID, Boolean> ENABLE_STATUS_INFLICTING_ARTIFACT = new EnumMap<>(StatusInflictingArtifactID.class);
+    public final EnumMap<QuiverArtifactID, Boolean> ENABLE_QUIVER_ARTIFACT = new EnumMap<>(QuiverArtifactID.class);
+    public final EnumMap<SummoningArtifactID, Boolean> ENABLE_SUMMONING_ARTIFACT = new EnumMap<>(SummoningArtifactID.class);
+    public final EnumMap<AgilityArtifactID, Boolean> ENABLE_AGILITY_ARTIFACT = new EnumMap<>(AgilityArtifactID.class);
+    public final EnumMap<DefensiveArtifactID, Boolean> ENABLE_DEFENSIVE_ARTIFACT = new EnumMap<>(DefensiveArtifactID.class);
 
+    @Comment("Artifact Durability")
+    public final int AGILITY_ARTIFACT_DURABILITY = 64;
+    public final int DAMAGING_ARTIFACT_DURABILITY = 64;
+    public final int DEFENSIVE_ARTIFACT_DURABILITY = 64;
+    public final int QUIVER_ARTIFACT_DURABILITY = 7;
+    public final int STATUS_ARTIFACT_DURABILITY = 64;
+    public final int SUMMONING_ARTIFACT_DURABILITY = 8;
 
-    @Comment("Artefact Durability")
-    public int agilityArtefactDurability = 64;
-    public int damagingArtefactDurability = 64;
-    public int defenciveArtefactDurability = 64;
-    public int quiverArtefactDurability = 7;
-    public int statusArtefactDurability = 64;
-    public int summoningArtefactDurability = 8;
-
-    public int getAgilityArtefactDurability(){
-        return agilityArtefactDurability;
+    public int getAgilityArtifactDurability(){
+        return AGILITY_ARTIFACT_DURABILITY;
     }
-    public int getDamagingArtefactDurability(){
-        return damagingArtefactDurability;
+    public int getDamagingArtifactDurability(){
+        return DAMAGING_ARTIFACT_DURABILITY;
     }
-    public int getDefenciveArtefactDurability(){
-        return defenciveArtefactDurability;
+    public int getDefensiveArtifactDurability(){
+        return DEFENSIVE_ARTIFACT_DURABILITY;
     }
-    public int getQuiverArtefactDurability(){
-        return quiverArtefactDurability;
+    public int getQuiverArtifactDurability(){
+        return QUIVER_ARTIFACT_DURABILITY;
     }
-    public int getStatusArtefactDurability(){
-        return statusArtefactDurability;
+    public int getStatusArtifactDurability(){
+        return STATUS_ARTIFACT_DURABILITY;
     }
-    public int getSummoningArtefactDurability(){
-        return summoningArtefactDurability;
-    }
-
-    @Comment("Villager Artefact Spawn Rate (Percentage where 1.0 = 100%)")
-    public float villagerArtefactSpawnRate = 0.25F;
-
-    public float getVillagerArtefactSpawnRate(){
-        return villagerArtefactSpawnRate;
+    public int getSummoningArtifactDurability(){
+        return SUMMONING_ARTIFACT_DURABILITY;
     }
 
-    @Comment("Illager Artefact Spawn Rate (Percentage where 1.0 = 100%)")
-    public float illagerArtefactSpawnRate = 0.25F;
+    @Comment("Villager Artifact Spawn Rate (Percentage where 1.0 = 100%)")
+    public final float VILLAGER_ARTIFACT_SPAWN_RATE = 0.25F;
 
-    public float getIllagerArtefactSpawnRate(){
-        return illagerArtefactSpawnRate;
+    public float getVillagerArtifactSpawnRate(){
+        return VILLAGER_ARTIFACT_SPAWN_RATE;
     }
 
-    @Comment("Dungeon Artefact Spawn Rate (Percentage where 1.0 = 100%)")
-    public float dungeonArtefactSpawnRate = 0.10F;
+    @Comment("Illager Artifact Spawn Rate (Percentage where 1.0 = 100%)")
+    public final float ILLAGER_ARTIFACT_SPAWN_RATE = 0.25F;
 
-    public float getDungeonArtefactSpawnRate(){
-        return dungeonArtefactSpawnRate;
+    public float getIllagerArtifactSpawnRate(){
+        return ILLAGER_ARTIFACT_SPAWN_RATE;
+    }
+
+    @Comment("World Artifact Spawn Rate (Percentage where 1.0 = 100%)")
+    public final float WORLD_ARTIFACT_SPAWN_RATE = 0.10F;
+
+    public float getWorldArtifactSpawnRate(){
+        return WORLD_ARTIFACT_SPAWN_RATE;
     }
 
     // set CONFIG defaults
     public McdarConfig(){
-        for (EnchantID enchantID : EnchantID.values()) {
-            enableEnchantment.put(enchantID, true);
-        }
-        for (AgilityArtefactID artefactID : AgilityArtefactID.values()){
-            enableAgilityArtefact.put(artefactID, true);
-        }
-        for (DamagingArtefactID artefactID : DamagingArtefactID.values()){
-            enableDamagingArtefact.put(artefactID, true);
-        }
-        for (DefenciveArtefactID artefactID : DefenciveArtefactID.values()){
-            enableDefenciveArtefact.put(artefactID, true);
-        }
-        for (QuiverArtefactID artefactID : QuiverArtefactID.values()){
-            enableQuiverArtefact.put(artefactID, true);
-        }
-        for (StatusInflictingArtefactID artefactID : StatusInflictingArtefactID.values()){
-            enableStatusInflictingArtefact.put(artefactID, true);
-        }
-        for (SummoningArtefactID artefactID : SummoningArtefactID.values()){
-            enableSummoningArtefact.put(artefactID, true);
-        }
+        for (EnchantID enchantID : EnchantID.values())
+            ENABLE_ENCHANTMENT.put(enchantID, true);
+
+        for (AgilityArtifactID artefactID : AgilityArtifactID.values())
+            ENABLE_AGILITY_ARTIFACT.put(artefactID, true);
+        for (DamagingArtifactID artefactID : DamagingArtifactID.values())
+            ENABLE_DAMAGING_ARTIFACT.put(artefactID, true);
+        for (DefensiveArtifactID artefactID : DefensiveArtifactID.values())
+            ENABLE_DEFENSIVE_ARTIFACT.put(artefactID, true);
+        for (QuiverArtifactID artefactID : QuiverArtifactID.values())
+            ENABLE_QUIVER_ARTIFACT.put(artefactID, true);
+        for (StatusInflictingArtifactID artefactID : StatusInflictingArtifactID.values())
+            ENABLE_STATUS_INFLICTING_ARTIFACT.put(artefactID, true);
+        for (SummoningArtifactID artefactID : SummoningArtifactID.values())
+            ENABLE_SUMMONING_ARTIFACT.put(artefactID, true);
     }
 
 }

@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.entities.*;
+import chronosacaria.mcdar.api.interfaces.Summonable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -18,24 +18,9 @@ import java.util.List;
 public class AbilityHelper {
 
     public static boolean isPetOf(LivingEntity self, LivingEntity owner){
-        if (self instanceof GolemKitGolemEntity)
-            return ((GolemKitGolemEntity) self)
-                    .getSummoner() == owner;
-        if (self instanceof TastyBoneWolfEntity)
-            return ((TastyBoneWolfEntity) self)
-                    .getSummoner() == owner;
-        if (self instanceof WonderfulWheatLlamaEntity)
-            return ((WonderfulWheatLlamaEntity) self)
-                    .getSummoner() == owner;
-        if (self instanceof EnchantedGrassRedSheepEntity)
-            return ((EnchantedGrassRedSheepEntity) self)
-                    .getSummoner() == owner;
-        if (self instanceof EnchantedGrassGreenSheepEntity)
-            return ((EnchantedGrassGreenSheepEntity) self)
-                    .getSummoner() == owner;
-        if (self instanceof EnchantedGrassBlueSheepEntity)
-            return ((EnchantedGrassBlueSheepEntity) self)
-                    .getSummoner() == owner;
+        if (self instanceof Summonable summonable) {
+            return summonable.getSummoner() == owner;
+        }
         return false;
     }
 
@@ -70,10 +55,10 @@ public class AbilityHelper {
         return false;
     }
 
-    public static final List<ItemStack> SATCHEL_OF_ELIXIRS_LIST = Collections.unmodifiableList(Arrays.asList(
+    public static final List<ItemStack> SATCHEL_OF_ELIXIRS_LIST = List.of(
             PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.STRENGTH),
             PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.SWIFTNESS),
-            PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.INVISIBILITY)));
+            PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.INVISIBILITY));
 
     public static final List<Item> SATCHEL_OF_SNACKS_LIST = Collections.unmodifiableList(Arrays.asList(
             Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,

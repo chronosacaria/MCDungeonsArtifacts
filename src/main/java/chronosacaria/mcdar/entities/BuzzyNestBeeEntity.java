@@ -20,11 +20,10 @@ import java.util.UUID;
 
 public class BuzzyNestBeeEntity extends BeeEntity implements Summonable {
 
-
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
     public BuzzyNestBeeEntity(EntityType<? extends BuzzyNestBeeEntity> type, World world){
-        super(EntityType.BEE, world);
+        super(type, world);
     }
 
     public static DefaultAttributeContainer.Builder createBuzzyNestBeeAttributes(){
@@ -45,7 +44,6 @@ public class BuzzyNestBeeEntity extends BeeEntity implements Summonable {
         return this.dataTracker.get(SUMMONER_UUID);
     }
 
-    @Override
     public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
@@ -64,26 +62,19 @@ public class BuzzyNestBeeEntity extends BeeEntity implements Summonable {
         }
     }
 
-
-
     protected void mobTick(){
-        if (getSummoner() instanceof PlayerEntity){
-            if (getSummoner().getAttacker() != null){
-                this.setBeeAttacker(getSummoner().getAttacker());
-            }
-
-            if (getSummoner().getAttacking() != null){
-                this.setBeeAttacker(getSummoner().getAttacking());
-            }
+        if (getSummoner() instanceof PlayerEntity summoner){
+            if (summoner.getAttacking() != null)
+                this.setBeeAttacker(summoner.getAttacking());
+            else if (summoner.getAttacker() != null)
+                this.setBeeAttacker(summoner.getAttacker());
         }
         super.mobTick();
     }
 
-    private boolean setBeeAttacker(LivingEntity attacker){
-        if (attacker.equals(getSummoner()))
-            return false;
-        setAttacker(attacker);
-        return true;
+    private void setBeeAttacker(LivingEntity attacker){
+        if (!attacker.equals(getSummoner()))
+            super.setAttacker(attacker);
     }
 
     public boolean tryAttack(Entity target){

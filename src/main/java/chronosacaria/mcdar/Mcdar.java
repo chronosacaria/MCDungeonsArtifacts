@@ -1,6 +1,6 @@
 package chronosacaria.mcdar;
 
-import chronosacaria.mcdar.enums.DamagingArtefactID;
+import chronosacaria.mcdar.enums.DamagingArtifactID;
 import chronosacaria.mcdar.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -21,11 +21,11 @@ public class Mcdar implements ModInitializer {
 
     public static final ItemGroup ARTEFACTS = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "artefacts"),
-            () -> new ItemStack(ArtefactsInit.damagingArtefact.get(DamagingArtefactID.LIGHTNING_ROD)));
+            () -> new ItemStack(ArtifactsInit.damagingArtifact.get(DamagingArtifactID.LIGHTNING_ROD)));
 
     @Override
     public void onInitialize() {
-        ArtefactsInit.init();
+        ArtifactsInit.init();
         EnchantsRegistry.init();
         StatusEffectInit.init();
         LootRegistry.init();

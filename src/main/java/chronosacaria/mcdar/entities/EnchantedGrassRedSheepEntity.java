@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowRedSheepSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -8,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -29,7 +29,6 @@ import java.util.UUID;
 public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
-    private EatGrassGoal eatGrassGoal;
 
     public EnchantedGrassRedSheepEntity(EntityType<? extends EnchantedGrassRedSheepEntity> type, World world) {
         super(EntityType.SHEEP, world);
@@ -51,22 +50,20 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
 
     @Override
     protected void initGoals(){
-        this.eatGrassGoal = new EatGrassGoal(this);
+        EatGrassGoal eatGrassGoal = new EatGrassGoal(this);
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
-        this.goalSelector.add(4, this.eatGrassGoal);
+        this.goalSelector.add(4, eatGrassGoal);
         this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0D, true));
-        //this.goalSelector.add(5, new SheepAttackGoal(this));
-        this.goalSelector.add(6, new FollowRedSheepSummonerGoal(this, this.getSummoner(), this.world, 1.0,
-                this.getNavigation(), 90.0F, 3.0F, true));
+        this.goalSelector.add(6, new FollowRedSheepSummonerGoal(this, this.getSummoner(), 1.0,
+                this.getNavigation(), 90.0F, 3.0F));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.targetSelector.add(1, (new RevengeGoal(this, new Class[0])));
+        this.targetSelector.add(1, new RevengeGoal(this));
     }
 
-    @Override
     public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
@@ -80,57 +77,37 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(NbtCompound tag){
+    @Override
+    public void writeCustomDataToNbt(NbtCompound tag){
         super.writeCustomDataToNbt(tag);
-        tag.putUuid("SummonerUUID",getSummonerUuid().get());
+        if (getSummonerUuid().isPresent())
+            tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(NbtCompound tag){
+    @Override
+    public void readCustomDataFromNbt(NbtCompound tag){
         super.readCustomDataFromNbt(tag);
-        UUID id;
-        if (tag.contains("SummonerUUID")){
-            id = tag.getUuid("SummonerUUID");
-        } else {
-            id = tag.getUuid("SummonerUUID");
-        }
+        UUID id = tag.getUuid("SummonerUUID");
         if (id != null){
-            this.setSummonerUuid(tag.getUuid("SummonerUUID"));
+            this.setSummonerUuid(id);
         }
     }
 
     @Override
     public boolean tryAttack(Entity target) {
-        boolean bl = target.damage(DamageSource.mob(this),
-                8.0F);
-        if (bl) {
-            this.tryAttack(target);
-            this.playSound(SoundEvents.ENTITY_SHEEP_AMBIENT, 1f,(this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-        }
-
-        return bl;
+        return SummoningHelper.attackTarget(this, target, SoundEvents.ENTITY_SHEEP_AMBIENT, 8.0f);
     }
 
     @Override
     public void setAttacker(LivingEntity attacker){
-        if (attacker == getSummoner()) {
-
-        } else {
+        if (attacker != null && !attacker.equals(getSummoner()))
             super.setAttacker(attacker);
-        }
     }
 
     @Override
-    public void tickMovement(){
-        if (this.isAlive()){
-            if (getSummoner() != null){
-                if (getSummoner().getAttacker() != null){
-                    this.setTarget(getSummoner().getAttacker());
-                } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                    this.setTarget(getSummoner().getAttacking());
-                }
-            }
-        }
+    public void tickMovement() {
         super.tickMovement();
+        SummoningHelper.trackAndProtectSummoner(this);
     }
 
     @Override
@@ -148,6 +125,6 @@ public class EnchantedGrassRedSheepEntity extends SheepEntity implements Summona
     }
 
     static {
-        SUMMONER_UUID = DataTracker.registerData(EnchantedGrassBlueSheepEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+        SUMMONER_UUID = DataTracker.registerData(EnchantedGrassRedSheepEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
 }

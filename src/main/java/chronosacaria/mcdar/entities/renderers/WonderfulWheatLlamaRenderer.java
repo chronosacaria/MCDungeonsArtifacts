@@ -9,13 +9,12 @@ import net.minecraft.util.Identifier;
 
 public class WonderfulWheatLlamaRenderer extends MobEntityRenderer<WonderfulWheatLlamaEntity, LlamaEntityModel<WonderfulWheatLlamaEntity>> {
     public WonderfulWheatLlamaRenderer(EntityRendererFactory.Context context) {
-        super(context, new LlamaEntityModel(context.getPart(EntityModelLayers.LLAMA)), 0.7F);
+        super(context, new LlamaEntityModel<>(context.getPart(EntityModelLayers.LLAMA)), 0.7F);
     }
 
     @Override
     public Identifier getTexture(WonderfulWheatLlamaEntity entity){
         return new Identifier("textures/entity/llama/llama.png");
     }
-
 
 }

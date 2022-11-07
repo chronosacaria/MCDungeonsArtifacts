@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowLlamaSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -26,8 +27,7 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
 
 
     public WonderfulWheatLlamaEntity(EntityType<? extends WonderfulWheatLlamaEntity> type, World world) {
-        super(EntityType.LLAMA, world);
-        //this.setTamed(true);
+        super(type, world);
     }
 
     public static DefaultAttributeContainer.Builder createLlamaAttributes() {
@@ -42,8 +42,8 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
     @Override
     protected void initGoals(){
 
-        this.goalSelector.add(6, new FollowLlamaSummonerGoal(this, this.getSummoner(), this.world, 1.0,
-                this.getNavigation(), 90.0F, 3.0F, true));
+        this.goalSelector.add(6, new FollowLlamaSummonerGoal(this, this.getSummoner(), 1.0,
+                this.getNavigation(), 90.0F, 3.0F));
         this.initCustomGoals();
     }
 
@@ -52,7 +52,6 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
         this.targetSelector.add(2, new RevengeGoal(this));
     }
 
-    @Override
     public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
@@ -66,15 +65,19 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(NbtCompound tag){
+    @Override
+    public void writeCustomDataToNbt(NbtCompound tag){
         super.writeCustomDataToNbt(tag);
-        tag.putUuid("SummonerUUID",getSummonerUuid().get());
+        if (getSummonerUuid().isPresent())
+            tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(NbtCompound tag){
+    @Override
+    public void readCustomDataFromNbt(NbtCompound tag){
         super.readCustomDataFromNbt(tag);
-        if (tag.getUuid("SummonerUUID") != null)
-            this.setSummonerUuid(tag.getUuid("SummonerUUID"));
+        UUID id = tag.getUuid("SummonerUUID");
+        if (id != null)
+            this.setSummonerUuid(id);
     }
 
     @Override
@@ -85,14 +88,8 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
 
     @Override
     public void tickMovement() {
-        if (this.isAlive() && getSummoner() != null) {
-            if (getSummoner().getAttacker() != null) {
-                this.setTarget(getSummoner().getAttacker());
-            } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                this.setTarget(getSummoner().getAttacking());
-            }
-        }
         super.tickMovement();
+        SummoningHelper.trackAndProtectSummoner(this);
     }
 
     public LivingEntity getSummoner(){

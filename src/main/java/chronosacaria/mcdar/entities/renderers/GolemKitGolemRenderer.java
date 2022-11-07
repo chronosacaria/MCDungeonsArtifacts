@@ -9,13 +9,12 @@ import net.minecraft.util.Identifier;
 
 public class GolemKitGolemRenderer extends MobEntityRenderer<GolemKitGolemEntity, IronGolemEntityModel<GolemKitGolemEntity>> {
     public GolemKitGolemRenderer(EntityRendererFactory.Context context) {
-        super(context, new IronGolemEntityModel(context.getPart(EntityModelLayers.IRON_GOLEM)), 0.7F);
+        super(context, new IronGolemEntityModel<>(context.getPart(EntityModelLayers.IRON_GOLEM)), 0.7F);
     }
 
     @Override
     public Identifier getTexture(GolemKitGolemEntity entity){
         return new Identifier("textures/entity/iron_golem/iron_golem.png");
     }
-
 
 }

@@ -4,8 +4,8 @@ import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.enums.DefenciveArtefactID;
-import chronosacaria.mcdar.init.ArtefactsInit;
+import chronosacaria.mcdar.enums.DamagingArtifactID;
+import chronosacaria.mcdar.init.ArtifactsInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,8 +25,8 @@ public class ArtifactEffects {
         }
 
         ItemStack offhand = player.getOffHandStack();
-        if (target != null && offhand.getItem() == ArtefactsInit.defenciveArtefact.get(DefenciveArtefactID.POWERSHAKER).asItem()) {
-            if (player.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && player.getRandom().nextFloat() <= 0.2F) {
+        if (target != null && offhand.getItem() == ArtifactsInit.damagingArtifact.get(DamagingArtifactID.POWERSHAKER).asItem()) {
+            if (player.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && CleanlinessHelper.percentToOccur(20)) {
                 CleanlinessHelper.playCenteredSound(target, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
                 AOECloudHelper.spawnExplosionCloud(player, target, 3.0F);
                 for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(target, 3.0F,
@@ -41,8 +41,7 @@ public class ArtifactEffects {
 
         for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity))) {
-            if (nearbyEntity == null) return;
-            if (nearbyEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode) return;
+            if (nearbyEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode) continue;
 
             AOECloudHelper.spawnExplosionCloud(user, nearbyEntity, 3);
             nearbyEntity.damage(DamageSource.explosion(user), damageAmount);
@@ -61,7 +60,6 @@ public class ArtifactEffects {
                         case 2 -> StatusEffects.SPEED;
                         default -> StatusEffects.SPEED;
                     }, 100, 2);
-            nearbyEntity.clearStatusEffects();
             nearbyEntity.addStatusEffect(statusEffectInstance);
         }
     }

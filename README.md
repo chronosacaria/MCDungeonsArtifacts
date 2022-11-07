@@ -1,2 +1,2 @@
 # MCDungeonsArtifacts
- Bringing the Artefacts of Minecraft Dungeons to Minecraft
+ Bringing the Artifacts of Minecraft Dungeons to Minecraft

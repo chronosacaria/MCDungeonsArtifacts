@@ -1,12 +1,11 @@
 package chronosacaria.mcdar.mixin;
 
 import chronosacaria.mcdar.api.AOEHelper;
+import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
 import chronosacaria.mcdar.config.McdarConfig;
-import chronosacaria.mcdar.enums.QuiverArtefactID;
-import chronosacaria.mcdar.init.ArtefactsInit;
+import chronosacaria.mcdar.enums.QuiverArtifactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -14,44 +13,40 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PersistentProjectileEntity.class)
-public abstract class PersistentProjectileEntityMixin {
-    @Shadow private double damage;
+public class PersistentProjectileEntityMixin {
 
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     public void onShieldingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
-        PersistentProjectileEntity arrowEntity = (PersistentProjectileEntity) (Object) this;
-        Entity entity = entityHitResult.getEntity();
-        if (entity instanceof LivingEntity){
-            if (((LivingEntity) entity).hasStatusEffect(StatusEffectInit.SHIELDING)){
+        if (entityHitResult.getEntity() instanceof LivingEntity living){
+            if (living.hasStatusEffect(StatusEffectInit.SHIELDING)){
                 if (ci.isCancellable()){
                     ci.cancel();
                 }
-                ProjectileEffectHelper.ricochetArrowLikeShield(arrowEntity, (LivingEntity) entity);
+                PersistentProjectileEntity arrowEntity = (PersistentProjectileEntity) (Object) this;
+                ProjectileEffectHelper.ricochetArrowLikeShield(arrowEntity);
             }
         }
     }
 
     @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onThunderingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
-        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
-        Entity entity = entityHitResult.getEntity();
-        damage = persistentProjectileEntity.getDamage();
+        PersistentProjectileEntity ppe = ((PersistentProjectileEntity) (Object) this);
 
-        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER)) {
-            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
+        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.THUNDERING_QUIVER)) {
+            if (ppe.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.THUNDERING_QUIVER).asItem()) {
-                    float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+                if (shooter instanceof PlayerEntity shootingPlayer && entityHitResult.getEntity() instanceof LivingEntity living &&
+                        offhand.isOf(QuiverArtifactID.THUNDERING_QUIVER.getItem())) {
+                    float effectTimer = CleanlinessHelper.getRemainingCD(shootingPlayer, offhand.getItem());
                     if (effectTimer > 0) {
-                        AOEHelper.electrocute(shooter, (LivingEntity) entity, (float) damage);
+                        AOEHelper.electrocute(shootingPlayer, living, (float) ppe.getDamage());
                     }
                 }
             }
@@ -60,18 +55,17 @@ public abstract class PersistentProjectileEntityMixin {
 
     @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void onTormentingArrowImpact(EntityHitResult entityHitResult, CallbackInfo ci){
-        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
-        Entity entity = entityHitResult.getEntity();
-        damage = persistentProjectileEntity.getDamage();
+        PersistentProjectileEntity ppe = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)){
-            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
+        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.TORMENT_QUIVER)){
+            if (ppe.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (shooter instanceof PlayerEntity && entity instanceof LivingEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()) {
-                    float effectTimer = ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+                if (shooter instanceof PlayerEntity shootingPlayer && entityHitResult.getEntity() instanceof LivingEntity &&
+                        offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.getItem())) {
+                    float effectTimer = CleanlinessHelper.getRemainingCD(shootingPlayer, offhand.getItem());
                     if (effectTimer > 0) {
-                        persistentProjectileEntity.setPunch(1);
+                        ppe.setPunch(1);
                     }
                 }
             }
@@ -80,15 +74,14 @@ public abstract class PersistentProjectileEntityMixin {
 
     @Inject(method = "onBlockHit", at = @At("HEAD"), cancellable = true)
     public void onTormentingArrowBlockImpact(BlockHitResult blockHitResult, CallbackInfo ci){
-        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
+        PersistentProjectileEntity ppe = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER)) {
-            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
+        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.TORMENT_QUIVER)) {
+            if (ppe.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.TORMENT_QUIVER).asItem()) {
-                    float effectTimer =
-                            ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+                if (shooter instanceof PlayerEntity shootingPlayer && offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.getItem())) {
+                    float effectTimer = CleanlinessHelper.getRemainingCD(shootingPlayer, offhand.getItem());
                     if (effectTimer > 0) {
                         if (ci.isCancellable()) {
                             ci.cancel();
@@ -101,17 +94,16 @@ public abstract class PersistentProjectileEntityMixin {
 
     @Inject(method = "getDragInWater", at = @At("RETURN"), cancellable = true)
     public void onHarpoonArrowFire(CallbackInfoReturnable<Float> cir) {
-        PersistentProjectileEntity persistentProjectileEntity = (PersistentProjectileEntity) (Object) this;
+        PersistentProjectileEntity ppe = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.enableQuiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER)) {
-            if (persistentProjectileEntity.getOwner() instanceof LivingEntity shooter) {
+        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.HARPOON_QUIVER)) {
+            if (ppe.getOwner() instanceof LivingEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (shooter instanceof PlayerEntity && offhand.getItem() == ArtefactsInit.quiverArtefact.get(QuiverArtefactID.HARPOON_QUIVER).asItem()) {
-                    float effectTimer =
-                            ((PlayerEntity) shooter).getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0);
+                if (shooter instanceof PlayerEntity shootingPlayer && offhand.isOf(QuiverArtifactID.HARPOON_QUIVER.getItem())) {
+                    float effectTimer = CleanlinessHelper.getRemainingCD(shootingPlayer, offhand.getItem());
                     if (effectTimer > 0) {
-                        if (persistentProjectileEntity.isTouchingWater()) {
+                        if (ppe.isTouchingWater()) {
                             float normDrag = cir.getReturnValueF();
                             float v = (cir.getReturnValue() == null ? 0.6F : normDrag) * 1.542f;
                             cir.setReturnValue(v);

@@ -2,7 +2,7 @@ package chronosacaria.mcdar.init;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
-import chronosacaria.mcdar.enchants.ArmourEnchantment;
+import chronosacaria.mcdar.enchants.ArmorEnchantment;
 import chronosacaria.mcdar.enchants.EnchantID;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.registry.Registry;
@@ -15,10 +15,10 @@ public class EnchantsRegistry {
 
     public static void init(){
         for (EnchantID enchantID : EnchantID.values()) {
-            if (!McdarConfig.CONFIG.enableEnchantment.get(enchantID))
+            if (!McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(enchantID))
                 continue;
 
-            Enchantment enchantment = new ArmourEnchantment(enchantID);
+            Enchantment enchantment = new ArmorEnchantment(enchantID);
 
             enchants.put(enchantID, enchantment);
             registerEnchant(enchantID.toString().toLowerCase(Locale.ROOT), enchantment);

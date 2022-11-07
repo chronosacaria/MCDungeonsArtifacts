@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.entities;
 
+import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.goals.FollowGolemSummonerGoal;
 import net.minecraft.entity.Entity;
@@ -24,16 +25,8 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
 
 
     public GolemKitGolemEntity(EntityType<? extends GolemKitGolemEntity> type, World world) {
-        super(EntityType.IRON_GOLEM, world);
-        //this.setTamed(true);
+        super(type, world);
     }
-
-    //public static DefaultAttributeContainer.Builder createTastyBoneWolfAttributes(){
-    //    return MobEntity.createMobAttributes()
-    //            .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30000001192092896D)
-    //            .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-    //            .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
-    //}
 
     protected void initDataTracker(){
         super.initDataTracker();
@@ -43,8 +36,8 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
     @Override
     protected void initGoals(){
 
-        this.goalSelector.add(6, new FollowGolemSummonerGoal(this, this.getSummoner(), this.world, 1.0,
-                this.getNavigation(), 90.0F, 3.0F, true));
+        this.goalSelector.add(6, new FollowGolemSummonerGoal(this, this.getSummoner(), 1.0,
+                this.getNavigation(), 90.0F, 3.0F));
         this.initCustomGoals();
     }
 
@@ -53,7 +46,6 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
         this.targetSelector.add(2, new RevengeGoal(this));
     }
 
-    @Override
     public void setSummonerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(SUMMONER_UUID, Optional.ofNullable(uuid));
     }
@@ -67,43 +59,31 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Summonable {
         this.setSummonerUuid(player.getUuid());
     }
 
-    public void writeCustomDateToTag(NbtCompound tag){
+    @Override
+    public void writeCustomDataToNbt(NbtCompound tag) {
         super.writeCustomDataToNbt(tag);
-        tag.putUuid("SummonerUUID",getSummonerUuid().get());
+        if (getSummonerUuid().isPresent())
+            tag.putUuid("SummonerUUID",getSummonerUuid().get());
     }
 
-    public void readCustomDataFromTag(NbtCompound tag){
+    @Override
+    public void readCustomDataFromNbt(NbtCompound tag) {
         super.readCustomDataFromNbt(tag);
-        UUID id;
-        if (tag.contains("SummonerUUID")){
-            id = tag.getUuid("SummonerUUID");
-        } else {
-            id = tag.getUuid("SummonerUUID");
-        }
-        if (id != null){
-            this.setSummonerUuid(tag.getUuid("SummonerUUID"));
-        }
+        UUID id = tag.getUuid("SummonerUUID");
+        if (id != null)
+            this.setSummonerUuid(id);
     }
 
     @Override
     public void setAttacker(LivingEntity attacker){
-        if (attacker == getSummoner()) {
-
-        } else {
+        if (attacker != null && !attacker.equals(getSummoner()))
             super.setAttacker(attacker);
-        }
     }
 
     @Override
     public void tickMovement() {
-        if (this.isAlive() && getSummoner() != null) {
-            if (getSummoner().getAttacker() != null) {
-                this.setTarget(getSummoner().getAttacker());
-            } else if (getSummoner().getAttacking() != null && getSummoner().getAttacking() != this) {
-                this.setTarget(getSummoner().getAttacking());
-            }
-        }
         super.tickMovement();
+        SummoningHelper.trackAndProtectSummoner(this);
     }
 
     public LivingEntity getSummoner(){

@@ -7,7 +7,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class StunnedStatusEffect extends StatusEffect {
-
     public StunnedStatusEffect(StatusEffectCategory type, int color, String id) {
         super(type, color);
         Registry.register(Registry.STATUS_EFFECT, new Identifier(Mcdar.MOD_ID, id), this);

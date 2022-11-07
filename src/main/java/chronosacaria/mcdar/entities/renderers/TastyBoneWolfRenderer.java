@@ -9,18 +9,12 @@ import net.minecraft.util.Identifier;
 
 public class TastyBoneWolfRenderer extends MobEntityRenderer<TastyBoneWolfEntity, WolfEntityModel<TastyBoneWolfEntity>> {
     public TastyBoneWolfRenderer(EntityRendererFactory.Context context) {
-        super(context, new WolfEntityModel(context.getPart(EntityModelLayers.WOLF)), 0.5F);
+        super(context, new WolfEntityModel<>(context.getPart(EntityModelLayers.WOLF)), 0.5F);
     }
 
     @Override
     public Identifier getTexture(TastyBoneWolfEntity entity){
-        if (!entity.hasAngerTime()){
-            return new Identifier("textures/entity/wolf/wolf_angry.png");
-        } else if (entity.hasAngerTime()){
-            return new Identifier("textures/entity/wolf/wolf.png");
-        }
-        return new Identifier("textures/entity/wolf/wolf.png");
+        return new Identifier("textures/entity/wolf/wolf" + (entity.hasAngerTime() ? "" : "_angry") + ".png");
     }
-
 
 }
