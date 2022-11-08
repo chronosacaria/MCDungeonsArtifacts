@@ -52,9 +52,9 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Summon
     protected void initGoals(){
         EatGrassGoal eatGrassGoal = new EatGrassGoal(this);
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
-        this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
+        //this.goalSelector.add(1, new AnimalMateGoal(this, 1.0D));
+        //this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(Items.WHEAT), false));
+        //this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.add(4, eatGrassGoal);
         this.goalSelector.add(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.add(6, new FollowBlueSheepSummonerGoal(this, this.getSummoner(), 1.0,

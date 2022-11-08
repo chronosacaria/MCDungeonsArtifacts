@@ -27,12 +27,7 @@ public class BuzzyNestBeeEntity extends BeeEntity implements Summonable {
     }
 
     public static DefaultAttributeContainer.Builder createBuzzyNestBeeAttributes(){
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0D)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 2.5D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 2.5D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0D);
+        return BeeEntity.createBeeAttributes();
     }
 
     protected void initDataTracker(){

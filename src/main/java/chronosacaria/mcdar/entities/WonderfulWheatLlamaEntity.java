@@ -14,14 +14,16 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.LlamaEntity;
+import net.minecraft.entity.passive.TraderLlamaEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.DyeColor;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable {
+public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Summonable {
 
     protected static final TrackedData<Optional<UUID>> SUMMONER_UUID;
 
@@ -31,12 +33,18 @@ public class WonderfulWheatLlamaEntity extends LlamaEntity implements Summonable
     }
 
     public static DefaultAttributeContainer.Builder createLlamaAttributes() {
-        return createAbstractDonkeyAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+        return LlamaEntity.createLlamaAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     protected void initDataTracker(){
         super.initDataTracker();
         this.dataTracker.startTracking(SUMMONER_UUID, Optional.empty());
+    }
+
+    @Nullable
+    @Override
+    public DyeColor getCarpetColor() {
+        return super.getCarpetColor();
     }
 
     @Override
