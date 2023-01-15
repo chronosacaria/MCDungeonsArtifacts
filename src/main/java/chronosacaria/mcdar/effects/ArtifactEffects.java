@@ -8,6 +8,7 @@ import chronosacaria.mcdar.enums.DamagingArtifactID;
 import chronosacaria.mcdar.init.ArtifactsInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,40 +27,35 @@ public class ArtifactEffects {
 
         ItemStack offhand = player.getOffHandStack();
         if (target != null && offhand.getItem() == ArtifactsInit.damagingArtifact.get(DamagingArtifactID.POWERSHAKER).asItem()) {
-            if (player.getItemCooldownManager().getCooldownProgress(offhand.getItem(), 0) > 0 && CleanlinessHelper.percentToOccur(20)) {
+            if (CleanlinessHelper.isCoolingDown(player, offhand.getItem()) && CleanlinessHelper.percentToOccur(20)) {
                 CleanlinessHelper.playCenteredSound(target, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
                 AOECloudHelper.spawnExplosionCloud(player, target, 3.0F);
-                for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(target, 3.0F,
-                        (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, player, target))) {
-                    nearbyEntity.damage(DamageSource.explosion(player), target.getMaxHealth() * 0.2F);
-                }
+                AOEHelper.affectNearbyEntities(player, 3.0f,
+                        (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, player, target),
+                        livingEntity -> livingEntity.damage(DamageSource.explosion(player), target.getMaxHealth() * 0.2F)
+                );
             }
         }
     }
 
     public static void causeBlastFungusExplosions(LivingEntity user, float distance, float damageAmount) {
-
-        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, distance,
-                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity))) {
-            if (nearbyEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode) continue;
-
-            AOECloudHelper.spawnExplosionCloud(user, nearbyEntity, 3);
-            nearbyEntity.damage(DamageSource.explosion(user), damageAmount);
-        }
+        AOEHelper.affectNearbyEntities(user, distance,
+                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity),
+                livingEntity -> {
+                    if (!(livingEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode)) {
+                        AOECloudHelper.spawnExplosionCloud(user, livingEntity, 3);
+                        livingEntity.damage(DamageSource.explosion(user), damageAmount);
+                    }
+                }
+        );
     }
 
     public static void enchantersTomeEffects(PlayerEntity user) {
         for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, user))){
-            //noinspection RedundantSuppression
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(
-                    switch ((new Random()).nextInt(3)) {
-                        case 0 -> StatusEffects.STRENGTH;
-                        case 1 -> StatusEffects.HASTE;
-                        //noinspection DuplicateBranchesInSwitch
-                        case 2 -> StatusEffects.SPEED;
-                        default -> StatusEffects.SPEED;
-                    }, 100, 2);
+            StatusEffect[] statuses = {StatusEffects.HASTE, StatusEffects.STRENGTH, StatusEffects.SPEED};
+            StatusEffectInstance statusEffectInstance =
+                    new StatusEffectInstance(statuses[new Random().nextInt(statuses.length)], 100, 2);
             nearbyEntity.addStatusEffect(statusEffectInstance);
         }
     }

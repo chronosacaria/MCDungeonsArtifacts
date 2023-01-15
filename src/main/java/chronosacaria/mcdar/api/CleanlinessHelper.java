@@ -59,7 +59,7 @@ public class CleanlinessHelper {
         mcdar$dropItem(le, new ItemStack(item, amount));
     }
 
-    public static float getRemainingCD(PlayerEntity player, Item item) {
-        return player.getItemCooldownManager().getCooldownProgress(item, 0);
+    public static boolean isCoolingDown(PlayerEntity player, Item item) {
+        return player.getItemCooldownManager().isCoolingDown(item);
     }
 }
