@@ -115,7 +115,7 @@ public class AOEHelper {
     }
 
     public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
-        DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
+        DamageSource magicExplosion = DamageSource.GENERIC.setExplosive().setUsesMagic();
 
         for (LivingEntity nearbyEntity : getEntitiesByPredicate(victim, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, victim))) {

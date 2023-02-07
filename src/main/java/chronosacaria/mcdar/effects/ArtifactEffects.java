@@ -32,7 +32,7 @@ public class ArtifactEffects {
                 AOECloudHelper.spawnExplosionCloud(player, target, 3.0F);
                 AOEHelper.affectNearbyEntities(player, 3.0f,
                         (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, player, target),
-                        livingEntity -> livingEntity.damage(DamageSource.explosion(player), target.getMaxHealth() * 0.2F)
+                        livingEntity -> livingEntity.damage(DamageSource.GENERIC.setExplosive(), target.getMaxHealth() * 0.2F)
                 );
             }
         }
@@ -44,7 +44,7 @@ public class ArtifactEffects {
                 livingEntity -> {
                     if (!(livingEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode)) {
                         AOECloudHelper.spawnExplosionCloud(user, livingEntity, 3);
-                        livingEntity.damage(DamageSource.explosion(user), damageAmount);
+                        livingEntity.damage(DamageSource.GENERIC.setExplosive(), damageAmount);
                     }
                 }
         );

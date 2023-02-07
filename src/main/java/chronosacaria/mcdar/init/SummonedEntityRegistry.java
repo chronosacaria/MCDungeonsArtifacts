@@ -13,8 +13,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.WolfEntity;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import java.util.List;
 import java.util.Map;
@@ -68,6 +68,6 @@ public class SummonedEntityRegistry {
                                       DefaultAttributeContainer.Builder attributes,
                                       EntityType<? extends LivingEntity> entityType){
         FabricDefaultAttributeRegistry.register(entityType, attributes);
-        Registry.register(Registry.ENTITY_TYPE, Mcdar.ID(name), entityType);
+        Registry.register(Registries.ENTITY_TYPE, Mcdar.ID(name), entityType);
     }
 }

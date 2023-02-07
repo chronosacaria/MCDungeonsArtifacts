@@ -56,7 +56,7 @@ public class EnchantmentEffects {
                     AOECloudHelper.spawnExplosionCloud(summonedMob, summonedMob, 3.0F);
                     for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(summonedMob, 3.0F,
                             (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, summonedMob, summonedMob))) {
-                        nearbyEntity.damage(DamageSource.explosion(summonedMob), 15 * beastBurstLevel);
+                        nearbyEntity.damage(DamageSource.GENERIC.setExplosive(), 15 * beastBurstLevel);
                     }
                 }
             }

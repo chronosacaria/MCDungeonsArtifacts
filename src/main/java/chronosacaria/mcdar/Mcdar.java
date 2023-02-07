@@ -3,9 +3,10 @@ package chronosacaria.mcdar;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
 import chronosacaria.mcdar.init.*;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.Random;
@@ -19,9 +20,10 @@ public class Mcdar implements ModInitializer {
 
     public static final Random random = new Random();
 
-    public static final ItemGroup ARTEFACTS = FabricItemGroupBuilder.build(
-            new Identifier(MOD_ID, "artefacts"),
-            () -> new ItemStack(ArtifactsInit.damagingArtifact.get(DamagingArtifactID.LIGHTNING_ROD)));
+    public static final ItemGroup ARTEFACTS = FabricItemGroup.builder(ID("artefacts"))
+            //TODO Convert to translatable
+            .displayName(Text.literal("MC Dungeons Artifacts"))
+            .icon(() -> new ItemStack(ArtifactsInit.damagingArtifact.get(DamagingArtifactID.LIGHTNING_ROD))).build();
 
     @Override
     public void onInitialize() {

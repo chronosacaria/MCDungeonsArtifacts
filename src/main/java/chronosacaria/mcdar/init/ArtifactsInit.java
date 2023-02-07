@@ -4,7 +4,8 @@ import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.artifacts.*;
 import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import java.util.EnumMap;
 import java.util.Locale;
@@ -136,7 +137,7 @@ public class ArtifactsInit {
     }
 
     protected static void registerArtifacts(String id, Item item) {
-        Registry.register(Registry.ITEM, Mcdar.ID(id), item);
+        Registry.register(Registries.ITEM, Mcdar.ID(id), item);
     }
 
 }

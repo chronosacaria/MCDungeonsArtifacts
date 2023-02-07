@@ -4,7 +4,6 @@ import chronosacaria.mcdar.entities.renderers.*;
 import chronosacaria.mcdar.init.SummonedEntityRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 @Environment(EnvType.CLIENT)
