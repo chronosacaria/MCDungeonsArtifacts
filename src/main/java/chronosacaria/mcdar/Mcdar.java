@@ -21,8 +21,7 @@ public class Mcdar implements ModInitializer {
     public static final Random random = new Random();
 
     public static final ItemGroup ARTEFACTS = FabricItemGroup.builder(ID("artefacts"))
-            //TODO Convert to translatable
-            .displayName(Text.literal("MC Dungeons Artifacts"))
+            .displayName(Text.translatable("itemGroup.mcdar.artefacts"))
             .icon(() -> new ItemStack(ArtifactsInit.damagingArtifact.get(DamagingArtifactID.LIGHTNING_ROD))).build();
 
     @Override
