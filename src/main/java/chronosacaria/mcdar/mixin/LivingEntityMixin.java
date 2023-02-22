@@ -5,7 +5,7 @@ import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.effects.EnchantmentEffects;
 import chronosacaria.mcdar.enchants.EnchantID;
-import chronosacaria.mcdar.enums.DefenciveArtefactID;
+import chronosacaria.mcdar.enums.DamagingArtifactID;
 import chronosacaria.mcdar.init.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -55,7 +55,7 @@ public class LivingEntityMixin {
 
         LivingEntity target = (LivingEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.enableDefenciveArtefact.get(DefenciveArtefactID.POWERSHAKER))
+        if (McdarConfig.CONFIG.ENABLE_DAMAGING_ARTIFACT.get(DamagingArtifactID.POWERSHAKER))
             ArtifactEffects.activatePowerShaker(player, target);
     }
 
@@ -64,7 +64,7 @@ public class LivingEntityMixin {
         if (source.getSource() instanceof Summonable summonedEntity) {
             if (source.getSource().world instanceof ServerWorld serverWorld) {
 
-                if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_BOSS))
+                if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BOSS))
                     amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
 
             }
@@ -79,14 +79,10 @@ public class LivingEntityMixin {
 
         if (player.isAlive() && player.world instanceof ServerWorld) {
 
-            if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_BURST))
+            if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BURST))
                 EnchantmentEffects.activateBeastBurst(player);
-            if (McdarConfig.CONFIG.enableEnchantment.get(EnchantID.BEAST_SURGE))
+            if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_SURGE))
                 EnchantmentEffects.activateBeastSurge(player);
         }
-    }
-
-    public boolean isMobNotPlayer(LivingEntity livingEntity) {
-        return !(livingEntity instanceof PlayerEntity);
     }
 }

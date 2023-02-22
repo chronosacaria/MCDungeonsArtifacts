@@ -17,14 +17,13 @@ public class BuzzyNestBeeRenderer extends MobEntityRenderer<BuzzyNestBeeEntity, 
     private static final Identifier NECTAR_TEXTURE = new Identifier("textures/entity/bee/bee_nectar.png");
 
     public BuzzyNestBeeRenderer(EntityRendererFactory.Context context) {
-        super(context, new BeeEntityModel(context.getPart(EntityModelLayers.BEE)), 0.4F);
+        super(context, new BeeEntityModel<>(context.getPart(EntityModelLayers.BEE)), 0.4F);
     }
 
     public Identifier getTexture(BuzzyNestBeeEntity beeEntity) {
-        if (beeEntity.hasAngerTime()) {
+        if (beeEntity.hasAngerTime())
             return beeEntity.hasNectar() ? ANGRY_NECTAR_TEXTURE : ANGRY_TEXTURE;
-        } else {
+        else
             return beeEntity.hasNectar() ? NECTAR_TEXTURE : PASSIVE_TEXTURE;
-        }
     }
 }

@@ -23,8 +23,6 @@ import java.util.UUID;
 
 public class EnchantmentEffects {
 
-
-
     public static float beastBossDamage(Summonable summonedEntity, ServerWorld serverWorld) {
         if (summonedEntity.getSummoner() != null) {
             UUID summonerUUID = summonedEntity.getSummoner().getUuid();
@@ -51,49 +49,32 @@ public class EnchantmentEffects {
                     EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BURST),
                             player);
             if (beastBurstLevel > 0){
-                for (Entity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
+                for (LivingEntity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
                         (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
-                    if (summonedMob == null) return;
-                    if (summonedMob instanceof LivingEntity summonedMobAsLiving){
-                        CleanlinessHelper.playCenteredSound(summonedMobAsLiving, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
-                        AOECloudHelper.spawnExplosionCloud(summonedMobAsLiving, summonedMobAsLiving, 3.0F);
-                        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(summonedMobAsLiving, 3.0F,
-                                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, summonedMobAsLiving, summonedMobAsLiving))) {
-                            nearbyEntity.damage(DamageSource.explosion(summonedMobAsLiving), 15 * beastBurstLevel);
-                        }
+                    if (summonedMob == null) continue;
+                    CleanlinessHelper.playCenteredSound(summonedMob, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
+                    AOECloudHelper.spawnExplosionCloud(summonedMob, summonedMob, 3.0F);
+                    for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(summonedMob, 3.0F,
+                            (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, summonedMob, summonedMob))) {
+                        nearbyEntity.damage(DamageSource.explosion(summonedMob), 15 * beastBurstLevel);
                     }
                 }
             }
         }
     }
 
-    public static void causeBeastBurstExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
-        DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
-        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(victim, distance,
-                (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, victim)))
-            nearbyEntity.damage(magicExplosion, damageAmount);
-    }
-
     public static void activateBeastSurge(PlayerEntity player) {
         List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(player.getActiveItem());
         if (potionEffects.isEmpty()) return;
-        if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH) {
+        if (potionEffects.get(0).getEffectType().equals(StatusEffects.INSTANT_HEALTH)) {
             int beastSurgeLevel =
                     EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_SURGE),
                             player);
             if (beastSurgeLevel > 0) {
-                for (Entity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
-                        (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
-                    if (summonedMob == null) return;
-                    if (summonedMob instanceof LivingEntity summonedMobAsLiving) {
-                        StatusEffectInstance beastSurgeSpeed = new StatusEffectInstance(StatusEffects.SPEED,
-                                10 * 20, (beastSurgeLevel * 3) - 1);
-                        StatusEffectInstance beastSurgeAttack = new StatusEffectInstance(StatusEffects.STRENGTH,
-                                10 * 20, (beastSurgeLevel * 3) - 1);
-                        summonedMobAsLiving.addStatusEffect(beastSurgeSpeed);
-                        summonedMobAsLiving.addStatusEffect(beastSurgeAttack);
-                    }
-                }
+                AOEHelper.afflictNearbyEntities(LivingEntity.class, player, 10,
+                        (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player),
+                        new StatusEffectInstance(StatusEffects.SPEED, 10 * 20, (beastSurgeLevel * 3) - 1),
+                        new StatusEffectInstance(StatusEffects.STRENGTH, 10 * 20, (beastSurgeLevel * 3) - 1));
             }
         }
     }

@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static chronosacaria.mcdar.Mcdar.random;
@@ -56,6 +57,27 @@ public class AOEHelper {
         for (LivingEntity nearbyEntity : getEntitiesByPredicate(entityType, user, distance, predicate)) {
             for (StatusEffectInstance instance : statusEffectInstances)
                 nearbyEntity.addStatusEffect(instance);
+        }
+    }
+
+    public static void affectNearbyEntities(LivingEntity user, Consumer<LivingEntity> method) {
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,
+                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
+            method.accept(nearbyEntity);
+        }
+    }
+
+    public static void affectNearbyEntities(LivingEntity user, float distance,
+                                            Predicate<? super LivingEntity> predicate, Consumer<LivingEntity> method) {
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, distance, predicate)) {
+            method.accept(nearbyEntity);
+        }
+    }
+
+    public static void affectNearbyEntities(Class<? extends LivingEntity> entityType, LivingEntity user, float distance,
+                                             Predicate<? super LivingEntity> predicate, Consumer<LivingEntity> method) {
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(entityType, user, distance, predicate)) {
+            method.accept(nearbyEntity);
         }
     }
 

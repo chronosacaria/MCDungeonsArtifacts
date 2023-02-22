@@ -3,6 +3,7 @@ package chronosacaria.mcdar.api;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -16,7 +17,7 @@ import java.util.Random;
 
 public class CleanlinessHelper {
 
-    static Random random = new Random();
+    static final Random RANDOM = new Random();
 
     public static void playCenteredSound(LivingEntity center, SoundEvent soundEvent, float volume, float pitch) {
         playCenteredSound(center, soundEvent, SoundCategory.PLAYERS, volume, pitch);
@@ -30,7 +31,7 @@ public class CleanlinessHelper {
     }
 
     public static boolean percentToOccur (int chance) {
-        return random.nextInt(100) + 1 <= chance;
+        return RANDOM.nextInt(100) + 1 <= chance;
     }
 
     public static void createLoreTTips(ItemStack stack, List<Text> tooltip) {
@@ -56,5 +57,9 @@ public class CleanlinessHelper {
 
     public static void mcdar$dropItem(LivingEntity le, Item item, int amount) {
         mcdar$dropItem(le, new ItemStack(item, amount));
+    }
+
+    public static boolean isCoolingDown(PlayerEntity player, Item item) {
+        return player.getItemCooldownManager().isCoolingDown(item);
     }
 }
