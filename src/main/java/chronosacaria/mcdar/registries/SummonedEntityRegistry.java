@@ -1,9 +1,7 @@
-package chronosacaria.mcdar.init;
+package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.entities.*;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -13,18 +11,10 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.WolfEntity;
-import net.minecraft.util.registry.Registry;
-
-import java.util.List;
-import java.util.Map;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 public class SummonedEntityRegistry {
-
-    public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRIBUTES =
-            Maps.newHashMap();
-    private static final List<EntityType<?>> SUMMONED_ENTITIES = Lists.newArrayList();
-
     public static final EntityType<BuzzyNestBeeEntity> BUZZY_NEST_BEE_ENTITY =
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BuzzyNestBeeEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
@@ -68,6 +58,6 @@ public class SummonedEntityRegistry {
                                       DefaultAttributeContainer.Builder attributes,
                                       EntityType<? extends LivingEntity> entityType){
         FabricDefaultAttributeRegistry.register(entityType, attributes);
-        Registry.register(Registry.ENTITY_TYPE, Mcdar.ID(name), entityType);
+        Registry.register(Registries.ENTITY_TYPE, Mcdar.ID(name), entityType);
     }
 }

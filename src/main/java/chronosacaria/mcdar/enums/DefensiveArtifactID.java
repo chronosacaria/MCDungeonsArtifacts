@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.enums;
 
 import chronosacaria.mcdar.config.McdarConfig;
-import chronosacaria.mcdar.init.ArtifactsInit;
+import chronosacaria.mcdar.registries.ArtifactsRegistry;
 import net.minecraft.item.Item;
 
 import java.util.EnumMap;
@@ -22,7 +22,7 @@ public enum DefensiveArtifactID implements IArtifactItem{
     }
 
     public static EnumMap<DefensiveArtifactID, Item> getItemsEnum() {
-        return ArtifactsInit.defensiveArtifact;
+        return ArtifactsRegistry.defensiveArtifact;
     }
 
     @Override

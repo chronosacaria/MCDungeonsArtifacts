@@ -28,7 +28,7 @@ public class HarvesterItem extends ArtifactDamagingItem{
         if (user.totalExperience >= 40 || user.isCreative()) {
             CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
             AOECloudHelper.spawnExplosionCloud(user, user, 3.0f);
-            AOEHelper.causeMagicExplosionAttack(user, user, 15, 3.0F);
+            AOEHelper.causeExplosion(user, user, 15, 3.0F);
 
             if (!user.isCreative()) {
                 user.addExperience(-40);

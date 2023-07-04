@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.api.interfaces.Summonable;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,8 +18,8 @@ import java.util.List;
 public class AbilityHelper {
 
     public static boolean isPetOf(LivingEntity self, LivingEntity owner){
-        if (self instanceof Summonable summonable) {
-            return summonable.getSummoner() == owner;
+        if (self instanceof Tameable tameable) {
+            return tameable.getOwner() == owner;
         }
         return false;
     }

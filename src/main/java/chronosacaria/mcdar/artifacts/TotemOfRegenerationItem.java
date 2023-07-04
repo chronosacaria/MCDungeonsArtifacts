@@ -32,7 +32,7 @@ public class TotemOfRegenerationItem extends ArtifactDefensiveItem{
             if (serverWorld.getBlockState(itemUseContextBlockPos).getCollisionShape(serverWorld, itemUseContextBlockPos).isEmpty()){
                 blockPos = itemUseContextBlockPos;
             } else {
-                blockPos = itemUseContextBlockPos.offset(itemUsageContext.getPlayerFacing());
+                blockPos = itemUseContextBlockPos.offset(itemUsageContext.getHorizontalPlayerFacing());
             }
             if (itemUsageContextPlayer != null){
 

@@ -4,7 +4,7 @@ import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtifactID;
-import chronosacaria.mcdar.init.SummonedEntityRegistry;
+import chronosacaria.mcdar.registries.SummonedEntityRegistry;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

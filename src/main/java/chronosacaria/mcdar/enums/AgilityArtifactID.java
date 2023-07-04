@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.enums;
 
 import chronosacaria.mcdar.config.McdarConfig;
-import chronosacaria.mcdar.init.ArtifactsInit;
+import chronosacaria.mcdar.registries.ArtifactsRegistry;
 import net.minecraft.item.Item;
 
 import java.util.EnumMap;
@@ -17,7 +17,7 @@ public enum AgilityArtifactID implements IArtifactItem {
     }
 
     public static EnumMap<AgilityArtifactID, Item> getItemsEnum() {
-        return ArtifactsInit.agilityArtifact;
+        return ArtifactsRegistry.agilityArtifact;
     }
 
     @Override

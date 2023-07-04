@@ -5,7 +5,7 @@ import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
 import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.QuiverArtifactID;
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -34,7 +34,7 @@ public class PersistentProjectileEntityMixin {
 
                     if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.THUNDERING_QUIVER))
                         if (offhand.isOf(QuiverArtifactID.THUNDERING_QUIVER.getItem()))
-                            AOEHelper.electrocute(shooter, le, (float) ppe.getDamage());
+                            AOEHelper.electrocute(le, (float) ppe.getDamage());
                     if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.TORMENT_QUIVER))
                         if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.getItem()))
                             ppe.setPunch(1);

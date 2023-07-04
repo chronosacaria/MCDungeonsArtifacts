@@ -5,9 +5,8 @@ import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
-import chronosacaria.mcdar.init.ArtifactsInit;
+import chronosacaria.mcdar.registries.ArtifactsRegistry;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,6 +17,7 @@ import net.minecraft.sound.SoundEvents;
 import java.util.Random;
 
 public class ArtifactEffects {
+    private static final float EXPLOSION_RADIUS = 3.0F;
 
     public static void activatePowerShaker(PlayerEntity player, LivingEntity target) {
         // Temporary way to stop crash with Industrial Revolution Slaughter Block
@@ -26,13 +26,13 @@ public class ArtifactEffects {
         }
 
         ItemStack offhand = player.getOffHandStack();
-        if (target != null && offhand.getItem() == ArtifactsInit.damagingArtifact.get(DamagingArtifactID.POWERSHAKER).asItem()) {
+        if (target != null && offhand.getItem() == ArtifactsRegistry.damagingArtifact.get(DamagingArtifactID.POWERSHAKER).asItem()) {
             if (CleanlinessHelper.isCoolingDown(player, offhand.getItem()) && CleanlinessHelper.percentToOccur(20)) {
                 CleanlinessHelper.playCenteredSound(target, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
-                AOECloudHelper.spawnExplosionCloud(player, target, 3.0F);
+                AOECloudHelper.spawnExplosionCloud(player, target, EXPLOSION_RADIUS);
                 AOEHelper.affectNearbyEntities(player, 3.0f,
                         (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, player, target),
-                        livingEntity -> livingEntity.damage(DamageSource.explosion(player), target.getMaxHealth() * 0.2F)
+                        livingEntity -> AOEHelper.causeExplosion(player, target, target.getMaxHealth() * 0.2F, EXPLOSION_RADIUS)
                 );
             }
         }
@@ -43,8 +43,8 @@ public class ArtifactEffects {
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, nearbyEntity),
                 livingEntity -> {
                     if (!(livingEntity instanceof PlayerEntity playerEntity && playerEntity.getAbilities().creativeMode)) {
-                        AOECloudHelper.spawnExplosionCloud(user, livingEntity, 3);
-                        livingEntity.damage(DamageSource.explosion(user), damageAmount);
+                        AOECloudHelper.spawnExplosionCloud(user, livingEntity, EXPLOSION_RADIUS);
+                        AOEHelper.causeExplosion(user, livingEntity, damageAmount, distance);
                     }
                 }
         );

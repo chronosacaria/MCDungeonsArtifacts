@@ -1,5 +1,5 @@
 {
-  "itemGroup.mcdar.artefacts":            "MC Dungeons Artifacts",
+  "itemGroup.mcdar.artifacts":            "MC Dungeons Artifacts",
 
   "item.mcdar.blast_fungus":              "Blast Fungus",
   "item.mcdar.boots_of_swiftness":        "Boots of Swiftness",
@@ -34,6 +34,14 @@
   "item.mcdar.updraft_tome":              "Updraft Tome",
   "item.mcdar.wind_horn":                 "Wind Horn",
   "item.mcdar.wonderful_wheat":           "Wonderful Wheat",
+
+  "entity.mcdar.buzzy_nest_bee":          "Buzzy Nest Bee",
+  "entity.mcdar.enchanted_blue_sheep":    "Enchanted Sheep",
+  "entity.mcdar.enchanted_green_sheep":   "Enchanted Sheep",
+  "entity.mcdar.enchanted_red_sheep":     "Enchanted Sheep",
+  "entity.mcdar.golem_kit_golem":         "Golem Kit Golem",
+  "entity.mcdar.tasty_bone_wolf":         "Tasty Bone Wolf",
+  "entity.mcdar.wonderful_wheat_llama":   "Wonderful Wheat Llama",
 
   "death.attack.electricShock":           "%s was electrocuted to death.",
 

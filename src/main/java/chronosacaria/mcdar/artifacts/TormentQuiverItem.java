@@ -3,7 +3,7 @@ package chronosacaria.mcdar.artifacts;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.QuiverArtifactID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
+import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;

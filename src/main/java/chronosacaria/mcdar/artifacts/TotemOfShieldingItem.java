@@ -4,7 +4,7 @@ import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.DefensiveArtifactID;
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +32,7 @@ public class TotemOfShieldingItem extends ArtifactDefensiveItem{
             if (serverWorld.getBlockState(itemUseContextBlockPos).getCollisionShape(serverWorld, itemUseContextBlockPos).isEmpty()){
                 blockPos = itemUseContextBlockPos;
             } else {
-                blockPos = itemUseContextBlockPos.offset(itemUsageContext.getPlayerFacing());
+                blockPos = itemUseContextBlockPos.offset(itemUsageContext.getHorizontalPlayerFacing());
             }
             if (itemUsageContextPlayer != null){
 

@@ -1,13 +1,11 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.damagesource.ElectricShockDamageSource;
-import chronosacaria.mcdar.init.StatusEffectInit;
 import chronosacaria.mcdar.mixin.CreeperEntityAccessor;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,15 +16,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-
-import static chronosacaria.mcdar.Mcdar.random;
 
 public class AOEHelper {
 
@@ -95,10 +90,9 @@ public class AOEHelper {
         }
     }
 
-    public static void electrocute(LivingEntity attacker, LivingEntity victim, float damageAmount){
+    public static void electrocute(LivingEntity victim, float damageAmount){
         summonLightningBoltOnEntity(victim);
-        ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(attacker).setUsesMagic();
-        victim.damage(electricShockDamageSource, damageAmount);
+        victim.damage(victim.getWorld().getDamageSources().lightningBolt(), damageAmount);
     }
 
     public static void electrocuteNearbyEnemies(LivingEntity user, float distance, float damageAmount, int limit){
@@ -107,19 +101,17 @@ public class AOEHelper {
 
         for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, distance,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, user))) {
-            electrocute(user, nearbyEntity, damageAmount);
+            electrocute(nearbyEntity, damageAmount);
 
             limit--;
             if (limit <= 0) break;
         }
     }
 
-    public static void causeMagicExplosionAttack(LivingEntity user, LivingEntity victim, float damageAmount, float distance){
-        DamageSource magicExplosion = DamageSource.explosion(user).setUsesMagic();
-
-        for (LivingEntity nearbyEntity : getEntitiesByPredicate(victim, distance,
-                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, victim))) {
-            nearbyEntity.damage(magicExplosion, damageAmount);
+    public static void causeExplosion(LivingEntity user, LivingEntity target, float damageAmount, float distance){
+        for (LivingEntity nearbyEntity : getEntitiesByPredicate(target, distance,
+                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, target))) {
+            nearbyEntity.damage(nearbyEntity.getWorld().getDamageSources().explosion(target, user), damageAmount);
         }
 
     }
@@ -133,8 +125,6 @@ public class AOEHelper {
                 zRatio = (Math.random() - Math.random()) * 0.01D) {
             xRatio = (Math.random() - Math.random()) * 0.01D;
         }
-        nearbyEntity.knockbackVelocity =
-                (float) (MathHelper.atan2(zRatio, xRatio) * 57.2957763671875D - (double) nearbyEntity.getYaw());
         nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
     }
 
@@ -156,8 +146,7 @@ public class AOEHelper {
             for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,
                     (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())){
                 summonLightningBoltOnEntity(nearbyEntity);
-                ElectricShockDamageSource electricShockDamageSource = (ElectricShockDamageSource) new ElectricShockDamageSource(user).setUsesMagic();
-                nearbyEntity.damage(electricShockDamageSource, 5.0f);
+                nearbyEntity.damage(nearbyEntity.getWorld().getDamageSources().lightningBolt(), 5.0f);
             }
         }
     }
@@ -173,20 +162,20 @@ public class AOEHelper {
         double startZ = nearbyEntity.getZ() - .275f;
 
         for (int i = 0; i < 10; i++) {
-            double frontX = .5f * random.nextDouble();
-            world.spawnParticles(particleEffect, startX + frontX, startY + random.nextDouble() * .5, startZ + .5f,
+            double frontX = .5f * world.getRandom().nextDouble();
+            world.spawnParticles(particleEffect, startX + frontX, startY + world.getRandom().nextDouble() * .5, startZ + .5f,
                     1,velX, velY, velZ, 0);
 
-            double backX = .5f * random.nextDouble();
-            world.spawnParticles(particleEffect, startX + backX, startY + random.nextDouble() * .5, startZ,1, velX, velY,
+            double backX = .5f * world.getRandom().nextDouble();
+            world.spawnParticles(particleEffect, startX + backX, startY + world.getRandom().nextDouble() * .5, startZ,1, velX, velY,
                     velZ,0);
 
-            double leftZ = .5f * random.nextDouble();
-            world.spawnParticles(particleEffect, startX, startY + random.nextDouble() * .5, startZ + leftZ,1, velX, velY,
+            double leftZ = .5f * world.getRandom().nextDouble();
+            world.spawnParticles(particleEffect, startX, startY + world.getRandom().nextDouble() * .5, startZ + leftZ,1, velX, velY,
                     velZ,0);
 
-            double rightZ = .5f * random.nextDouble();
-            world.spawnParticles(particleEffect, startX + .5f, startY + random.nextDouble() * .5, startZ + rightZ,1, velX,
+            double rightZ = .5f * world.getRandom().nextDouble();
+            world.spawnParticles(particleEffect, startX + .5f, startY + world.getRandom().nextDouble() * .5, startZ + rightZ,1, velX,
                     velY, velZ,0);
         }
     }

@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.mixin;
 
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;

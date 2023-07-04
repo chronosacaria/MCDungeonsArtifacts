@@ -5,10 +5,14 @@ import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.enums.StatusInflictingArtifactID;
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.AmbientEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -30,9 +34,9 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
 
         int i = 0;
 
-        for (LivingEntity entitiesByClass : AOEHelper.getEntitiesByPredicate(MobEntity.class, user, 6,
+        for (LivingEntity entitiesByPredicate : AOEHelper.getEntitiesByPredicate(MobEntity.class, user, 6,
                 (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, user))) {
-            sendIntoWildRage(entitiesByClass);
+            sendIntoWildRage(entitiesByPredicate);
             i++;
             if (i >= 3)
                 break;
@@ -47,7 +51,14 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
     }
 
     public static void sendIntoWildRage(LivingEntity mobEntity) {
-        mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffectInit.CHARMED, 200, 0));
+        boolean bl = false;
+        try {
+            mobEntity.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        } catch (IllegalArgumentException e) {
+            bl = true;
+        }
+        if (!(bl || mobEntity instanceof WitherEntity || mobEntity instanceof EnderDragonEntity || mobEntity instanceof AmbientEntity))
+            mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffectInit.CHARMED, 200, 0));
     }
 
     @Override

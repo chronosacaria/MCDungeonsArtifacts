@@ -1,17 +1,18 @@
-package chronosacaria.mcdar.init;
+package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.artifacts.*;
 import chronosacaria.mcdar.enums.*;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import java.util.EnumMap;
 import java.util.Locale;
 
 import static chronosacaria.mcdar.config.McdarConfig.CONFIG;
 
-public class ArtifactsInit {
+public class ArtifactsRegistry {
 
     public static final EnumMap<DamagingArtifactID, Item> damagingArtifact = new EnumMap<>(DamagingArtifactID.class);
     public static final EnumMap<StatusInflictingArtifactID, Item> statusInflictingArtifact = new EnumMap<>(StatusInflictingArtifactID.class);
@@ -20,7 +21,7 @@ public class ArtifactsInit {
     public static final EnumMap<AgilityArtifactID, Item> agilityArtifact = new EnumMap<>(AgilityArtifactID.class);
     public static final EnumMap<DefensiveArtifactID, Item> defensiveArtifact = new EnumMap<>(DefensiveArtifactID.class);
 
-    public static void init() {
+    public static void register() {
 
         for (DamagingArtifactID artefactID : DamagingArtifactID.values()) {
             if (!CONFIG.ENABLE_DAMAGING_ARTIFACT.get(artefactID))
@@ -49,7 +50,7 @@ public class ArtifactsInit {
             Item item = switch (artefactID) {
                 case CORRUPTED_SEEDS -> new CorruptedSeedsItem();
                 case GONG_OF_WEAKENING -> new GongOfWeakeningItem();
-                //case LOVE_MEDALLION -> new LoveMedallionItem(artefactID);
+                case LOVE_MEDALLION -> new LoveMedallionItem(artefactID);
                 case SATCHEL_OF_ELEMENTS -> new SatchelOfElementsItem();
                 case SHOCK_POWDER -> new ShockPowderItem();
                 //noinspection UnnecessaryDefault
@@ -136,7 +137,7 @@ public class ArtifactsInit {
     }
 
     protected static void registerArtifacts(String id, Item item) {
-        Registry.register(Registry.ITEM, Mcdar.ID(id), item);
+        Registry.register(Registries.ITEM, Mcdar.ID(id), item);
     }
 
 }

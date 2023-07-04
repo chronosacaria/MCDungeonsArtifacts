@@ -8,10 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 public class LoveMedallionAttackGoal extends ActiveTargetGoal<LivingEntity> {
 
     public LoveMedallionAttackGoal(MobEntity mob) {
-        super(mob, LivingEntity.class, 0, true, true, LoveMedallionAttackGoal::isMobNotPlayer);
+        super(mob, LivingEntity.class, 0, true, true, LoveMedallionAttackGoal::isNonBossMobNotPlayer);
     }
 
-    private static boolean isMobNotPlayer(LivingEntity livingEntity) {
+    private static boolean isNonBossMobNotPlayer(LivingEntity livingEntity) {
         return !(livingEntity instanceof PlayerEntity);
     }
 

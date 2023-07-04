@@ -1,11 +1,12 @@
-package chronosacaria.mcdar.init;
+package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enchants.ArmorEnchantment;
 import chronosacaria.mcdar.enchants.EnchantID;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 import java.util.EnumMap;
 import java.util.Locale;
@@ -13,7 +14,7 @@ import java.util.Locale;
 public class EnchantsRegistry {
     public static final EnumMap<EnchantID, Enchantment> enchants = new EnumMap<>(EnchantID.class);
 
-    public static void init(){
+    public static void register(){
         for (EnchantID enchantID : EnchantID.values()) {
             if (!McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(enchantID))
                 continue;
@@ -26,6 +27,6 @@ public class EnchantsRegistry {
     }
 
     protected static void registerEnchant(String id, Enchantment enchant){
-        Registry.register(Registry.ENCHANTMENT, Mcdar.ID(id), enchant);
+        Registry.register(Registries.ENCHANTMENT, Mcdar.ID(id), enchant);
     }
 }

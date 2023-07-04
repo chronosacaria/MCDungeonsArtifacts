@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.init;
+package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.statuseffect.CharmedStatusEffect;
 import chronosacaria.mcdar.statuseffect.ShieldingStatusEffect;

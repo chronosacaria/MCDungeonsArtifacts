@@ -4,7 +4,6 @@ import chronosacaria.mcdar.artifacts.ArtifactDamagingItem;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
@@ -110,7 +109,7 @@ public abstract class AbstractBeaconItem extends ArtifactDamagingItem {
                     if (!world.isClient()){
                         Entity entity = entityHitResult.getEntity();
                         entity.timeUntilRegen = 0;
-                        entity.damage(DamageSource.magic(playerEntity, playerEntity), BEAM_DAMAGE_PER_TICK);
+                        entity.damage(playerEntity.getDamageSources().indirectMagic(playerEntity, playerEntity), BEAM_DAMAGE_PER_TICK);
                     }
                 }
                 if (getMaxCount() % 20 == 0){

@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.mixin;
 
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.mob.MobEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

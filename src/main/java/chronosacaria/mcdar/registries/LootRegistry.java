@@ -1,4 +1,4 @@
-package chronosacaria.mcdar.init;
+package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.*;
@@ -32,7 +32,7 @@ public class LootRegistry {
     public static final Collection<Identifier> WORLD_CHESTS =
             Set.of(LootTables.ABANDONED_MINESHAFT_CHEST, LootTables.SIMPLE_DUNGEON_CHEST, LootTables.SHIPWRECK_TREASURE_CHEST);
 
-    public static void init(){
+    public static void register(){
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
 
             if (ILLAGER_ARTEFACT_LOOT_TABLES.contains(id)) {

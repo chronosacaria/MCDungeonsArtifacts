@@ -1,5 +1,5 @@
 {
-  "itemGroup.mcdar.artefacts":            "MC Dungeons Artifacts",
+  "itemGroup.mcdar.artifacts":            "MC Dungeons Artifacts",
 
   "item.mcdar.blast_fungus":              "폭발 곰팡이",
   "item.mcdar.boots_of_swiftness":        "신속의 부츠",
@@ -34,6 +34,14 @@
   "item.mcdar.updraft_tome":              "상승기류 고서",
   "item.mcdar.wind_horn":                 "바람 나팔",
   "item.mcdar.wonderful_wheat":           "환상적인 밀",
+
+  "entity.mcdar.buzzy_nest_bee":          "윙윙벌집 벌",
+  "entity.mcdar.enchanted_blue_sheep":    "마법에 걸린 잔디 양",
+  "entity.mcdar.enchanted_green_sheep":   "마법에 걸린 잔디 양",
+  "entity.mcdar.enchanted_red_sheep":     "마법에 걸린 잔디 양",
+  "entity.mcdar.golem_kit_golem":         "골렘 키트 철 골렘",
+  "entity.mcdar.tasty_bone_wolf":         "맛있는 뼈 늑대",
+  "entity.mcdar.wonderful_wheat_llama":   "환상적인 밀 알파카",
 
   "death.attack.electricShock":           "%s는(은) 감전사했습니다.",
 

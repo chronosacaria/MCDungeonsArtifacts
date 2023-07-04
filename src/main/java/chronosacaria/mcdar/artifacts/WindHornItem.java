@@ -27,7 +27,7 @@ public class WindHornItem extends ArtifactDefensiveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
 
-        CleanlinessHelper.playCenteredSound(user, SoundEvents.EVENT_RAID_HORN, SoundCategory.BLOCKS, 5.0F, 1.0F);
+        CleanlinessHelper.playCenteredSound(user, SoundEvents.EVENT_RAID_HORN.value(), SoundCategory.BLOCKS, 5.0F, 1.0F);
         for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
                 (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
             AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 2.0F);

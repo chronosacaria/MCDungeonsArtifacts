@@ -1,5 +1,5 @@
 {
-  "itemGroup.mcdar.artefacts":            "我的世界：地下城法器",
+  "itemGroup.mcdar.artifacts":            "我的世界：地下城法器",
 
   "item.mcdar.blast_fungus":              "爆破菌",
   "item.mcdar.boots_of_swiftness":        "迅捷之靴",
@@ -34,6 +34,14 @@
   "item.mcdar.updraft_tome":              "鼓风之典",
   "item.mcdar.wind_horn":                 "风之号角",
   "item.mcdar.wonderful_wheat":           "优质小麦",
+
+  "entity.mcdar.buzzy_nest_bee":          "嗡嗡蜂巢蜜蜂",
+  "entity.mcdar.enchanted_blue_sheep":    "附魔羊",
+  "entity.mcdar.enchanted_green_sheep":   "附魔羊",
+  "entity.mcdar.enchanted_red_sheep":     "附魔羊",
+  "entity.mcdar.golem_kit_golem":         "傀儡用具铁傀儡",
+  "entity.mcdar.tasty_bone_wolf":         "美味骨肉狼",
+  "entity.mcdar.wonderful_wheat_llama":   "优质小麦羊驼",
 
   "death.attack.electricShock":           "%s被电死了。",
 

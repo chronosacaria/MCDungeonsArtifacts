@@ -4,13 +4,12 @@ import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.enchants.EnchantID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
+import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,9 +22,9 @@ import java.util.UUID;
 
 public class EnchantmentEffects {
 
-    public static float beastBossDamage(Summonable summonedEntity, ServerWorld serverWorld) {
-        if (summonedEntity.getSummoner() != null) {
-            UUID summonerUUID = summonedEntity.getSummoner().getUuid();
+    public static float beastBossDamage(Tameable summonedEntity, ServerWorld serverWorld) {
+        if (summonedEntity.getOwner() != null) {
+            UUID summonerUUID = summonedEntity.getOwnerUuid();
             if (summonerUUID != null) {
                 Entity beastOwner = serverWorld.getEntity(summonerUUID);
                 if (beastOwner instanceof LivingEntity beastOwnerAsLiving) {
@@ -42,6 +41,7 @@ public class EnchantmentEffects {
     }
 
     public static void activateBeastBurst(PlayerEntity player) {
+        float explosionRadius = 3.0f;
         List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(player.getActiveItem());
         if (potionEffects.isEmpty()) return;
         if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
@@ -53,11 +53,8 @@ public class EnchantmentEffects {
                         (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
                     if (summonedMob == null) continue;
                     CleanlinessHelper.playCenteredSound(summonedMob, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
-                    AOECloudHelper.spawnExplosionCloud(summonedMob, summonedMob, 3.0F);
-                    for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(summonedMob, 3.0F,
-                            (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, summonedMob, summonedMob))) {
-                        nearbyEntity.damage(DamageSource.explosion(summonedMob), 15 * beastBurstLevel);
-                    }
+                    AOECloudHelper.spawnExplosionCloud(summonedMob, summonedMob, explosionRadius);
+                    AOEHelper.causeExplosion(player, summonedMob, 3 * beastBurstLevel, explosionRadius);
                 }
             }
         }

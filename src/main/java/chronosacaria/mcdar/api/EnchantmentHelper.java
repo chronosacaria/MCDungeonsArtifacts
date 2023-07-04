@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.enchants.EnchantID;
-import chronosacaria.mcdar.init.EnchantsRegistry;
+import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

@@ -1,5 +1,5 @@
 {
-  "itemGroup.mcdar.artefacts":            "Майнкрафт Подземелья: Артефакты",
+  "itemGroup.mcdar.artifacts":            "Майнкрафт Подземелья: Артефакты",
 
   "item.mcdar.blast_fungus":              "Взрывной Грибок",
   "item.mcdar.boots_of_swiftness":        "Ботинки ловкости",
@@ -32,6 +32,14 @@
   "item.mcdar.updraft_tome":              "Восходящий Фолиант",
   "item.mcdar.wind_horn":                 "Рог ветра",
   "item.mcdar.wonderful_wheat":           "Превосходная пшеница",
+
+  "entity.mcdar.buzzy_nest_bee":          "Жужжащее гнездо пчела",
+  "entity.mcdar.enchanted_blue_sheep":    "Зачарованная трава овца",
+  "entity.mcdar.enchanted_green_sheep":   "Зачарованная трава овца",
+  "entity.mcdar.enchanted_red_sheep":     "Зачарованная трава овца",
+  "entity.mcdar.golem_kit_golem":         "Комплект голема железный голем",
+  "entity.mcdar.tasty_bone_wolf":         "Вкусная кость волк",
+  "entity.mcdar.wonderful_wheat_llama":   "Превосходная пшеница лама",
 
   "death.attack.electricShock":           "%s был убит электричеством.",
 

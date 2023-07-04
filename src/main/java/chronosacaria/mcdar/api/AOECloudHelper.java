@@ -9,16 +9,16 @@ import net.minecraft.util.math.BlockPos;
 public class AOECloudHelper {
 
     public static void spawnExplosionCloud(LivingEntity attacker, LivingEntity victim, float radius){
-        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(victim.world, victim.getX(), victim.getY(), victim.getZ());
+        AreaEffectCloudEntity areaEffectCloudEntity = new AreaEffectCloudEntity(victim.getWorld(), victim.getX(), victim.getY(), victim.getZ());
         areaEffectCloudEntity.setOwner(attacker);
         areaEffectCloudEntity.setParticleType(ParticleTypes.EXPLOSION);
         areaEffectCloudEntity.setRadius(radius);
         areaEffectCloudEntity.setDuration(0);
-        attacker.world.spawnEntity(areaEffectCloudEntity);
+        attacker.getWorld().spawnEntity(areaEffectCloudEntity);
     }
 
     public static void spawnStatusEffectCloud(LivingEntity owner, BlockPos blockPos, int duration, StatusEffectInstance... statusEffectInstances) {
-        AreaEffectCloudEntity aoeCloudEntity = new AreaEffectCloudEntity(owner.world, blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
+        AreaEffectCloudEntity aoeCloudEntity = new AreaEffectCloudEntity(owner.getWorld(), blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
         aoeCloudEntity.setOwner(owner);
         aoeCloudEntity.setRadius(5.0f);
         aoeCloudEntity.setRadiusOnUse(-0.5f);
@@ -26,7 +26,7 @@ public class AOECloudHelper {
         aoeCloudEntity.setDuration(duration);
         for (StatusEffectInstance instance : statusEffectInstances)
             aoeCloudEntity.addEffect(instance);
-        owner.world.spawnEntity(aoeCloudEntity);
+        owner.getWorld().spawnEntity(aoeCloudEntity);
     }
 
 }

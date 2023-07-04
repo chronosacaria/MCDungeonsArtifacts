@@ -1,13 +1,13 @@
 package chronosacaria.mcdar.api;
 
 import chronosacaria.mcdar.api.interfaces.Summonable;
-import chronosacaria.mcdar.init.SummonedEntityRegistry;
+import chronosacaria.mcdar.registries.SummonedEntityRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker;
 import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SummoningHelper {
             case 2 -> {
                 for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(MobEntity.class, sheep, 5,
                         (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive())) {
-                    nearbyEntity.setOnFireFor(100);
+                    nearbyEntity.setOnFireFor(5);
                 }
             }
             default -> {}
@@ -60,8 +61,8 @@ public class SummoningHelper {
     }
 
     public static void trackAndProtectSummoner(MobEntity summonedEntity) {
-        if (summonedEntity instanceof Summonable summonable && summonedEntity.isAlive()) {
-            if (summonable.getSummoner() instanceof PlayerEntity summoner) {
+        if (summonedEntity instanceof Tameable summonable && summonedEntity.isAlive()) {
+            if (summonable.getOwner() instanceof PlayerEntity summoner) {
                 if (summoner.getAttacker() != null)
                     summonedEntity.setTarget(summoner.getAttacker());
                 else if (summoner.getAttacking() != null && summoner.getAttacking() != summonedEntity)
@@ -71,7 +72,7 @@ public class SummoningHelper {
     }
 
     public static boolean attackTarget(MobEntity summonedMob, Entity target, SoundEvent soundEvent, float damageAmount) {
-        boolean bl = target.damage(DamageSource.mob(summonedMob), damageAmount);
+        boolean bl = target.damage(target.getWorld().getDamageSources().mobAttack(summonedMob), damageAmount);
         if (bl) {
             summonedMob.tryAttack(target);
             summonedMob.playSound(soundEvent, 1f,(summonedMob.getRandom().nextFloat() - summonedMob.getRandom().nextFloat()) * 0.2F + 1.0F);
@@ -79,7 +80,10 @@ public class SummoningHelper {
         return bl;
     }
 
-    public static void tryTeleport(MobEntity summonedEntity, LivingEntity summoner) {
+    public static void tryTeleport(MobEntity summonedEntity, @Nullable LivingEntity summoner) {
+        if (summoner == null)
+            return;
+
         BlockPos blockPos = new BlockPos(summoner.getBlockPos());
 
         for (int i = 0; i < 10; ++i) {
@@ -112,6 +116,6 @@ public class SummoningHelper {
     private static boolean canTeleportTo(MobEntity summonedEntity, BlockPos blockPos) {
         if (LandPathNodeMaker.getLandNodeType(summonedEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE)
             return false;
-        return summonedEntity.world.isSpaceEmpty(summonedEntity, summonedEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(summonedEntity.getBlockPos()))));
+        return summonedEntity.getWorld().isSpaceEmpty(summonedEntity, summonedEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(summonedEntity.getBlockPos()))));
     }
 }

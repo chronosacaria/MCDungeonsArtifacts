@@ -1,13 +1,13 @@
 package chronosacaria.mcdar.mixin;
 
-import chronosacaria.mcdar.api.interfaces.Summonable;
 import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.effects.EnchantmentEffects;
 import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
-import chronosacaria.mcdar.init.StatusEffectInit;
+import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -61,8 +61,8 @@ public class LivingEntityMixin {
 
     @ModifyVariable(method = "damage", at = @At(value = "HEAD"), argsOnly = true)
     public float mcdar$damageModifiers(float amount, DamageSource source) {
-        if (source.getSource() instanceof Summonable summonedEntity) {
-            if (source.getSource().world instanceof ServerWorld serverWorld) {
+        if (source.getSource() instanceof Tameable summonedEntity) {
+            if (source.getSource().getWorld() instanceof ServerWorld serverWorld) {
 
                 if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BOSS))
                     amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
@@ -77,7 +77,7 @@ public class LivingEntityMixin {
 
         if (!((Object) this instanceof PlayerEntity player)) return;
 
-        if (player.isAlive() && player.world instanceof ServerWorld) {
+        if (player.isAlive() && player.getWorld() instanceof ServerWorld) {
 
             if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BURST))
                 EnchantmentEffects.activateBeastBurst(player);
