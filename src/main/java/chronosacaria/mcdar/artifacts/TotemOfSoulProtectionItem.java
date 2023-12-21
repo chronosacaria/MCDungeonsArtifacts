@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -20,7 +21,11 @@ import java.util.List;
 
 public class TotemOfSoulProtectionItem extends ArtifactDefensiveItem{
     public TotemOfSoulProtectionItem() {
-        super(DefensiveArtifactID.TOTEM_OF_SOUL_PROTECTION);
+        super(
+                DefensiveArtifactID.TOTEM_OF_SOUL_PROTECTION,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                        .get(DefensiveArtifactID.TOTEM_OF_SOUL_PROTECTION).mcdar$getDurability()
+        );
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
@@ -43,7 +48,13 @@ public class TotemOfSoulProtectionItem extends ArtifactDefensiveItem{
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
+                EnchantmentHelper.mcdar$cooldownHelper(
+                        itemUsageContextPlayer,
+                        this,
+                        Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                                .get(DefensiveArtifactID.TOTEM_OF_SOUL_PROTECTION)
+                                .mcdar$getMaxCooldownEnchantmentTime()
+                );
                 return ActionResult.CONSUME;
             }
         }

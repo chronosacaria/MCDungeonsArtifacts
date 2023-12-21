@@ -4,7 +4,6 @@ import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -29,7 +28,7 @@ public class EnchantmentEffects {
                 Entity beastOwner = serverWorld.getEntity(summonerUUID);
                 if (beastOwner instanceof LivingEntity beastOwnerAsLiving) {
                     int beastBossLevel =
-                            EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BOSS),
+                            EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.BEAST_BOSS,
                                     beastOwnerAsLiving);
                     if (beastBossLevel > 0) {
                         return 1.1F + (0.1F * beastBossLevel);
@@ -46,7 +45,7 @@ public class EnchantmentEffects {
         if (potionEffects.isEmpty()) return;
         if (potionEffects.get(0).getEffectType() == StatusEffects.INSTANT_HEALTH){
             int beastBurstLevel =
-                    EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_BURST),
+                    EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.BEAST_BURST,
                             player);
             if (beastBurstLevel > 0){
                 for (LivingEntity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
@@ -65,7 +64,7 @@ public class EnchantmentEffects {
         if (potionEffects.isEmpty()) return;
         if (potionEffects.get(0).getEffectType().equals(StatusEffects.INSTANT_HEALTH)) {
             int beastSurgeLevel =
-                    EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.enchants.get(EnchantID.BEAST_SURGE),
+                    EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.BEAST_SURGE,
                             player);
             if (beastSurgeLevel > 0) {
                 AOEHelper.afflictNearbyEntities(LivingEntity.class, player, 10,

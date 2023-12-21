@@ -28,11 +28,9 @@ public class FollowSummonerGoal<T extends PathAwareEntity & Tameable> extends Go
     public boolean canStart() {
         LivingEntity livingEntity = this.summonedEntity.getOwner();
 
-        if (livingEntity == null
-                || livingEntity.isSpectator()
-                || this.summonedEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance))
-            return false;
-        return true;
+        return livingEntity != null
+                && !livingEntity.isSpectator()
+                && !(this.summonedEntity.squaredDistanceTo(livingEntity) < (double) (this.minDistance * this.minDistance));
     }
 
     @Override
@@ -51,7 +49,7 @@ public class FollowSummonerGoal<T extends PathAwareEntity & Tameable> extends Go
             this.countdownTicks = 10;
             if (!this.summonedEntity.hasVehicle()) {
                 if (this.summonedEntity.squaredDistanceTo(this.summonedEntity.getOwner()) >= 144.0D) {
-                    SummoningHelper.tryTeleport(this.summonedEntity, this.summonedEntity.getOwner());
+                    SummoningHelper.mcdar$tryTeleport(this.summonedEntity, this.summonedEntity.getOwner());
                 } else {
                     this.navigation.startMovingTo(this.summonedEntity.getOwner(), this.speed);
                 }

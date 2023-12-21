@@ -1,7 +1,7 @@
 package chronosacaria.mcdar.mixin;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.QuiverArtifactID;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,8 +24,8 @@ public abstract class BowItemMixin {
     public void onFlamingQuiverArrowLoosing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks,
                                             CallbackInfo ci, PlayerEntity playerEntity, boolean bl,
                                             ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity){
-        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.FLAMING_QUIVER)){
-            if (playerEntity.getOffHandStack().isOf(QuiverArtifactID.FLAMING_QUIVER.getItem())) {
+        if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.QUIVER_ARTIFACT_STATS.get(QuiverArtifactID.FLAMING_QUIVER).mcdar$getIsEnabled()){
+            if (playerEntity.getOffHandStack().isOf(QuiverArtifactID.FLAMING_QUIVER.mcdar$getItem())) {
                 float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(playerEntity.getOffHandStack().getItem(), 0);
                 if (effectTimer > 0) {
                     ProjectileEffectHelper.flamingQuiverArrow(persistentProjectileEntity);

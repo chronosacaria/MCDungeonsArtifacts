@@ -19,14 +19,10 @@ public class BuzzyNestBeeEntity extends BeeEntity implements Tameable, Summonabl
     @Nullable
     UUID ownerEntityUUID = null;
 
-    int maxAge = 12000;
+    final int MAX_AGE = 12000;
 
     public BuzzyNestBeeEntity(EntityType<BuzzyNestBeeEntity> type, World world){
         super(type, world);
-    }
-
-    protected void initDataTracker(){
-        super.initDataTracker();
     }
 
     public void setSummoner(Entity player) {
@@ -55,8 +51,8 @@ public class BuzzyNestBeeEntity extends BeeEntity implements Tameable, Summonabl
             else if (summoner.getAttacker() != null)
                 this.setBeeAttacker(summoner.getAttacker());
         }
-        if (maxAge > -1)
-            if (age >= maxAge)
+        if (MAX_AGE > -1)
+            if (age >= MAX_AGE)
                 kill();
         super.mobTick();
     }

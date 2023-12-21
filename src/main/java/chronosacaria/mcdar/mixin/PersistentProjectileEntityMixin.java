@@ -1,9 +1,9 @@
 package chronosacaria.mcdar.mixin;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.ProjectileEffectHelper;
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.QuiverArtifactID;
 import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
@@ -32,11 +32,11 @@ public class PersistentProjectileEntityMixin {
                 // * Quivers * //
                 if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
 
-                    if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.THUNDERING_QUIVER))
-                        if (offhand.isOf(QuiverArtifactID.THUNDERING_QUIVER.getItem()))
+                    if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.QUIVER_ARTIFACT_STATS.get(QuiverArtifactID.THUNDERING_QUIVER).mcdar$getIsEnabled())
+                        if (offhand.isOf(QuiverArtifactID.THUNDERING_QUIVER.mcdar$getItem()))
                             AOEHelper.electrocute(le, (float) ppe.getDamage());
-                    if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.TORMENT_QUIVER))
-                        if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.getItem()))
+                    if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.QUIVER_ARTIFACT_STATS.get(QuiverArtifactID.TORMENT_QUIVER).mcdar$getIsEnabled())
+                        if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.mcdar$getItem()))
                             ppe.setPunch(1);
 
                 }
@@ -54,11 +54,11 @@ public class PersistentProjectileEntityMixin {
     public void onTormentingArrowBlockImpact(BlockHitResult blockHitResult, CallbackInfo ci){
         PersistentProjectileEntity ppe = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.TORMENT_QUIVER)) {
+        if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.QUIVER_ARTIFACT_STATS.get(QuiverArtifactID.TORMENT_QUIVER).mcdar$getIsEnabled()) {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.getItem())) {
+                if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.mcdar$getItem())) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ci.isCancellable()) {
                             ci.cancel();
@@ -73,11 +73,11 @@ public class PersistentProjectileEntityMixin {
     public void onHarpoonArrowFire(CallbackInfoReturnable<Float> cir) {
         PersistentProjectileEntity ppe = (PersistentProjectileEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.ENABLE_QUIVER_ARTIFACT.get(QuiverArtifactID.HARPOON_QUIVER)) {
+        if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.QUIVER_ARTIFACT_STATS.get(QuiverArtifactID.HARPOON_QUIVER).mcdar$getIsEnabled()) {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(QuiverArtifactID.HARPOON_QUIVER.getItem())) {
+                if (offhand.isOf(QuiverArtifactID.HARPOON_QUIVER.mcdar$getItem())) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ppe.isTouchingWater()) {
                             float normDrag = cir.getReturnValueF();

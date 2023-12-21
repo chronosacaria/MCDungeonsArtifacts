@@ -17,7 +17,7 @@ public class ItemGroupRegistry {
     public static void register() {
         Registry.register(Registries.ITEM_GROUP, ARTIFACTS, FabricItemGroup.builder()
                 .displayName(Text.translatable("itemGroup.mcdar.artifacts"))
-                .icon(() -> new ItemStack(ArtifactsRegistry.damagingArtifact.get(DamagingArtifactID.LIGHTNING_ROD)))
+                .icon(() -> new ItemStack(ArtifactsRegistry.DAMAGING_ARTIFACT.get(DamagingArtifactID.LIGHTNING_ROD)))
                 .build());
     }
 }

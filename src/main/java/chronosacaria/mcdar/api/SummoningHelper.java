@@ -28,7 +28,7 @@ public class SummoningHelper {
             SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY,
             SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY);
 
-    public static void summonedSheepEffect(LivingEntity sheep, int effectInt) {
+    public static void mcdar$summonedSheepEffect(LivingEntity sheep, int effectInt) {
         switch (effectInt) {
             case 0 -> AOEHelper.afflictNearbyEntities(MobEntity.class, sheep, 5,
                     (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive(), new StatusEffectInstance(StatusEffects.POISON, 100, 4));
@@ -44,7 +44,7 @@ public class SummoningHelper {
         }
     }
 
-    public static boolean summonSummonableEntity(LivingEntity entityToSpawn, LivingEntity summoner, BlockPos blockPos) {
+    public static boolean mcdar$summonSummonableEntity(LivingEntity entityToSpawn, LivingEntity summoner, BlockPos blockPos) {
         World world = summoner.getWorld();
 
         if (entityToSpawn instanceof Summonable summonableEntity) {
@@ -60,7 +60,7 @@ public class SummoningHelper {
         return false;
     }
 
-    public static void trackAndProtectSummoner(MobEntity summonedEntity) {
+    public static void mcdar$trackAndProtectSummoner(MobEntity summonedEntity) {
         if (summonedEntity instanceof Tameable summonable && summonedEntity.isAlive()) {
             if (summonable.getOwner() instanceof PlayerEntity summoner) {
                 if (summoner.getAttacker() != null)
@@ -71,7 +71,7 @@ public class SummoningHelper {
         }
     }
 
-    public static boolean attackTarget(MobEntity summonedMob, Entity target, SoundEvent soundEvent, float damageAmount) {
+    public static boolean mcdar$attackTarget(MobEntity summonedMob, Entity target, SoundEvent soundEvent, float damageAmount) {
         boolean bl = target.damage(target.getWorld().getDamageSources().mobAttack(summonedMob), damageAmount);
         if (bl) {
             summonedMob.tryAttack(target);
@@ -80,31 +80,31 @@ public class SummoningHelper {
         return bl;
     }
 
-    public static void tryTeleport(MobEntity summonedEntity, @Nullable LivingEntity summoner) {
+    public static void mcdar$tryTeleport(MobEntity summonedEntity, @Nullable LivingEntity summoner) {
         if (summoner == null)
             return;
 
         BlockPos blockPos = new BlockPos(summoner.getBlockPos());
 
         for (int i = 0; i < 10; ++i) {
-            int j = getRandomInt(summonedEntity, -3, 3);
-            int k = getRandomInt(summonedEntity, -1, 1);
-            int l = getRandomInt(summonedEntity, -3, 3);
-            boolean bl = tryTeleportTo(summonedEntity, summoner, blockPos.getX() + j, blockPos.getY() + k, blockPos.getZ() + l); //23343
+            int j = mcdar$getRandomInt(summonedEntity, -3, 3);
+            int k = mcdar$getRandomInt(summonedEntity, -1, 1);
+            int l = mcdar$getRandomInt(summonedEntity, -3, 3);
+            boolean bl = mcdar$tryTeleportTo(summonedEntity, summoner, blockPos.getX() + j, blockPos.getY() + k, blockPos.getZ() + l); //23343
             if (bl) {
                 return;
             }
         }
     }
 
-    private static int getRandomInt(MobEntity summonedEntity, int i, int j) {
+    private static int mcdar$getRandomInt(MobEntity summonedEntity, int i, int j) {
         return summonedEntity.getRandom().nextInt(j - i + 1) + i;
     }
 
-    private static boolean tryTeleportTo(MobEntity summonedEntity, LivingEntity summoner, int i, int j, int k){
+    private static boolean mcdar$tryTeleportTo(MobEntity summonedEntity, LivingEntity summoner, int i, int j, int k){
         if (Math.abs((double) i - summoner.getX()) < 2.0D && Math.abs((double) k - summoner.getZ()) < 2.0D) {
             return false;
-        } else if (!canTeleportTo(summonedEntity, new BlockPos(i, j, k))){
+        } else if (!mcdar$canTeleportTo(summonedEntity, new BlockPos(i, j, k))){
             return false;
         } else {
             summonedEntity.getNavigation().stop();
@@ -113,7 +113,7 @@ public class SummoningHelper {
         }
     }
 
-    private static boolean canTeleportTo(MobEntity summonedEntity, BlockPos blockPos) {
+    private static boolean mcdar$canTeleportTo(MobEntity summonedEntity, BlockPos blockPos) {
         if (LandPathNodeMaker.getLandNodeType(summonedEntity.getEntityWorld(), new BlockPos.Mutable()) != PathNodeType.WALKABLE)
             return false;
         return summonedEntity.getWorld().isSpaceEmpty(summonedEntity, summonedEntity.getBoundingBox().offset(blockPos.subtract(new BlockPos(summonedEntity.getBlockPos()))));

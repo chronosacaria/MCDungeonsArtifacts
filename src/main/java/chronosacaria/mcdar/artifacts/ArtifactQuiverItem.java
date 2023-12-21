@@ -1,6 +1,5 @@
 package chronosacaria.mcdar.artifacts;
 
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.QuiverArtifactID;
 import chronosacaria.mcdar.registries.ItemGroupRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -12,8 +11,8 @@ public class ArtifactQuiverItem extends Item {
 
     public final QuiverArtifactID id;
 
-    public ArtifactQuiverItem(QuiverArtifactID id) {
-        super(new Settings().maxCount(1).maxDamage(McdarConfig.CONFIG.getQuiverArtifactDurability()));
+    public ArtifactQuiverItem(QuiverArtifactID id, int artifactDurability) {
+        super(new Settings().maxCount(1).maxDamage(artifactDurability));
         this.id = id;
         ItemGroupEvents.modifyEntriesEvent(ItemGroupRegistry.ARTIFACTS).register(entries -> entries.add(this.getDefaultStack()));
     }

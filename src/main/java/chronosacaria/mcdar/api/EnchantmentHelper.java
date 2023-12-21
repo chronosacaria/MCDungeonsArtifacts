@@ -1,6 +1,5 @@
 package chronosacaria.mcdar.api;
 
-import chronosacaria.mcdar.enchants.EnchantID;
 import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,15 +8,14 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantmentHelper {
 
-    public static void cooldownHelper(PlayerEntity player, Item item, int maxCooldown) {
-        int cooldownLevel = getCooldownLevel(EnchantsRegistry.enchants.get(EnchantID.COOLDOWN),
-                player);
+    public static void mcdar$cooldownHelper(PlayerEntity player, Item item, int maxCooldown) {
+        int cooldownLevel = mcdar$getCooldownLevel(EnchantsRegistry.COOLDOWN, player);
         player.getItemCooldownManager().set(item,
                 cooldownLevel == 0 ? maxCooldown :
-                        (int) (maxCooldown - (maxCooldown * cooldownCalcHelper(cooldownLevel))));
+                        (int) (maxCooldown - (maxCooldown * mcdar$cooldownCalcHelper(cooldownLevel))));
     }
 
-    public static float cooldownCalcHelper(int level) {
+    public static float mcdar$cooldownCalcHelper(int level) {
         float modifier = 0.18f;
         for (int i = 0 ; i < level - 1 ; i++) {
             float j = 0.11f - (0.02f * i);
@@ -28,7 +26,7 @@ public class EnchantmentHelper {
         return modifier;
     }
 
-    public static int getCooldownLevel(Enchantment enchantment, PlayerEntity playerEntity){
+    public static int mcdar$getCooldownLevel(Enchantment enchantment, PlayerEntity playerEntity){
         int totalLevel = 0;
         for (ItemStack itemStack : enchantment.getEquipment(playerEntity).values())
             totalLevel += net.minecraft.enchantment.EnchantmentHelper.getLevel(enchantment, itemStack);

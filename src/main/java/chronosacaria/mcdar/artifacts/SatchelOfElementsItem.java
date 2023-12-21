@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -17,7 +18,11 @@ import java.util.List;
 
 public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
     public SatchelOfElementsItem() {
-        super(StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS);
+        super(
+                StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -30,7 +35,13 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
                 user.addExperience(-15);
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            EnchantmentHelper.cooldownHelper(user, this, 60);
+            EnchantmentHelper.mcdar$cooldownHelper(
+                    user,
+                    this,
+                    Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                            .get(StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS)
+                            .mcdar$getMaxCooldownEnchantmentTime()
+            );
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

@@ -26,7 +26,7 @@ public class ArtifactEffects {
         }
 
         ItemStack offhand = player.getOffHandStack();
-        if (target != null && offhand.getItem() == ArtifactsRegistry.damagingArtifact.get(DamagingArtifactID.POWERSHAKER).asItem()) {
+        if (target != null && offhand.getItem() == ArtifactsRegistry.DAMAGING_ARTIFACT.get(DamagingArtifactID.POWERSHAKER).asItem()) {
             if (CleanlinessHelper.isCoolingDown(player, offhand.getItem()) && CleanlinessHelper.percentToOccur(20)) {
                 CleanlinessHelper.playCenteredSound(target, SoundEvents.ENTITY_GENERIC_EXPLODE, 0.5F, 1.0F);
                 AOECloudHelper.spawnExplosionCloud(player, target, EXPLOSION_RADIUS);

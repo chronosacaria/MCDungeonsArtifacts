@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
@@ -22,7 +23,11 @@ import java.util.List;
 
 public class LightFeatherItem extends ArtifactAgilityItem{
     public LightFeatherItem() {
-        super(AgilityArtifactID.LIGHT_FEATHER);
+        super(
+                AgilityArtifactID.LIGHT_FEATHER,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.AGILITY_ARTIFACT_STATS
+                        .get(AgilityArtifactID.LIGHT_FEATHER).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -42,7 +47,13 @@ public class LightFeatherItem extends ArtifactAgilityItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 120);
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.AGILITY_ARTIFACT_STATS
+                        .get(AgilityArtifactID.LIGHT_FEATHER)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

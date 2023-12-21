@@ -39,10 +39,6 @@ public class TastyBoneWolfEntity extends WolfEntity implements Tameable, Summona
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
     }
 
-    protected void initDataTracker(){
-        super.initDataTracker();
-    }
-
     //TODO Find why they be spinning
     @Override
     protected void initGoals(){
@@ -114,7 +110,7 @@ public class TastyBoneWolfEntity extends WolfEntity implements Tameable, Summona
     @Override
     public void tickMovement() {
         super.tickMovement();
-        SummoningHelper.trackAndProtectSummoner(this);
+        SummoningHelper.mcdar$trackAndProtectSummoner(this);
     }
 
     @Nullable

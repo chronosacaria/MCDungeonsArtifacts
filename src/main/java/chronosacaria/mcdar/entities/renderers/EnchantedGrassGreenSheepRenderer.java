@@ -11,6 +11,7 @@ public class EnchantedGrassGreenSheepRenderer extends MobEntityRenderer<Enchante
         SheepEntityModel<EnchantedGrassGreenSheepEntity>> {
     public EnchantedGrassGreenSheepRenderer(EntityRendererFactory.Context context){
         super(context, new SheepEntityModel<>(context.getPart(EntityModelLayers.SHEEP)), 0.7F);
+        this.addFeature(new EnchantedGrassGreenSheepWoolFeatureRenderer(this, context.getModelLoader()));
     }
 
     @Override

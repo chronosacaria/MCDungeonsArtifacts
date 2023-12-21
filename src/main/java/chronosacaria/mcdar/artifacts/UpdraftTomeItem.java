@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.effects.ArtifactEffects;
@@ -18,7 +19,11 @@ import java.util.List;
 
 public class UpdraftTomeItem extends ArtifactDamagingItem{
     public UpdraftTomeItem() {
-        super(DamagingArtifactID.UPDRAFT_TOME);
+        super(
+                DamagingArtifactID.UPDRAFT_TOME,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                        .get(DamagingArtifactID.UPDRAFT_TOME).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -28,7 +33,13 @@ public class UpdraftTomeItem extends ArtifactDamagingItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 300);
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                        .get(DamagingArtifactID.UPDRAFT_TOME)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

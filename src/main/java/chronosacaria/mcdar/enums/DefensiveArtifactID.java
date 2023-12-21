@@ -1,6 +1,6 @@
 package chronosacaria.mcdar.enums;
 
-import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.registries.ArtifactsRegistry;
 import net.minecraft.item.Item;
 
@@ -17,21 +17,28 @@ public enum DefensiveArtifactID implements IArtifactItem{
     TOTEM_OF_SOUL_PROTECTION,
     WIND_HORN;
 
-    public static EnumMap<DefensiveArtifactID, Boolean> getEnabledItems() {
-        return McdarConfig.CONFIG.ENABLE_DEFENSIVE_ARTIFACT;
-    }
 
     public static EnumMap<DefensiveArtifactID, Item> getItemsEnum() {
-        return ArtifactsRegistry.defensiveArtifact;
+        return ArtifactsRegistry.DEFENSIVE_ARTIFACT;
     }
 
     @Override
-    public Boolean isEnabled() {
-        return getEnabledItems().get(this);
+    public Boolean mcdar$isEnabled() {
+        return Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS.get(this).mcdar$getIsEnabled();
     }
 
     @Override
-    public Item getItem() {
+    public Item mcdar$getItem() {
         return getItemsEnum().get(this);
+    }
+
+    @Override
+    public Float mcdar$getGeneralArtifactSpawnRate() {
+        return Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS.get(this).mcdar$getGeneralArtifactSpawnRate();
+    }
+
+    @Override
+    public Float mcdar$getDungeonArtifactSpawnRate() {
+        return Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS.get(this).mcdar$getDungeonArtifactSpawnRate();
     }
 }

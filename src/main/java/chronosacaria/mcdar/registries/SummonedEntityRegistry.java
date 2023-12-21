@@ -2,6 +2,7 @@ package chronosacaria.mcdar.registries;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.entities.*;
+import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -14,33 +15,45 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
+import java.util.Map;
+
 public class SummonedEntityRegistry {
+
+    public static final Map<EntityType<? extends LivingEntity>, DefaultAttributeContainer> ATTRIBUTES =
+            Maps.newHashMap();
     public static final EntityType<BuzzyNestBeeEntity> BUZZY_NEST_BEE_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BuzzyNestBeeEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, BuzzyNestBeeEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<EnchantedGrassGreenSheepEntity> ENCHANTED_GRASS_GREEN_SHEEP_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EnchantedGrassGreenSheepEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, EnchantedGrassGreenSheepEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<EnchantedGrassBlueSheepEntity> ENCHANTED_GRASS_BLUE_SHEEP_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EnchantedGrassBlueSheepEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, EnchantedGrassBlueSheepEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<EnchantedGrassRedSheepEntity> ENCHANTED_GRASS_RED_SHEEP_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, EnchantedGrassRedSheepEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, EnchantedGrassRedSheepEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<GolemKitGolemEntity> GOLEM_KIT_GOLEM_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GolemKitGolemEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, GolemKitGolemEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<TastyBoneWolfEntity> TASTY_BONE_WOLF_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TastyBoneWolfEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, TastyBoneWolfEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
     public static final EntityType<WonderfulWheatLlamaEntity> WONDERFUL_WHEAT_LLAMA_ENTITY =
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WonderfulWheatLlamaEntity::new)
+            FabricEntityTypeBuilder
+                    .create(SpawnGroup.CREATURE, WonderfulWheatLlamaEntity::new)
                     .dimensions(EntityDimensions.fixed(1, 2))
                     .build();
 

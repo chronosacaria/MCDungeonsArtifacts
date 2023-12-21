@@ -1,5 +1,7 @@
+/*
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -17,8 +19,12 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
-    public SatchelOfSnacksItem(DefensiveArtifactID artefactID) {
-        super(artefactID);
+    public SatchelOfSnacksItem() {
+        super(
+                DefensiveArtifactID.SATCHEL_OF_SNACKS,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                        .get(DefensiveArtifactID.SATCHEL_OF_SNACKS).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -31,8 +37,13 @@ public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 400);
-
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                        .get(DefensiveArtifactID.SATCHEL_OF_SNACKS)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
@@ -41,3 +52,5 @@ public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
         CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
 }
+
+ */

@@ -10,6 +10,10 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.TurtleEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -85,6 +89,18 @@ public class AOEHelper {
             lightningEntity.setCosmetic(true);
             if (target instanceof CreeperEntity creeperEntity) {
                 creeperEntity.getDataTracker().set(charged, true);
+            }
+            if (target instanceof MooshroomEntity mooshroomEntity) {
+                mooshroomEntity.onStruckByLightning((ServerWorld) world, lightningEntity);
+            }
+            if (target instanceof PigEntity pigEntity) {
+                pigEntity.onStruckByLightning((ServerWorld) world, lightningEntity);
+            }
+            if (target instanceof TurtleEntity turtleEntity) {
+                turtleEntity.onStruckByLightning((ServerWorld) world, lightningEntity);
+            }
+            if (target instanceof VillagerEntity villagerEntity) {
+                villagerEntity.onStruckByLightning((ServerWorld)world, lightningEntity);
             }
             world.spawnEntity(lightningEntity);
         }

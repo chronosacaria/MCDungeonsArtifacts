@@ -1,15 +1,12 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
-import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtifactID;
 import chronosacaria.mcdar.registries.SummonedEntityRegistry;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
@@ -18,28 +15,19 @@ import java.util.List;
 
 public class WonderfulWheatItem extends ArtifactSummoningItem{
     public WonderfulWheatItem() {
-        super(SummoningArtifactID.WONDERFUL_WHEAT);
+        super(
+                SummoningArtifactID.WONDERFUL_WHEAT,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.SUMMONING_ARTIFACT_STATS
+                        .get(SummoningArtifactID.WONDERFUL_WHEAT).mcdar$getDurability()
+        );
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
-        if (itemUsageContext.getWorld() instanceof ServerWorld serverWorld) {
-            PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
-
-            if (itemUsageContextPlayer != null){
-
-                if (SummoningHelper.summonSummonableEntity(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY.create(serverWorld),
-                        itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
-
-                    if (!itemUsageContextPlayer.isCreative())
-                        itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
-                                (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
-
-                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
-                    return ActionResult.SUCCESS;
-                }
-            }
-        }
-        return ActionResult.SUCCESS;
+        return CleanlinessHelper.mcdar$cleanUseSummon(
+                itemUsageContext,
+                this,
+                SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY
+        );
     }
 
     @Override
