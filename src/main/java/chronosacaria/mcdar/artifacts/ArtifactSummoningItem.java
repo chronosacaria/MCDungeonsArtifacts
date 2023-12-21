@@ -1,6 +1,5 @@
 package chronosacaria.mcdar.artifacts;
 
-import chronosacaria.mcdar.config.McdarConfig;
 import chronosacaria.mcdar.enums.SummoningArtifactID;
 import chronosacaria.mcdar.registries.ItemGroupRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -12,8 +11,8 @@ public class ArtifactSummoningItem extends Item {
 
     public final SummoningArtifactID id;
 
-    public ArtifactSummoningItem(SummoningArtifactID id) {
-        super(new Settings().maxCount(1).maxDamage(McdarConfig.CONFIG.getSummoningArtifactDurability()));
+    public ArtifactSummoningItem(SummoningArtifactID id, int artifactDurability) {
+        super(new Settings().maxCount(1).maxDamage(artifactDurability));
         this.id = id;
         ItemGroupEvents.modifyEntriesEvent(ItemGroupRegistry.ARTIFACTS).register(entries -> entries.add(this.getDefaultStack()));
     }

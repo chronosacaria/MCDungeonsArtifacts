@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -22,7 +23,11 @@ import java.util.List;
 
 public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
     public GongOfWeakeningItem() {
-        super(StatusInflictingArtifactID.GONG_OF_WEAKENING);
+        super(
+                StatusInflictingArtifactID.GONG_OF_WEAKENING,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.GONG_OF_WEAKENING).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -37,8 +42,13 @@ public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 100);
-
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.GONG_OF_WEAKENING)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

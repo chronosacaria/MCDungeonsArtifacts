@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -17,7 +18,11 @@ import java.util.List;
 
 public class LightningRodItem extends ArtifactDamagingItem{
     public LightningRodItem() {
-        super(DamagingArtifactID.LIGHTNING_ROD);
+        super(
+                DamagingArtifactID.LIGHTNING_ROD,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                        .get(DamagingArtifactID.LIGHTNING_ROD).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {
@@ -30,7 +35,13 @@ public class LightningRodItem extends ArtifactDamagingItem{
                 user.addExperience(-15);
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            EnchantmentHelper.cooldownHelper(user, this, 40);
+            EnchantmentHelper.mcdar$cooldownHelper(
+                    user,
+                    this,
+                    Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                            .get(DamagingArtifactID.LIGHTNING_ROD)
+                            .mcdar$getMaxCooldownEnchantmentTime()
+            );
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

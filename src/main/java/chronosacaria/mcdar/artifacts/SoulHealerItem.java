@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
@@ -19,7 +20,11 @@ import java.util.List;
 
 public class SoulHealerItem extends ArtifactDefensiveItem{
     public SoulHealerItem() {
-        super(DefensiveArtifactID.SOUL_HEALER);
+        super(
+                DefensiveArtifactID.SOUL_HEALER,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                        .get(DefensiveArtifactID.SOUL_HEALER).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -34,7 +39,14 @@ public class SoulHealerItem extends ArtifactDefensiveItem{
                 if (healedAmount > 0) {
                     user.addExperience((int) (-healedAmount));
                     itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
-                    EnchantmentHelper.cooldownHelper(user, this, bl ? 20 : 60);
+                    EnchantmentHelper.mcdar$cooldownHelper(
+                            user,
+                            this,
+                            bl ? 20
+                                    : Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
+                                        .get(DefensiveArtifactID.SOUL_HEALER)
+                                        .mcdar$getMaxCooldownEnchantmentTime()
+                    );
                 }
             }
         }

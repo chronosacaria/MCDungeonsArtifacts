@@ -1,9 +1,9 @@
 package chronosacaria.mcdar.mixin;
 
-import chronosacaria.mcdar.config.McdarConfig;
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.effects.ArtifactEffects;
 import chronosacaria.mcdar.effects.EnchantmentEffects;
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.enchants.EnchantmentsID;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
 import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.entity.LivingEntity;
@@ -55,7 +55,7 @@ public class LivingEntityMixin {
 
         LivingEntity target = (LivingEntity) (Object) this;
 
-        if (McdarConfig.CONFIG.ENABLE_DAMAGING_ARTIFACT.get(DamagingArtifactID.POWERSHAKER))
+        if (Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS.get(DamagingArtifactID.POWERSHAKER).mcdar$getIsEnabled())
             ArtifactEffects.activatePowerShaker(player, target);
     }
 
@@ -64,7 +64,7 @@ public class LivingEntityMixin {
         if (source.getSource() instanceof Tameable summonedEntity) {
             if (source.getSource().getWorld() instanceof ServerWorld serverWorld) {
 
-                if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BOSS))
+                if (Mcdar.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_BOSS).mcdar$getIsEnabled())
                     amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
 
             }
@@ -79,9 +79,9 @@ public class LivingEntityMixin {
 
         if (player.isAlive() && player.getWorld() instanceof ServerWorld) {
 
-            if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_BURST))
+            if (Mcdar.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_BURST).mcdar$getIsEnabled())
                 EnchantmentEffects.activateBeastBurst(player);
-            if (McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(EnchantID.BEAST_SURGE))
+            if (Mcdar.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_SURGE).mcdar$getIsEnabled())
                 EnchantmentEffects.activateBeastSurge(player);
         }
     }

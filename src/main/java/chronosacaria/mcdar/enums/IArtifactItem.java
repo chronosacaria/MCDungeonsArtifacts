@@ -4,7 +4,10 @@ import net.minecraft.item.Item;
 
 public interface IArtifactItem {
 
-    Boolean isEnabled();
+    Boolean mcdar$isEnabled();
 
-    Item getItem();
+    Item mcdar$getItem();
+
+    Float mcdar$getGeneralArtifactSpawnRate();
+    Float mcdar$getDungeonArtifactSpawnRate();
 }

@@ -14,7 +14,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.passive.TraderLlamaEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.DyeColor;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -32,16 +31,6 @@ public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Tame
 
     public static DefaultAttributeContainer.Builder createLlamaAttributes() {
         return LlamaEntity.createLlamaAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
-    }
-
-    protected void initDataTracker(){
-        super.initDataTracker();
-    }
-
-    @Nullable
-    @Override
-    public DyeColor getCarpetColor() {
-        return super.getCarpetColor();
     }
 
     @Override
@@ -86,7 +75,7 @@ public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Tame
     @Override
     public void tickMovement() {
         super.tickMovement();
-        SummoningHelper.trackAndProtectSummoner(this);
+        SummoningHelper.mcdar$trackAndProtectSummoner(this);
     }
 
     @Nullable

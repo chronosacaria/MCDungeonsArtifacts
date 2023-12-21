@@ -76,7 +76,7 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Tameab
 
     @Override
     public boolean tryAttack(Entity target) {
-        return SummoningHelper.attackTarget(this, target, SoundEvents.ENTITY_SHEEP_AMBIENT, 8.0f);
+        return SummoningHelper.mcdar$attackTarget(this, target, SoundEvents.ENTITY_SHEEP_AMBIENT, 8.0f);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class EnchantedGrassBlueSheepEntity extends SheepEntity implements Tameab
     @Override
     public void tickMovement() {
         super.tickMovement();
-        SummoningHelper.trackAndProtectSummoner(this);
+        SummoningHelper.mcdar$trackAndProtectSummoner(this);
     }
 
     @Override

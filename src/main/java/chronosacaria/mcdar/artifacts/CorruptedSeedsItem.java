@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -19,7 +20,11 @@ import java.util.List;
 
 public class CorruptedSeedsItem extends ArtifactStatusInflictingItem{
     public CorruptedSeedsItem() {
-        super(StatusInflictingArtifactID.CORRUPTED_SEEDS);
+        super(
+                StatusInflictingArtifactID.CORRUPTED_SEEDS,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.CORRUPTED_SEEDS).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -31,7 +36,13 @@ public class CorruptedSeedsItem extends ArtifactStatusInflictingItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 100);
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.CORRUPTED_SEEDS)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
@@ -21,7 +22,11 @@ import java.util.List;
 
 public class ShockPowderItem extends ArtifactStatusInflictingItem{
     public ShockPowderItem() {
-        super(StatusInflictingArtifactID.SHOCK_POWDER);
+        super(
+                StatusInflictingArtifactID.SHOCK_POWDER,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.SHOCK_POWDER).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -34,8 +39,13 @@ public class ShockPowderItem extends ArtifactStatusInflictingItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 300);
-
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.SHOCK_POWDER)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

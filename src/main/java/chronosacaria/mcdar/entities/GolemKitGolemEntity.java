@@ -66,7 +66,7 @@ public class GolemKitGolemEntity extends IronGolemEntity implements Tameable, Su
     @Override
     public void tickMovement() {
         super.tickMovement();
-        SummoningHelper.trackAndProtectSummoner(this);
+        SummoningHelper.mcdar$trackAndProtectSummoner(this);
     }
 
     @Nullable

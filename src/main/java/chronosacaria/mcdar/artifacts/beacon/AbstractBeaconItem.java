@@ -26,8 +26,8 @@ public abstract class AbstractBeaconItem extends ArtifactDamagingItem {
     public static final float BEAM_DAMAGE_PER_TICK = 0.5F;
     public static final float XP_COST_PER_TICK = 0.625F;
 
-    public AbstractBeaconItem(DamagingArtifactID artefactID) {
-        super(artefactID);
+    public AbstractBeaconItem(DamagingArtifactID artefactID, int artifactDurability) {
+        super(artefactID, artifactDurability);
     }
 
     @Nullable

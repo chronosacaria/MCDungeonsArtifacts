@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
@@ -19,7 +20,11 @@ import java.util.List;
 
 public class HarvesterItem extends ArtifactDamagingItem{
     public HarvesterItem() {
-        super(DamagingArtifactID.HARVESTER);
+        super(
+                DamagingArtifactID.HARVESTER,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                        .get(DamagingArtifactID.HARVESTER).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
@@ -34,7 +39,13 @@ public class HarvesterItem extends ArtifactDamagingItem{
                 user.addExperience(-40);
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            EnchantmentHelper.cooldownHelper(user, this, 60);
+            EnchantmentHelper.mcdar$cooldownHelper(
+                    user,
+                    this,
+                    Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
+                            .get(DamagingArtifactID.HARVESTER)
+                            .mcdar$getMaxCooldownEnchantmentTime()
+            );
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

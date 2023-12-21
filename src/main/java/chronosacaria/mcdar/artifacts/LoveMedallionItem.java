@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
@@ -25,8 +26,12 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class LoveMedallionItem extends ArtifactStatusInflictingItem {
-    public LoveMedallionItem(StatusInflictingArtifactID id) {
-        super(id);
+    public LoveMedallionItem() {
+        super(
+                StatusInflictingArtifactID.LOVE_MEDALLION,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.LOVE_MEDALLION).mcdar$getDurability()
+        );
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand){
@@ -45,7 +50,13 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.cooldownHelper(user, this, 120);
+        EnchantmentHelper.mcdar$cooldownHelper(
+                user,
+                this,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
+                        .get(StatusInflictingArtifactID.LOVE_MEDALLION)
+                        .mcdar$getMaxCooldownEnchantmentTime()
+        );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

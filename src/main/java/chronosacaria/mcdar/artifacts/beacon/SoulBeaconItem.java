@@ -5,8 +5,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public abstract class SoulBeaconItem extends AbstractBeaconItem{
-    public SoulBeaconItem(DamagingArtifactID artefactID) {
-        super(artefactID);
+    public SoulBeaconItem(DamagingArtifactID artefactID, int artifactDurability) {
+        super(artefactID, artifactDurability);
     }
 
     public boolean canFire(PlayerEntity playerEntity, ItemStack itemStack){

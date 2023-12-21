@@ -1,32 +1,26 @@
 package chronosacaria.mcdar.registries;
 
-import chronosacaria.mcdar.Mcdar;
-import chronosacaria.mcdar.config.McdarConfig;
-import chronosacaria.mcdar.enchants.ArmorEnchantment;
-import chronosacaria.mcdar.enchants.EnchantID;
+import chronosacaria.mcdar.enchants.BeastBossEnchantment;
+import chronosacaria.mcdar.enchants.BeastBurstEnchantment;
+import chronosacaria.mcdar.enchants.BeastSurgeEnchantment;
+import chronosacaria.mcdar.enchants.CooldownEnchantment;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-
-import java.util.EnumMap;
-import java.util.Locale;
+import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.entity.EquipmentSlot;
 
 public class EnchantsRegistry {
-    public static final EnumMap<EnchantID, Enchantment> enchants = new EnumMap<>(EnchantID.class);
-
+    public static Enchantment COOLDOWN;
+    public static Enchantment BEAST_BOSS;
+    public static Enchantment BEAST_BURST;
+    public static Enchantment BEAST_SURGE;
     public static void register(){
-        for (EnchantID enchantID : EnchantID.values()) {
-            if (!McdarConfig.CONFIG.ENABLE_ENCHANTMENT.get(enchantID))
-                continue;
-
-            Enchantment enchantment = new ArmorEnchantment(enchantID);
-
-            enchants.put(enchantID, enchantment);
-            registerEnchant(enchantID.toString().toLowerCase(Locale.ROOT), enchantment);
-        }
-    }
-
-    protected static void registerEnchant(String id, Enchantment enchant){
-        Registry.register(Registries.ENCHANTMENT, Mcdar.ID(id), enchant);
+        COOLDOWN = new CooldownEnchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET});
+        BEAST_BOSS = new BeastBossEnchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET});
+        BEAST_BURST = new BeastBurstEnchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET});
+        BEAST_SURGE = new BeastSurgeEnchantment(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON,
+                new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET});
     }
 }

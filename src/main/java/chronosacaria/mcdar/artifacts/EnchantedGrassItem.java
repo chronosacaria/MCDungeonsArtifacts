@@ -1,5 +1,6 @@
 package chronosacaria.mcdar.artifacts;
 
+import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.CleanlinessHelper;
 import chronosacaria.mcdar.api.EnchantmentHelper;
 import chronosacaria.mcdar.api.SummoningHelper;
@@ -19,7 +20,11 @@ import java.util.Random;
 
 public class EnchantedGrassItem extends ArtifactSummoningItem{
     public EnchantedGrassItem() {
-        super(SummoningArtifactID.ENCHANTED_GRASS);
+        super(
+                SummoningArtifactID.ENCHANTED_GRASS,
+                Mcdar.CONFIG.mcdarArtifactsStatsConfig.SUMMONING_ARTIFACT_STATS
+                        .get(SummoningArtifactID.ENCHANTED_GRASS).mcdar$getDurability()
+        );
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
@@ -31,17 +36,22 @@ public class EnchantedGrassItem extends ArtifactSummoningItem{
                 int effectInt = (new Random()).nextInt(3);
                 SheepEntity sheep = SummoningHelper.SHEEP.get(effectInt).create(serverWorld);
 
-                if (SummoningHelper.summonSummonableEntity(sheep, itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
+                if (SummoningHelper.mcdar$summonSummonableEntity(sheep, itemUsageContextPlayer, itemUsageContext.getBlockPos())) {
                     assert sheep != null;
                     if (CleanlinessHelper.percentToOccur(1))
                         sheep.setCustomName(Text.literal("Lilly"));
-                    SummoningHelper.summonedSheepEffect(sheep, effectInt);
+                    SummoningHelper.mcdar$summonedSheepEffect(sheep, effectInt);
 
                     if (!itemUsageContextPlayer.isCreative())
                         itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                                 (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                    EnchantmentHelper.cooldownHelper(itemUsageContextPlayer, this, 600);
+                    EnchantmentHelper.mcdar$cooldownHelper(
+                            itemUsageContextPlayer,
+                            this,
+                            Mcdar.CONFIG.mcdarArtifactsStatsConfig.SUMMONING_ARTIFACT_STATS
+                                    .get(SummoningArtifactID.ENCHANTED_GRASS)
+                                    .mcdar$getMaxCooldownEnchantmentTime());
                     return ActionResult.CONSUME;
                 }
             }
