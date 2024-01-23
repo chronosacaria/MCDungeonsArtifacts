@@ -1,6 +1,7 @@
 package chronosacaria.mcdar.config;
 
 import java.util.List;
+import java.util.Set;
 
 public class ArtifactStatsConfigHelper {
 
@@ -8,8 +9,10 @@ public class ArtifactStatsConfigHelper {
     boolean isEnabled = true;
     int durability;
     int maxCooldownEnchantmentTime;
-    float generalSpawnRate;
-    float dungeonSpawnRate;
+    int generalSpawnWeight;
+    int dungeonSpawnWeight;
+    Set<String> generalLootTables;
+    Set<String> dungeonLootTables;
 
     public boolean mcdar$getIsEnabled() {
         return isEnabled;
@@ -23,31 +26,42 @@ public class ArtifactStatsConfigHelper {
         return maxCooldownEnchantmentTime;
     }
 
-    public float mcdar$getGeneralArtifactSpawnRate() {
-        return generalSpawnRate;
+    public int mcdar$getGeneralArtifactSpawnWeight() {
+        return generalSpawnWeight;
     }
 
-    public float mcdar$getDungeonArtifactSpawnRate() {
-        return dungeonSpawnRate;
+    public int mcdar$getDungeonArtifactSpawnWeight() {
+        return dungeonSpawnWeight;
+    }
+    public Set<String> mcdar$getGeneralLootTables() {
+        return generalLootTables;
+    }
+
+    public Set<String> mcdar$getDungeonLootTables() {
+        return dungeonLootTables;
     }
 
     @SuppressWarnings("unused")
     public ArtifactStatsConfigHelper() {
     }
 
-    public ArtifactStatsConfigHelper(boolean isEnabled, int durability, int maxCooldownEnchantmentTime, float generalSpawnRate, float dungeonSpawnRate) {
+    public ArtifactStatsConfigHelper(boolean isEnabled, int durability, int maxCooldownEnchantmentTime, int generalSpawnWeight, int dungeonSpawnWeight, Set<String> generalLootTables, Set<String> dungeonLootTables) {
         this.isEnabled = isEnabled;
         this.durability = durability;
         this.maxCooldownEnchantmentTime = maxCooldownEnchantmentTime;
-        this.generalSpawnRate = generalSpawnRate;
-        this.dungeonSpawnRate = dungeonSpawnRate;
+        this.generalSpawnWeight = generalSpawnWeight;
+        this.dungeonSpawnWeight = dungeonSpawnWeight;
+        this.generalLootTables = generalLootTables;
+        this.dungeonLootTables = dungeonLootTables;
     }
-    public ArtifactStatsConfigHelper(List<String> comment, boolean isEnabled, int durability, int maxCooldownEnchantmentTime, float generalSpawnRate, float dungeonSpawnRate) {
+    public ArtifactStatsConfigHelper(List<String> comment, boolean isEnabled, int durability, int maxCooldownEnchantmentTime, int generalSpawnWeight, int dungeonSpawnWeight, Set<String> generalLootTables, Set<String> dungeonLootTables) {
         this.comment = comment;
         this.isEnabled = isEnabled;
         this.durability = durability;
         this.maxCooldownEnchantmentTime = maxCooldownEnchantmentTime;
-        this.generalSpawnRate = generalSpawnRate;
-        this.dungeonSpawnRate = dungeonSpawnRate;
+        this.generalSpawnWeight = generalSpawnWeight;
+        this.dungeonSpawnWeight = dungeonSpawnWeight;
+        this.generalLootTables = generalLootTables;
+        this.dungeonLootTables = dungeonLootTables;
     }
 }

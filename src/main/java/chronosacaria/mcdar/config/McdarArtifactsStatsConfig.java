@@ -1,14 +1,20 @@
 package chronosacaria.mcdar.config;
 
+import chronosacaria.mcdar.api.GroupedObjectsHelper;
 import chronosacaria.mcdar.enums.*;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import net.minecraft.util.Identifier;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Config(name = "mcdar_artifacts_stats_config")
 public class McdarArtifactsStatsConfig implements ConfigData {
+    public final float ARTIFACT_GENERAL_SPAWN_CHANCE = 0.25f;
+    public final float ARTIFACT_DUNGEON_SPAWN_CHANCE = 0.1f;
     public final LinkedHashMap<AgilityArtifactID, ArtifactStatsConfigHelper> AGILITY_ARTIFACT_STATS = new LinkedHashMap<>();
     public final LinkedHashMap<DamagingArtifactID, ArtifactStatsConfigHelper> DAMAGING_ARTIFACT_STATS = new LinkedHashMap<>();
     public final LinkedHashMap<DefensiveArtifactID, ArtifactStatsConfigHelper> DEFENSIVE_ARTIFACT_STATS = new LinkedHashMap<>();
@@ -17,14 +23,19 @@ public class McdarArtifactsStatsConfig implements ConfigData {
     public final LinkedHashMap<SummoningArtifactID, ArtifactStatsConfigHelper> SUMMONING_ARTIFACT_STATS = new LinkedHashMap<>();
 
     public McdarArtifactsStatsConfig() {
+        Set<String> villager = GroupedObjectsHelper.VILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
+        Set<String> illager = GroupedObjectsHelper.ILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
+        Set<String> dungeon = GroupedObjectsHelper.ALL_ARTIFACTS_DUNGEON_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
         AGILITY_ARTIFACT_STATS.put(
                 AgilityArtifactID.BOOTS_OF_SWIFTNESS,
                 new ArtifactStatsConfigHelper(
                         true,
                         64,
                         100,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         AGILITY_ARTIFACT_STATS.put(
@@ -33,8 +44,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         AGILITY_ARTIFACT_STATS.put(
@@ -43,8 +56,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         120,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         AGILITY_ARTIFACT_STATS.put(
@@ -53,8 +68,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         120,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
 
@@ -64,8 +81,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         120,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DAMAGING_ARTIFACT_STATS.put(
@@ -74,8 +93,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         60,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DAMAGING_ARTIFACT_STATS.put(
@@ -84,8 +105,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         40,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DAMAGING_ARTIFACT_STATS.put(
@@ -94,8 +117,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DAMAGING_ARTIFACT_STATS.put(
@@ -104,8 +129,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         300,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
 
@@ -115,8 +142,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         100,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -125,8 +154,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         500,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -135,8 +166,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         60,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -145,8 +178,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -155,8 +190,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -165,8 +202,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         DEFENSIVE_ARTIFACT_STATS.put(
@@ -175,8 +214,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         250,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
 
@@ -193,8 +234,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         500,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         QUIVER_ARTIFACT_STATS.put(
@@ -210,8 +253,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         QUIVER_ARTIFACT_STATS.put(
@@ -227,8 +272,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         QUIVER_ARTIFACT_STATS.put(
@@ -244,8 +291,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
 
@@ -255,8 +304,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         100,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         STATUS_INFLICTING_ARTIFACT_STATS.put(
@@ -265,8 +316,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         100,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         STATUS_INFLICTING_ARTIFACT_STATS.put(
@@ -275,8 +328,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         120,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         STATUS_INFLICTING_ARTIFACT_STATS.put(
@@ -285,8 +340,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         60,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
         STATUS_INFLICTING_ARTIFACT_STATS.put(
@@ -295,8 +352,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         64,
                         300,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        illager,
+                        dungeon
                 )
         );
 
@@ -306,8 +365,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         SUMMONING_ARTIFACT_STATS.put(
@@ -316,8 +377,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         SUMMONING_ARTIFACT_STATS.put(
@@ -326,8 +389,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         SUMMONING_ARTIFACT_STATS.put(
@@ -336,8 +401,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
         SUMMONING_ARTIFACT_STATS.put(
@@ -346,8 +413,10 @@ public class McdarArtifactsStatsConfig implements ConfigData {
                         true,
                         8,
                         600,
-                        0.25f,
-                        0.1f
+                        2,
+                        1,
+                        villager,
+                        dungeon
                 )
         );
     }
