@@ -3,7 +3,7 @@ package chronosacaria.mcdar.artifacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.DefensiveArtifactID;
 import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
@@ -48,12 +48,9 @@ public class TotemOfShieldingItem extends ArtifactDefensiveItem{
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                EnchantmentHelper.mcdar$cooldownHelper(
+                McdarEnchantmentHelper.mcdar$cooldownHelper(
                         itemUsageContextPlayer,
-                        this,
-                        Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
-                                .get(DefensiveArtifactID.TOTEM_OF_SHIELDING)
-                                .mcdar$getMaxCooldownEnchantmentTime()
+                        this
                 );
                 return ActionResult.CONSUME;
             }

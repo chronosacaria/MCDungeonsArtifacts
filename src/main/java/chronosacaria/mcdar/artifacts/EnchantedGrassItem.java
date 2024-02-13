@@ -2,7 +2,7 @@ package chronosacaria.mcdar.artifacts;
 
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.api.SummoningHelper;
 import chronosacaria.mcdar.enums.SummoningArtifactID;
 import net.minecraft.client.item.TooltipContext;
@@ -46,12 +46,10 @@ public class EnchantedGrassItem extends ArtifactSummoningItem{
                         itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                                 (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                    EnchantmentHelper.mcdar$cooldownHelper(
+                    McdarEnchantmentHelper.mcdar$cooldownHelper(
                             itemUsageContextPlayer,
-                            this,
-                            Mcdar.CONFIG.mcdarArtifactsStatsConfig.SUMMONING_ARTIFACT_STATS
-                                    .get(SummoningArtifactID.ENCHANTED_GRASS)
-                                    .mcdar$getMaxCooldownEnchantmentTime());
+                            this
+                    );
                     return ActionResult.CONSUME;
                 }
             }

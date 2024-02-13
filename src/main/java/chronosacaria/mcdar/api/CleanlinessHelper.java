@@ -4,6 +4,7 @@ import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.enums.*;
 import chronosacaria.mcdar.registries.EnchantsRegistry;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -104,7 +105,7 @@ public class CleanlinessHelper {
         }
         if (!player.isCreative())
             itemStack.damage(1, player, (entity) -> entity.sendToolBreakStatus(hand));
-        EnchantmentHelper.mcdar$cooldownHelper(player, artifact, mcdar$artifactIDToItemCooldownTime(artifact));
+        McdarEnchantmentHelper.mcdar$cooldownHelper(player, artifact);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
@@ -125,10 +126,9 @@ public class CleanlinessHelper {
                         itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                                 (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                    EnchantmentHelper.mcdar$cooldownHelper(
+                    McdarEnchantmentHelper.mcdar$cooldownHelper(
                             itemUsageContextPlayer,
-                            artifact,
-                            mcdar$artifactIDToItemCooldownTime(artifact));
+                            artifact);
                     return ActionResult.CONSUME;
                 }
             }
@@ -136,9 +136,9 @@ public class CleanlinessHelper {
         return ActionResult.SUCCESS;
     }
 
-    private static int mcdar$artifactIDToItemCooldownTime(Item artifactItem) {
-        int cooldownLevel = net.minecraft.enchantment.EnchantmentHelper.getLevel(EnchantsRegistry.COOLDOWN, artifactItem.getDefaultStack());
-        if (artifactItem instanceof IArtifactItem) {
+    public static int mcdar$artifactIDToItemCooldownTime(Item artifactItem) {
+        int cooldownLevel = EnchantmentHelper.getLevel(EnchantsRegistry.COOLDOWN, artifactItem.getDefaultStack());
+        //if (artifactItem instanceof IArtifactItem) {
             for (AgilityArtifactID agilityArtifactID : AgilityArtifactID.values())
                 if (artifactItem.asItem() == agilityArtifactID.mcdar$getItem()
                         && Mcdar.CONFIG.mcdarArtifactsStatsConfig.AGILITY_ARTIFACT_STATS.get(agilityArtifactID)
@@ -154,7 +154,7 @@ public class CleanlinessHelper {
             for (DefensiveArtifactID defensiveArtifactID : DefensiveArtifactID.values())
                 if (artifactItem.asItem() == defensiveArtifactID.mcdar$getItem()
                         && Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS.get(defensiveArtifactID)
-                            .mcdar$getIsEnabled())
+                            .mcdar$getIsEnabled() && artifactItem.asItem() != DefensiveArtifactID.SOUL_HEALER.mcdar$getItem())
                     return Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS.get(defensiveArtifactID)
                             .mcdar$getMaxCooldownEnchantmentTime();
             for (QuiverArtifactID quiverArtifactID : QuiverArtifactID.values())
@@ -175,7 +175,7 @@ public class CleanlinessHelper {
                             .mcdar$getIsEnabled())
                     return Mcdar.CONFIG.mcdarArtifactsStatsConfig.SUMMONING_ARTIFACT_STATS.get(summoningArtifactID)
                             .mcdar$getMaxCooldownEnchantmentTime();
-        }
+        //}
         return 0;
     }
 }

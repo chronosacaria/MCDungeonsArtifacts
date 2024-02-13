@@ -3,7 +3,7 @@ package chronosacaria.mcdar.artifacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.DefensiveArtifactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -48,12 +48,9 @@ public class TotemOfRegenerationItem extends ArtifactDefensiveItem{
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer,
                             (entity) -> entity.sendToolBreakStatus(itemUsageContext.getHand()));
 
-                EnchantmentHelper.mcdar$cooldownHelper(
+                McdarEnchantmentHelper.mcdar$cooldownHelper(
                         itemUsageContextPlayer,
-                        this,
-                        Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
-                                .get(DefensiveArtifactID.TOTEM_OF_REGENERATION)
-                                .mcdar$getMaxCooldownEnchantmentTime()
+                        this
                 );
                 return ActionResult.CONSUME;
             }

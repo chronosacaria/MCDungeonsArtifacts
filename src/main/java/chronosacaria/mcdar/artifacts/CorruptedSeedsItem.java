@@ -3,7 +3,7 @@ package chronosacaria.mcdar.artifacts;
 import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.StatusInflictingArtifactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -36,12 +36,9 @@ public class CorruptedSeedsItem extends ArtifactStatusInflictingItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.mcdar$cooldownHelper(
+        McdarEnchantmentHelper.mcdar$cooldownHelper(
                 user,
-                this,
-                Mcdar.CONFIG.mcdarArtifactsStatsConfig.STATUS_INFLICTING_ARTIFACT_STATS
-                        .get(StatusInflictingArtifactID.CORRUPTED_SEEDS)
-                        .mcdar$getMaxCooldownEnchantmentTime()
+                this
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

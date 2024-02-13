@@ -6,10 +6,18 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class EnchantmentHelper {
+public class McdarEnchantmentHelper {
 
     public static void mcdar$cooldownHelper(PlayerEntity player, Item item, int maxCooldown) {
         int cooldownLevel = mcdar$getCooldownLevel(EnchantsRegistry.COOLDOWN, player);
+        player.getItemCooldownManager().set(item,
+                cooldownLevel == 0 ? maxCooldown :
+                        (int) (maxCooldown - (maxCooldown * mcdar$cooldownCalcHelper(cooldownLevel))));
+    }
+
+    public static void mcdar$cooldownHelper(PlayerEntity player, Item item) {
+        int cooldownLevel = mcdar$getCooldownLevel(EnchantsRegistry.COOLDOWN, player);
+        int maxCooldown = CleanlinessHelper.mcdar$artifactIDToItemCooldownTime(item);
         player.getItemCooldownManager().set(item,
                 cooldownLevel == 0 ? maxCooldown :
                         (int) (maxCooldown - (maxCooldown * mcdar$cooldownCalcHelper(cooldownLevel))));

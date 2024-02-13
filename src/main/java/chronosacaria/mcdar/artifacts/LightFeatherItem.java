@@ -4,7 +4,7 @@ import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.AgilityArtifactID;
 import chronosacaria.mcdar.registries.StatusEffectInit;
 import net.minecraft.client.item.TooltipContext;
@@ -47,12 +47,9 @@ public class LightFeatherItem extends ArtifactAgilityItem{
         if (!user.isCreative())
             itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-        EnchantmentHelper.mcdar$cooldownHelper(
+        McdarEnchantmentHelper.mcdar$cooldownHelper(
                 user,
-                this,
-                Mcdar.CONFIG.mcdarArtifactsStatsConfig.AGILITY_ARTIFACT_STATS
-                        .get(AgilityArtifactID.LIGHT_FEATHER)
-                        .mcdar$getMaxCooldownEnchantmentTime()
+                this
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

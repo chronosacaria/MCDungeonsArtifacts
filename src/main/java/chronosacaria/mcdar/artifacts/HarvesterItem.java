@@ -4,7 +4,7 @@ import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOECloudHelper;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.DamagingArtifactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,12 +39,9 @@ public class HarvesterItem extends ArtifactDamagingItem{
                 user.addExperience(-40);
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
             }
-            EnchantmentHelper.mcdar$cooldownHelper(
+            McdarEnchantmentHelper.mcdar$cooldownHelper(
                     user,
-                    this,
-                    Mcdar.CONFIG.mcdarArtifactsStatsConfig.DAMAGING_ARTIFACT_STATS
-                            .get(DamagingArtifactID.HARVESTER)
-                            .mcdar$getMaxCooldownEnchantmentTime()
+                    this
             );
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

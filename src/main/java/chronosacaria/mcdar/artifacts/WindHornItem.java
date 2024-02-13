@@ -4,7 +4,7 @@ import chronosacaria.mcdar.Mcdar;
 import chronosacaria.mcdar.api.AOEHelper;
 import chronosacaria.mcdar.api.AbilityHelper;
 import chronosacaria.mcdar.api.CleanlinessHelper;
-import chronosacaria.mcdar.api.EnchantmentHelper;
+import chronosacaria.mcdar.api.McdarEnchantmentHelper;
 import chronosacaria.mcdar.enums.DefensiveArtifactID;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -62,12 +62,9 @@ public class WindHornItem extends ArtifactDefensiveItem{
             if (!user.isCreative())
                 itemStack.damage(1, user, (entity) -> entity.sendToolBreakStatus(hand));
 
-            EnchantmentHelper.mcdar$cooldownHelper(
+            McdarEnchantmentHelper.mcdar$cooldownHelper(
                     user,
-                    this,
-                    Mcdar.CONFIG.mcdarArtifactsStatsConfig.DEFENSIVE_ARTIFACT_STATS
-                            .get(DefensiveArtifactID.WIND_HORN)
-                            .mcdar$getMaxCooldownEnchantmentTime()
+                    this
             );
             return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
 
