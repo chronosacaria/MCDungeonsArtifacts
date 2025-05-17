@@ -25,7 +25,7 @@ public class GolemKitItem extends ArtifactSummoningItem {
         return CleanlinessHelper.mcdar$cleanUseSummon(
                 itemUsageContext,
                 this,
-                SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY,
+                SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY.get(),
                 modifiedCooldownEnchantmentTime
         );
     }

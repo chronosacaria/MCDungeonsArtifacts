@@ -56,21 +56,6 @@ allprojects {
 
     repositories {
         maven {
-            name = "TerraformersMC"
-            url = "https://maven.terraformersmc.com/"
-        }
-        maven {
-            name = "QuiltMC"
-            url = "https://maven.quiltmc.org/repository/release/"
-        }
-        maven {
-            name = "Modrinth"
-            url = "https://api.modrinth.com/maven"
-            content {
-                includeGroup "maven.modrinth"
-            }
-        }
-        maven {
             name = "FzzyMaven"
             url = "https://maven.fzzyhmstrs.me/"
         }

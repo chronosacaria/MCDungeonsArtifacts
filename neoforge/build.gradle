@@ -47,7 +47,9 @@ dependencies {
         it.mappings("dev.architectury:yarn-mappings-patch-neoforge:$project.yarn_mappings_patch_neoforge_version")
     }
 
-    modImplementation "me.fzzyhmstrs:fzzy_config:${rootProject.fzzyConfigVersion}+neoforge"
+    modImplementation("me.fzzyhmstrs:fzzy_config:${rootProject.fzzyConfigVersion}+neoforge") {
+        exclude group: "net.neoforged.fancymodloader", module: "loader"
+    }
 }
 
 publishMods {

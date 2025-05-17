@@ -24,9 +24,9 @@ import java.util.List;
 public class SummoningHelper {
 
     public static final List<? extends EntityType<? extends SheepEntity>> SHEEP = Arrays.asList(
-            SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY,
-            SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY,
-            SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY);
+            SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY.get(),
+            SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY.get(),
+            SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY.get());
 
     public static void mcdar$summonedSheepEffect(LivingEntity sheep, int effectInt) {
         switch (effectInt) {

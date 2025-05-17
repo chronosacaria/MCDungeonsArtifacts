@@ -1,0 +1,20 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mcdar.beast_boss"
+  },
+  "max_cost": {
+    "base": 16,
+    "per_level_above_first": 10
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "slots": [
+    "armor"
+  ],
+  "supported_items": "#minecraft:enchantable/armor",
+  "weight": 1
+}

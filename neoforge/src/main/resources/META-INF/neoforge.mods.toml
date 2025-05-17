@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/chronosacaria/MCDungeonsArtifacts/issues"
+license = "Timefall Development License 1.2"
+
+[[mods]]
+modId = "mcdar"
+version = "${version}"
+displayName = "MC Dungeons Artifacts"
+authors = "Chronosacaria, Kluzzio, fzzyhmstrs, yuripo (Art), SeaOfPixels (Art), SattesKrokodil (Art), Patreons (Support)"
+description = '''
+Bringing the artifacts of Minecraft Dungeons to Minecraft
+'''
+logoFile = "assets/mcdar/icon.png"
+
+[[dependencies.mcdar]]
+modId = "neoforge"
+type = "REQUIRED"
+versionRange = "[21.0.0-beta,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mcdar]]
+modId = "minecraft"
+type = "REQUIRED"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mcdar]]
+modId = "fzzy_config"
+type = "REQUIRED"
+versionRange = "[0.6.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config="mcdar.mixins.json"

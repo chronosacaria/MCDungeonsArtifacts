@@ -25,7 +25,7 @@ public class TastyBoneItem extends ArtifactSummoningItem {
         return CleanlinessHelper.mcdar$cleanUseSummon(
                 itemUsageContext,
                 this,
-                SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY,
+                SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY.get(),
                 modifiedCooldownEnchantmentTime
         );
     }

@@ -16,12 +16,12 @@ import net.minecraft.util.DyeColor;
 public class SummonedEntityRenderRegistryFabric {
     public static void register() {
 
-        EntityRendererRegistry.register(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BeeEntityRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context, DyeColor.BLUE));
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context,DyeColor.GREEN));
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context, DyeColor.RED));
-        EntityRendererRegistry.register(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, IronGolemEntityRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, WolfEntityRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, context -> new LlamaEntityRenderer(context, EntityModelLayers.TRADER_LLAMA));
+        EntityRendererRegistry.register(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY.get(), BeeEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY.get(), context -> new EnchantedGrassSheepRenderer(context, DyeColor.BLUE));
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY.get(), context -> new EnchantedGrassSheepRenderer(context,DyeColor.GREEN));
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY.get(), context -> new EnchantedGrassSheepRenderer(context, DyeColor.RED));
+        EntityRendererRegistry.register(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY.get(), IronGolemEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY.get(), WolfEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY.get(), context -> new LlamaEntityRenderer(context, EntityModelLayers.TRADER_LLAMA));
     }
 }

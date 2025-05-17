@@ -25,7 +25,7 @@ public class WonderfulWheatItem extends ArtifactSummoningItem {
         return CleanlinessHelper.mcdar$cleanUseSummon(
                 itemUsageContext,
                 this,
-                SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY,
+                SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY.get(),
                 modifiedCooldownEnchantmentTime
         );
     }

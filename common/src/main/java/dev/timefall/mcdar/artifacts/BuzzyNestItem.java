@@ -25,7 +25,7 @@ public class BuzzyNestItem extends ArtifactSummoningItem {
         return CleanlinessHelper.mcdar$cleanUseSummon(
                 itemUsageContext,
                 this,
-                SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY,
+                SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY.get(),
                 modifiedCooldownEnchantmentTime
         );
     }
