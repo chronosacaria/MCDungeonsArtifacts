@@ -3,15 +3,20 @@ package dev.timefall.mcdar.config;
 import dev.timefall.mcdar.ModConstants;
 import dev.timefall.mcdar.api.GroupedObjectsHelper;
 import dev.timefall.mcdar.config.item_sections.*;
+import dev.timefall.mcdx.configs.AoeExclusionType;
 import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedChoiceList;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
 import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
+import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedEnum;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -66,6 +71,22 @@ public class McdarArtifactsStatsConfig extends Config {
         return statusInflictingArtifactStats;
     }
 
+    public SummoningArtifactStats mcdar$getSummoningArtifactStats() {
+        return summoningArtifactStats;
+    }
+
+
+    public ValidatedChoiceList<AoeExclusionType> satchelExclusions = new ValidatedList<>(
+            AoeExclusionType.TYPES,
+            new ValidatedEnum<>(AoeExclusionType.CREATIVE_PLAYER)
+    ).toChoiceList(
+            List.of(
+                AoeExclusionType.SELF,
+                AoeExclusionType.SELF_PET,
+                AoeExclusionType.OBSCURED
+            )
+    );
+
     public Set<Identifier> mcdar$getVillagerLootTables() {
         return villagerLootTables;
     }
@@ -78,9 +99,6 @@ public class McdarArtifactsStatsConfig extends Config {
         return dungeonLootTables;
     }
 
-    public SummoningArtifactStats mcdar$getSummoningArtifactStats() {
-        return summoningArtifactStats;
-    }
 
     public McdarArtifactsStatsConfig() {
         super(ModConstants.id("mcdar_artifacts_stats_config"));

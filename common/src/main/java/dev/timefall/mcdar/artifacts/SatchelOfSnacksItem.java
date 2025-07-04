@@ -1,6 +1,5 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
@@ -9,6 +8,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -16,6 +16,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SatchelOfSnacksItem extends ArtifactDefensiveItem {
@@ -29,25 +31,19 @@ public class SatchelOfSnacksItem extends ArtifactDefensiveItem {
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         Item snackToDrop =
-                AbilityHelper.SATCHEL_OF_SNACKS_LIST.get(user.getRandom().nextInt(AbilityHelper.SATCHEL_OF_SNACKS_LIST.size()));
+                SATCHEL_OF_SNACKS_LIST.get(user.getRandom().nextInt(SATCHEL_OF_SNACKS_LIST.size()));
 
         CleanlinessHelper.mcdar$dropItem(user, snackToDrop);
-
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
-
-        EnchantmentEffects.mcdar$cooldownHelper(
-                user,
-                this,
-                modifiedCooldownEnchantmentTime
-        );
-        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+        return CleanlinessHelper.mcdar$useAndDamageArtifact(user, hand, itemStack, modifiedCooldownEnchantmentTime);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext tooltipContext, List<Text> tooltip, TooltipType type){
         CleanlinessHelper.createLoreTTips(stack, tooltip);
     }
+
+    private static final List<Item> SATCHEL_OF_SNACKS_LIST = Collections.unmodifiableList(Arrays.asList(
+            Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,
+            Items.COOKED_COD, Items.COOKED_COD, Items.COOKED_RABBIT, Items.COOKED_CHICKEN, Items.COOKED_BEEF,
+            Items.MELON_SLICE, Items.CARROT, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.BAKED_POTATO));
 }

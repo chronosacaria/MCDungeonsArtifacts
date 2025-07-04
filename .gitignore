@@ -135,3 +135,5 @@ fabric/run/
 /neoforge/run/logs/debug-4.log.gz
 /neoforge/run/logs/debug-5.log.gz
 /.windsurfrules
+/neoforge/run/
+/fabric/src/main/generated/.cache/93d6a09524dff5806942685e351e9217e6e772b7

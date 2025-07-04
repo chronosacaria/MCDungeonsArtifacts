@@ -29,18 +29,8 @@ public class UpdraftTomeItem extends ArtifactDamagingItem {
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         ArtifactEffects.mcdar$updraftNearbyEnemies(user);
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
+        return CleanlinessHelper.mcdar$useAndDamageArtifact(user, hand, itemStack, modifiedCooldownEnchantmentTime);
 
-        EnchantmentEffects.mcdar$cooldownHelper(
-                user,
-                this,
-                modifiedCooldownEnchantmentTime
-        );
-
-        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
     @Override

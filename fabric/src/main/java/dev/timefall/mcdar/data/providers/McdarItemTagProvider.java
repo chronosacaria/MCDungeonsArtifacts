@@ -9,9 +9,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class McdarTagProvider extends FabricTagProvider.ItemTagProvider {
+public class McdarItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
-    public McdarTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @Nullable BlockTagProvider blockTagProvider) {
+    public McdarItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @Nullable BlockTagProvider blockTagProvider) {
         super(output, completableFuture, blockTagProvider);
     }
 

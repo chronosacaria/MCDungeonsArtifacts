@@ -1,11 +1,16 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
+import dev.timefall.mcdx.api.AOEHelper;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
@@ -39,7 +44,7 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem {
                 int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, user.getWorld());
 
                 if (user.totalExperience >= experienceDrain || user.isCreative()) {
-                    AOEHelper.satchelOfElementsEffects(user, damage, range, duration, amplifier, amplifier2, amplifier3);
+                    satchelOfElementsEffects(user, damage, range, duration, amplifier, amplifier2, amplifier3);
 
                     if (!user.isCreative()) {
                         user.addExperience(-experienceDrain);
@@ -61,5 +66,29 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext tooltipContext, List<Text> tooltip, TooltipType type){
         CleanlinessHelper.createLoreTTips(stack, tooltip);
+    }
+
+    private static void satchelOfElementsEffects(PlayerEntity user, float damage, float range, int duration, int amplifier, int amplifier2, int amplifier3) {
+        int effectInt = (CleanlinessHelper.RANDOM.nextInt(3));
+
+        if (effectInt == 0){ // BURNING
+            for (LivingEntity nearbyEntity : AOEHelper.getEntitiesWithExclusions(user, range, McdarArtifactsStatsConfig.CONFIG.satchelExclusions)){
+                nearbyEntity.setOnFireFor(3);
+            }
+        }
+        if (effectInt == 1) { // FROZEN
+            AOEHelper.afflictNearbyEntities(
+                    user,
+                    range,
+                    new StatusEffectInstance(StatusEffectRegistry.STUNNED.getEntry(), duration, amplifier),
+                    new StatusEffectInstance(StatusEffects.NAUSEA, duration, amplifier2),
+                    new StatusEffectInstance(StatusEffects.SLOWNESS, duration, amplifier3)
+            );
+        }
+        if (effectInt == 2) { // LIGHTNING STRIKE
+            for (LivingEntity nearbyEntity : AOEHelper.getEntitiesWithExclusions(user, range, McdarArtifactsStatsConfig.CONFIG.satchelExclusions)){
+                AOEHelper.electrocute(nearbyEntity, damage);
+            }
+        }
     }
 }

@@ -30,15 +30,7 @@ public class EnchantersTomeItem extends ArtifactDefensiveItem {
 
         ArtifactEffects.mcdar$enchantersTomeEffects(user);
 
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
-
-
-        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
-
-        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+        return CleanlinessHelper.mcdar$useAndDamageArtifact(user, hand, itemStack, modifiedCooldownEnchantmentTime);
     }
 
     @Override

@@ -6,6 +6,8 @@ import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDamagingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdx.api.AbilityHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -35,7 +37,7 @@ public class HarvesterItem extends ArtifactDamagingItem {
         if (user.totalExperience >= experienceDrain || user.isCreative()) {
             CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 1.0F, 1.0F);
             AOECloudHelper.spawnExplosionCloud(user, user, range);
-            AOEHelper.causeExplosion(user, user, damage, range);
+            AbilityHelper.applyToNearestNTargets(user, Integer.MAX_VALUE, range, McdxCoreConfig.INSTANCE.aoeExclusions, AOEHelper.causeExplosion(user, damage));
 
             if (!user.isCreative()) {
                 user.addExperience(-experienceDrain);

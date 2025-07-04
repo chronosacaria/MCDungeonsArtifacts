@@ -1,14 +1,13 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactAgilityItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
 import dev.timefall.mcdar.registry.StatusEffectRegistry;
+import dev.timefall.mcdx.api.AOEHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,10 +33,9 @@ public class LightFeatherItem extends ArtifactAgilityItem {
 
         user.jump();
 
-        for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, 5,
-                (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
+        //TODO Replace with MCDX applyToTargets
+        dev.timefall.mcdx.api.AbilityHelper.applyToNearestNTargets(user, Integer.MAX_VALUE, 5f, McdxCoreConfig.INSTANCE.allyExclusions, (nearbyEntity) -> {
             AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, 5.0F);
-
             nearbyEntity.addStatusEffect(
                     new StatusEffectInstance(
                             StatusEffectRegistry.STUNNED.getEntry(),
@@ -56,7 +54,7 @@ public class LightFeatherItem extends ArtifactAgilityItem {
                             McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getDuration(),
                             McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getAmplifier3()
                     ));
-        }
+        });
 
         if (!user.isCreative()){
             EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;

@@ -59,6 +59,13 @@ allprojects {
             name = "FzzyMaven"
             url = "https://maven.fzzyhmstrs.me/"
         }
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+            content {
+                includeGroup "maven.modrinth"
+            }
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

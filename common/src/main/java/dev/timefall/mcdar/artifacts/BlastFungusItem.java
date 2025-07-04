@@ -36,13 +36,8 @@ public class BlastFungusItem extends ArtifactDamagingItem {
 
         CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 1.0F, 1.0F);
         ArtifactEffects.mcdar$causeBlastFungusExplosions(user, range, damage);
-        if (!user.isCreative()) {
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
-        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
+        return CleanlinessHelper.mcdar$useAndDamageArtifact(user, hand, itemStack, modifiedCooldownEnchantmentTime);
 
-        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
     @Override

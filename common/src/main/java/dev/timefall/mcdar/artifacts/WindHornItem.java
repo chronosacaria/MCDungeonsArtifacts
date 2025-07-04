@@ -1,14 +1,14 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdx.api.AOEHelper;
+import dev.timefall.mcdx.api.AbilityHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Instrument;
 import net.minecraft.item.ItemStack;
@@ -50,10 +50,10 @@ public class WindHornItem extends ArtifactDefensiveItem {
             Instrument instrument = optional.get().value();
             user.setCurrentHand(hand);
             WindHornItem.playSound(world, user, instrument);
-            for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getRange(),
-                    (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
+
+            AbilityHelper.applyToNearestNTargets(user, Integer.MAX_VALUE, 5f, McdxCoreConfig.INSTANCE.allyExclusions, (nearbyEntity) -> {
                 AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getDamage());
-            }
+            });
 
             if (!user.isCreative()) {
                 EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;

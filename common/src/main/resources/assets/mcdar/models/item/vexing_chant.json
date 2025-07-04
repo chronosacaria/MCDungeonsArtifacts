@@ -1,0 +1,57 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "mcdar:item/vexing_chant"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 8],
+			"to": [16, 22, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-3, 0, 8]},
+			"faces": {
+				"north": {"uv": [4, 5, 12, 16], "texture": "#1"},
+				"east": {"uv": [1.45455, 0, 1.45455, 11], "texture": "#1"},
+				"south": {"uv": [12, 5, 4, 16], "texture": "#1"},
+				"west": {"uv": [1.45455, 0, 1.45455, 11], "texture": "#1"},
+				"up": {"uv": [1.45455, 0, 15.95455, 0], "texture": "#1"},
+				"down": {"uv": [1.45455, 0, 15.95455, 0], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0.47, -1.86, -0.57],
+			"translation": [0, 2.75, 0.25],
+			"scale": [0.42773, 0.42773, 0.42773]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0.47, -1.86, -0.57],
+			"translation": [0, 2.75, 0.25],
+			"scale": [0.42773, 0.42773, 0.42773]
+		},
+		"firstperson_righthand": {
+			"rotation": [-26.3, -56.55, -18.07],
+			"translation": [1.5, 1.5, -0.25],
+			"scale": [0.41211, 0.41211, 0.41211]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-26.3, -56.55, -18.07],
+			"translation": [1.5, 1.5, -0.25],
+			"scale": [0.41211, 0.41211, 0.41211]
+		},
+		"ground": {
+			"rotation": [31.36, -11.72, 44.32],
+			"translation": [0, 2.75, 0],
+			"scale": [0.25586, 0.25586, 0.25586]
+		},
+		"gui": {
+			"rotation": [-25.51, 28.53, 8.83],
+			"translation": [0, -2, 0],
+			"scale": [0.73047, 0.73047, 0.73047]
+		},
+		"head": {
+			"translation": [0, -19, -4]
+		}
+	}
+}

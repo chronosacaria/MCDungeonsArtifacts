@@ -1,10 +1,10 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDamagingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdx.api.AOEHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,7 +28,7 @@ public class LightningRodItem extends ArtifactDamagingItem {
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         if (user.totalExperience >= 15 || user.isCreative()) {
-            AOEHelper.electrocuteNearbyEnemies(user, 5, 5, Integer.MAX_VALUE);
+            AOEHelper.electrocuteNearbyEnemies(user, user, 5,5, Integer.MAX_VALUE);
 
             if (!user.isCreative()) {
                 user.addExperience(-15);

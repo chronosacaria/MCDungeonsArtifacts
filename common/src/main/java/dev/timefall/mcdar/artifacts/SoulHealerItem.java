@@ -1,11 +1,11 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdx.api.AOEHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -66,8 +66,7 @@ public class SoulHealerItem extends ArtifactDefensiveItem {
     }
 
     public static float healMostInjuredAlly(LivingEntity healer, float distance) {
-        List<LivingEntity> nearbyEntities = AOEHelper.getEntitiesByPredicate(healer, distance,
-                (nearbyEntity) -> AbilityHelper.canHealEntity(healer, nearbyEntity));
+        List<LivingEntity> nearbyEntities = AOEHelper.getEntitiesWithExclusions(healer, distance, McdxCoreConfig.INSTANCE.allyExclusions);
         if (!nearbyEntities.isEmpty()) {
             nearbyEntities.sort((o1, o2) -> {
                 float o1LostHealth = o1.getMaxHealth() - o1.getHealth();
@@ -79,6 +78,7 @@ public class SoulHealerItem extends ArtifactDefensiveItem {
         } else
             return 0;
     }
+
     public static float healAlly(LivingEntity allyToBeHealed) {
         float healingBase = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getDamageOrHealingFactor();
         float maxHealth = allyToBeHealed.getMaxHealth();

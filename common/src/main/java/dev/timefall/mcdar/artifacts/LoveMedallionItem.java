@@ -1,12 +1,12 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
 import dev.timefall.mcdar.registry.StatusEffectRegistry;
+import dev.timefall.mcdx.api.AbilityHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,7 +14,6 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.AmbientEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
@@ -39,20 +38,16 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
-        int i = 0;
+        AbilityHelper.applyToNearestNTargets(
+                user,
+                3,
+                range,
+                McdxCoreConfig.INSTANCE.aoeExclusions,
+                nearbyEntity -> sendIntoWildRage(nearbyEntity, duration, amplifier)
+        );
 
-        for (LivingEntity entitiesByPredicate : AOEHelper.getEntitiesByPredicate(MobEntity.class, user, range,
-                (nearbyEntity) -> AbilityHelper.isAoeTarget(nearbyEntity, user, user))) {
-            sendIntoWildRage(entitiesByPredicate, duration, amplifier);
-            i++;
-            if (i >= 3)
-                break;
-        }
-
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
+        EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+        itemStack.damage(1, user, equipmentSlot);
 
         EnchantmentEffects.mcdar$cooldownHelper(
                 user,
@@ -64,13 +59,7 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
     }
 
     public static void sendIntoWildRage(LivingEntity mobEntity, int duration, int amplifier) {
-        boolean bl = false;
-        try {
-            mobEntity.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
-        } catch (IllegalArgumentException e) {
-            bl = true;
-        }
-        if (!(bl || mobEntity instanceof WitherEntity || mobEntity instanceof EnderDragonEntity || mobEntity instanceof AmbientEntity))
+        if (!(mobEntity.getAttributes().hasAttribute(EntityAttributes.GENERIC_ATTACK_DAMAGE) || mobEntity instanceof WitherEntity || mobEntity instanceof EnderDragonEntity || mobEntity instanceof AmbientEntity))
             mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffectRegistry.CHARMED.getEntry(), duration, amplifier));
     }
 

@@ -33,18 +33,14 @@ public class CorruptedSeedsItem extends ArtifactStatusInflictingItem {
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().CORRUPTED_SEEDS_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
-        AOEHelper.afflictNearbyEntities(user,range, new StatusEffectInstance(StatusEffects.SLOWNESS, duration, amplifier),
-                new StatusEffectInstance(StatusEffects.POISON, duration, amplifier2));
+        dev.timefall.mcdx.api.AOEHelper.afflictNearbyEntities(
+                user,
+                range,
+                new StatusEffectInstance(StatusEffects.SLOWNESS, duration, amplifier),
+                new StatusEffectInstance(StatusEffects.POISON, duration, amplifier2)
+        );
 
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
-
-
-        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
-
-        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+        return CleanlinessHelper.mcdar$useAndDamageArtifact(user, hand, itemStack, modifiedCooldownEnchantmentTime);
     }
 
     @Override

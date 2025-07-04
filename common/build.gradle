@@ -10,6 +10,8 @@ dependencies {
 
     //modCompileOnly "dev.emi:emi-xplat-intermediary:${rootProject.emi_version}+${rootProject.minecraft_version}"
     modCompileOnly "me.fzzyhmstrs:fzzy_config:${rootProject.fzzyConfigVersion}"
+
+    modCompileOnly "maven.modrinth:mcdx:${rootProject.mcdxVersion}"
 }
 
 publishing {

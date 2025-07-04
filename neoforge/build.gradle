@@ -50,6 +50,8 @@ dependencies {
     modImplementation("me.fzzyhmstrs:fzzy_config:${rootProject.fzzyConfigVersion}+neoforge") {
         exclude group: "net.neoforged.fancymodloader", module: "loader"
     }
+
+    modRuntimeOnly "maven.modrinth:mcdx:${rootProject.mcdxVersion}"
 }
 
 publishMods {

@@ -2,6 +2,9 @@ package dev.timefall.mcdar.api;
 
 import dev.timefall.mcdar.api.interfaces.Summonable;
 import dev.timefall.mcdar.registry.SummonedEntityRegistry;
+import dev.timefall.mcdx.api.AOEHelper;
+import dev.timefall.mcdx.api.AbilityHelper;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -30,13 +33,10 @@ public class SummoningHelper {
 
     public static void mcdar$summonedSheepEffect(LivingEntity sheep, int effectInt) {
         switch (effectInt) {
-            case 0 -> AOEHelper.afflictNearbyEntities(MobEntity.class, sheep, 5,
-                    (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive(), new StatusEffectInstance(StatusEffects.POISON, 100, 4));
-            case 1 -> AOEHelper.afflictNearbyEntities(PlayerEntity.class, sheep, 10,
-                    LivingEntity::isAlive, new StatusEffectInstance(StatusEffects.SPEED, 600, 2));
+            case 0 -> dev.timefall.mcdx.api.AOEHelper.afflictNearbyEntities(sheep, 5, new StatusEffectInstance(StatusEffects.POISON, 100, 4));
+            case 1 -> dev.timefall.mcdx.api.AOEHelper.afflictNearbyEntities(sheep, 5, new StatusEffectInstance(StatusEffects.SPEED, 600, 2));
             case 2 -> {
-                for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(MobEntity.class, sheep, 5,
-                        (nearbyEntity) -> nearbyEntity != sheep && nearbyEntity.isAlive())) {
+                for (LivingEntity nearbyEntity : AOEHelper.getEntitiesWithExclusions(sheep, 5, McdxCoreConfig.INSTANCE.aoeExclusions)) {
                     nearbyEntity.setOnFireFor(5);
                 }
             }

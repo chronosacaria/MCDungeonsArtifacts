@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "texture_size": [32, 32],
   "textures": {
-    "0": "item/satchel_of_snacks",
-    "particle": "item/satchel_of_snacks"
+    "0": "mcdar:item/satchel_of_snacks",
+    "particle": "mcdar:item/satchel_of_snacks"
   },
   "elements": [
     {

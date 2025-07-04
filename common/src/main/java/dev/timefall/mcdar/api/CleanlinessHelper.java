@@ -144,19 +144,20 @@ public class CleanlinessHelper {
         return ActionResult.SUCCESS;
     }
 
-    public static ItemStack mcdar$getEitherHandItemStack(PlayerEntity playerEntity) {
-        return !playerEntity.getOffHandStack().isEmpty()
-                ? playerEntity.getOffHandStack()
-                : playerEntity.getMainHandStack();
+    public static boolean mcdar$isValidForBeastEffects(List<StatusEffectInstance> potionEffects) {
+        for (StatusEffectInstance instance: potionEffects) {
+            if (instance.getEffectType() == StatusEffects.INSTANT_HEALTH || instance.getEffectType() == StatusEffects.REGENERATION) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    @SuppressWarnings("SizeReplaceableByIsEmpty")
-    public static boolean mcdar$isValidForBeastEffects(List<StatusEffectInstance> potionEffects) {
-        return potionEffects.stream().filter(
-                (instance) -> instance.getEffectType()
-                        == StatusEffects.INSTANT_HEALTH
-                            || instance.getEffectType()
-                        == StatusEffects.REGENERATION
-        ).toList().size() > 0;
+    public static TypedActionResult<ItemStack> mcdar$useAndDamageArtifact(PlayerEntity user, Hand hand, ItemStack itemStack, int cooldown) {
+        EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+        itemStack.damage(1, user, equipmentSlot);
+
+        user.getItemCooldownManager().set(itemStack.getItem(), cooldown);
+        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 }

@@ -1,10 +1,10 @@
 package dev.timefall.mcdar.artifacts;
 
-import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdx.api.AOEHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -42,11 +42,8 @@ public class GongOfWeakeningItem extends ArtifactStatusInflictingItem {
         AOEHelper.afflictNearbyEntities(user, range, new StatusEffectInstance(StatusEffects.WEAKNESS, duration, amplifier),
                 new StatusEffectInstance(StatusEffects.RESISTANCE, duration, amplifier2));
 
-        if (!user.isCreative()){
-            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            itemStack.damage(1, user, equipmentSlot);
-        }
-
+        EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+        itemStack.damage(1, user, equipmentSlot);
 
         user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

@@ -2,9 +2,10 @@ package dev.timefall.mcdar.effect;
 
 import dev.timefall.mcdar.api.AOECloudHelper;
 import dev.timefall.mcdar.api.AOEHelper;
-import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.registry.EnchantmentRegistry;
+import dev.timefall.mcdx.configs.AoeExclusionType;
+import dev.timefall.mcdx.configs.McdxCoreConfig;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.enchantment.Enchantment;
@@ -26,6 +27,7 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class EnchantmentEffects {
 
@@ -70,12 +72,16 @@ public class EnchantmentEffects {
             int beastBurstLevel = entry.map(e -> EnchantmentHelper.getEquipmentLevel(e, player)).orElse(0);
 
             if (beastBurstLevel > 0){
-                for (LivingEntity summonedMob : AOEHelper.getEntitiesByPredicate(player, 10,
-                        (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player))) {
-                    if (summonedMob == null) continue;
-                    CleanlinessHelper.playCenteredSound(summonedMob, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 0.5F, 1.0F);
-                    AOECloudHelper.spawnExplosionCloud(summonedMob, summonedMob, explosionRadius);
-                    AOEHelper.causeExplosion(player, summonedMob, 3 * beastBurstLevel, explosionRadius);
+
+                List<LivingEntity> pets = dev.timefall.mcdx.api.AOEHelper.getEntitiesByPredicate(player, 10f, maybePet -> AoeExclusionType.SELF_PET.isExcluded(player, maybePet, maybePet));
+                for (LivingEntity pet: pets) {
+                    CleanlinessHelper.playCenteredSound(pet, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 0.5F, 1.0F);
+                    AOECloudHelper.spawnExplosionCloud(pet, pet, explosionRadius);
+                    List<LivingEntity> targets2 = dev.timefall.mcdx.api.AOEHelper.getEntitiesWithExclusions(pet, player, 3f, McdxCoreConfig.INSTANCE.obscuredExclusions);
+                    Consumer<LivingEntity> explosion = AOEHelper.causeExplosion(player, 3 * beastBurstLevel);
+                    for (LivingEntity target2 : targets2) {
+                        explosion.accept(target2);
+                    }
                 }
             }
         }
@@ -83,16 +89,16 @@ public class EnchantmentEffects {
 
     public static void activateBeastSurge(PlayerEntity player, ServerWorld serverWorld) {
         List<StatusEffectInstance> potionEffects = PotionContentsComponent.DEFAULT.customEffects();
-        if (potionEffects.isEmpty()) return;
-        if (potionEffects.get(0).getEffectType().equals(StatusEffects.INSTANT_HEALTH)) {
+        if (CleanlinessHelper.mcdar$isValidForBeastEffects(potionEffects)) {
             Optional<? extends RegistryEntry<Enchantment>> entry = serverWorld.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(EnchantmentRegistry.BEAST_SURGE);
             int beastSurgeLevel = entry.map(e -> EnchantmentHelper.getEquipmentLevel(e, player)).orElse(0);
 
             if (beastSurgeLevel > 0) {
-                AOEHelper.afflictNearbyEntities(LivingEntity.class, player, 10,
-                        (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, player),
-                        new StatusEffectInstance(StatusEffects.SPEED, 10 * 20, (beastSurgeLevel * 3) - 1),
-                        new StatusEffectInstance(StatusEffects.STRENGTH, 10 * 20, (beastSurgeLevel * 3) - 1));
+                List<LivingEntity> pets = dev.timefall.mcdx.api.AOEHelper.getEntitiesByPredicate(player, 10f, maybePet -> AoeExclusionType.SELF_PET.isExcluded(player, maybePet, maybePet));
+                for (LivingEntity pet: pets) {
+                    pet.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 10 * 20, (beastSurgeLevel * 3) - 1));
+                    pet.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 10 * 20, (beastSurgeLevel * 3) - 1));
+}
             }
         }
     }
